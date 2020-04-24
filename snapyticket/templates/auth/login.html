@@ -3,7 +3,6 @@
 <h1> Login In here</h1>
 <form method='POST'>{% csrf_token %}
 {{form.as_p}}
-{{request.user}}
 <button type='submit'>Login</button>
 </form>
 {% endblock content %}
