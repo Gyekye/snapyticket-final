@@ -1,0 +1,32 @@
+from django import forms
+from phone_field.forms import PhoneFormField, PhoneWidget
+from django.contrib.auth.forms import UserChangeForm,UserCreationForm
+from .models import User
+from django.core.exceptions import ValidationError
+
+
+# Overrriding UserCreation and UserChange Forms
+
+class UserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+        ]
+        def clean(self):
+            email = self.cleaned_data.get('email')
+            if User.objects.filter(email=email).exists():
+                raise ValidationError("Your email already exist please change it. Thank You")
+            return self.cleaned_data            
+        
+class UserChangeForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+            'phone',
+            'profile_image',
+        ]
+    
