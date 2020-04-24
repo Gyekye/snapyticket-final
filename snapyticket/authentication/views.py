@@ -38,7 +38,7 @@ class RegisterView(View):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account'
-            mail_body = render_to_string('email_snippets/account_activate.html',
+            mail_body = render_to_string('email_snippets/account_activate/account_activate.html',
             {
                     #Variables that will be passed to the template
                     'user':user,
@@ -68,7 +68,7 @@ class ActivateAcccountView(View):
             return redirect('auth:user_profile')
             messages.success(request,'You have successfully activated your account')
         else:
-            return render(request,"email_snippets/account_activate_failed.html")
+            return render(request,"email_snippets/account_activate/account_activate_failed.html")
         
         
 class ProfileView(LoginRequiredMixin,View):
