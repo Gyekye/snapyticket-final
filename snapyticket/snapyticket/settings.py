@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from django.core.mail.backends import smtp
+import django
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -123,13 +124,12 @@ USE_TZ = True
 
 
 # EMAIL SENDING SETUP CONFIG
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD= os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-
+EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'snapyticket@gmail.com'
+EMAIL_HOST_PASSWORD= 'justscan235'
+EMAIL_PORT = 587
 
 # AUTHENTICATION REDIRECT URLS
 LOGIN_REDIRECT_URL = 'auth:user_profile'
