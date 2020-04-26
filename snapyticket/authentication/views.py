@@ -17,7 +17,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import login
 from django.http.response import HttpResponse, HttpResponseRedirect
-
+# Password Reset Imports
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import PasswordResetView
+from django.urls import reverse_lazy
 User = get_user_model()
 
 
@@ -43,6 +46,7 @@ class RegisterView(View):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account'
+            use_https=False,
             mail_body = render_to_string('email_snippets/account_activate/account_activate.html',
                                          {
                                              # Variables that will be passed to the template
@@ -50,6 +54,7 @@ class RegisterView(View):
                                              'domain': current_site.domain,
                                              'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                                              'token': account_activation_token.make_token(user),
+                                             'protocol':'http' if use_https else 'http',
                                          }
                                          )
             # TODO Integrate Email Sending with SendGrid to speed things up when going into production
@@ -119,6 +124,34 @@ class LoginView(LoginView):
         else:
             return self.form_invalid(form)
 
+class PasswordResetView(PasswordResetView):
+    template_name = 'password/reset_form.html'
+    email_template_name = 'email_snippets/password/reset_done_email.html'
+    form_class = PasswordResetForm
+    success_url = reverse_lazy('auth:password_reset_done') 
+    
+    def get(self,*args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('auth:user_profile')
+        form = self.get_form_class()
+        return render(self.request,self.template_name,{'form':form})
+    
+    def post(self, request, *args, **kwargs):
+        """
+        Handle POST requests: instantiate a form instance with the passed
+        POST variables and then check if it's valid.
+        """
+        form = self.get_form()
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            try:
+                user_email = User.objects.get(email=email)
+            except:
+                messages.warning(request,'You email does not belong to any account ')
+                return redirect('auth:user_login')
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 class ProfileView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
