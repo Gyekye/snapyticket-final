@@ -1,5 +1,4 @@
 from django import forms
-from phone_field.forms import PhoneFormField, PhoneWidget
 from django.contrib.auth.forms import UserChangeForm,UserCreationForm
 from .models import User
 from django.core.exceptions import ValidationError

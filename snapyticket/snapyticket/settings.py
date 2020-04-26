@@ -134,6 +134,7 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 # AUTHENTICATION REDIRECT URLS
 LOGIN_REDIRECT_URL = 'auth:user_profile'
 LOGOUT_REDIRECT_URL = 'auth:user_login'
+LOGIN_URL = 'auth:user_login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
