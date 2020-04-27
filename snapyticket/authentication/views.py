@@ -2,8 +2,8 @@ from django.shortcuts import redirect, render, resolve_url
 from django.contrib import messages
 from django.views.generic import View
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import AuthenticationForm 
+
 from .forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
@@ -29,8 +29,9 @@ class RegisterView(View):
         """ Redirects users back to profile when they try to access signup page
             while they are logged in
         """
+        # Todo Make sure to write a redirect for event organizers too
         if self.request.user.is_authenticated:
-            return redirect('auth:user_profile')
+            return redirect('profile:user_profile')
         form = UserCreationForm()
         context = {'form': form, }
         return render(self.request, 'auth/signup.html', context)
@@ -40,30 +41,35 @@ class RegisterView(View):
         form = UserCreationForm(request.POST)
         # Checks if the form is valid
         if form.is_valid():
-            user_email = form.cleaned_data.get('email')
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your account'
-            use_https=False,
-            mail_body = render_to_string('email_snippets/account_activate/account_activate.html',
-                                         {
-                                             # Variables that will be passed to the template
-                                             'user': user,
-                                             'domain': current_site.domain,
-                                             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                             'token': account_activation_token.make_token(user),
-                                             'protocol':'http' if use_https else 'http',
-                                         }
-                                         )
-            # TODO Integrate Email Sending with SendGrid to speed things up when going into production
+            user_phone = form.cleaned_data.get('phone')
+            if User.objects.filter(phone=user_phone).exists():
+                messages.info(request,"Your phone number exists change it ")
+                return redirect('auth:user_register')
+            else:
+                user_email = form.cleaned_data.get('email')
+                user = form.save(commit=False)
+                user.is_active = False
+                user.save()
+                current_site = get_current_site(request)
+                mail_subject = 'Activate your account'
+                use_https=False,
+                mail_body = render_to_string('email_snippets/account_activate/account_activate.html',
+                                            {
+                                                # Variables that will be passed to the template
+                                                'user': user,
+                                                'domain': current_site.domain,
+                                                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                                'token': account_activation_token.make_token(user),
+                                                'protocol':'http' if use_https else 'http',
+                                            }
+                                            )
+                # TODO Integrate Email Sending with SendGrid to speed things up when going into production
 
-            # Sends a Verification link to user so they can activate their account
-            send_mail(mail_subject, mail_body, settings.EMAIL_HOST_USER, [user_email])
-            messages.success(request,
-                             "A confirmation link has been sent to your email use that to activate your account")
-            return redirect('auth:user_login')
+                # Sends a Verification link to user so they can activate their account
+                send_mail(mail_subject, mail_body, settings.EMAIL_HOST_USER, [user_email])
+                messages.success(request,
+                                "A confirmation link has been sent to your email use that to activate your account")
+                return redirect('auth:user_login')
         context = {'form': form}
         return render(self.request, 'auth/signup.html', context)
 
@@ -83,7 +89,7 @@ class ActivateAcccountView(View):
             # Logins In user and redirects back to the Profile page
             login(request, user)
             messages.success(request, "Welcome to your profile")
-            return redirect('auth:user_profile')
+            return redirect('profile:user_profile')
         else:
             return render(request, "email_snippets/account_activate/account_activate_failed.html")
 
@@ -101,8 +107,9 @@ class LoginView(LoginView):
         """ Redirects users back to profile when they try to access login page
             while they are logged in
         """
+        # Todo Make sure to write a redirect for event organizers too
         if self.request.user.is_authenticated:
-            return redirect('auth:user_profile')
+            return redirect('profile:user_profile')
         else:
             # This renders the login form for the user if he is not logged in
             form = self.form_class
@@ -131,8 +138,9 @@ class PasswordResetView(PasswordResetView):
     success_url = reverse_lazy('auth:password_reset_done') 
     
     def get(self,*args, **kwargs):
+        # Todo Make sure to write a redirect for event organizers too
         if self.request.user.is_authenticated:
-            return redirect('auth:user_profile')
+            return redirect('profile:user_profile')
         form = self.get_form_class()
         return render(self.request,self.template_name,{'form':form})
     
@@ -153,6 +161,4 @@ class PasswordResetView(PasswordResetView):
         else:
             return self.form_invalid(form)
 
-class ProfileView(LoginRequiredMixin, View):
-    def get(self, *args, **kwargs):
-        return render(self.request, 'profile/profile.html')
+

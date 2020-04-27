@@ -11,6 +11,5 @@ class User(AbstractUser):
     is_organizer = models.BooleanField(help_text="Are you an event organizer",default=False)
     profile_image = models.ImageField(upload_to='profile/profile-images',blank=True)
     
-    
     def __str__(self):
         return self.username

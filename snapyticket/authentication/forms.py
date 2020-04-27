@@ -12,12 +12,9 @@ class UserCreationForm(UserCreationForm):
         fields = [
             'username',
             'email',
-        ]
-        def clean(self):
-            email = self.cleaned_data.get('email')
-            if User.objects.filter(email=email).exists():
-                raise ValidationError("Your email already exist please change it. Thank You")
-            return self.cleaned_data            
+            'phone',
+        ]      
+            
         
 class UserChangeForm(UserChangeForm):
     class Meta:
@@ -26,6 +23,6 @@ class UserChangeForm(UserChangeForm):
             'username',
             'email',
             'phone',
-            'profile_image',
+            'profile_image'
         ]
     

@@ -1,8 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if request.user.is_organizer %}Welcome Organizer to your dashboard {{user.username}}{% else %}welcome to your profile {{request.user}}{% endif %}<br>
+<p>{{ request.user.username}}<p>
+
+<p>{{request.user.email}}<p>
+
+<p>{{request.user.phone}}<p>
+{% if request.user.profile_image %}
+<img src="{{request.user.profile_image.url}}">
+{% else %}
+<a href="{% url 'profile:update'%}">Choose a Profile picture</a>
+{% endif %}
 <br>
-<a href="{% url 'auth:user_logout'%}">Logout</a>
+<br>
+<a href="{% url 'auth:user_logout'%}">Logout</a>  
+<a href="{% url 'profile:password_change'%}">Change Password</a> 
+<a href="{% url 'profile:update'%}">Update Profile</a>
 {% endblock content %}
 
