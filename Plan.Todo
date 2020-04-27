@@ -1,0 +1,16 @@
+# Development Task
+# Task with ** means completed 
+# Task with * means in progress 
+
+TODO: COMPLETE USER AUTHENTICATION AND PROFILE UPDATES **
+TODO: CREATE ORGANIZER APP AND MODELS
+TODO: CREATE TICKET APP AND MODEL AND LINK TO ORGANIZER
+
+
+
+
+
+## Production Task
+TODO: Link email to sendgrid.
+TODO: Test code 
+TODO: Integrate segment and live chat
