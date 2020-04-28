@@ -22,3 +22,4 @@ class EventOrganizerRequired(AccessMixin):
             messages.info(request,'You are not an event organizer.')
             return redirect('profile:user_profile')
         return super().dispatch(request, *args, **kwargs)
+
