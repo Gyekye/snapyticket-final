@@ -8,11 +8,11 @@ class IndexView(TemplateView):
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('core:home')
-        else:
-            context = self.get_context_data(**kwargs)
-            return self.render_to_response(context)
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
 
 
 
 class HomeView(LoginRequiredMixin,TemplateView):
     template_name = 'core/home.html'
+    
