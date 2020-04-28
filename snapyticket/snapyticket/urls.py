@@ -23,6 +23,7 @@ urlpatterns = [
     path('',include('core.urls',namespace='core')),
     path('auth/',include('authentication.urls',namespace='auth')),
     path('user/profile/',include('userprofile.urls',namespace='profile')),
+    path('user/organizer/dashboard/',include('organizer.urls',namespace='organizer')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # user apps
     'authentication.apps.AuthenticationConfig',
-    'six',
+    'organizer.apps.OrganizerConfig',
+    'core.apps.CoreConfig',
+    'ticket.apps.TicketConfig',
+    'userprofile.apps.UserprofileConfig',
     # PACKAGES
     'phone_field',
 ]

@@ -30,7 +30,6 @@ class RegisterView(View):
         """ Redirects users back to profile when they try to access signup page
             while they are logged in
         """
-        # Todo Make sure to write a redirect for event organizers too
         if self.request.user.is_authenticated:
             return redirect('profile:user_profile')
         form = UserCreationForm()
@@ -43,10 +42,13 @@ class RegisterView(View):
         # Checks if the form is valid
         if form.is_valid():
             user_phone = form.cleaned_data.get('phone')
+            #print(type(user_phone))
             if User.objects.filter(phone=user_phone).exists():
                 messages.info(request,"Your phone number exists change it ")
                 return redirect('auth:user_register')
-            
+            if len(user_phone) > 10:
+                messages.info(request,'Phone number must be 10 not more than')
+                return redirect('auth:user_register')
             user_email = form.cleaned_data.get('email')
             user = form.save(commit=False)
             user.is_active = False
@@ -107,7 +109,6 @@ class LoginView(LoginView):
         """ Redirects users back to profile when they try to access login page
             while they are logged in
         """
-        # Todo Make sure to write a redirect for event organizers too
         if self.request.user.is_authenticated:
             return redirect('profile:user_profile')
             # This renders the login form for the user if he is not logged in
@@ -136,7 +137,6 @@ class PasswordResetView(PasswordResetView):
     success_url = reverse_lazy('auth:password_reset_done') 
     
     def get(self,*args, **kwargs):
-        # Todo Make sure to write a redirect for event organizers too
         if self.request.user.is_authenticated:
             return redirect('profile:user_profile')
         form = self.get_form_class()
