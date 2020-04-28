@@ -158,4 +158,3 @@ class PasswordResetView(PasswordResetView):
             return self.form_valid(form)
         return self.form_invalid(form)
 
-

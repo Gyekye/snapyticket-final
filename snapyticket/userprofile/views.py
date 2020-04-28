@@ -31,3 +31,4 @@ class ProfileChangeView(LoginRequiredMixin,View):
             return redirect('profile:user_profile')
         context = {'form':form}
         return render(self.request,'profile/update.html',context)
+    
