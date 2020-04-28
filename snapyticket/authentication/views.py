@@ -127,8 +127,7 @@ class LoginView(LoginView):
         form = self.get_form()
         if form.is_valid():
             return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)
 
 class PasswordResetView(PasswordResetView):
     template_name = 'password/reset_form.html'
@@ -157,7 +156,6 @@ class PasswordResetView(PasswordResetView):
                 messages.warning(request,'You email does not belong to any account ')
                 return redirect('auth:user_login')
             return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)
 
 
