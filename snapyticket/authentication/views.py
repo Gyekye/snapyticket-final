@@ -157,4 +157,3 @@ class PasswordResetView(PasswordResetView):
                 return redirect('auth:user_login')
             return self.form_valid(form)
         return self.form_invalid(form)
-

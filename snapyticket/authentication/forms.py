@@ -25,4 +25,3 @@ class UserChangeForm(UserChangeForm):
             'phone',
             'profile_image'
         ]
-    
