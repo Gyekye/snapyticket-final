@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>{{ request.user.username}}<p>
-
-<p>{{request.user.email}}<p>
-
-<p>{{request.user.phone}}<p>
+<h3> Welcome to your profile</h3>
+<bolder>Name: {{ request.user.username}}<bolder>
+<hr>
+<bolder>Email: {{request.user.email}}<bolder>
+<hr>
+<bolder>Phone: {{request.user.phone}}<bolder>
+<hr>
 {% if request.user.profile_image %}
-<img src="{{request.user.profile_image.url}}">
+Profile Photo: <img src="{{request.user.profile_image.url}}" width="100px;" height="100px;"</font>
 {% else %}
+<br><br><hr>
 <a href="{% url 'profile:update'%}">Choose a Profile picture</a>
 {% endif %}
 <br>

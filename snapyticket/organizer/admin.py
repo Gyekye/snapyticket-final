@@ -19,3 +19,4 @@ class OrganizerAdmin(admin.ModelAdmin):
         'logo',
     ]
 admin.site.register(Organizer,OrganizerAdmin)
+#admin.site.register(Social)

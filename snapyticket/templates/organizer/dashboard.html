@@ -1,1 +1,23 @@
-This is a event dashbord for {{request.user.username}}
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if request.user.is_organizer %}
+<h3>Welcome to your dashboard {{request.user.organizer.name}}</h3>
+<hr>
+<bolder>Name:{{request.user.organizer.name}}</bolder>
+<hr>
+{% for links in request.user.organizer.social_set.all %}
+<ul> 
+ <a href="{{links.link}}"><li>{{links.platform}}</li></a>
+</ul>
+{% endfor %}
+<hr>
+<bolder>Email:{{request.user.organizer.email}}</bolder><br><br>
+<img src="{{request.user.organizer.logo.url}}" width="100px;" height="100px;"</font><br>
+<a href="{{request.user.organizer.get_absolute_url}}">Update organizer info</a><br>
+{% endif %}<br>
+
+<a href="{% url 'profile:user_profile'%}">Profile</a>  
+{% endblock content %}

@@ -1,15 +1,32 @@
-from django.shortcuts import render
-from django.views.generic import View
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.views.generic import View,UpdateView
+from django.http import HttpResponse, HttpResponseRedirect
 from .decorators import EventOrganizerRequired
-from django.contrib.auth.mixins import LoginRequiredMixin,AccessMixin
-# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import UpdateOrganizerInfo
+from .models import Organizer
+from django.contrib import messages
+from django.urls import reverse_lazy
 
 
-
-class DashBoardView(EventOrganizerRequired,View):
+class DashBoardView(LoginRequiredMixin,EventOrganizerRequired,View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse('GET request!')
+        return render(request,'organizer/dashboard.html')
 
     def post(self, request, *args, **kwargs):
         return HttpResponse('POST request!')
+
+
+class OrganizerUpdate(UpdateView):
+    model = Organizer
+    fields = ['name','logo','email']
+    success_url = reverse_lazy('organizer:dashboard')
+    template_name = 'organizer/update.html'
+    
+    def form_valid(self, form):
+        """If the form is valid, save the associated model. and display a success message"""
+        self.object = form.save()
+        messages.info(self.request,"You have successfully updated your details")
+        return super().form_valid(form)
+
+

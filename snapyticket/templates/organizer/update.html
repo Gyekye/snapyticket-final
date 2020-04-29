@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Update organizer here</h2>
+<style>
+    #id_password {
+        display: none;
+    }
+    
+    #for {
+        display: none;
+    }
+</style>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {% for field in form %}
+    <p>
+        {{ field.label_tag }}<br> {{ field }} {% if field.help_text %}
+        <small style="display: none">{{ field.help_text }}</small> {% endif %} {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    </p>
+    {% endfor %}<button type="submit">Update Info</button>
+</form>
+{% endblock content %}

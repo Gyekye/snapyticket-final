@@ -14,11 +14,10 @@ def organizer_only(view_func):
     return wrap
 
 
-# class based decorators called Mixi
+# class based decorators called Mixins
 class EventOrganizerRequired(AccessMixin):
     """Verify that the current user is organizer."""
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_organizer:
-            messages.info(request,'You are not an event organizer.')
-            return redirect('profile:user_profile')
+            return HttpResponse("You are not allowed here Kindly go back")
         return super().dispatch(request, *args, **kwargs)
