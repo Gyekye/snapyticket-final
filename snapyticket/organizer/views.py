@@ -3,7 +3,6 @@ from django.views.generic import View,UpdateView
 from django.http import HttpResponse, HttpResponseRedirect
 from .decorators import EventOrganizerRequired
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import UpdateOrganizerInfo
 from .models import Organizer
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -17,9 +16,17 @@ class DashBoardView(LoginRequiredMixin,EventOrganizerRequired,View):
         return HttpResponse('POST request!')
 
 
-class OrganizerUpdate(UpdateView):
+class OrganizerUpdate(LoginRequiredMixin,EventOrganizerRequired,UpdateView):
     model = Organizer
-    fields = ['name','logo','email']
+    fields = [
+            'name',
+            'logo',
+            'email',
+            'twitter',
+            'instagram',
+            'facebook',
+            'telegram',
+        ]
     success_url = reverse_lazy('organizer:dashboard')
     template_name = 'organizer/update.html'
     
