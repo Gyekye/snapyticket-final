@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('core.urls',namespace='core')),
+    path('ticket/',include('ticket.urls',namespace='ticket')),
     path('auth/',include('authentication.urls',namespace='auth')),
     path('user/profile/',include('userprofile.urls',namespace='profile')),
     path('user/organizer/dashboard/',include('organizer.urls',namespace='organizer')),

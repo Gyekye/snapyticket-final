@@ -22,6 +22,8 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 from django.db.models import ObjectDoesNotExist
+from django.core.exceptions import ValidationError
+from django.contrib.admin import forms
 User = get_user_model()
 
 
@@ -117,6 +119,10 @@ class LoginView(LoginView):
 
     def form_valid(self, form):
         """Security check complete. Log the user in."""
+        user = form.cleaned_data.get('username')
+        _status = User.objects.get(username=user)
+        if not _status.is_active:
+            return HttpResponse('Inactive acoount')
         login(self.request, form.get_user())
         return HttpResponseRedirect(self.get_success_url())
 
@@ -129,7 +135,7 @@ class LoginView(LoginView):
         if form.is_valid():
             return self.form_valid(form)
         return self.form_invalid(form)
-
+    
 class PasswordResetView(PasswordResetView):
     template_name = 'password/reset_form.html'
     email_template_name = 'email_snippets/password/reset_done_email.html'
