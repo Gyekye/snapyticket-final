@@ -99,18 +99,24 @@ class TicketVariation(models.Model):
     def __str__(self):
         return f'{self.ticket.title} - {self.variation}'
     
-
-    
 class TicketItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     ticket = models.ForeignKey(Ticket,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     ticket_type = models.ForeignKey(TicketVariation,on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
+    slug = models.SlugField(default="Slug-Field")
     
     def __str__(self):
         return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
     
+    def remove_from_cart(self):
+        return reverse('ticket:remove_from_cart',kwargs={'slug':self.slug,'pk':self.pk})
+    
+#   A signal to generate a unique slug for each other item
+def _ticket_item_slug_gen(sender,instance,*args, **kwargs):
+    instance.slug = slugify(instance.user)+'-'+slugify(instance.ticket.title)  
+pre_save.connect(_ticket_item_slug_gen,sender=TicketItem)
     
 class TicketBag(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)

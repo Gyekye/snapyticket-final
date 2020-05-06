@@ -16,4 +16,7 @@
         </button>
 </form>
 
-<a href="{{ticket.get_absolute_url}} ">view ticket</a>{% endblock content %}
+<a href="{{ticket.get_absolute_url}} ">view ticket</a><br><br>
+<a href="{{t.remove_from_cart}} ">remove ticket</a><br><br>
+{% for obj in ticket.ticketitem_set.all %}
+<a href="{{obj.remove_from_cart}} ">Remove</a>{% endfor %}{% endblock content %}

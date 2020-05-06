@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView,DetailView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Ticket,TicketItem,TicketBag
 from .forms import AddToCartForm
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 # Create your views here.
 class TicketView(TemplateView):
     template_name = 'ticket/tickets.html'
@@ -20,10 +22,11 @@ class TicketDetail(DetailView):
     context_object_name = 'ticket'
     template_name='ticket/details.html'
 
-
+@login_required
 def _add_to_cart(request,slug):
     # gets the ticket with a specific slug
     _ticket = Ticket.objects.get(slug=slug)
+    print(_ticket.ticketitem_set.all())
     if request.method == 'POST':
         # gets the ticket_type from the form
         _type = request.POST.get('ticket_type')
@@ -66,3 +69,20 @@ def _add_to_cart(request,slug):
         form = AddToCartForm()
     context = {'ticket':_ticket,'form':form}
     return render(request,'ticket/bag.html',context)
+
+@login_required
+def _remove_from_cart(request,slug,pk):
+    # todo build a functionality to decrease the number of ticket items by 1 the remove when its zero
+    # gets the specific ticket to remove from ticket bag
+    _ticket_to_remove = get_object_or_404(TicketItem,user=request.user,slug=slug,id=pk)
+    # gets users ticket bag
+    _ticket_bag = TicketBag.objects.get(user=request.user,ordered=False)
+    # removes ticket item from users ticket bag
+    _ticket_bag.tickets.remove(_ticket_to_remove)
+    # then deletes other if all ticket items are gone
+    TicketItem.delete(_ticket_to_remove)
+    #  deletes the users ticket bag when there are no tickets in them
+    if _ticket_bag.tickets.count() == 0:
+        TicketBag.delete(_ticket_bag)
+    #todo create a redirect to ticket bag
+    return HttpResponse('Item removed from ticket items')
