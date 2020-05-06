@@ -59,17 +59,22 @@ class Ticket(models.Model):
     
     # Model Methods 
     def __str__(self):
-        return f'{self.title} created by {self.organizer.user.username}'
+        return f'{self.title} created by {self.organizer.name}'
     
     def get_absolute_url(self):
         return reverse("ticket:detail", kwargs={"slug": self.slug})
     
+    def add_to_cart(self):
+        return reverse("ticket:add_to_cart", kwargs={"slug": self.slug})
+    
     
 # model signals 
 # todo write a custom signal to send ticket ID to organizers
+# todo uncomment the sending email functionality
 def ticket_slug_slugify(sender,instance,*args, **kwargs):
     """ Auto Generates Ticket Slug and then sends the unique ID to the event organizer"""
     instance.slug = slugify(instance.title)+'-'+slugify(instance.organizer.name)
+    """
     send_mail(
     'Your Ticket ID',
     f'This is your unique Ticket ID:{instance.slug}',
@@ -77,6 +82,7 @@ def ticket_slug_slugify(sender,instance,*args, **kwargs):
     [instance.organizer.email],
     fail_silently=False,
     )
+    """
 pre_save.connect(ticket_slug_slugify,sender=Ticket)
 
 
@@ -92,3 +98,23 @@ class TicketVariation(models.Model):
     
     def __str__(self):
         return f'{self.ticket.title} - {self.variation}'
+    
+
+    
+class TicketItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    ticket = models.ForeignKey(Ticket,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    ticket_type = models.ForeignKey(TicketVariation,on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
+    
+    
+class TicketBag(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    tickets = models.ManyToManyField(TicketItem)
+    created_on = models.DateTimeField(auto_now=True)
+    ordered = models.BooleanField(default=False)
+    order_ref_code = models.CharField(max_length=100)

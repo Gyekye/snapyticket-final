@@ -1,12 +1,8 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <ul>
-<li>
-{{ticket.title}}
-</li>
+    <li>
+        {{ticket.title}}
+    </li>
 </ul>
-
-{% endblock content %}
-
+<a href="{{ticket.add_to_cart}} ">add to cart</a>{% endblock content %}
