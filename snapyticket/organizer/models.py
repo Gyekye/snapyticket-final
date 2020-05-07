@@ -6,6 +6,8 @@ from django.urls import reverse
 User = settings.AUTH_USER_MODEL
 
 class Organizer(models.Model):
+    # Todo write a functuality to send the organizer ID to organizers when they regsiter as organizers
+    # todo #3 write necesaary querysets for event organizers
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='organizers_logos', default='default_organizer_logo')
     name = models.CharField(max_length=200)

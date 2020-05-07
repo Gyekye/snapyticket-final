@@ -106,6 +106,7 @@ class TicketItem(models.Model):
     ticket_type = models.ForeignKey(TicketVariation,on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     slug = models.SlugField(default="Slug-Field")
+    # todo write a method to generate the price of the ticket items
     
     def __str__(self):
         return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
@@ -119,6 +120,7 @@ def _ticket_item_slug_gen(sender,instance,*args, **kwargs):
 pre_save.connect(_ticket_item_slug_gen,sender=TicketItem)
     
 class TicketBag(models.Model):
+    # todo write custom querysets to get all ordered and unordered querysets
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     tickets = models.ManyToManyField(TicketItem)
     created_on = models.DateTimeField(auto_now=True)

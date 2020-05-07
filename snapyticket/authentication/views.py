@@ -68,7 +68,7 @@ class RegisterView(View):
                                             'protocol':'http' if use_https else 'http',
                                         }
                                         )
-            # TODO Integrate Email Sending with SendGrid to speed things up when going into production
+            # TODO #4 Integrate Email Sending with SendGrid to speed things up when going into production
 
             # Sends a Verification link to user so they can activate their account
             send_mail(mail_subject, mail_body, settings.EMAIL_HOST_USER, [user_email])
