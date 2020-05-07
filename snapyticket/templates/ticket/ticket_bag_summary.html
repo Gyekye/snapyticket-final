@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+
+<ul>
+    {% for ticket in ticket_bag.tickets.all %}
+    <li>
+        {{ticket.ticket_type}} * {{ticket.quantity}}
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ticket.add_to_cart}} ">checkout</a><br><br>
+{% endblock content %}

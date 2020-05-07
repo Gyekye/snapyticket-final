@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}Ticket Bag page
+<label>Update your ticket</label><br>
+<form method="POST">
+
+    {% csrf_token%}
+
+    {{form}}
+    <button type="submit">Add
+        </button>
+</form>
+{% endblock content %}
