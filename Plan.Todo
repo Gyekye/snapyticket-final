@@ -1,13 +1,12 @@
 # Development Task
 # Task with ** means completed 
-# Task with * means in progress 
-
+# Task with * means in progress
 TODO: COMPLETE USER AUTHENTICATION AND PROFILE UPDATES **
 TODO: CREATE ORGANIZER APP AND MODELS **
 TODO: CREATE TICKET APP AND MODEL AND LINK TO ORGANIZER **
 TODO: CREATE ADD TO CART **
 TODO: REMOVE FROM CART LOGIC **
-TODO: EDIT CART ITEMS
+TODO: EDIT CART ITEMS **
 TODO: CHECKOUT
 TODO: PAYMENT
 TODO: QRCODE GEN API
@@ -15,6 +14,9 @@ TODO: QRCODE SCANNER API
 TODO: DASHBOARD MODELS
 TODO: DASHBOARD CHAT FUNCTIONALITY
 
+
+### Writing custom model managers
+Todo:Write custom managers and querysets where they are needed
 
 
 
