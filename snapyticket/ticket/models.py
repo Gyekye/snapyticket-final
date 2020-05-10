@@ -18,8 +18,8 @@ CATEGORY_CHOICES = (
 
 
 class Ticket(models.Model):
-    # todo Write querysets to send emails to organizers who have their tickets pending 
-    # todo write querysets to generate all buyers of specific organizers ticket
+    # todo Write queryset to send emails to organizers who have their tickets pending
+    # todo write queryset to generate all buyers of specific organizers ticket
     """ 
     An event organizer can have multiple tickets
     A Ticket should be based in a particular category of events
@@ -107,7 +107,7 @@ class TicketVariation(models.Model):
 class TicketItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=1)
     ticket_type = models.ForeignKey(TicketVariation, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     slug = models.SlugField(default="Slug-Field")
@@ -133,7 +133,7 @@ pre_save.connect(_ticket_item_slug_gen, sender=TicketItem)
 
 
 class TicketBag(models.Model):
-    # todo write custom querysets to get all ordered and unordered querysets
+    # todo write custom queryset to get all ordered and unordered querysets
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tickets = models.ManyToManyField(TicketItem)
     created_on = models.DateTimeField(auto_now=True)

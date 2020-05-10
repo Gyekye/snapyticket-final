@@ -1,7 +1,5 @@
+from django.contrib.auth.mixins import AccessMixin
 from django.http.response import HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin,AccessMixin
-from django.contrib import messages
-from django.shortcuts import redirect
 
 
 # Function based decorator
@@ -14,7 +12,7 @@ def organizer_only(view_func):
     return wrap
 
 
-# class based decorators called Mixins
+# class based decorators called Mixin
 class EventOrganizerRequired(AccessMixin):
     """Verify that the current user is organizer."""
     def dispatch(self, request, *args, **kwargs):

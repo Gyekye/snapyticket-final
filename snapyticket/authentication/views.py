@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, resolve_url
 from django.contrib import messages
 from django.views.generic import View
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth.forms import AuthenticationForm
 
 from .forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -24,6 +24,7 @@ from django.urls import reverse_lazy
 from django.db.models import ObjectDoesNotExist
 from django.core.exceptions import ValidationError
 from django.contrib.admin import forms
+
 User = get_user_model()
 
 
@@ -44,12 +45,12 @@ class RegisterView(View):
         # Checks if the form is valid
         if form.is_valid():
             user_phone = form.cleaned_data.get('phone')
-            #print(type(user_phone))
+            # print(type(user_phone))
             if User.objects.filter(phone=user_phone).exists():
-                messages.info(request,"Your phone number exists change it ")
+                messages.info(request, "Your phone number exists change it ")
                 return redirect('auth:user_register')
             if len(user_phone) > 10:
-                messages.info(request,'Phone number must be 10 not more than')
+                messages.info(request, 'Phone number must be 10 not more than')
                 return redirect('auth:user_register')
             user_email = form.cleaned_data.get('email')
             user = form.save(commit=False)
@@ -57,23 +58,23 @@ class RegisterView(View):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account'
-            use_https=False
+            use_https = False
             mail_body = render_to_string('email_snippets/account_activate/account_activate.html',
-                                        {
-                                            # Variables that will be passed to the template
-                                            'user': user,
-                                            'domain': current_site.domain,
-                                            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                            'token': account_activation_token.make_token(user),
-                                            'protocol':'http' if use_https else 'http',
-                                        }
-                                        )
+                                         {
+                                             # Variables that will be passed to the template
+                                             'user': user,
+                                             'domain': current_site.domain,
+                                             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                             'token': account_activation_token.make_token(user),
+                                             'protocol': 'http' if use_https else 'http',
+                                         }
+                                         )
             # TODO #4 Integrate Email Sending with SendGrid to speed things up when going into production
 
             # Sends a Verification link to user so they can activate their account
             send_mail(mail_subject, mail_body, settings.EMAIL_HOST_USER, [user_email])
             messages.success(request,
-                            "A confirmation link has been sent to your email use that to activate your account")
+                             "A confirmation link has been sent to your email use that to activate your account")
             return redirect('auth:user_login')
         context = {'form': form}
         return render(self.request, 'auth/signup.html', context)
@@ -135,19 +136,20 @@ class LoginView(LoginView):
         if form.is_valid():
             return self.form_valid(form)
         return self.form_invalid(form)
-    
+
+
 class PasswordResetView(PasswordResetView):
     template_name = 'password/reset_form.html'
     email_template_name = 'email_snippets/password/reset_done_email.html'
     form_class = PasswordResetForm
-    success_url = reverse_lazy('auth:password_reset_done') 
-    
-    def get(self,*args, **kwargs):
+    success_url = reverse_lazy('auth:password_reset_done')
+
+    def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('profile:user_profile')
         form = self.get_form_class()
-        return render(self.request,self.template_name,{'form':form})
-    
+        return render(self.request, self.template_name, {'form': form})
+
     def post(self, request, *args, **kwargs):
         """
         Handle POST requests: instantiate a form instance with the passed
@@ -159,7 +161,7 @@ class PasswordResetView(PasswordResetView):
             try:
                 user_email = User.objects.get(email=email)
             except ObjectDoesNotExist:
-                messages.warning(request,'You email does not belong to any account ')
+                messages.warning(request, 'You email does not belong to any account ')
                 return redirect('auth:user_login')
             return self.form_valid(form)
         return self.form_invalid(form)

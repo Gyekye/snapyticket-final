@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, DetailView, UpdateView
+from django.views.generic import TemplateView, DetailView, UpdateView,View
 
 from .forms import AddToCartForm
 from .models import Ticket, TicketItem, TicketBag
@@ -33,12 +33,27 @@ class UpdateTicketItem(UpdateView):
     success_url = reverse_lazy('ticket:ticket_bag_summary')
     template_name = 'ticket/update_ticket_item.html'
 
+    def form_valid(self, form):
+        """ Checks for the validity of the data being passed into the form"""
+        _ticket_item_quantity = form.cleaned_data.get('quantity')
+        # Return an httpResponse when the quantity falls below onw
+        if _ticket_item_quantity < 1:
+            return  HttpResponse("Quantity must not go below one")
+        else:
+            # if quantity is greater than or equals one then call save method
+            form.save()
+        return super().form_valid(form)
+
+
+class PaymentView(View):
+    pass
+
 
 @login_required
 def _add_to_cart(request, slug):
     # gets the ticket with a specific slug
     _ticket = Ticket.objects.get(slug=slug)
-    print(_ticket.ticketitem_set.all())
+    #print(_ticket.ticketitem_set.all())
     if request.method == 'POST':
         # gets the ticket_type from the form
         _type = request.POST.get('ticket_type')
@@ -60,22 +75,28 @@ def _add_to_cart(request, slug):
             # else creates a new ticket item and saves it 
             except:
                 # creates a new ticket item
-                ticket_item, created = TicketItem.objects.get_or_create(
+                _ticket_item, created = TicketItem.objects.get_or_create(
                     user=request.user,
                     ticket=_ticket,
                     quantity=_quantity,
                     ordered=False,
                     ticket_type=_ticket_type
                 )  # saves new ticket_item
-                ticket_item.save()
+                # checks to see the quantity entered does not fall below one
+                if _ticket_item.quantity < 1:
+                    # if it falls below one, then update to 1 then save
+                    _ticket_item.quantity = 1
+                    _ticket_item.save()
+                else:
+                    _ticket_item.save()
                 # creates or gets a ticket bag
-                new_ticket_bag, created = TicketBag.objects.get_or_create(
+                _new_ticket_bag, created = TicketBag.objects.get_or_create(
                     user=request.user,
                 )
                 # saves ticket bag
-                new_ticket_bag.save()
+                _new_ticket_bag.save()
                 # added newly created ticket to the ticket bag
-                new_ticket_bag.tickets.add(ticket_item)
+                _new_ticket_bag.tickets.add(_ticket_item)
                 # print(new_ticket_bag.tickets.quantity)
                 return HttpResponse("added to cart")
     else:
@@ -102,7 +123,7 @@ def _remove_from_cart(request, slug, pk):
     return HttpResponse('Item removed from ticket items')
 
 
-def ticket_bag_summary(request):
-    user_ticket_bag = get_object_or_404(TicketBag, user=request.user)
-    context = {'ticket_bag': user_ticket_bag}
+def _ticket_bag_summary(request):
+    _user_ticket_bag = get_object_or_404(TicketBag, user=request.user)
+    context = {'ticket_bag': _user_ticket_bag}
     return render(request, 'ticket/ticket_bag_summary.html', context)
