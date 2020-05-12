@@ -1,0 +1,37 @@
+    <form>
+      <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+        <h3>SUPPORT NATURE WITH AS LOW AS $1</h3>
+        <button type="button" onClick="payWithRave()">Donate Here</button>
+    </form>
+    <script>
+        const publicKey = "{{pubkey}}";
+        function payWithRave() {
+            var x = getpaidSetup({
+                PBFPubKey: publicKey,
+                customer_email: "{{request.user.email}}",
+                amount: {{user_order.total_ticket_bag_price}},
+                {% if request.user.phone %}
+                customer_phone: "{{request.user.phone}}",
+                customer_firstname:'{{request.user.username}}',
+                {% endif %}
+                currency: "{{currency}}",
+                // Change the txref to be ticket-bag ref-code
+                txref: "rave"+"{{request.user.id}}",
+                onclose: function() {},
+                callback: function(response) {
+                      var txref = response.tx.txRef;
+                      console.log("This is the response returned after a charge", response);
+                      if (
+                    response.tx.chargeResponseCode == "00" ||
+                    response.tx.chargeResponseCode == "0"
+                    //Mark will write an if logic to check the amount upon callback before redirecting
+                ) {
+                  window.location = "http://127.0.0.1:8000/payment/success/?txref="+txref; //Add your success page here
+                } else {
+                    // redirect to a failure page.
+                }
+                    x.close();
+                }
+        });
+    }
+    </script>

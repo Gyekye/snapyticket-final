@@ -133,6 +133,11 @@ LOGIN_REDIRECT_URL = 'profile:user_profile'
 LOGOUT_REDIRECT_URL = 'auth:user_login'
 LOGIN_URL = 'auth:user_login'
 
+# FLUTTERWAVE PAYMENTS
+RAVE_PUBLIC_KEY = 'FLWPUBK_TEST-914edb532df870a7867d127a2a9fd28d-X'
+RAVE_SECRET_KEY = 'FLWSECK_TEST-0d2cc4f5a0787d8fd5f59efff8d379a6-X'
+RAVE_CURRENCY = 'GHS'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'

@@ -19,8 +19,11 @@
 <a href="{{ticket.get_absolute_url}} ">view ticket</a><br><br>
 <br><br>
 {% for obj in ticket.ticketitem_set.all %}
+{% if obj.ordered %}
+{% else %}
 <a href="{{obj.remove_from_cart}} ">Remove -{{obj.ticket.title}}-{{obj.ticket_type}} * {{obj.quantity}}</a><br>
 <a href="{{obj.update_ticket_item}} ">Edit - {{obj.ticket.title}}-{{obj.ticket_type}} * {{obj.quantity}}</a><br><br>
+{% endif %}
 {% endfor %}
 <a href="{% url 'ticket:ticket_bag_summary'%}">View your ticket bag</a><br><br>
 {% endblock content %}

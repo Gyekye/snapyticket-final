@@ -96,7 +96,7 @@ class ActivateAcccountView(View):
             login(request, user)
             messages.success(request, "Welcome to your profile")
             return redirect('profile:user_profile')
-        return render(request, "email_snippets/account_activate/account_activate_failed.html")
+        return render(request, "redirects/emails/account_activate_failed.html")
 
 
 class LoginView(LoginView):

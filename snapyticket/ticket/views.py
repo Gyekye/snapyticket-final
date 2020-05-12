@@ -1,8 +1,14 @@
+import json
+#import unirest
+import requests
+#unirest is a http library. You can use any http library you prefer
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, DetailView, UpdateView,View
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.views.generic import TemplateView, DetailView, UpdateView, View
 
 from .forms import AddToCartForm
 from .models import Ticket, TicketItem, TicketBag
@@ -38,7 +44,7 @@ class UpdateTicketItem(UpdateView):
         _ticket_item_quantity = form.cleaned_data.get('quantity')
         # Return an httpResponse when the quantity falls below onw
         if _ticket_item_quantity < 1:
-            return  HttpResponse("Quantity must not go below one")
+            return HttpResponse("Quantity must not go below one")
         else:
             # if quantity is greater than or equals one then call save method
             form.save()
@@ -53,7 +59,7 @@ class PaymentView(View):
 def _add_to_cart(request, slug):
     # gets the ticket with a specific slug
     _ticket = Ticket.objects.get(slug=slug)
-    #print(_ticket.ticketitem_set.all())
+    # print(_ticket.ticketitem_set.all())
     if request.method == 'POST':
         # gets the ticket_type from the form
         _type = request.POST.get('ticket_type')
@@ -67,7 +73,7 @@ def _add_to_cart(request, slug):
             try:
                 # try to check if the ticket item exits already an if it does will update the quantity
                 _existing_ticket_item = TicketItem.objects.get(user=request.user, ticket=_ticket,
-                                                               ticket_type=_ticket_type)
+                                                               ticket_type=_ticket_type,ordered=False)
                 # increases the quantity of the order item by the quantity typed
                 _existing_ticket_item.quantity += _quantity
                 _existing_ticket_item.save()
@@ -92,6 +98,8 @@ def _add_to_cart(request, slug):
                 # creates or gets a ticket bag
                 _new_ticket_bag, created = TicketBag.objects.get_or_create(
                     user=request.user,
+                    ordered=False,
+                    tickets__ordered=False,
                 )
                 # saves ticket bag
                 _new_ticket_bag.save()
@@ -109,9 +117,9 @@ def _add_to_cart(request, slug):
 def _remove_from_cart(request, slug, pk):
     # todo build a functionality to decrease the number of ticket items by 1 the remove when its zero
     # gets the specific ticket to remove from ticket bag
-    _ticket_to_remove = get_object_or_404(TicketItem, user=request.user, slug=slug, id=pk)
+    _ticket_to_remove = get_object_or_404(TicketItem, user=request.user, slug=slug, id=pk, ordered=False)
     # gets users ticket bag
-    _ticket_bag = TicketBag.objects.get(user=request.user, ordered=False)
+    _ticket_bag = TicketBag.objects.get(user=request.user, ordered=False, tickets__ordered=False)
     # removes ticket item from users ticket bag
     _ticket_bag.tickets.remove(_ticket_to_remove)
     # then deletes other if all ticket items are gone
@@ -122,8 +130,23 @@ def _remove_from_cart(request, slug, pk):
     # todo create a redirect to ticket bag
     return HttpResponse('Item removed from ticket items')
 
-
+@login_required
 def _ticket_bag_summary(request):
-    _user_ticket_bag = get_object_or_404(TicketBag, user=request.user)
+    _user_ticket_bag = get_object_or_404(TicketBag,user=request.user,ordered=False,tickets__ordered=False)
     context = {'ticket_bag': _user_ticket_bag}
     return render(request, 'ticket/ticket_bag_summary.html', context)
+
+
+#todo fix the webhooks and do a proper server side validation
+#@require_POST
+#@csrf_exempt
+#def _receive_payment(request):
+#    data = json.loads(request.body)
+#    print(data)
+#    return HttpResponse(status=200)
+
+
+#def _confirm_payment(responds):
+#  data = responds.body
+#   print(data)
+#   return  HttpResponse(status=200)

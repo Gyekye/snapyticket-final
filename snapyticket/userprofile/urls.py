@@ -1,11 +1,12 @@
 from django.urls import path, reverse_lazy
 from django.contrib.auth import views as auth_views
-from .views import ProfileView, ProfileChangeView
+from .views import ProfileView, ProfileChangeView,UserTickets
 
 app_name = 'profile'
 
 urlpatterns = [
     path('', ProfileView.as_view(), name='user_profile'),
+    path('my/tickets/',UserTickets.as_view(),name='user_tickets'),
     path('change/details/', ProfileChangeView.as_view(), name='update'),
     # Password Change Views
     # Todo add a message to the user after password change successful

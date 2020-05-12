@@ -9,6 +9,8 @@ verify_ssl = true
 django = "*"
 pillow = "*"
 django-phone-field = "*"
+six = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"

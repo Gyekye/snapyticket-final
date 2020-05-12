@@ -122,14 +122,20 @@ class TicketItem(models.Model):
 
     def update_ticket_item(self):
         return reverse('ticket:update_ticket_item', kwargs={'slug': self.slug, 'pk': self.pk})
+    
+    # setting the price of the ticket item
+    def ticket_item_price(self):
+        return self.quantity * self.ticket_type.price
+    
+    # total price method Note: Always call this method when wanting to get the ticket item price
+    def ticket_item_total_price(self):
+        return self.ticket_item_price()
 
 
-#   A signal to generate a unique slug for each other item
-def _ticket_item_slug_gen(sender, instance, *args, **kwargs):
+#   A signal to generate a unique slug for each Ticket item
+def ticket_item_slug_gen(sender, instance, *args, **kwargs):
     instance.slug = slugify(instance.user) + '-' + slugify(instance.ticket.title)
-
-
-pre_save.connect(_ticket_item_slug_gen, sender=TicketItem)
+pre_save.connect(ticket_item_slug_gen, sender=TicketItem)
 
 
 class TicketBag(models.Model):
@@ -139,3 +145,15 @@ class TicketBag(models.Model):
     created_on = models.DateTimeField(auto_now=True)
     ordered = models.BooleanField(default=False)
     order_ref_code = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return f'{self.user.username} - ticket-bag'
+    
+    # getting the total price of Ticket bag 
+    def total_ticket_bag_price(self):
+        total_price = 0
+        # loops through the ticket items 
+        for ticket_items in self.tickets.all():
+            # appends the ticket item price to the total_price variable
+            total_price += ticket_items.ticket_item_total_price()
+        return total_price
