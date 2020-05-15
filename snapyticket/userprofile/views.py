@@ -1,11 +1,12 @@
+import qrcode
 from django.contrib import messages
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.views.generic import View,TemplateView
-from ticket.models import TicketBag
+from ticket.models import TicketBag,TicketItem
 from authentication.forms import UserChangeForm
-
+from django.conf import settings
 User = get_user_model()
 
 
@@ -42,10 +43,11 @@ class ProfileChangeView(LoginRequiredMixin, View):
 
 
 
-class UserTickets(TemplateView):
-    template_name = 'profile/tickets.html'
-    
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        context['ordered_tickets'] = TicketBag.objects.filter(user=self.request.user,ordered=True)
-        return self.render_to_response(context)
+
+class UserTickets(View):
+    def get(self, request,*args, **kwargs):
+        ordered_tickets = TicketBag.objects.filter(user=request.user,ordered=True)
+        context = {
+            'ordered_tickets':ordered_tickets,
+        }
+        return render(request,'profile/tickets.html',context)

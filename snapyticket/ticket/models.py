@@ -111,8 +111,8 @@ class TicketItem(models.Model):
     ticket_type = models.ForeignKey(TicketVariation, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     slug = models.SlugField(default="Slug-Field")
+    qr_image = models.ImageField(upload_to='ticket_qrcode',null=True)
 
-    # todo write a method to generate the price of the ticket items
 
     def __str__(self):
         return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
@@ -148,6 +148,9 @@ class TicketBag(models.Model):
     
     def __str__(self):
         return f'{self.user.username} - ticket-bag'
+    
+    def get_absolute_url(self):
+        return reverse('profile:user_tickets', kwargs={'id': self.pk})
     
     # getting the total price of Ticket bag 
     def total_ticket_bag_price(self):

@@ -5,6 +5,7 @@
 {% for items in ordered_tickets%}
 {% for tickets in items.tickets.all %}
 {{tickets.ticket_type}} **{{tickets.quantity}}<br><br>
+<img src="{{ tickets.qr_image.url }}" alt="Event QR code" />
 {% endfor %}
 {% endfor %}
 <a href="{% url 'auth:user_logout'%}">Logout</a>  

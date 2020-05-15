@@ -51,10 +51,6 @@ class UpdateTicketItem(UpdateView):
         return super().form_valid(form)
 
 
-class PaymentView(View):
-    pass
-
-
 @login_required
 def _add_to_cart(request, slug):
     # gets the ticket with a specific slug
