@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Default Font';
+    src: url(/static/fonts/productsansregular.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Default Font Bold';
+    src: url(/static/fonts/productsansbold.woff2);
+}
+
+@font-face {
+    font-family: 'Regular Font';
+    src: url(/static/fonts/poppinsregular.woff2);
+}
+
+@font-face {
+    font-family: 'Regular Font Medium';
+    src: url(/static/fonts/poppinsmedium.woff2);
+}
+
+@font-face {
+    font-family: 'Regular Font SemiBold';
+    src: url(/static/fonts/poppinssemibold.woff2);
+}
+
+@font-face {
+    font-family: 'Regular Font ExtraBold';
+    src: url(/static/fonts/poppinsextrabold.woff2);
+}

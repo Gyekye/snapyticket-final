@@ -1,21 +1,86 @@
+{% load static %}
+<!-- EvesBay Landing Page -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EvesBay</title>
+
+    <!-- CSS -->
+
+    <!-- Materialize css cdn link -->
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <!-- End of materialize css cdn link -->
+
+    <!-- Owl carousel css cdn link -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <!-- End of Owl carousel css cdn link -->
+
+    <!-- Fullpage css cdn link -->
+    <link rel="stylesheet" href="{% static 'css/fullpage.min.css' %}">
+    <!-- End of Fullpage css cdn link -->
+
+    <!-- Custom css link -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- End of custom css link -->
+
+    <!-- END OF CSS -->
+
+    <!-- FONTS -->
+
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="{% static 'fonts/icon.css' %}">
+    <!-- End of material icons -->
+
+    <!-- Default Fonts -->
+    <link rel="stylesheet" href="{% static 'fonts/default.css' %}">
+    <!-- End of default Fonts -->
+
+    <!-- Fontawesome fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- End of Fontawesome fonts -->
+
+    <!-- END OF FONTS -->
+
 </head>
 
 <body>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %} 
+
     {% block content %} {% endblock content %}
+
+    <!-- End of Main Section -->
+
+    <!-- JS -->
+
+    <!-- Jquery js cdn link -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <!-- End of jquery js cdn link -->
+
+    <!-- Animation js cdnlink -->
+    <script src="{% static 'js/TweenMax.min.js' %}"></script>
+    <script src="{% static 'js/TimelineMax.min.js' %}"></script>
+    <!-- End of animation js cdnlink -->
+
+    <!-- Owl carousel js cdn link -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- End of Owl carousel js cdn link -->
+
+    <!-- Fullpage js cdn link -->
+    <script src="{% static 'js/fullpage.min.js' %}"></script>
+    <!-- End of Fullpage js cdn link -->
+
+    <!-- Materialize js cdn link -->
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <!-- End of materialize js cdn link -->
+
+    <!-- Custom js link -->
+    {% block extrafooter %} {% endblock extrafooter %}
+    <!-- End of custom js link -->
+
+    <!--END OF JS  -->
 </body>
 
 </html>
