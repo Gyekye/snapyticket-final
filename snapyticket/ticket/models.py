@@ -112,6 +112,7 @@ class TicketItem(models.Model):
     ordered = models.BooleanField(default=False)
     slug = models.SlugField(default="Slug-Field")
     qr_image = models.ImageField(upload_to='ticket_qrcode',null=True)
+    qr_image_path = models.CharField(max_length=1000,blank=True)
 
 
     def __str__(self):
