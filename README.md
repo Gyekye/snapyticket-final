@@ -1,5 +1,4 @@
-Snapyticket
-A REST api written in Django for people with deadlines
+Snapyticket:
 
 Technologies used
 Django: The web framework for perfectionists with deadlines (Django builds better web apps with less code).
