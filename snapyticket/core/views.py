@@ -55,6 +55,8 @@ class SuccessView(TemplateView):
                 ticketitems.save()
             # creates a special sequence of strings for the ticket bag which has been ordered as the order id 
             user_ticket_bag.order_ref_code = create_ref_code()
+            # saves the ticket bag after giving it a order ID
+            user_ticket_bag.save()
             # loops through the ticksts in the  ticket bag 
             for ticket_item in user_ticket_bag.tickets.all():
                 # sets a counter to zero
@@ -65,8 +67,8 @@ class SuccessView(TemplateView):
                 # this image can be accessed with the {{TicketItem.qr_image.url}} in the templates
                 while counter < ticket_item.quantity:
                     # while the counter is less than the ticketItem quantity keep making qrcodes
+                    # increase counter by one
                     counter = counter + 1
-                    print(ticket_item)
                     ticket_item_qr = qrcode.make(
                         # the qrcode for each tickets consists of unique data
                         # its consists of the ticket_type
@@ -74,18 +76,16 @@ class SuccessView(TemplateView):
                         # the order ref code 
                         # and the name of the ticket
                         # todo pass more data to the data in the qrcode 
-                        f'{self.request.user}\n **************\n{ticket_item.ticket_type.variation}\n',
+                        f'PURCHASED BY: {self.request.user}\nVARAIATION: {ticket_item.ticket_type.variation}\nORDER ID: {user_ticket_bag.order_ref_code}',
                     )
                     # saves the qrcode image to the media folder in the project directory in a folder called qr_codes
                     # todo fix the duplicatrion of the images upon saving 
                     ticket_item_qr.save(settings.MEDIA_ROOT +f'/qr_codes/{request.user}{ticket_item}{ticket_item.id}{counter}.png')
                     # creates the qr_image instance by opening it
                     open_image = Image.open(settings.MEDIA_ROOT +f'/qr_codes/{request.user}{ticket_item}{ticket_item.id}{counter}.png')
-                    # sets the qr_code image of the ticketItem to the opened image
-                    ticket_item.qr_image = open_image
                     # saves the image
                     # todo make sure that the qrcode is indeed saved to the qr-image model of each ticket item
-                    new_image = ticket_item.qr_image.save(f'{open_image}.png')
+                    new_image = ticket_item.qr_image.save(open_image)
                     print(ticket_item.qr_image)
                     # break when counter is equal to the quantity of the ticket Item 
                     if counter == ticket_item.quantity:
