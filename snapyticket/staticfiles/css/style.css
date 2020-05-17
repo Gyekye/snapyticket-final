@@ -410,19 +410,27 @@ p.card-text {
 
 div.cateCard {
     display: block;
+    position: relative;
     transition: .1s;
 }
 
-div.cateCard:hover {
-    transform: translateY(-5px) !important;
+div.cate-img-x-i {
+    position: absolute;
+    width: 30%;
+    height: 0;
+    cursor: pointer;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    opacity: 0;
+    background: #2F80ED;
+    transition: .4s;
 }
 
-div.cate-img {
-    position: absolute;
-    background-position: center;
-    z-index: 10;
-    right: 0;
-    bottom: -6px;
+div.cateCard:hover .cate-img-x-i {
+    opacity: 1;
+    height: 40%;
+    transform: translateY(-5px) !important;
 }
 
 span.pre-banner-helper-text {
@@ -1253,6 +1261,10 @@ p.modal-heading-helper-text {
 
 .cost-text span {
     font-family: Regular Font SemiBold;
+}
+
+.z2 {
+    z-index: 10;
 }
 
 
