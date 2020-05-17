@@ -357,7 +357,7 @@ div.card {
 }
 
 .f-x {
-    font-size: 2.8rem !important;
+    font-size: 2.4rem !important;
 }
 
 .mb-0 {
@@ -414,22 +414,33 @@ div.cateCard {
     transition: .1s;
 }
 
-div.cate-img-x-i {
+div.cate-img-x-i,
+div.cate-img-x-ii,
+div.cate-img-x-iii,
+div.cate-img-x-iv,
+div.cate-img-x-v,
+div.cate-img-x-vi,
+div.cate-img-x-vii {
     position: absolute;
-    width: 30%;
-    height: 0;
+    width: 100%;
+    padding-top: 10vh;
+    height: 100%;
     cursor: pointer;
     right: 0;
     bottom: 0;
     z-index: 100;
     opacity: 0;
-    background: #2F80ED;
-    transition: .4s;
+    background: white;
 }
 
-div.cateCard:hover .cate-img-x-i {
+div.cateCard:hover .cate-img-x-i,
+div.cateCard:hover div.cate-img-x-ii,
+div.cateCard:hover div.cate-img-x-iii,
+div.cateCard:hover div.cate-img-x-iv,
+div.cateCard:hover div.cate-img-x-v,
+div.cateCard:hover div.cate-img-x-vi,
+div.cateCard:hover div.cate-img-x-vii {
     opacity: 1;
-    height: 40%;
     transform: translateY(-5px) !important;
 }
 
