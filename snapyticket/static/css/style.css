@@ -309,6 +309,7 @@ button.search-sub-btn {
     position: absolute;
     top: 6px;
     right: 7px;
+    padding-top: 4px;
     z-index: 1;
     height: 45px;
 }
@@ -513,13 +514,14 @@ section.featured-section {
     object-fit: cover;
 }
 
-.sub-main-card {
+.sub-card {
     height: 45vh;
     width: 100%;
     padding-top: 4vh;
+    position: relative;
 }
 
-.sub-main-card-img {
+.sub-card-img {
     width: 100%;
     height: 100% !important;
     object-fit: cover;
@@ -552,13 +554,15 @@ section.featured-section {
     object-fit: cover;
 }
 
-.main-card-content {
+.main-card-content,
+.sub-card-content {
     z-index: 10;
     position: absolute;
     padding: 20px;
 }
 
-.main-card-date {
+.main-card-date,
+.sub-card-date {
     padding: 15px;
     width: 200px;
     text-align: center;
@@ -570,6 +574,12 @@ section.featured-section {
     position: absolute;
     width: 100%;
     top: 78vh;
+}
+
+.sub-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 34vh;
 }
 
 .shareBtn {
@@ -590,6 +600,15 @@ section.featured-section {
     background: linear-gradient(rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.774), black);
 }
 
+.sub-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 0vh;
+    cursor: pointer;
+    transition: .5s ease;
+    background: linear-gradient(rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.774), black);
+}
+
 .main-card-title {
     font-size: 3.3rem;
     padding-top: 8vh;
@@ -597,9 +616,21 @@ section.featured-section {
     font-family: Regular Font SemiBold;
 }
 
+.sub-card-title {
+    font-size: 3rem;
+    padding-top: 2vh;
+    color: white;
+    font-family: Regular Font SemiBold;
+}
+
 .main-card:hover .main-card-overlay {
     opacity: 1;
     height: 86vh;
+}
+
+.sub-card:hover .sub-card-overlay {
+    opacity: 1;
+    height: 41vh;
 }
 
 
