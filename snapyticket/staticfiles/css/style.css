@@ -26,11 +26,11 @@ body {
 
 a.btn.default-btn,
 button.btn {
-    padding: 3px;
-    height: 45px;
+    padding: 10px;
+    height: 55px;
     text-transform: capitalize;
     font-family: Regular Font;
-    font-size: .7rem;
+    font-size: .88rem;
     padding-right: 25px;
     padding-left: 25px;
     transition: .4s;
@@ -558,14 +558,49 @@ section.featured-section {
     object-fit: cover;
 }
 
+.main-card-content {
+    z-index: 10;
+    position: absolute;
+    padding: 20px;
+}
+
+.main-card-date {
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+.main-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 78vh;
+}
+
+.shareBtn {
+    margin-right: 40px;
+    margin-top: -15px;
+}
+
+.main-card-action {
+    padding-top: 8vh;
+}
+
 .main-card-overlay {
     position: absolute;
-    opacity: 0;
     width: 100%;
     height: 0vh;
     cursor: pointer;
     transition: .5s ease;
-    background: linear-gradient(rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.274), black);
+    background: linear-gradient(rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.774), black);
+}
+
+.main-card-title {
+    font-size: 3.3rem;
+    padding-top: 13vh;
+    color: white;
+    font-family: Regular Font SemiBold;
 }
 
 .main-card:hover .main-card-overlay {
