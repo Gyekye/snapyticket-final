@@ -259,19 +259,67 @@
                     <div class="row">
                         <div class="col s5">
                             <div class="main-card">
-                                <div class="main-card-overlay waves-effect waves-light"></div>
-                                <img src="/static/imgs/ticket-images/02.jpg" class="main-card-img" alt="">
+                                <div class="main-card-overlay waves-effect waves-light">
+                                    <div class="main-card-content">
+                                        <div class="main-card-date">
+                                            05 February 2020
+                                        </div>
+                                        <div class="main-card-title">
+                                            Shatta Wale Ft. Stoneboy LiveExploit 2020 SXT.
+                                        </div>
+                                        <div class="main-card-action">
+                                            <a href="" class="btn default-btn bg-y z-depth-0">Get tickets</a>
+                                        </div>
+                                        <div class="main-card-organizer black-text">
+                                            Organized by DarkShadowsEves Community
+                                            <a href="" class="btn right z-depth-0 bg-x btn-large btn-floating shareBtn"><i class="material-icons">share</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img src="{% static 'imgs/ticket-images/02.jpg' %}" class="main-card-img" alt="">
                             </div>
                         </div>
                         <div class="col s7">
-                            <div class="sub-main-card">
-                                <img src="/static/imgs/ticket-images/03.jpg" class="sub-main-card-img" alt="">
+                            <div class="sub-card">
+                                <div class="sub-card-overlay waves-effect waves-light">
+                                    <div class="main-card-content">
+                                        <div class="sub-card-date">
+                                            05 February 2020
+                                        </div>
+                                        <div class="sub-card-title">
+                                            Shatta Wale Ft. Stoneboy LiveExploit 2020 SXT.
+                                        </div>
+                                        <div class="sub-card-action">
+                                            <a href="" class="btn default-btn bg-y z-depth-0">Get tickets</a>
+                                        </div>
+                                        <div class="sub-card-organizer black-text">
+                                            <a href="" class="btn right z-depth-0 bg-x btn-large btn-floating shareBtn"><i class="material-icons">share</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img src="/static/imgs/ticket-images/03.jpg" class="sub-card-img" alt="">
                             </div>
                             <div class="wrapper-x mt-x">
                                 <div class="row">
                                     <div class="col s6">
-                                        <div class="pre-main-card">
-                                            <img src="/static/imgs/ticket-images/01.jpg" class="pre-main-card-img" alt="">
+                                        <div class="pre-card">
+                                            <div class="pre-card-overlay waves-effect waves-light">
+                                                <div class="main-card-content">
+                                                    <div class="pre-card-date">
+                                                        05 February 2020
+                                                    </div>
+                                                    <div class="pre-card-title">
+                                                        Raperhorlic GH 2020
+                                                    </div>
+                                                    <div class="pre-card-action">
+                                                        <a href="" class="btn default-btn bg-y z-depth-0">Get tickets</a>
+                                                    </div>
+                                                    <div class="pre-card-organizer black-text">
+                                                        <a href="" class="btn right z-depth-0 bg-x ml-x btn-large btn-floating shareBtn"><i class="material-icons">share</i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="/static/imgs/ticket-images/01.jpg" class="pre-card-img" alt="">
                                         </div>
                                     </div>
                                     <div class="col s6">
@@ -318,7 +366,7 @@
                             </p>
                         </div>
                         <div class="col s6">
-                            <img src="/static/imgs/core/live.jpg" class="responsive-img" alt="">
+                            <img src="{% static 'imgs/core/live.jpg' %}" class="responsive-img" alt="">
                         </div>
                     </div>
                 </div>
@@ -338,7 +386,7 @@
                             <div class="padd-t-3 center">
                                 <br><br>
                                 <center>
-                                    <div id="dashboard"></div>
+                                    {% include 'page_snippets/dashboard.html' %}
                                 </center>
                                 <p class="heading-helper-text center-align">
                                     Lorem ipsum dolor sit, amet consectetur.
@@ -355,7 +403,7 @@
                                         <div class="card">
                                             <div class="card-content">
                                                 <div class="imgCircle-container">
-                                                    <img src="/imgs/testimonies/testimonyOne.jpg" class="imgCircle responsive-img" alt="">
+                                                    <img src="{% static 'imgs/testimonies/testimonyOne.jpg' %}" class="imgCircle responsive-img" alt="">
                                                 </div>
                                                 <div class="testimonies-right">
                                                     <p class="testimonies-user">Emmanuel Kelvin Oppong</p>
@@ -372,7 +420,7 @@
                                         <div class="card">
                                             <div class="card-content">
                                                 <div class="imgCircle-container">
-                                                    <img src="/imgs/testimonies/testimonyTwo.jpg" class="imgCircle responsive-img" alt="">
+                                                    <img src="{% static 'imgs/testimonies/testimonyTwo.jpg' %}" class="imgCircle responsive-img" alt="">
                                                 </div>
                                                 <div class="testimonies-right">
                                                     <p class="testimonies-user">Okine Shaun Nii Okoi</p>

@@ -4,12 +4,6 @@ img {
     display: block;
 }
 
-#fooss {
-    display: none;
-    transition: .3s;
-    position: absolute;
-}
-
 * {
     font-family: Regular Font;
 }
@@ -26,14 +20,15 @@ body {
 
 a.btn.default-btn,
 button.btn {
-    padding: 3px;
-    height: 45px;
+    padding: 10px;
+    height: 55px;
     text-transform: capitalize;
-    font-family: Regular Font;
-    font-size: .7rem;
+    font-family: Regular Font Medium;
+    font-size: .88rem;
     padding-right: 25px;
     padding-left: 25px;
     transition: .4s;
+    border-radius: 0;
 }
 
 .bg-x {
@@ -315,6 +310,7 @@ button.search-sub-btn {
     position: absolute;
     top: 6px;
     right: 7px;
+    padding-top: 4px;
     z-index: 1;
     height: 45px;
 }
@@ -519,13 +515,14 @@ section.featured-section {
     object-fit: cover;
 }
 
-.sub-main-card {
+.sub-card {
     height: 45vh;
     width: 100%;
     padding-top: 4vh;
+    position: relative;
 }
 
-.sub-main-card-img {
+.sub-card-img {
     width: 100%;
     height: 100% !important;
     object-fit: cover;
@@ -547,30 +544,143 @@ section.featured-section {
     color: white;
 }
 
-.pre-main-card {
+.pre-card {
     width: 100%;
     height: 43vh;
+    position: relative;
 }
 
-.pre-main-card-img {
+.pre-card-img {
     width: 100%;
     height: 43vh;
     object-fit: cover;
 }
 
+.main-card-content,
+.sub-card-content,
+.pre-card-content {
+    z-index: 10;
+    position: absolute;
+    padding: 20px;
+}
+
+.main-card-date,
+.sub-card-date,
+.pre-card-date {
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+.main-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 78vh;
+    color: black;
+}
+
+.sub-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 34vh;
+}
+
+.pre-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 34vh;
+    right: 0;
+}
+
+.ml-x {
+    margin-right: -40px !important;
+}
+
+.sub-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 34vh;
+}
+
+.shareBtn {
+    margin-right: 40px;
+    margin-top: -15px;
+}
+
+.main-card-action {
+    padding-top: 4vh;
+}
+
+.pre-card-action {
+    padding-top: 3vh;
+}
+
 .main-card-overlay {
     position: absolute;
-    opacity: 0;
     width: 100%;
     height: 0vh;
     cursor: pointer;
     transition: .5s ease;
-    background: linear-gradient(rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.274), black);
+    background: white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
+}
+
+.sub-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 0vh;
+    cursor: pointer;
+    transition: .5s ease;
+    background: white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
+}
+
+.pre-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 0vh;
+    cursor: pointer;
+    transition: .5s ease;
+    background: white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
+}
+
+.main-card-title {
+    font-size: 3.3rem;
+    padding-top: 8vh;
+    color: black;
+    font-family: Regular Font SemiBold;
+}
+
+.sub-card-title {
+    font-size: 2.4rem;
+    padding-top: 2vh;
+    color: black;
+    font-family: Regular Font SemiBold;
+}
+
+.pre-card-title {
+    font-size: 2rem;
+    padding-top: 2vh;
+    color: black;
+    font-family: Regular Font SemiBold;
 }
 
 .main-card:hover .main-card-overlay {
     opacity: 1;
     height: 86vh;
+}
+
+.sub-card:hover .sub-card-overlay {
+    opacity: 1;
+    height: 41vh;
+}
+
+.pre-card:hover .pre-card-overlay {
+    opacity: 1;
+    height: 43vh;
 }
 
 
@@ -849,16 +959,6 @@ div.form-box {
 .testimonies-right span {
     color: #F47402;
     font-size: .75rem;
-}
-
-.indicatorsC {
-    width: 40px;
-    height: 40px;
-    background: #585656;
-    color: white;
-    padding: 5px;
-    transform: translateY(180px);
-    z-index: 1010 !important;
 }
 
 
