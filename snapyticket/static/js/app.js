@@ -112,7 +112,7 @@ $(document).ready(function() {
 
 
 $(function() {
-    $("#dashboard").load("/templates/snippets/dashboard.html");
+    $("#dashboard").load("templates/page_snippets/dashbaord.html' %}");
 });
 
 var instance = M.Carousel.getInstance('carousel');

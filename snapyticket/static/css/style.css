@@ -880,16 +880,6 @@ div.form-box {
     font-size: .75rem;
 }
 
-.indicatorsC {
-    width: 40px;
-    height: 40px;
-    background: #585656;
-    color: white;
-    padding: 5px;
-    transform: translateY(180px);
-    z-index: 1010 !important;
-}
-
 
 /* End of testimonies Section */
 

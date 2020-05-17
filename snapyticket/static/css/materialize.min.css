@@ -8168,6 +8168,7 @@ input[type=range]::-ms-thumb {
     overflow: hidden;
     background: #FAFAFA;
     position: relative;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 50px 1px rgba(0, 0, 0, .1);
     width: 100%;
     height: 400px;
     -webkit-perspective: 500px;

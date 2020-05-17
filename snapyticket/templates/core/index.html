@@ -276,7 +276,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <img src="/static/imgs/ticket-images/02.jpg" class="main-card-img" alt="">
+                                <img src="{% static 'imgs/ticket-images/02.jpg' %}" class="main-card-img" alt="">
                             </div>
                         </div>
                         <div class="col s7">
@@ -334,7 +334,7 @@
                             </p>
                         </div>
                         <div class="col s6">
-                            <img src="/static/imgs/core/live.jpg" class="responsive-img" alt="">
+                            <img src="{% static 'imgs/core/live.jpg' %}" class="responsive-img" alt="">
                         </div>
                     </div>
                 </div>
@@ -354,7 +354,7 @@
                             <div class="padd-t-3 center">
                                 <br><br>
                                 <center>
-                                    <div id="dashboard"></div>
+                                    {% include 'page_snippets/dashboard.html' %}
                                 </center>
                                 <p class="heading-helper-text center-align">
                                     Lorem ipsum dolor sit, amet consectetur.
@@ -371,7 +371,7 @@
                                         <div class="card">
                                             <div class="card-content">
                                                 <div class="imgCircle-container">
-                                                    <img src="/imgs/testimonies/testimonyOne.jpg" class="imgCircle responsive-img" alt="">
+                                                    <img src="{% static 'imgs/testimonies/testimonyOne.jpg' %}" class="imgCircle responsive-img" alt="">
                                                 </div>
                                                 <div class="testimonies-right">
                                                     <p class="testimonies-user">Emmanuel Kelvin Oppong</p>
@@ -388,7 +388,7 @@
                                         <div class="card">
                                             <div class="card-content">
                                                 <div class="imgCircle-container">
-                                                    <img src="/imgs/testimonies/testimonyTwo.jpg" class="imgCircle responsive-img" alt="">
+                                                    <img src="{% static 'imgs/testimonies/testimonyTwo.jpg' %}" class="imgCircle responsive-img" alt="">
                                                 </div>
                                                 <div class="testimonies-right">
                                                     <p class="testimonies-user">Okine Shaun Nii Okoi</p>
