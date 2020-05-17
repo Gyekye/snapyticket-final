@@ -4,12 +4,6 @@ img {
     display: block;
 }
 
-#fooss {
-    display: none;
-    transition: .3s;
-    position: absolute;
-}
-
 * {
     font-family: Regular Font;
 }
