@@ -69,7 +69,13 @@ class SuccessView(TemplateView):
                     # while the counter is less than the ticketItem quantity keep making qrcodes
                     # increase counter by one
                     counter = counter + 1
-                    ticket_item_qr = qrcode.make(
+                    ticket_item_qr = qrcode.QRCode(
+                            version=1,
+                            error_correction=qrcode.constants.ERROR_CORRECT_L,
+                            box_size=10,
+                            border=4,
+                    )
+                    ticket_item_qr.add_data(
                         # the qrcode for each tickets consists of unique data
                         # its consists of the ticket_type
                         # its consist of the username of the user
@@ -78,6 +84,8 @@ class SuccessView(TemplateView):
                         # todo pass more data to the data in the qrcode 
                         f'PURCHASED BY: {self.request.user}\nVARAIATION: {ticket_item.ticket_type.variation}\nORDER ID: {user_ticket_bag.order_ref_code}',
                     )
+                    ticket_item_qr.make(fit=True)
+                    img = qr.make_image(fill_color="black", back_color="white")
                     # saves the qrcode image to the media folder in the project directory in a folder called qr_codes
                     # todo fix the duplicatrion of the images upon saving 
                     ticket_item_qr.save(settings.MEDIA_ROOT +f'/qr_codes/{request.user}{ticket_item}{ticket_item.id}{counter}.png')
