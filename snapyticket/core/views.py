@@ -85,15 +85,15 @@ class SuccessView(TemplateView):
                         f'PURCHASED BY: {self.request.user}\nVARAIATION: {ticket_item.ticket_type.variation}\nORDER ID: {user_ticket_bag.order_ref_code}',
                     )
                     ticket_item_qr.make(fit=True)
-                    img = qr.make_image(fill_color="black", back_color="white")
+                    img = ticket_item_qr.make_image(fill_color="black", back_color="white")
                     # saves the qrcode image to the media folder in the project directory in a folder called qr_codes
                     # todo fix the duplicatrion of the images upon saving 
-                    ticket_item_qr.save(settings.MEDIA_ROOT +f'/qr_codes/{request.user}{ticket_item}{ticket_item.id}{counter}.png')
+                    img.save(settings.MEDIA_ROOT +f'/qr_codes/{request.user}{ticket_item}{ticket_item.id}{counter}.png')
                     # creates the qr_image instance by opening it
                     open_image = Image.open(settings.MEDIA_ROOT +f'/qr_codes/{request.user}{ticket_item}{ticket_item.id}{counter}.png')
                     # saves the image
                     # todo make sure that the qrcode is indeed saved to the qr-image model of each ticket item
-                    new_image = ticket_item.qr_image.save(open_image)
+                    new_image = ticket_item.qr_image.save(img,open_image,save=True)
                     print(ticket_item.qr_image)
                     # break when counter is equal to the quantity of the ticket Item 
                     if counter == ticket_item.quantity:
