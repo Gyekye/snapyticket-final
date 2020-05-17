@@ -578,7 +578,7 @@ section.featured-section {
 }
 
 .main-card-action {
-    padding-top: 8vh;
+    padding-top: 4vh;
 }
 
 .main-card-overlay {
@@ -592,7 +592,7 @@ section.featured-section {
 
 .main-card-title {
     font-size: 3.3rem;
-    padding-top: 13vh;
+    padding-top: 8vh;
     color: white;
     font-family: Regular Font SemiBold;
 }
