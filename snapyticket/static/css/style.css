@@ -23,11 +23,12 @@ button.btn {
     padding: 10px;
     height: 55px;
     text-transform: capitalize;
-    font-family: Regular Font;
+    font-family: Regular Font Medium;
     font-size: .88rem;
     padding-right: 25px;
     padding-left: 25px;
     transition: .4s;
+    border-radius: 0;
 }
 
 .bg-x {
@@ -577,6 +578,24 @@ section.featured-section {
     position: absolute;
     width: 100%;
     top: 78vh;
+    color: black;
+}
+
+.sub-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 34vh;
+}
+
+.pre-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 34vh;
+    right: 0;
+}
+
+.ml-x {
+    margin-right: -40px !important;
 }
 
 .sub-card-organizer {
@@ -604,7 +623,8 @@ section.featured-section {
     height: 0vh;
     cursor: pointer;
     transition: .5s ease;
-    background: linear-gradient(rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.774), black);
+    background: white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
 }
 
 .sub-card-overlay {
@@ -613,7 +633,8 @@ section.featured-section {
     height: 0vh;
     cursor: pointer;
     transition: .5s ease;
-    background: linear-gradient(rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.774), black);
+    background: white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
 }
 
 .pre-card-overlay {
@@ -622,27 +643,28 @@ section.featured-section {
     height: 0vh;
     cursor: pointer;
     transition: .5s ease;
-    background: linear-gradient(rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.515), rgba(0, 0, 0, 0.774), black);
+    background: white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
 }
 
 .main-card-title {
     font-size: 3.3rem;
     padding-top: 8vh;
-    color: white;
+    color: black;
     font-family: Regular Font SemiBold;
 }
 
 .sub-card-title {
     font-size: 2.4rem;
     padding-top: 2vh;
-    color: white;
+    color: black;
     font-family: Regular Font SemiBold;
 }
 
 .pre-card-title {
     font-size: 2rem;
     padding-top: 2vh;
-    color: white;
+    color: black;
     font-family: Regular Font SemiBold;
 }
 
