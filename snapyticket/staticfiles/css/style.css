@@ -1,0 +1,1444 @@
+img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+#fooss {
+    display: none;
+    transition: .3s;
+    position: absolute;
+}
+
+* {
+    font-family: Regular Font;
+}
+
+html,
+body {
+    box-sizing: content-box;
+    scroll-behavior: smooth;
+}
+
+.btn {
+    text-transform: capitalize !important;
+}
+
+a.btn.default-btn,
+button.btn {
+    padding: 3px;
+    height: 45px;
+    text-transform: capitalize;
+    font-family: Regular Font;
+    font-size: .7rem;
+    padding-right: 25px;
+    padding-left: 25px;
+    transition: .4s;
+}
+
+.bg-x {
+    background: #F47402;
+}
+
+.bg-x:hover,
+.bg-x:focus {
+    background: #F47402;
+    opacity: .8;
+}
+
+.bg-y {
+    background: #325DF6;
+}
+
+.bg-y:hover,
+.bg-y:focus {
+    background: #325DF6;
+    opacity: .8;
+}
+
+.bg-z {
+    background: #325DF6 !important;
+}
+
+.bg-z:hover,
+.bg-z:focus {
+    background: #325DF6;
+    opacity: .8;
+}
+
+.content-x {
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 100%;
+    padding-bottom: 5.6px;
+}
+
+.content-xs {
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 96%;
+    padding-bottom: 5.6px;
+}
+
+.pr-0 {
+    padding-right: 0;
+}
+
+.content-z {
+    padding-left: 8%;
+    padding-right: 8%;
+    width: 100%;
+}
+
+.content-y {
+    padding-right: 6%;
+}
+
+.x-black {
+    color: #2c2c2c !important;
+}
+
+.x-grey {
+    color: #777777 !important;
+}
+
+.small-text {
+    font-size: 13px;
+}
+
+.medium-text {
+    font-size: 17px;
+}
+
+.large-text {
+    font-size: 21px;
+}
+
+
+/* Heading Section */
+
+section.section-heading {
+    height: 12vh;
+    width: 100%;
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+header nav {
+    background: transparent;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+header nav ul li a {
+    display: inline;
+    font-size: .9rem !important;
+    transition: 1s !important;
+}
+
+header nav ul li a.br-right {
+    border-right: 1px solid #777777 !important;
+}
+
+header nav ul li a:hover {
+    background: transparent !important;
+    color: #2c2c2c !important;
+}
+
+header nav a.brand-logo,
+header nav a.brand-logo span {
+    font-family: Default Font Bold;
+    font-size: 20px;
+}
+
+header nav a.brand-logo span {
+    color: #F47402;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.bolder {
+    font-weight: bolder;
+}
+
+
+/* End of heading section */
+
+
+/* Quote section */
+
+section.section-quote {
+    padding-top: 4vh;
+    padding-bottom: 6vh;
+}
+
+div.heading-main {
+    font-family: Default Font Bold;
+    font-size: 30px;
+    color: #2c2c2c;
+}
+
+p.heading-helper-text {
+    color: #777777;
+    margin-top: 4px;
+    font-size: .8rem;
+}
+
+.logo-main,
+.logo-main span {
+    font-size: 30px;
+    font-family: Default Font Bold;
+}
+
+.logo-main span {
+    color: #F47402;
+}
+
+p.logo-helper-text {
+    color: #777777;
+    margin: 0;
+    font-size: .8rem;
+}
+
+
+/* End of quote section */
+
+
+/* Search Box Section */
+
+section.section-search-box {
+    height: 55vh;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+div.search-box-container {
+    width: 100%;
+    height: 100%;
+    background: url(/static/imgs/core/index.png);
+    background-size: cover;
+    background-position: center;
+    border-top: 1px solid #FAFAFA;
+}
+
+div.h-x-1 {
+    padding-top: 17vh;
+}
+
+::placeholder {
+    color: #a3a3a3;
+}
+
+input.search {
+    border-bottom: none !important;
+    background-color: #ffffff !important;
+    height: 56px !important;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33 !important;
+    padding-top: 20px;
+    border-radius: 5px;
+    text-indent: 50px;
+    letter-spacing: .5px !important;
+    border-radius: 6px;
+    font-family: Regular Font Medium;
+    letter-spacing: 0px;
+    z-index: 100;
+    font-size: .9rem !important;
+}
+
+div.form-input-field {
+    padding-top: 10px;
+}
+
+div.form-input-field label {
+    font-size: .9rem;
+    display: block;
+    margin-bottom: 7px;
+}
+
+input {
+    border-bottom: none !important;
+    border: none !important;
+    height: 50px !important;
+    padding-top: 20px;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    border-radius: 5px;
+    font-family: Regular Font Medium;
+    text-indent: 20px;
+    transition: 3.9s;
+    font-size: .89rem !important;
+    color: #4F4F4F
+}
+
+input:focus {
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, .1) !important;
+}
+
+textarea {
+    border-bottom: none !important;
+    border: none !important;
+    height: 100px !important;
+    padding-top: 20px;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    border-radius: 5px;
+    font-family: Regular Font Medium;
+    text-indent: 20px;
+    transition: 3.9s;
+    font-size: .89rem !important;
+    color: #4F4F4F
+}
+
+textarea:focus {
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, .1) !important;
+    border: none !important;
+}
+
+div.search-box {
+    width: 89.4%;
+    position: absolute;
+    transform: translateY(-28px);
+    padding-left: 6.6%;
+}
+
+img.relax-img {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+button.search-sub-btn {
+    position: absolute;
+    top: 6px;
+    right: 7px;
+    z-index: 1;
+    height: 45px;
+}
+
+.loca-x {
+    position: absolute;
+    right: -10px !important;
+    box-shadow: 0 0 0 transparent !important;
+}
+
+i.search-prefix {
+    position: absolute;
+    top: 15px;
+    left: 8.6%;
+    color: #828282
+}
+
+
+/* End of Search Box Section */
+
+
+/* Category Search Section */
+
+div.card {
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    border-radius: 4px;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.card-x-top {
+    padding-bottom: 10vh;
+}
+
+.card-x-all {
+    padding-top: 1.3vh;
+    padding-bottom: 3.5vh;
+}
+
+.f-x {
+    font-size: 2.4rem !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+}
+
+.pr-0 {
+    padding-right: 0 !important;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+.padd-t-1 {
+    width: 290px;
+    padding-top: 4vh;
+}
+
+button.btn.prefix-box {
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #ffffff;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+}
+
+div.ticket-counter {
+    font-family: Regular Font ExtraBold;
+    color: #F47402;
+    padding-top: 10px;
+}
+
+.section-category-search {
+    height: 100vh;
+}
+
+span.card-title {
+    font-family: Regular Font ExtraBold !important;
+    font-size: 1.1rem !important;
+    color: #000000;
+}
+
+p.card-text {
+    font-size: .89rem;
+}
+
+div.cateCard {
+    display: block;
+    position: relative;
+    transition: .1s;
+}
+
+div.cate-img-x-i,
+div.cate-img-x-ii,
+div.cate-img-x-iii,
+div.cate-img-x-iv,
+div.cate-img-x-v,
+div.cate-img-x-vi,
+div.cate-img-x-vii {
+    position: absolute;
+    width: 100%;
+    padding-top: 10vh;
+    height: 100%;
+    cursor: pointer;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    opacity: 0;
+    background: white;
+}
+
+div.cateCard:hover .cate-img-x-i,
+div.cateCard:hover div.cate-img-x-ii,
+div.cateCard:hover div.cate-img-x-iii,
+div.cateCard:hover div.cate-img-x-iv,
+div.cateCard:hover div.cate-img-x-v,
+div.cateCard:hover div.cate-img-x-vi,
+div.cateCard:hover div.cate-img-x-vii {
+    opacity: 1;
+    transform: translateY(-5px) !important;
+}
+
+span.pre-banner-helper-text {
+    font-size: .9rem;
+}
+
+
+/* End of category Search Section */
+
+.featured-left {
+    width: 50%;
+    height: 90vh;
+    background: #FAFAFA;
+    padding-left: 10%
+}
+
+.faC {
+    display: block;
+}
+
+.featuredCard {
+    width: 80%;
+    height: 90vh;
+    padding-top: 2.5vh;
+    background: white;
+    cursor: pointer;
+}
+
+.featuredDesc {
+    padding: 10px 20px;
+    transition: .3s;
+    overflow: auto;
+}
+
+.featuredDate {
+    font-family: Regular Font Medium;
+    color: #6C63FF;
+    margin-bottom: 0;
+}
+
+.seeMore {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.featuredTitle {
+    font-size: 22px;
+    font-family: Default Font Bold;
+    margin-top: 6px;
+    margin-bottom: 5px;
+}
+
+.featuredDesc:hover {
+    transform: translateY(-20px);
+    background: white;
+    z-index: 10000;
+}
+
+
+/* Top  featured events section  */
+
+section.featured-section {
+    height: 100vh;
+}
+
+.main-card {
+    width: 100%;
+    height: 90vh;
+    padding-top: 4vh;
+    position: relative;
+}
+
+.main-card-img {
+    height: 90vh !important;
+    object-fit: cover;
+}
+
+.sub-main-card {
+    height: 45vh;
+    width: 100%;
+    padding-top: 4vh;
+}
+
+.sub-main-card-img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+.mt-x {
+    margin-top: 2vh;
+}
+
+.pre-banner-card {
+    height: 43vh;
+    background: #325DF6;
+}
+
+.pre-banner-card-content {
+    padding: 40px;
+    font-family: Regular Font SemiBold;
+    font-size: 2.5rem;
+    color: white;
+}
+
+.pre-main-card {
+    width: 100%;
+    height: 43vh;
+}
+
+.pre-main-card-img {
+    width: 100%;
+    height: 43vh;
+    object-fit: cover;
+}
+
+.main-card-overlay {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 0vh;
+    cursor: pointer;
+    transition: .5s ease;
+    background: linear-gradient(rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.274), black);
+}
+
+.main-card:hover .main-card-overlay {
+    opacity: 1;
+    height: 86vh;
+}
+
+
+/* End of Top  featured events section  */
+
+
+/*  Banner section */
+
+.banner-section {
+    height: 100vh;
+}
+
+.email-prefix {
+    color: #828282;
+    position: absolute;
+    left: 10%;
+    transform: translateY(13px)
+}
+
+.right-sect {
+    width: 40%;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    background: #FAFAFA;
+    z-index: -1;
+}
+
+.emailBtn {
+    position: absolute;
+    left: 40.1%;
+    padding-top: 0px !important;
+    height: 35px !important;
+    transform: translateY(7px)
+}
+
+.pl-1 {
+    text-indent: 60px;
+}
+
+.padd-t-2 {
+    padding-top: 10px;
+}
+
+.shadow-x {
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 6px 1px #afafaf33 !important;
+}
+
+.heading-helper-text-ln {
+    line-height: 30px;
+    font-size: .8rem;
+}
+
+.veri-text {
+    font-size: .89rem !important;
+}
+
+.veri {
+    font-size: .89rem !important;
+    padding-top: 3px;
+}
+
+
+/*  End of Banner section */
+
+
+/* Organizer Section */
+
+section.organizer-section {
+    height: 100vh;
+}
+
+.eveCard {
+    height: 90px;
+}
+
+.plr-1 {
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+    font-family: Regular Font SemiBold !important;
+}
+
+.dashboard-img {
+    width: 80%;
+}
+
+.padd-t-3 {
+    padding-top: 6vh;
+}
+
+.bg-c-1 {
+    background: white;
+    background-size: cover;
+    background-position: center;
+}
+
+.svg1,
+.svg2 {
+    position: absolute;
+    z-index: -1;
+    height: 100% !important;
+    top: 0;
+}
+
+g#troubles,
+g#earnings,
+g#report,
+g#payment,
+g#paymentHistory,
+g#salesHistory,
+g#sidebar {
+    transition: .2s;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+g#troubles:hover,
+g#earnings:hover,
+g#report:hover,
+g#payment:hover,
+g#paymentHistory:hover,
+g#salesHistory:hover,
+g#sidebar:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+
+
+/* End of Organizer Section */
+
+
+/* Footer section */
+
+.full-height {
+    height: 100vh;
+}
+
+footer {
+    background: #1d1d1d;
+    padding-top: 13vh;
+    padding-bottom: 13vh;
+}
+
+.formImg {
+    width: 440px;
+    margin-left: 100px;
+}
+
+footer-section-x {
+    background: #1d1d1d;
+    padding-top: 23vh;
+    padding-bottom: 13vh;
+    height: inherit;
+}
+
+.footer-heading {
+    font-family: Default Font Bold;
+    font-size: 20px;
+    color: white;
+}
+
+.footer-links-container {
+    padding-top: 20px;
+}
+
+.footer-link {
+    display: block;
+    font-size: .8rem;
+    margin-bottom: 13px;
+    transition: .3s;
+    font-family: Regular Font;
+    color: #cecece;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+    color: #F47402;
+}
+
+.footer-bottom {
+    padding-top: 4vh;
+    margin-top: 10vh;
+    border-top: .4px solid #2b2a2a !important;
+}
+
+.footer-c {
+    font-size: .8rem;
+    color: #cecece;
+}
+
+.footer-d {
+    font-size: .83rem;
+    color: #525252;
+    line-height: 25px;
+}
+
+.footer-d a {
+    color: black;
+}
+
+.footer-social {
+    color: white;
+    margin-left: 30px;
+    transition: .3s;
+}
+
+.footer-social:hover {
+    color: #F47402;
+}
+
+.padd-t-4 {
+    padding-top: 20px;
+}
+
+.footer-bottom-link {
+    margin-right: 40px;
+    font-size: .8rem;
+    color: #a3a3a3;
+}
+
+.contact-info {
+    color: white;
+    font-size: .8rem;
+    line-height: 30px;
+}
+
+
+/* End of Footer section */
+
+
+/* Form Section Box */
+
+section.form-section-box {
+    width: 100%;
+    height: 100vh;
+}
+
+div.form-box {
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 6px 1px #afafaf33 !important;
+}
+
+
+/* End of Form Section Box */
+
+
+/* Testimonies Section */
+
+.imgCircle {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 100%;
+}
+
+.imgCircle-container {
+    width: 18%;
+    float: left;
+    height: 60px;
+}
+
+.testimonies-right {
+    float: left;
+    width: 82%;
+    height: 60px;
+}
+
+.testimonies-desc {
+    color: #5a5a5a;
+    font-size: .8rem;
+}
+
+.testimonies-user {
+    font-family: Regular Font Medium;
+    color: black;
+}
+
+.testimonies-right span {
+    color: #F47402;
+    font-size: .75rem;
+}
+
+.indicatorsC {
+    width: 40px;
+    height: 40px;
+    background: #585656;
+    color: white;
+    padding: 5px;
+    transform: translateY(180px);
+    z-index: 1010 !important;
+}
+
+
+/* End of testimonies Section */
+
+
+/* Contact Section */
+
+.contact-top {
+    position: absolute;
+    width: 142vh;
+    height: 600px;
+    top: 130px;
+    background: rgba(252, 252, 252, 0.7);
+    border-radius: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 30px;
+}
+
+.map {
+    width: 100%;
+    height: 300px;
+}
+
+.small-height {
+    height: 50px;
+}
+
+
+/* End of Contact Section */
+
+
+/* Terms and Conditions & Privacy Policy*/
+
+.t-and-c {
+    margin-top: 100px;
+    line-height: 5px;
+}
+
+.large-name {
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.content-md {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.bay {
+    color: #F47402;
+}
+
+.top-line {
+    width: 65%;
+    height: 1px;
+    background-color: rgb(236, 236, 236);
+}
+
+.top-line1 {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(236, 236, 236);
+}
+
+.tc-container {
+    margin-top: 60px;
+}
+
+.tc-image {
+    margin-top: -150px;
+}
+
+.tc-container {
+    margin-top: -85px;
+}
+
+.pp-container {
+    margin-top: -80px;
+}
+
+.pp-image {
+    margin-top: -120px;
+}
+
+
+/* End of Terms and Conditions */
+
+
+/* HELP */
+
+.faq-content {
+    margin-top: 80px;
+}
+
+.help-q {
+    width: 45px;
+    height: 45px;
+    background-color: #EB5757;
+    border-radius: 50%;
+}
+
+.q-mark {
+    font-size: 25px;
+    padding-top: 5px;
+    vertical-align: middle;
+}
+
+.top-help-text {
+    width: 150px;
+}
+
+.help {
+    margin-top: -32px;
+    font-weight: bold;
+}
+
+div.help-search-box-container {
+    width: 100%;
+    height: 200px;
+}
+
+section.help-section-search-box {
+    height: 15vh;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.help-category {
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 80%;
+}
+
+.help-info {
+    padding-left: 15%;
+    padding-right: 15%;
+    width: 70%;
+}
+
+div.card-content.cate-cont {
+    text-align: center;
+}
+
+.plus {
+    font-size: 30px;
+}
+
+.plus:hover {
+    cursor: pointer;
+}
+
+div.card.featCard.cateActive {
+    border: 1px solid #6C63FF;
+}
+
+div.card.featCard.cateActive:hover,
+div.card.featCard.cateActive:focus {
+    border: 2px solid #6C63FF;
+}
+
+
+/* Ticket Details Section */
+
+section.product-detail-section {
+    height: 96vh;
+    padding-bottom: 10vh;
+}
+
+.pro-left {
+    width: 25%;
+    height: 116vh;
+    background: #2c2c2c;
+    position: absolute;
+    z-index: -1;
+}
+
+div.event-tit {
+    font-size: 1.8rem;
+    font-family: Default Font Bold;
+}
+
+p.event-desc {
+    font-size: .9rem;
+    line-height: 27px;
+    color: #777777
+}
+
+p.event-org {
+    font-size: .9rem;
+}
+
+p.event-org span {
+    padding-left: 20px;
+    font-family: Regular Font SemiBold;
+}
+
+p.eves-info {
+    font-size: .9rem;
+}
+
+p.eves-info i {
+    font-size: 20px;
+}
+
+p.eves-info i.circlePhone {
+    font-size: 12px;
+    padding: 3px;
+    border: 1px solid black;
+    border-radius: 100px;
+}
+
+a.event-social-link {
+    font-size: 1.5rem;
+    margin-right: 20px;
+    color: #2b2a2a;
+    transition: .3s;
+}
+
+a.event-social-link:hover {
+    color: #6C63FF;
+}
+
+.ml-2 {
+    margin-left: 20px;
+}
+
+a.event-action {
+    height: 50px;
+    padding-top: 5px;
+    text-transform: capitalize;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+}
+
+#mainImage {
+    width: 80%;
+    height: 78vh;
+    float: left;
+    background: #ffff;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+}
+
+.mainImg {
+    height: 100% !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+.mainImageOverlay {
+    width: 100%;
+    height: 78vh;
+    z-index: 10;
+    transform: translateY(-78vh);
+    background: linear-gradient(#ffffff00, #ffffff00, #080808);
+}
+
+div.event-date {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 13px 20px;
+    font-family: Regular Font ExtraBold;
+    position: absolute;
+    bottom: 20px;
+    font-size: .8rem;
+    left: 20px;
+}
+
+div.event-deadline {
+    background: #EB5757;
+    color: white;
+    text-align: center;
+    padding: 13px 20px;
+    font-family: Regular Font SemiBold;
+    position: absolute;
+    top: 20px;
+    font-size: .8rem;
+    left: 20px;
+}
+
+img.purchaseImg {
+    float: left;
+    width: 20px;
+    padding-top: 7px;
+    margin-left: 8px;
+}
+
+.subImage {
+    float: left;
+    padding-left: 10px;
+}
+
+.subImg {
+    max-height: 70px !important;
+    width: 70px !important;
+    transition: .3s;
+    object-fit: cover;
+    margin-bottom: 2.3vh;
+}
+
+.subImg:hover {
+    transform: scale(1.1)
+}
+
+img.modal-img {
+    height: 300px !important;
+    width: 100% !important;
+}
+
+#addToCart {
+    width: 40%;
+    height: 95vh !important;
+    overflow: hidden;
+    padding-bottom: 60px;
+}
+
+.ml-0 {
+    margin-left: 0 !important;
+}
+
+.mr-0 {
+    margin-right: 0 !important;
+}
+
+div.modal-heading {
+    font-size: 1.3rem;
+    font-family: Regular Font SemiBold;
+}
+
+p.modal-heading-helper-text {
+    margin-top: 0;
+    font-size: .84rem;
+    color: #777777;
+}
+
+.variation-container {
+    width: 100%;
+    height: 15vh;
+}
+
+.variation {
+    width: 20%;
+    float: left;
+    height: 10vh;
+    margin-right: 4%;
+}
+
+.variation-container {
+    margin-top: 30px;
+}
+
+.variation-price {
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    border: 2px solid #2b2a2a;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.variation-price.activeX {
+    background: black !important;
+    color: white !important;
+}
+
+.variation-price:hover {
+    background: black;
+    color: white;
+}
+
+.quanitity-updater {
+    height: 44px;
+    width: 20px;
+    margin-left: 10px;
+    padding-top: 4px;
+}
+
+.variation-name {
+    font-family: Regular Font SemiBold;
+    padding-top: 2px;
+    font-size: .8rem;
+}
+
+.quantityInput {
+    width: 50px !important;
+}
+
+.modal-footer-buy {
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    padding: 19px;
+    margin-top: 30px;
+}
+
+.small-textX {
+    font-size: .86rem !important;
+}
+
+.buy {
+    margin-top: -9px;
+    margin-right: -5px !important;
+}
+
+.cost-text {
+    font-size: .9rem;
+}
+
+.cost-text span {
+    font-family: Regular Font SemiBold;
+}
+
+.z2 {
+    z-index: 10;
+}
+
+
+/* End of  Ticket Details Section */
+
+
+/* Cart Section */
+
+section.cart-section {
+    height: 100vh;
+}
+
+.cart-right {
+    width: 25%;
+    height: 116vh;
+    background: #FAFAFA;
+    position: absolute;
+    z-index: -1;
+    right: 0;
+}
+
+.cart-summary {
+    background: #272727;
+    padding: 20px 30px;
+}
+
+.cart-heading {
+    font-size: 1.5rem;
+    font-family: Default Font Bold;
+}
+
+.cart-heading-helper-text {
+    font-size: .83rem;
+    color: #BDBDBD;
+    margin-top: 0;
+}
+
+.cart-image {
+    width: 90px !important;
+    height: 82px;
+    object-fit: cover;
+}
+
+.ticket-type {
+    width: 90px;
+    height: 30px;
+    padding-top: 5px;
+    background: black;
+    position: absolute;
+    transition: .3s;
+    cursor: pointer;
+    color: white;
+    font-size: .8rem;
+    bottom: 0;
+    z-index: 1;
+    text-align: center;
+}
+
+.ticket-type:hover {
+    height: 82px;
+    padding-top: 30px;
+}
+
+.cart-main {
+    padding: 30px 0px;
+}
+
+.divider-x {
+    height: .6px;
+    width: 100%;
+    background: rgb(83, 83, 83);
+}
+
+div.height-x {
+    height: 10px;
+}
+
+div.height-xs {
+    height: 50px;
+}
+
+.summary-x,
+.summary-x span {
+    color: white;
+    font-family: Regular Font ExtraBold;
+    font-size: .8rem;
+}
+
+.ws-1 {
+    letter-spacing: 1px !important;
+}
+
+.submit-right {
+    height: 50px !important;
+    transform: translateY(-58px);
+    font-family: Regular Font ExtraBold !important;
+    border-radius: 0;
+}
+
+.pt-xs {
+    padding-top: 30px !important;
+}
+
+p.ticket-name {
+    font-family: Regular Font Medium;
+    font-size: .9rem;
+    color: #525252;
+}
+
+.ticket-count {
+    font-size: .9rem;
+    font-family: Regular Font ExtraBold;
+    color: #000;
+    padding-right: 70px;
+    padding-top: 3px;
+}
+
+img.delete-icon {
+    width: 22px;
+}
+
+.ticket-price {
+    font-family: Regular Font SemiBold;
+    padding: 5px;
+    transform: translateY(-3px);
+    background: white;
+    font-size: .8rem;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, .1) !important;
+    margin-right: 30px;
+}
+
+
+/* End of cart section */
+
+
+/* Payment section */
+
+#formaX {
+    display: none;
+}
+
+section.payment-footer {
+    width: 100%;
+    height: 55px;
+    position: fixed;
+    bottom: 0;
+    padding-top: 20px;
+    background: #505050;
+}
+
+.s-x,
+.s-x span {
+    font-size: 20px;
+}
+
+section.payment-section {
+    height: 100vh;
+}
+
+.heading-small {
+    font-family: Default Font Bold;
+    font-size: 16px;
+}
+
+
+/* End of payment section */
