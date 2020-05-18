@@ -76,7 +76,7 @@ new fullpage("#fullpage", {
                 xCounter += .1;
             }
         } else if (destination.index == 3) {
-            tlMax.fromTo(animateBottom, 1, { y: '50', opacity: 0 }, { y: '0', opacity: 1, ease: Power2.easeInOut }, "-=1.3")
+            tlMax.fromTo(animateBottom, 1, { y: '50', opacity: 0 }, { y: '0', opacity: 1, ease: Power2.easeInOut }, "-=1.2")
                 .fromTo(animateWidthXS, 1, { width: '0', opacity: 0 }, { width: '25%', opacity: 1, ease: Power2.easeInOut }, "-=1.3", )
         }
     }
