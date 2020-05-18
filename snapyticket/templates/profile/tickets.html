@@ -1,15 +1,6 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<h3> Welcome to your  purcahased tickets</h3>
-{% for items in ordered_tickets%}
-{% for tickets in items.tickets.all %}
-{{tickets.ticket_type}} **{{tickets.quantity}}<br><br>
-<img src="{{ tickets.qr_image.url }}" alt="Event QR code" />
-{% endfor %}
-{% endfor %}
-<a href="{% url 'auth:user_logout'%}">Logout</a>  
-<a href="{% url 'profile:password_change'%}">Change Password</a> 
-<a href="{% url 'profile:update'%}">Update Profile</a>
-{% endblock content %}
-
+{% extends 'base.html' %} {% block content %}
+<h3> Welcome to your purcahased tickets</h3>
+<img src="/media/qr_codes/{{request.user}}/{{ ticket }}" alt="">
+<a href="{% url 'auth:user_logout'%}">Logout</a>
+<a href="{% url 'profile:password_change'%}">Change Password</a>
+<a href="{% url 'profile:update'%}">Update Profile</a> {% endblock content %}

@@ -44,10 +44,16 @@ class ProfileChangeView(LoginRequiredMixin, View):
 
 
 
-class UserTickets(View):
-    def get(self, request,*args, **kwargs):
-        ordered_tickets = TicketBag.objects.filter(user=request.user,ordered=True)
-        context = {
-            'ordered_tickets':ordered_tickets,
-        }
-        return render(request,'profile/tickets.html',context)
+
+
+
+class UserTickets(TemplateView):
+    template_name = 'profile/tickets.html'
+    """
+    Render a template. Pass keyword arguments from the URLconf to the context.
+    """
+    def get (self, request, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context["ordered_tickets"] = TicketItem.objects.filter(user=request.user,ordered=True)
+        return self.render_to_response(context)
+    

@@ -16,7 +16,6 @@ CATEGORY_CHOICES = (
     ('ES', "Other Event"),
 )
 
-
 class Ticket(models.Model):
     # todo Write queryset to send emails to organizers who have their tickets pending
     # todo write queryset to generate all buyers of specific organizers ticket
@@ -109,6 +108,7 @@ class TicketItem(models.Model):
     ticket_type = models.ForeignKey(TicketVariation, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     slug = models.SlugField(default="Slug-Field")
+    ticket_code = models.CharField(max_length=15,blank=True)
     qr_image = models.ImageField(upload_to='ticket_qrcode',null=True)
     qr_image_path = models.CharField(max_length=1000,blank=True)
 
