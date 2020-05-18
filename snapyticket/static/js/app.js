@@ -37,7 +37,7 @@ new fullpage("#fullpage", {
         const animateBottom = section.querySelectorAll('.animateBottom')
         const animateSearch = section.querySelector('.animateSearch')
         const animateFade = section.querySelectorAll('.animateFade')
-        const searchBox = section.querySelectorAll('#search')
+        const animateWidthXS = section.querySelectorAll('.animateWidthXS')
         const animateHeight = section.querySelectorAll('.animateHeight')
         const scalerOne = section.querySelectorAll('#circleOne')
         const scalerTwo = section.querySelectorAll('#circleTwo')
@@ -67,11 +67,17 @@ new fullpage("#fullpage", {
             }
 
         } else if (destination.index === 2) {
-            tlMax.fromTo(scalerOne, 1, { transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1)', opacity: 1, ease: Power2.easeInOut }, "-=2.3")
-                .fromTo(scalerTwo, 1, { transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1)', opacity: 1, ease: Power2.easeInOut }, "=-2.1")
-                .fromTo(animateRight, 1, { x: '100', opacity: 0 }, { x: '0', opacity: 1, ease: Power2.easeInOut }, "-=1.3")
-                .fromTo(animateBottom, 1, { y: '50', opacity: 0 }, { y: '0', opacity: 1, ease: Power2.easeInOut }, "-=1.3");
-            let counter = 0;
+
+            xCards = section.querySelectorAll('.xCard');
+
+            for (let xCard of xCards) {
+                let xCounter = 0;
+                tlMax.fromTo(xCard, .4, { y: '100', opacity: 0 }, { y: '0', opacity: 1, ease: Power2.ease }, `-=${xCounter}`);
+                xCounter += .1;
+            }
+        } else if (destination.index == 3) {
+            tlMax.fromTo(animateBottom, 1, { y: '50', opacity: 0 }, { y: '0', opacity: 1, ease: Power2.easeInOut }, "-=1.3")
+                .fromTo(animateWidthXS, 1, { width: '0', opacity: 0 }, { width: '25%', opacity: 1, ease: Power2.easeInOut }, "-=1.3", )
         }
     }
 });

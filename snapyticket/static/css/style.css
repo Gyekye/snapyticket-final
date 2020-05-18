@@ -706,7 +706,7 @@ section.featured-section {
 .email-prefix {
     color: #828282;
     position: absolute;
-    left: 10%;
+    left: 20px;
     transform: translateY(13px)
 }
 
@@ -719,9 +719,13 @@ section.featured-section {
     z-index: -1;
 }
 
+.relative {
+    position: relative;
+}
+
 .emailBtn {
     position: absolute;
-    left: 40.1%;
+    right: 10px;
     padding-top: 0px !important;
     height: 35px !important;
     transform: translateY(7px)
