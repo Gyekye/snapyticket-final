@@ -116,7 +116,3 @@ $(function() {
 });
 
 var instance = M.Carousel.getInstance('carousel');
-
-let ticketImage = document.querySelector('.image-section');
-ticketImage.style.background = 'url(/imgs/ticket-images/house.jpg)'
-ticketImage.style.backgroundSize = 'cover';

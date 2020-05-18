@@ -361,6 +361,11 @@ div.card {
     padding-bottom: 7px;
 }
 
+.f-xs {
+    font-family: Default Font Bold;
+    font-size: 1.2rem;
+}
+
 .mb-0 {
     margin-bottom: 0 !important;
 }
@@ -756,6 +761,14 @@ section.featured-section {
 
 section.organizer-section {
     height: 100vh;
+}
+
+.org-left {
+    width: 30%;
+    height: 100vh;
+    position: absolute;
+    background: #FAFAFA;
+    z-index: -1;
 }
 
 .eveCard {
