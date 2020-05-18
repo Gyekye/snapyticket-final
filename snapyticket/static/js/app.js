@@ -122,3 +122,7 @@ $(function() {
 });
 
 var instance = M.Carousel.getInstance('carousel');
+
+setTimeout(function() {
+    $('.loader').fadeToggle();
+}, 1000)
