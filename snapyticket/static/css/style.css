@@ -150,6 +150,11 @@ header nav a.brand-logo span {
     font-size: 20px;
 }
 
+.brand-logo-img {
+    width: 130px;
+    object-fit: cover;
+}
+
 header nav a.brand-logo span {
     color: #F47402;
 }
