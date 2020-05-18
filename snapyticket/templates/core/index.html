@@ -10,13 +10,13 @@
                     <!-- Navbar -->
                     <nav class="z-depth-0">
                         <a href="" class="brand-logo x-black">
-                    Eves<span>bay</span>
-                    </a>
+                            <img src="{% static 'imgs/core/logo.png' %}" class="brand-logo-img" alt="">
+                        </a>
                         <ul class="right hide-on-med-and-down">
                             <li class="waves-effect"><a href="" class="x-grey">Browse Events</a></li>
                             <li class="waves-effect"><a href="" class="x-grey">Contact</a></li>
-                            <li class="waves-effect"><a href="" class="x-grey br-right">Get Started</a></li>
-                            <li class="waves-effect"><a href="" class="x-grey">Login</a></li>
+                            <li class="waves-effect"><a href="{% url 'auth:user_register' %}" class="x-grey br-right">Get Started</a></li>
+                            <li class="waves-effect"><a href="{% url 'auth:user_login' %}" class="x-grey">Login</a></li>
                         </ul>
                     </nav>
                     <!-- End of Navbar -->
