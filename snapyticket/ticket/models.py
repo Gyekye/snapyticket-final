@@ -85,8 +85,6 @@ def ticket_slug_slugify(sender, instance, *args, **kwargs):
     fail_silently=False,
     )
     """
-
-
 pre_save.connect(ticket_slug_slugify, sender=Ticket)
 
 

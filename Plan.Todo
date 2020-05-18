@@ -3,7 +3,7 @@
 
 
 ## Development Task [ MAJOR ]
-    -- user authentication -  checked
+-- user authentication -  checked
 TODO: CREATE CUSTOM USER MODEL **
 TODO: COMPLETE USER AUTHENTICATION [SIGNUP,LOGIN,PASSWORD RESETS] **
 TODO: USER PROFILE UPDATES **
@@ -30,14 +30,14 @@ TODO: REQUEST PAYMENT FUNCTIONALITY
 TODO: SEE ALL PAYMENTS WITH ITS STATUS[PAID ,PENDING , CANCELLED]
 TODO: A FUNCTIONALITY TO SEND EMAIL[ PAYMENT STATUS ] TO THE ORG WHEN THEY REQUEST PAYMENT
 
-    --core-functionality 2
+--core-functionality 2
 TODO: DO ALL TICKETS QUERY
 TODO: FILTER TICKETS OBJECTS BY SPECIFIC TYPE
 TODO: BUILD A HIGHLY EFFICIENT SEARCH WITH Q
 
 
 ## Development tasks [ Minor ]
-    --back-ends
+--back-ends
 todo: contact us functionality
 todo: report abuse  functionality
 todo: tutorials page functionality
@@ -49,7 +49,7 @@ todo: build testimonies models
 todo: send emails to users when they purchase a ticket functionality
 todo: send emails to users when the event dates reaches functionality
 
-    --front-ends
+--front-ends
 todo: make the site full pwa
 todo: add micro interactions
 todo: enhance seo ranking and add schema objects
