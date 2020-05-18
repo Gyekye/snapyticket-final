@@ -49,7 +49,7 @@
 
 <body>
 
-    {% block content %} {% endblock content %}
+    {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% block content %} {% endblock content %}
 
     <!-- End of Main Section -->
 

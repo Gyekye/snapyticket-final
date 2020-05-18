@@ -941,6 +941,10 @@ div.form-box {
     height: 60px;
 }
 
+.testimonies-container {
+    padding-top: 12vh;
+}
+
 .testimonies-right {
     float: left;
     width: 82%;
