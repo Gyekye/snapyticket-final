@@ -18,6 +18,38 @@ body {
     text-transform: capitalize !important;
 }
 
+div.loader {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: white;
+    z-index: 100000;
+    padding-left: 45%;
+}
+
+#loader,
+#loaderC {
+    animation-name: rotator;
+    animation-duration: 1.2s;
+    transform-box: fil-box;
+    animation-iteration-count: infinite;
+    transform-origin: center;
+    animation-direction: alternate;
+}
+
+#loaderC {
+    animation-direction: alternate-reverse;
+}
+
+@keyframes rotator {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
 a.btn.default-btn,
 button.btn {
     padding: 10px;
@@ -151,7 +183,8 @@ header nav a.brand-logo span {
 }
 
 .brand-logo-img {
-    width: 130px;
+    width: 110px;
+    padding-top: 5px;
     object-fit: cover;
 }
 
