@@ -42,3 +42,7 @@ buyAn.addEventListener("click", () => {
         formaX.style.display = "block"
     }
 })
+
+setTimeout(function() {
+    $('.loader').fadeToggle();
+}, 2000)

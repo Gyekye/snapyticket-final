@@ -1,1 +1,30 @@
-{% extends 'base.html' %} {% block content %} asdf {% endblock content %}
+{% extends 'base-auth.html' %} {% block content %} {% load static %}
+
+<section class="login-form-container">
+    <div class="login-form-banner">
+        <div class="login-form-banner-content">
+            <a href="" class="btn waves-effect waves-light left btn-floating black z-depth-0 backBtn"><i class="material-icons">arrow_back</i></a>
+            <div class="center-align section-x">
+                <div class="heading-banner white-text">
+                    Welcome Back
+                </div>
+                <p class="heading-banner-helper-text grey-text text-lighten-4">
+                    Login and get your tickets at the ease of your home
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="login-form-box">
+        <div class="form-box">
+            <div class="form-box-content">
+                <a href="" class="right">
+                    <img src="{% static 'imgs/core/logo.png' %}" class="form-img" alt="">
+                </a>
+                <div class="heading-form">Login</div>
+                <p class="heading-form-helper-text">Login to resume your session</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
