@@ -1,9 +1,9 @@
-<form>
+<form method='POST'>
     <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
         <h3>SUPPORT NATURE WITH AS LOW AS $1</h3>
         <button type="button" onClick="payWithRave()">Donate Here</button>
-    </form>
-    <script type="text/javascript">
+</form>
+    <script>
         const publicKey = "{{pubkey}}";
         function payWithRave() {
             var x = getpaidSetup({
@@ -25,8 +25,8 @@
                     response.tx.chargeResponseCode == "00" ||
                     response.tx.chargeResponseCode == "0"
                     //Mark will write an if logic to check the amount upon callback before redirecting
-                ) {
-                  window.location = "http://127.0.0.1:8000/payment/success/?txref="+txref; //Add your success page here
+                ){
+                  window.location = "http://127.0.0.1:8000/payment/success/" //Add your success page here
                 } else {
                     // redirect to a failure page.
                 }

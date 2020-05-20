@@ -1,6 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <h3> Welcome to your purcahased tickets</h3>
-<img src="/media/qr_codes/{{request.user}}/{{ ticket }}" alt="">
+{% for bag  in ordered_ticket_bag %}
+{{bag.order_ref_code}}<br>
+{% for ticket_item in bag.tickets.all  %}
+ ----{{ticket_item.ticket.title}}-{{ticket_item.ticket_type.variation}} x{{ticket_item.quantity}}<br>
+ 
+ <a href="{{ticket_item.get_absolute_url}}">Details</a>
+{% endfor %}
+{% endfor %}
 <a href="{% url 'auth:user_logout'%}">Logout</a>
 <a href="{% url 'profile:password_change'%}">Change Password</a>
 <a href="{% url 'profile:update'%}">Update Profile</a> {% endblock content %}

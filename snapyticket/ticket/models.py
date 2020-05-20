@@ -109,16 +109,21 @@ class TicketItem(models.Model):
     ordered = models.BooleanField(default=False)
     slug = models.SlugField(default="Slug-Field")
     ticket_code = models.CharField(max_length=15,blank=True)
-    qr_image = models.ImageField(upload_to='ticket_qrcode',null=True)
-    qr_image_path = models.CharField(max_length=1000,blank=True)
+    
 
-
+    # named object representation
     def __str__(self):
         return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
-
+    
+    # aboslute url
+    def get_absolute_url(self):
+        return reverse("profile:bag-detail", kwargs={"ticket_code": self.ticket_code})
+    
+    # cart to remove from cart
     def remove_from_cart(self):
         return reverse('ticket:remove_from_cart', kwargs={'slug': self.slug, 'pk': self.pk})
-
+    
+    # update ticket_item url
     def update_ticket_item(self):
         return reverse('ticket:update_ticket_item', kwargs={'slug': self.slug, 'pk': self.pk})
     
@@ -137,6 +142,12 @@ def ticket_item_slug_gen(sender, instance, *args, **kwargs):
 pre_save.connect(ticket_item_slug_gen, sender=TicketItem)
 
 
+# model to hold qr _code of ticket item model
+class TicketItemQrImage(models.Model):
+    ticket_item = models.ForeignKey(TicketItem,on_delete=models.CASCADE)
+    ticket_item_qr_image = models.ImageField(upload_to='ticket_qr_code')
+       
+    
 class TicketBag(models.Model):
     # todo write custom queryset to get all ordered and unordered querysets
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
