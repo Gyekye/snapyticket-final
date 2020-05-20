@@ -1,12 +1,7 @@
 {% extends 'base.html' %} {% load static %}{% block content %}
 <!-- Main Section -->
 
-<div class="loader valign-wrapper">
-    <center>
-        {% include 'page_snippets/loader.html' %}
-    </center>
-</div>
-
+{% include 'page_snippets/preloader.html' %}
 <div id="fullpage">
     <section class="section s1">
         <!-- Header Section -->
@@ -44,7 +39,7 @@
                     </div>
                     <div class="col s7">
                         <div class="right right-align">
-                            <div class="logo-main animateRight">Eves<span>bay</span></div>
+                            <img src="{% static 'imgs/core/logo.png' %}" class="logo-main" alt="">
                             <p class="logo-helper-text animateBottom">fast is everything</p>
                         </div>
                     </div>
