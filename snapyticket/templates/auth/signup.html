@@ -1,16 +1,16 @@
 {% extends 'base-auth.html' %} {% block content %} {% load static %}
 
 <section class="login-form-container">
-    <img src="{% static 'imgs/svgs/login.svg' %}" class="login-svg" alt="">
+    <img src="{% static 'imgs/svgs/getstarted.svg' %}" class="login-svg" alt="">
     <div class="login-form-banner">
         <div class="login-form-banner-content">
             <a href="" class="btn waves-effect waves-light left btn-floating grey darken-3 btnX z-depth-0 backBtn"><i class="material-icons">arrow_back</i></a>
             <div class="center-align section-x">
                 <div class="heading-banner white-text">
-                    Welcome Back
+                    Get a free Account Today
                 </div>
                 <p class="heading-banner-helper-text grey-text text-lighten-4">
-                    Login and get your tickets at the ease of your home
+                    Get your tickets at the ease of your home
                 </p>
             </div>
         </div>
@@ -29,20 +29,12 @@
                 <div class="cotext-xs">
                     <form method="POST">
                         {% csrf_token %} {{ form.as_p }}
-                        <div class="form-field">
-                            <p>
-                                <label>
-                                <input type="checkbox" class="filled-in" checked="checked" />
-                                <span>Always keep me logged in</span>
-                              </label>
-                            </p>
-                        </div>
-                        <a href="{% url 'auth:user_login' %}" class="right waves-effect waves-blue lx-l">Login to my account</a>
                         <br>
-                        <div class="cotext-xxs">
-                            <a href="" class="bold-text grey-text text-darken-1 mt-x">Terms and Conditions</a>
-                            <button type="submit" class="right btn btnX form-btn-submit z-depth-0">Create account</button>
-                        </div>
+                        <a href="{% url 'auth:user_login' %}" class="waves-effect waves-blue bold-text mt-x" id="loginForm">Login to my account</a>
+                        <button type="submit" class="right btn btnX form-btn-submit z-depth-0" id="submitForm">Create Account</button>
+                        <a href="" class="waves-effect waves-blue bold-text mt-x" id="backForm">Back</a>
+                        <a type="submit" class="right btn form-btn-submit z-depth-0" id="nextForm">Next</a>
+                        <br>
                     </form>
                     <br>
                 </div>

@@ -7,9 +7,13 @@ input {
     font-family: Regular Font SemiBold;
 }
 
+.invalidForm {
+    border: 1px solid #EB5757;
+}
+
 input {
-    border-bottom: none !important;
-    border: none !important;
+    border-bottom: none;
+    border: none;
     height: 50px !important;
     padding-top: 20px;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 10px 1px rgba(187, 187, 187, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.055) !important;
@@ -124,12 +128,19 @@ a.form-btn {
     transition: .3s;
 }
 
-button.form-btn-submit {
+button.form-btn-submit,
+a.form-btn-submit {
     height: 40px;
 }
 
+a.form-btn-submit {
+    padding-top: 1px;
+}
+
 button.form-btn-submit:hover,
-button.form-btn-submit:focus {
+button.form-btn-submit:focus,
+a.form-btn-submit:hover,
+a.form-btn-submit:focus {
     background-color: transparent;
     border: 2.5px solid #2F80ED;
     color: #3F3D56;
@@ -176,10 +187,20 @@ ul.errorlist li {
 span.helptext,
 span.phone-field-ext,
 input#id_phone_1,
+input#id_password1,
+input#id_password2,
+label[for="id_password1"],
+label[for="id_password2"],
+a#backForm,
+button#submitForm,
 form ul li {
-    display: none !important;
+    display: none;
 }
 
 form ul.errorlist li {
     display: block !important;
+}
+
+.mt-x {
+    padding-top: 3px;
 }
