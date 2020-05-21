@@ -4,7 +4,7 @@ input {
 }
 
 .bold-text {
-    font-family: Default Font Bold;
+    font-family: Regular Font SemiBold !important;
 }
 
 .invalidForm {
@@ -12,7 +12,7 @@ input {
 }
 
 .btn {
-    font-family: Default Font Bold !important;
+    font-family: Regular Font SemiBold !important;
 }
 
 input {
