@@ -4,10 +4,14 @@
 {{bag.order_ref_code}}<br>
 {% for ticket_item in bag.tickets.all  %}
  ----{{ticket_item.ticket.title}}-{{ticket_item.ticket_type.variation}} x{{ticket_item.quantity}}<br>
- 
- <a href="{{ticket_item.get_absolute_url}}">Details</a>
+ <a href="{{ticket_item.get_absolute_url}}">Details</a><br>
+ {% for ticket_item_image in ticket_item.ticketitemqrimage_set.all  %}
+ {{ticket_item.ticket.title}}
+<img src='{{ticket_item_image.ticket_item_qr_image.url}}'>
 {% endfor %}
 {% endfor %}
+{% endfor %}
+<br>
 <a href="{% url 'auth:user_logout'%}">Logout</a>
 <a href="{% url 'profile:password_change'%}">Change Password</a>
 <a href="{% url 'profile:update'%}">Update Profile</a> {% endblock content %}

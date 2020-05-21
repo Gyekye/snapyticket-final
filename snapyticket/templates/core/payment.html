@@ -1,37 +1,40 @@
-<form method='POST'>
-    <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-        <h3>SUPPORT NATURE WITH AS LOW AS $1</h3>
-        <button type="button" onClick="payWithRave()">Donate Here</button>
-</form>
-    <script>
-        const publicKey = "{{pubkey}}";
-        function payWithRave() {
-            var x = getpaidSetup({
-                PBFPubKey: publicKey,
-                customer_email: "{{request.user.email}}",
-                amount: {{user_order.total_ticket_bag_price}},
-                {% if request.user.phone %}
-                customer_phone: "{{request.user.phone}}",
-                customer_firstname:'{{request.user.username}}',
-                {% endif %}
-                currency: "{{currency}}",
-                // Change the txref to be ticket-bag ref-code
-                txref: "rave"+"{{request.user.id}}",
-                onclose: function() {},
-                callback: function(response) {
-                      var txref = response.tx.txRef;
-                      console.log("This is the response returned after a charge", response);
-                      if (
-                    response.tx.chargeResponseCode == "00" ||
-                    response.tx.chargeResponseCode == "0"
-                    //Mark will write an if logic to check the amount upon callback before redirecting
-                ){
-                  window.location = "http://127.0.0.1:8000/payment/success/" //Add your success page here
-                } else {
-                    // redirect to a failure page.
-                }
-                    x.close();
-                }
-        });
-    }
-    </script>
+{% extends 'base.html' %}
+
+{% block content  %}
+<input type="submit" style="cursor:pointer;" value="Pay Now" id="submit" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('submit').addEventListener('click', function () {
+
+    var flw_ref = "", chargeResponse = "", trxref = "FDKHGK"+ Math.random(), API_publicKey = "{{pubkey}}";
+
+    getpaidSetup(
+      {
+        PBFPubKey: API_publicKey,
+        customer_email: "{{request.user.email}}",
+        amount: {{user_order.total_ticket_bag_price}},
+        {% if request.user.phone %}
+        customer_phone: "{{request.user.phone}}",
+        customer_firstname:'{{request.user.username}}',
+        {% endif %}
+        currency: "{{currency}}",
+        txref: "rave-{{user_order.order_ref_code}}",
+        meta: [{metaname:"flightID", metavalue: "AP1234"}],
+        onclose:function(response) {
+        },
+        callback:function(response) {
+          txref = response.data.txRef, chargeResponse = response.data.chargeResponseCode;
+          if (chargeResponse == "00" || chargeResponse == "0") {
+            window.location = "http://127.0.0.1:8000/payment/success/"+txref; //Add your success page here //Add your success page here
+          } else {
+            window.location = "http://127.0.0.1:8000/payment/failed/"+txref;  //Add your failure page here
+          }
+        }
+      }
+    );
+    });
+  });
+</script>
+{% endblock content  %}

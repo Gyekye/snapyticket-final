@@ -1,3 +1,4 @@
+import qrcode
 import random
 import string
 from PIL import Image
@@ -6,6 +7,7 @@ from django.views.generic import TemplateView,RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ticket.models import TicketBag,TicketItem
 from django.conf import settings
+import base64
 
 # Create your views here.
 def create_ref_code():
@@ -50,13 +52,54 @@ class SuccessView(LoginRequiredMixin,TemplateView):
         user_ticket_bag.ordered = True
         # checks if ticket bag is ordered
         if user_ticket_bag.ordered == True:
+            user_ticket_bag.order_ref_code = create_ref_code()
             # gets all the tickets in the ticket bag
+            counter = 0
             for ticketitems in user_ticket_bag.tickets.all():
                 # sets the ticket item ordered to true
                 ticketitems.ordered = True
                 ticketitems.ticket_code = create_ref_code()
                 # saves the ticket item order 
                 ticketitems.save()
+                
+                # Qr code generation logic below
+                while counter < ticketitems.quantity:
+                    counter = counter + 1
+                    # main logic here 
+                    ticket_item_qr = qrcode.QRCode(
+                            version=1,
+                            error_correction=qrcode.constants.ERROR_CORRECT_L,
+                            box_size=10,
+                            border=4,
+                    )
+                    ticket_item_qr.add_data(
+                        # the qrcode for each tickets consists of unique data
+                        # its consists of the ticket_type
+                        # its consist of the username of the user
+                        # the order ref code 
+                        # and the name of the ticket
+                        # todo pass more data to the data in the qrcode 
+                        f'''
+                        PURCHASED BY: *************************{self.request.user}\n*******\n
+                        VARAIATION: ***************************{ticketitems.ticket_type.variation}\n*******\n
+                        ORDER ID: *************{user_ticket_bag.order_ref_code}\n*******\n
+                        TICKET_CODE: *************{ticketitems.ticket_code}\n*******\n
+                        ''',
+                    )
+                    ticket_item_qr.make(fit=True)
+                    img = ticket_item_qr.make_image(fill_color="black", back_color="white")
+                    # saves the qrcode image to the media folder in the project directory in a folder called qr_codes
+                    # todo fix the duplicatrion of the images upon saving 
+                    img.save(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png')
+                    # end of main logic
+                    # image generation termination logic begins 
+                    ticket_image = ticketitems.ticketitemqrimage_set.create(ticket_item=ticketitems)
+                    with open(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png', "rb") as imageFile:
+                       str = base64.b64encode(imageFile.read())
+                       ticket_image.ticket_item_qr_image.save(f'{request.user}{ticketitems.ticket_code}{counter}.png',imageFile,save=True)
+                    ticketitems.save()
+                    if counter == ticketitems.quantity:
+                        break
         # saves ticket bag after setting ordered equals True
         user_ticket_bag.save()
         # pass the context to the template

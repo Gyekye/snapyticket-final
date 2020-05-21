@@ -49,7 +49,7 @@ class UserTicketsList(LoginRequiredMixin,View):
         
 class UserTicketsDetail(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        user_ticket_bag = TicketBag.objects.get(user=request.user,ordered=True)
+        user_ticket_bag = TicketBag.objects.filter(user=request.user,ordered=True)
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/ticket-details.html',context)
         

@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-
 {% block content  %}
 
 hello
+{% for ticket_items  in  ordered_ticket_bag %}
+{{ticket_items.ticket_code}}
 
+{% endfor %}
 {% endblock content  %}
