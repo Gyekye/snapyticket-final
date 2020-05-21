@@ -15,13 +15,15 @@ TODO: REMOVE FROM CART LOGIC **
 TODO: EDIT CART ITEMS **
 TODO: CHECKOUT [PAYMENT] **
 TODO: PAYMENT SUCCESSFUL [WRITE YOUR OWN WEB HOOK] **
-TODO: QR CODE GEN FOR TICKETS *
+TODO: QR CODE GEN FOR TICKETS **
 TODO: DISPLAY USERS TICKETS **
 
 -- Organizer
 TODO: CREATE ORGANIZER MODEL **
 TODO: ORGANIZER PROFILE UPDATES **
 TODO: SEND TICKET ID TO ORGANIZERS UPON ACCEPTING TO PUBLISH BY US **
+
+
 TODO: DASHBOARD MODELS
 TODO: DASHBOARD CHART FUNCTIONALITY
 TODO: DISPLAY PEOPLE WHO HAVE BOUGHT AN ORG TICKET
@@ -29,6 +31,7 @@ TODO: DISPLAY ALL ORGANIZERS EVENTS ORGANIZED
 TODO: REQUEST PAYMENT FUNCTIONALITY
 TODO: SEE ALL PAYMENTS WITH ITS STATUS[PAID ,PENDING , CANCELLED]
 TODO: A FUNCTIONALITY TO SEND EMAIL[ PAYMENT STATUS ] TO THE ORG WHEN THEY REQUEST PAYMENT
+
 
 --core-functionality 2
 TODO: DO ALL TICKETS QUERY
@@ -48,37 +51,3 @@ todo: build blog functionality
 todo: build testimonies models
 todo: send emails to users when they purchase a ticket functionality
 todo: send emails to users when the event dates reaches functionality
-
---front-ends
-todo: make the site full pwa
-todo: add micro interactions
-todo: enhance seo ranking and add schema objects
-
-
-## Production Task  ###Backends
-Todo: Deploy to cloud host [aws or azure ]
-Todo: Deploy our static assets to a storage [ s3 bucket or blob storage ]
-Todo: Integrate Send grid
-Todo: Integrate Intercom Live Chat
-Todo: Integrate Google analytics
-Todo: Integrate LiveSession
-Todo: Integrate Full story
-Todo: integrate push notifications
-
-
-### Writing custom model managers
-Todo:Write custom managers for all models
-Todo:Write custom query sets for all models
-Todo: Write highly effective queries  with Q [ Enhance current queries to be a bit faster ]
-
-
-
-
-
-
-## Minor Update One
-Todo: Write Rest Api for all the models [Learn it within two weeks]
-Todo: design a new set of UI/UX for the app
-Todo: Integrate React and the app's Api
-Todo: Deploy as an update
-Todo: launch a  survey

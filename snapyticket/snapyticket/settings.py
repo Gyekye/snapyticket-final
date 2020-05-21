@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'ticket.apps.TicketConfig',
     'userprofile.apps.UserprofileConfig',
+    'blog.apps.BlogConfig',
+    'support.apps.SupportConfig',
+    'feedback.apps.FeedbackConfig',
     # PACKAGES
     'phone_field',
 ]
