@@ -86,17 +86,21 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                         TICKET_CODE: *************{ticketitems.ticket_code}\n*******\n
                         ''',
                     )
+                    # makes the size of the image fit
                     ticket_item_qr.make(fit=True)
+                    # generates white and black qr code
                     img = ticket_item_qr.make_image(fill_color="black", back_color="white")
                     # saves the qrcode image to the media folder in the project directory in a folder called qr_codes
-                    # todo fix the duplicatrion of the images upon saving 
                     img.save(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png')
-                    # end of main logic
                     # image generation termination logic begins 
+                    # creates an object for the ticket qr model class ( foreign key to ticket item)
                     ticket_image = ticketitems.ticketitemqrimage_set.create(ticket_item=ticketitems)
+                    # opens the image and encodes it to the bytes
                     with open(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png', "rb") as imageFile:
                        str = base64.b64encode(imageFile.read())
+                       # saves the image to the ticket_item_item_qr attribute
                        ticket_image.ticket_item_qr_image.save(f'{request.user}{ticketitems.ticket_code}{counter}.png',imageFile,save=True)
+                       # saves the image to the model
                     ticketitems.save()
                     if counter == ticketitems.quantity:
                         break
