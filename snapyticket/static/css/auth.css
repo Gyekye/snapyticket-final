@@ -85,7 +85,8 @@ p.heading-banner-helper-text {
 
 section.login-form-container div.login-form-box {
     width: 50%;
-    height: 100%;
+    height: 100vh;
+    overflow: auto;
     float: right;
     padding-left: 9%;
     padding-right: 9%;
@@ -125,14 +126,13 @@ a.form-btn {
 
 button.form-btn-submit {
     height: 40px;
-    transition: .3s;
 }
 
 button.form-btn-submit:hover,
 button.form-btn-submit:focus {
     background-color: transparent;
     border: 2.5px solid #2F80ED;
-    color: #2F80ED;
+    color: #3F3D56;
     border-left-color: transparent;
 }
 
@@ -171,4 +171,15 @@ ul.errorlist li {
     font-size: 14px;
     color: #EB5757;
     font-family: Regular Font Medium;
+}
+
+span.helptext,
+span.phone-field-ext,
+input#id_phone_1,
+form ul li {
+    display: none !important;
+}
+
+form ul.errorlist li {
+    display: block !important;
 }
