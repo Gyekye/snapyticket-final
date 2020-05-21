@@ -6034,7 +6034,6 @@ input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #9e9e9e;
     border-radius: 0;
     outline: none;
     height: 3rem;
@@ -6079,7 +6078,6 @@ input[type=search]:not(.browser-default)[readonly="readonly"],
 textarea.materialize-textarea:disabled,
 textarea.materialize-textarea[readonly="readonly"] {
     color: rgba(0, 0, 0, 0.42);
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.42)
 }
 
 input:not([type]):disabled+label,
@@ -6124,7 +6122,6 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #818181;
     -webkit-box-shadow: 0 1px 0 0 #2F80ED;
     box-shadow: 0 1px 0 0 #2F80ED
 }
