@@ -1,20 +1,54 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1> SignUp In here </h1>
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-      {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="display: none">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-      {% endfor %}<button type="submit">Sign up</button>
-  </form>
+{% extends 'base-auth.html' %} {% block content %} {% load static %}
+
+<section class="login-form-container">
+    <img src="{% static 'imgs/svgs/login.svg' %}" class="login-svg" alt="">
+    <div class="login-form-banner">
+        <div class="login-form-banner-content">
+            <a href="" class="btn waves-effect waves-light left btn-floating grey darken-3 btnX z-depth-0 backBtn"><i class="material-icons">arrow_back</i></a>
+            <div class="center-align section-x">
+                <div class="heading-banner white-text">
+                    Welcome Back
+                </div>
+                <p class="heading-banner-helper-text grey-text text-lighten-4">
+                    Login and get your tickets at the ease of your home
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="login-form-box valign-wrapper">
+        <div class="form-box">
+            <div class="form-box-content">
+                <a href="" class="right">
+                    <img src="{% static 'imgs/core/logo.png' %}" class="form-img" alt="">
+                </a>
+                <div class="heading-form">Get Started</div>
+                <p class="heading-form-helper-text">Get a free account today</p>
+                <div class="cotext-x">
+                    <a href="" class="btn white form-btn grey-text text-darken-3 bold-text"><img src="{% static 'imgs/icons/google.png' %}" class="left google-icon" alt=""> Continue with Google</a>
+                </div>
+                <div class="cotext-xs">
+                    <form method="POST">
+                        {% csrf_token %} {{ form.as_p }}
+                        <div class="form-field">
+                            <p>
+                                <label>
+                                <input type="checkbox" class="filled-in" checked="checked" />
+                                <span>Always keep me logged in</span>
+                              </label>
+                            </p>
+                        </div>
+                        <a href="{% url 'auth:user_login' %}" class="right waves-effect waves-blue lx-l">Login to my account</a>
+                        <br>
+                        <div class="cotext-xxs">
+                            <a href="" class="bold-text grey-text text-darken-1 mt-x">Terms and Conditions</a>
+                            <button type="submit" class="right btn btnX form-btn-submit z-depth-0">Create account</button>
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock content %}

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('.btn').click(function() {
+    $('.btnX').click(function() {
         $(this).addClass("activate")
     })
 })
