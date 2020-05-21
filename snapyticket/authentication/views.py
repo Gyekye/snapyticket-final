@@ -162,6 +162,6 @@ class PasswordResetView(PasswordResetView):
                 user_email = User.objects.get(email=email)
             except ObjectDoesNotExist:
                 messages.warning(request, 'You email does not belong to any account ')
-                return redirect('auth:user_login')
+                return redirect('auth:password_reset')
             return self.form_valid(form)
         return self.form_invalid(form)
