@@ -8,14 +8,12 @@ from ticket.models import TicketBag,TicketItem
 from authentication.forms import UserChangeForm
 from django.conf import settings
 User = get_user_model()
-
-
 # Create your views here.
-
 class ProfileView(LoginRequiredMixin, View):
     # renders the profile template
     def get(self, *args, **kwargs):
         return render(self.request, 'profile/profile.html')
+
 
 
 class ProfileChangeView(LoginRequiredMixin, View):
@@ -40,20 +38,18 @@ class ProfileChangeView(LoginRequiredMixin, View):
             return redirect('profile:user_profile')
         context = {'form': form}
         return render(self.request, 'profile/update.html', context)
-
-
-
-
-
-
-
-class UserTickets(TemplateView):
-    template_name = 'profile/tickets.html'
-    """
-    Render a template. Pass keyword arguments from the URLconf to the context.
-    """
-    def get (self, request, **kwargs):
-        context = self.get_context_data(**kwargs)
-        context["ordered_tickets"] = TicketItem.objects.filter(user=request.user,ordered=True)
-        return self.render_to_response(context)
     
+    
+    
+class UserTicketsList(LoginRequiredMixin,View):
+    def get(self, request, *args, **kwargs):
+        user_ticket_bag = TicketBag.objects.filter(user=request.user,ordered=True)
+        context = {'ordered_ticket_bag':user_ticket_bag}
+        return render(request,'profile/tickets.html',context)
+        
+class UserTicketsDetail(LoginRequiredMixin,View):
+    def get(self, request, *args, **kwargs):
+        user_ticket_bag = TicketBag.objects.filter(user=request.user,ordered=True)
+        context = {'ordered_ticket_bag':user_ticket_bag}
+        return render(request,'profile/ticket-details.html',context)
+        
