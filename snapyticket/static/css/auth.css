@@ -4,11 +4,15 @@ input {
 }
 
 .bold-text {
-    font-family: Regular Font SemiBold;
+    font-family: Default Font Bold;
 }
 
 .invalidForm {
     border: 1px solid #EB5757;
+}
+
+.btn {
+    font-family: Default Font Bold !important;
 }
 
 input {
@@ -175,7 +179,6 @@ div.form-field {
 a.lx-l {
     position: aboslute;
     transform: translateY(-35px);
-    font-family: Regular Font SemiBold;
 }
 
 ul.errorlist li {
