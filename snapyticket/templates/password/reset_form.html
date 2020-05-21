@@ -1,19 +1,47 @@
-{% extends 'base.html' %}
-{% block content %}
-Reset your password here
-  <form method="post">
-    {% csrf_token %}
-      {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="display: none">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-      {% endfor %}<button type="submit"> Send instructions to my email</button>
-  </form>
+{% extends 'base-auth.html' %} {% block content %} {% load static %}
+
+<section class="login-form-container">
+    <img src="{% static 'imgs/svgs/forgotpassword.svg' %}" class="login-svg" alt="">
+    <div class="login-form-banner">
+        <div class="login-form-banner-content">
+            <a href="{% url 'core:index' %}" class="btn waves-effect waves-light left btn-floating grey darken-3 btnX z-depth-0 backBtn"><i class="material-icons">home</i></a>
+            <div class="center-align section-x">
+                <div class="heading-banner white-text">
+                    Struggling with you password
+                </div>
+                <p class="heading-banner-helper-text grey-text text-lighten-4">
+                    You can always request for a new one anytime
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="login-form-box valign-wrapper">
+        <div class="form-box">
+            <div class="form-box-content">
+                <a href="" class="right">
+                    <img src="{% static 'imgs/core/logo.png' %}" class="form-img" alt="">
+                </a>
+                <div class="heading-form">Reset Password</div>
+                <p class="heading-form-helper-text">Login to resume your session</p>
+                <div class="cotext-x">
+                    <p class="grey-text text-darken-2">
+                        Provide you email address linked with your account. You would be notified with a link to reset you password immediately.
+                    </p>
+                </div>
+                <div>
+                    <form method="POST">
+                        {% csrf_token %} {{ form.as_p }}
+                        <br>
+                        <div class="cotext-xxs">
+                            <a href="{% url 'auth:user_login' %}" class="bold-text grey-text text-darken-1">Return to login</a>
+                            <button type="submit" class="right btn btnX form-btn-submit z-depth-0">Reset</button>
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock content %}
