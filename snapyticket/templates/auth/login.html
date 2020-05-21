@@ -1,6 +1,7 @@
 {% extends 'base-auth.html' %} {% block content %} {% load static %}
 
 <section class="login-form-container">
+    <img src="{% static 'imgs/svgs/login.svg' %}" class="login-svg" alt="">
     <div class="login-form-banner">
         <div class="login-form-banner-content">
             <a href="" class="btn waves-effect waves-light left btn-floating black z-depth-0 backBtn"><i class="material-icons">arrow_back</i></a>
@@ -23,20 +24,27 @@
                 <div class="heading-form">Login</div>
                 <p class="heading-form-helper-text">Login to resume your session</p>
                 <div class="cotext-x">
-                    <a href="" class="btn white form-btn grey-text text-darken-3"><img src="{% static 'imgs/icons/google.png' %}" class="left google-icon" alt=""> Continue with Google</a>
+                    <a href="" class="btn white form-btn grey-text text-darken-3 bold-text"><img src="{% static 'imgs/icons/google.png' %}" class="left google-icon" alt=""> Continue with Google</a>
                 </div>
                 <div class="cotext-xs">
-                    <form action="">
+                    <form method="POST">
+                        {% csrf_token %} {{ form.as_p }}
                         <div class="form-field">
-                            <label for="">Username</label>
-                            <input type="text">
+                            <p>
+                                <label>
+                                <input type="checkbox" class="filled-in" checked="checked" />
+                                <span>Always keep me logged in</span>
+                              </label>
+                            </p>
                         </div>
-                        <div class="form-field">
-                            <label for="">Password</label>
-                            <input type="password">
-                            <i class="material-icons passwordToggle">visibility_off</i>
+                        <a href="" class="right waves-effect waves-blue lx-l">Create Account</a>
+                        <br>
+                        <div class="cotext-xxs">
+                            <a href="" class="bold-text grey-text text-darken-1">Forgot password</a>
+                            <button type="submit" class="right btn form-btn-submit z-depth-0">Login</button>
                         </div>
                     </form>
+                    <br>
                 </div>
             </div>
         </div>

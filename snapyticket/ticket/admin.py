@@ -1,11 +1,16 @@
 from django.contrib import admin
-from .models import Ticket,TicketImage,TicketVariation,TicketItem,TicketBag
+from .models import Ticket,TicketImage,TicketVariation,TicketItem,TicketBag,TicketItemQrImage
 # Register your models here.
 class TicketImageInline(admin.TabularInline):
     min_num = 1
     model = TicketImage
     fields = ['image']
-
+    
+class TicketItemQrImageInline(admin.TabularInline):
+    min_num = 1
+    model = TicketItemQrImage
+    fields = ['ticket_item_qr_image']
+    
 class TicketVariation(admin.TabularInline):
     min_value  = 1
     model  = TicketVariation
@@ -28,6 +33,7 @@ class TicketBagAdmin(admin.ModelAdmin):
         'ordered',
     ]
 class TicketItemAdmin(admin.ModelAdmin):
+    inlines = [TicketItemQrImageInline]
     list_display = [
         'user',
         'ticket',
@@ -37,3 +43,4 @@ class TicketItemAdmin(admin.ModelAdmin):
 admin.site.register(Ticket,TicketAdmin)
 admin.site.register(TicketBag,TicketBagAdmin)
 admin.site.register(TicketItem,TicketItemAdmin)
+
