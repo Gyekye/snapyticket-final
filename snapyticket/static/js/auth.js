@@ -1,3 +1,7 @@
+setTimeout(function() {
+    $('.messageBox').slideToggle();
+}, 4000)
+
 $(document).ready(function() {
     $('.btnX').click(function() {
         $(this).addClass("activate")

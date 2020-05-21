@@ -4,7 +4,7 @@
     <img src="{% static 'imgs/svgs/login.svg' %}" class="login-svg" alt="">
     <div class="login-form-banner">
         <div class="login-form-banner-content">
-            <a href="" class="btn waves-effect waves-light left btn-floating grey darken-3 btnX z-depth-0 backBtn"><i class="material-icons">arrow_back</i></a>
+            <a href="{% url 'core:index' %}" class="btn waves-effect waves-light left btn-floating grey darken-3 btnX z-depth-0 backBtn"><i class="material-icons">home</i></a>
             <div class="center-align section-x">
                 <div class="heading-banner white-text">
                     Welcome Back
@@ -40,7 +40,7 @@
                         <a href="{% url 'auth:user_register' %}" class="right waves-effect waves-blue lx-l">Create Account</a>
                         <br>
                         <div class="cotext-xxs">
-                            <a href="" class="bold-text grey-text text-darken-1">Forgot password</a>
+                            <a href="{% url 'auth:password_reset' %}" class="bold-text grey-text text-darken-1">Forgot password</a>
                             <button type="submit" class="right btn btnX form-btn-submit z-depth-0">Login</button>
                         </div>
                     </form>
