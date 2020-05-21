@@ -37,10 +37,10 @@
                               </label>
                             </p>
                         </div>
-                        <a href="{% url 'auth:user_register' %}" class="right waves-effect bold-text waves-blue lx-l">Forgot password ?</a>
+                        <a href="{% url 'auth:password_reset' %}" class="right waves-effect bold-text waves-blue lx-l">Forgot password ?</a>
                         <br>
                         <div class="cotext-xxs">
-                            <a href="{% url 'auth:password_reset' %}" class="bold-text grey-text text-darken-1">Create Account</a>
+                            <a href="{% url 'auth:user_register' %}" class="bold-text grey-text text-darken-1">Create Account</a>
                             <button type="submit" class="right btn btnX form-btn-submit z-depth-0">Login</button>
                         </div>
                     </form>
