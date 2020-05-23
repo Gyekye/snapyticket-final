@@ -21,6 +21,5 @@ Todo: integrate push notifications
 
 
 ### Writing custom model managers
-Todo:Write custom managers for all models
-Todo:Write custom query sets for all models
+Todo:Write custom managers for all models *
 Todo: Write highly effective queries  with Q [ Enhance current queries to be a bit faster ]
