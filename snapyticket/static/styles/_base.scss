@@ -1,0 +1,879 @@
+@import './variables';
+@import './abstracts';
+
+/* General Styles */
+
+* {
+    font-family: Regular Font;
+}
+
+html,
+body {
+    box-sizing: content-box;
+    scroll-behavior: smooth;
+}
+
+.content-x {
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 100%;
+    padding-bottom: 5.6px;
+}
+
+pl-0 {
+    padding-left: 0;
+}
+
+.content-xs {
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 96%;
+    padding-bottom: 5.6px;
+}
+
+.content-z {
+    padding-left: 8%;
+    padding-right: 8%;
+    width: 100%;
+}
+
+.content-y {
+    padding-right: 6%;
+}
+
+.x-black {
+    color: $x-black;
+}
+
+.x-grey {
+    color: $x-grey;
+}
+
+.bg-x {
+    background: $primary-color;
+    &:hover,
+    &:focus {
+        background: $primary-color;
+        opacity: .8;
+    }
+}
+
+.bg-y {
+    background: $secondary-color;
+    &:hover,
+    &:focus {
+        background: $secondary-color;
+        opacity: .8;
+    }
+}
+
+.bg-z {
+    background: $secondary-color;
+    &:hover,
+    &:focus {
+        background: $secondary-color;
+        opacity: .8;
+    }
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.sx {
+    width: 3%;
+}
+
+.f-x {
+    font-size: 2.6rem !important;
+    padding-bottom: 7px;
+}
+
+.f-xs {
+    font-family: Default Font Bold;
+    font-size: 1.2rem;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.ml-x {
+    margin-right: 0px !important;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+}
+
+.pr-0 {
+    padding-right: 0 !important;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+.padd-t-1 {
+    width: 290px;
+    padding-top: 4vh;
+}
+
+.small-text {
+    font-size: 13px;
+}
+
+.medium-text {
+    font-size: 17px;
+}
+
+.large-text {
+    font-size: 21px;
+}
+
+
+/* End of General Styles */
+
+
+/* Quote Section */
+
+p {
+    .heading-helper-text {
+        color: $x-grey;
+        margin-top: 4px;
+        font-size: .8rem;
+    }
+    .logo-helper-text {
+        color: $x-grey;
+        margin: 0;
+        font-size: .8rem;
+    }
+}
+
+div {
+    heading-main {
+        font-family: Default Font Bold;
+        font-size: 30px;
+        color: $x-black;
+    }
+}
+
+section {
+    .section-quote {
+        padding-top: 4vh;
+        padding-bottom: 6vh;
+        .logo-main {
+            font-size: 30px;
+            font-family: Default Font Bold;
+            width: 120px;
+            span {
+                font-size: 30px;
+                font-family: Default Font Bold;
+                width: 120px;
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+
+/* End of Quote Section */
+
+
+/* Search Box Section */
+
+img.relax-img {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+section {
+    .section-search-box {
+        height: 55vh;
+        padding-left: 2%;
+        padding-right: 2%;
+        div {
+            .search-box-container {
+                @include fullWidth();
+                height: 100%;
+                background: url(/static/imgs/core/index.png);
+                background-size: cover;
+                background-position: center;
+                border-top: 1px solid $grey98;
+                .search-box {
+                    width: 89.4%;
+                    position: absolute;
+                    transform: translateY(-28px);
+                    padding-left: 6.6%;
+                    i {
+                        search-prefix {
+                            position: absolute;
+                            top: 15px;
+                            left: 8.6%;
+                            color: #828282
+                        }
+                    }
+                    .loca-x {
+                        position: absolute;
+                        right: -10px;
+                        box-shadow: 0 0 0 transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* End of Search Box Section */
+
+
+/* Category Search Section */
+
+.section-category-search {
+    @include fullHeight();
+}
+
+div {
+    .ticket-counter {
+        font-family: Regular Font ExtraBold;
+        color: $primary-color;
+        padding-top: 10px;
+    }
+}
+
+span {
+    .pre-banner-helper-text {
+        font-size: .9rem;
+    }
+}
+
+
+/* End of Category Search Section*/
+
+
+/* Featured Events Section */
+
+.featured-left {
+    width: 50%;
+    height: 90vh;
+    background: $grey98;
+    padding-left: 10%;
+}
+
+.faC {
+    display: block;
+}
+
+.featuredDesc {
+    padding: 10px 20px;
+    transition: .3s;
+    overflow: auto;
+    &:hover {
+        .featuredDesc {
+            transform: translateY(-20px);
+            background: $white;
+            z-index: 10000;
+        }
+    }
+}
+
+.featuredDate {
+    font-family: Regular Font Medium;
+    color: $secondary-color;
+    margin-bottom: 0;
+}
+
+.seeMore {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.featuredTitle {
+    font-size: 22px;
+    font-family: Default Font Bold;
+    margin-top: 6px;
+    margin-bottom: 5px;
+}
+
+
+/* End of featured Events Section */
+
+
+/* Banner Section */
+
+.banner-section {
+    @include fullHeight();
+    .right-sect {
+        width: 40%;
+        @include fullHeight();
+        position: absolute;
+        right: 0;
+        background: $grey98;
+        z-index: -1;
+        p {
+            .veri-text {
+                font-size: .89rem;
+                .veri {
+                    font-size: .89rem;
+                    padding-top: 3px;
+                }
+            }
+        }
+    }
+}
+
+.shadow-x {
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 6px 1px #afafaf33 !important;
+}
+
+.pl-1 {
+    text-indent: 60px;
+}
+
+.padd-t-2 {
+    padding-top: 10px;
+}
+
+.relative {
+    position: relative;
+}
+
+.heading-helper-text-ln {
+    line-height: 30px;
+    font-size: .8rem;
+}
+
+.email-prefix {
+    color: $x-grey;
+    position: absolute;
+    left: 20px;
+    transform: translateY(13px)
+}
+
+
+/* End of Banner Section */
+
+
+/* Organizer Section */
+
+section {
+    .organizer-section {
+        @include fullHeight();
+        .org-left {
+            width: 30%;
+            @include fullHeight();
+            position: absolute;
+            background: $grey98;
+            z-index: -1;
+        }
+    }
+}
+
+.plr-1 {
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+    font-family: Regular Font SemiBold !important;
+}
+
+.dashboard-img {
+    width: 80%;
+}
+
+.padd-t-3 {
+    padding-top: 6vh;
+}
+
+.bg-c-1 {
+    background: $white;
+    background-size: cover;
+    background-position: center;
+}
+
+.svg1,
+.svg2 {
+    position: absolute;
+    z-index: -1;
+    height: 100% !important;
+    top: 0;
+}
+
+g {
+    #troubles,
+    #earnings,
+    #report,
+    #payment,
+    #paymentHistory,
+    #salesHistory,
+    #sidebar {
+        transition: .2s;
+        transform-origin: center;
+        transform-box: fill-box;
+        &:hover {
+            transform: scale(1.08);
+            z-index: 10;
+        }
+    }
+}
+
+
+/* End of Organizer Section */
+
+
+/* Testimonies Section */
+
+.imgCircle-container {
+    width: 18%;
+    float: left;
+    height: 60px;
+    .imgCircle {
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 100%;
+    }
+}
+
+.testimonies-container {
+    padding-top: 12vh;
+}
+
+.testimonies-right {
+    float: left;
+    width: 82%;
+    height: 60px;
+    .testimonies-user {
+        font-family: Regular Font Medium;
+        color: $x-black;
+    }
+    span {
+        color: $primary-color;
+        font-size: .75rem;
+    }
+    .testimonies-desc {
+        color: #5a5a5a;
+        font-size: .8rem;
+    }
+}
+
+
+/* End of testimonies Section */
+
+
+/* Ticket Details Section */
+
+section {
+    .product-detail-section {
+        height: 96vh;
+        padding-bottom: 10vh;
+    }
+}
+
+.pro-left {
+    width: 25%;
+    height: 116vh;
+    background: $x-black;
+    position: absolute;
+    z-index: -1;
+}
+
+div {
+    .event-tit {
+        font-size: 1.8rem;
+        font-family: Default Font Bold;
+    }
+}
+
+p {
+    .event-desc {
+        font-size: .9rem;
+        line-height: 27px;
+        color: $x-grey
+    }
+    .event-org {
+        font-size: .9rem;
+        span {
+            padding-left: 20px;
+            font-family: Regular Font SemiBold;
+        }
+    }
+    .eves-info {
+        font-size: .9rem;
+        i {
+            font-size: 20px;
+            .circlePhone {
+                font-size: 12px;
+                padding: 3px;
+                border: 1px solid $black;
+                border-radius: 100px;
+            }
+        }
+    }
+}
+
+a.event-social-link {
+    font-size: 1.5rem;
+    margin-right: 20px;
+    color: #2b2a2a;
+    transition: .3s;
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
+.ml-2 {
+    margin-left: 20px;
+}
+
+a.event-action {
+    height: 50px;
+    padding-top: 5px;
+    text-transform: capitalize;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+}
+
+#mainImage {
+    width: 80%;
+    height: 78vh;
+    float: left;
+    background: $white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    .mainImg {
+        height: 100% !important;
+        @include fullWidth();
+        object-fit: cover;
+    }
+}
+
+.mainImageOverlay {
+    @include fullWidth();
+    height: 78vh;
+    z-index: 10;
+    transform: translateY(-78vh);
+    background: linear-gradient(#ffffff00, #ffffff00, #080808);
+}
+
+div {
+    .event-date {
+        background: $black;
+        color: $white;
+        text-align: center;
+        padding: 13px 20px;
+        font-family: Regular Font ExtraBold;
+        position: absolute;
+        bottom: 20px;
+        font-size: .8rem;
+        left: 20px;
+        .event-deadline {
+            background: $invalid;
+            color: $white;
+            text-align: center;
+            padding: 13px 20px;
+            font-family: Regular Font SemiBold;
+            position: absolute;
+            top: 20px;
+            font-size: .8rem;
+            left: 20px;
+        }
+    }
+}
+
+img {
+    .purchaseImg {
+        float: left;
+        width: 20px;
+        padding-top: 7px;
+        margin-left: 8px;
+    }
+    .modal-img {
+        height: 300px !important;
+        width: 100% !important;
+    }
+}
+
+.subImage {
+    float: left;
+    padding-left: 10px;
+    .subImg {
+        max-height: 70px !important;
+        width: 70px !important;
+        transition: .3s;
+        object-fit: cover;
+        margin-bottom: 2.3vh;
+        &:hover {
+            transform: scale(1.1)
+        }
+    }
+}
+
+div {
+    #addToCart {
+        width: 40%;
+        height: 95vh !important;
+        overflow: hidden;
+        padding-bottom: 60px;
+    }
+}
+
+.ml-0 {
+    margin-left: 0 !important;
+}
+
+.mr-0 {
+    margin-right: 0 !important;
+}
+
+div {
+    .modal-heading {
+        font-size: 1.3rem;
+        font-family: Regular Font SemiBold;
+    }
+}
+
+p {
+    .modal-heading-helper-text {
+        margin-top: 0;
+        font-size: .84rem;
+        color: $x-grey;
+    }
+}
+
+.variation-container {
+    @include fullWidth();
+    height: 15vh;
+    margin-top: 30px;
+    .variation {
+        width: 20%;
+        float: left;
+        height: 10vh;
+        margin-right: 4%;
+    }
+}
+
+.variation-price {
+    @include fullWidth();
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    border: 2px solid #2b2a2a;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: .3s;
+    &:hover {
+        background: $black;
+        color: $white;
+    }
+    .activeX {
+        background: $black !important;
+        color: $white !important;
+    }
+}
+
+.variation-name {
+    font-family: Regular Font SemiBold;
+    padding-top: 2px;
+    font-size: .8rem;
+}
+
+form {
+    .quantityInput {
+        width: 50px !important;
+    }
+    .quanitity-updater {
+        height: 44px;
+        width: 20px;
+        margin-left: 10px;
+        padding-top: 4px;
+    }
+}
+
+.modal-footer-buy {
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    padding: 19px;
+    margin-top: 30px;
+    .buy {
+        margin-top: -9px;
+        margin-right: -5px !important;
+    }
+}
+
+.small-textX {
+    font-size: .86rem !important;
+}
+
+.cost-text {
+    font-size: .9rem;
+    span {
+        font-family: Regular Font SemiBold;
+    }
+}
+
+.z2 {
+    z-index: 10;
+}
+
+
+/* End of  Ticket Details Section */
+
+
+/* Cart Section */
+
+section {
+    .cart-section {
+        @include fullHeight();
+        .cart-right {
+            width: 25%;
+            height: 116vh;
+            background: $grey98;
+            position: absolute;
+            z-index: -1;
+            right: 0;
+        }
+    }
+}
+
+div {
+    .cart-heading {
+        font-size: 1.5rem;
+        font-family: Default Font Bold;
+    }
+    .height-x {
+        height: 10px;
+    }
+    .height-xs {
+        height: 50px;
+    }
+    .cart-image {
+        width: 90px !important;
+        height: 82px;
+        object-fit: cover;
+    }
+    .divider-x {
+        height: .6px;
+        @include fullWidth();
+        background: rgb(83, 83, 83);
+    }
+}
+
+p {
+    .cart-heading-helper-text {
+        font-size: .83rem;
+        color: $grey74;
+        margin-top: 0;
+    }
+    .ticket-name {
+        font-family: Regular Font Medium;
+        font-size: .9rem;
+        color: $x-grey;
+        .ticket-count {
+            font-size: .9rem;
+            font-family: Regular Font ExtraBold;
+            color: $black;
+            padding-right: 70px;
+            padding-top: 3px;
+        }
+        .ticket-price {
+            font-family: Regular Font SemiBold;
+            padding: 5px;
+            transform: translateY(-3px);
+            background: $white;
+            font-size: .8rem;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, .1) !important;
+            margin-right: 30px;
+        }
+    }
+}
+
+.cart-summary {
+    background: $dark-bg;
+    padding: 20px 30px;
+    .summary-x {
+        span {
+            color: $white;
+            font-family: Regular Font ExtraBold;
+            font-size: .8rem;
+        }
+    }
+}
+
+.ticket-type {
+    width: 90px;
+    height: 30px;
+    padding-top: 5px;
+    background: $black;
+    position: absolute;
+    transition: .3s;
+    cursor: pointer;
+    color: $white;
+    font-size: .8rem;
+    bottom: 0;
+    z-index: 1;
+    text-align: center;
+    &:hover {
+        height: 82px;
+        padding-top: 30px;
+    }
+}
+
+.cart-main {
+    padding: 30px 0px;
+}
+
+.ws-1 {
+    letter-spacing: 1px !important;
+}
+
+.submit-right {
+    height: 50px !important;
+    transform: translateY(-58px);
+    font-family: Regular Font ExtraBold !important;
+    border-radius: 0;
+}
+
+.pt-xs {
+    padding-top: 30px !important;
+}
+
+img.delete-icon {
+    width: 22px;
+}
+
+
+/* End of cart section */
+
+
+/* Payment section */
+
+#formaX {
+    display: none;
+}
+
+.s-x {
+    span {
+        font-size: 20px;
+    }
+}
+
+section {
+    .payment-section {
+        @include fullHeight();
+    }
+    .payment-footer {
+        @include fullWidth();
+        height: 55px;
+        position: fixed;
+        bottom: 0;
+        padding-top: 20px;
+        background: #505050;
+    }
+}
+
+.heading-small {
+    font-family: Default Font Bold;
+    font-size: 16px;
+}
+
+
+/* End of payment section */

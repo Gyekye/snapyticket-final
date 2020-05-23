@@ -1,0 +1,338 @@
+@import './variables';
+
+/* Form Inputs Styles */
+
+input {
+    border-bottom: none !important;
+    border: none !important;
+    height: 50px !important;
+    padding-top: 20px;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    border-radius: 5px;
+    font-family: Regular Font Medium;
+    text-indent: 20px;
+    transition: 3.9s;
+    font-size: .89rem !important;
+    color: #4F4F4F;
+    &:focus {
+        box-shadow: inset 0 0 7px rgba(0, 0, 0, .1);
+    }
+}
+
+textarea {
+    border-bottom: none !important;
+    border: none !important;
+    height: 100px !important;
+    padding-top: 20px;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    border-radius: 5px;
+    font-family: Regular Font Medium;
+    text-indent: 20px;
+    transition: 3.9s;
+    font-size: .89rem !important;
+    color: #4F4F4F;
+    &:focus {
+        box-shadow: inset 0 0 7px rgba(0, 0, 0, .1);
+        border: none;
+    }
+}
+
+
+/* End of Form Styles */
+
+
+/* Button Styles */
+
+a.btn.default-btn {
+    padding: 10px;
+    height: 55px;
+    text-transform: capitalize;
+    font-family: Regular Font Medium;
+    font-size: .88rem;
+    padding-right: 25px;
+    padding-left: 25px;
+    transition: .4s;
+    border-radius: 0;
+}
+
+button.btn {
+    padding: 10px;
+    height: 55px;
+    text-transform: capitalize;
+    font-family: Regular Font Medium;
+    font-size: .88rem;
+    padding-right: 25px;
+    padding-left: 25px;
+    transition: .4s;
+    border-radius: 0;
+    .prefix-box {
+        padding-left: 15px;
+        padding-right: 15px;
+        background: $white;
+        box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+    }
+}
+
+button.search-sub-btn {
+    position: absolute;
+    top: 6px;
+    right: 7px;
+    padding-top: 4px;
+    z-index: 1;
+    height: 45px;
+}
+
+.shareBtn {
+    margin-right: 40px;
+    margin-top: -15px;
+}
+
+.emailBtn {
+    position: absolute;
+    right: 10px;
+    padding-top: 0px !important;
+    height: 35px !important;
+    transform: translateY(7px)
+}
+
+
+/* End of Button Styles */
+
+
+/* Card Styles */
+
+div {
+    .card {
+        box-shadow: 0 0 0 0 #afafaf40, 1px 1px 10px 1px #afafaf33 !important;
+        border-radius: 4px;
+    }
+}
+
+.card-x-top {
+    padding-bottom: 10vh;
+}
+
+.card-x-all {
+    padding-top: 1.3vh;
+    padding-bottom: 3.5vh;
+}
+
+div {
+    .cateCard {
+        display: block;
+        position: relative;
+        transition: .1s;
+        &:hover {
+            opacity: 1;
+            transform: translateY(-5px) !important;
+        }
+        .cate-img-x-i,
+        .cate-img-x-ii,
+        .cate-img-x-iii,
+        .cate-img-x-iv,
+        .cate-img-x-v,
+        .cate-img-x-vi,
+        .cate-img-x-vii {
+            position: absolute;
+            width: 100%;
+            padding-top: 10vh;
+            height: 100%;
+            cursor: pointer;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+            opacity: 0;
+            background: $white;
+            &:hover {
+                opacity: 1;
+                transform: translateY(-5px) !important;
+            }
+        }
+    }
+}
+
+span {
+    .card-title {
+        font-family: Regular Font ExtraBold !important;
+        font-size: 1.1rem !important;
+        color: $black;
+    }
+}
+
+p {
+    .card-text {
+        font-size: .89rem;
+    }
+}
+
+.featuredCard {
+    width: 80%;
+    height: 90vh;
+    padding-top: 2.5vh;
+    background: $white;
+    cursor: pointer;
+}
+
+.main-card-img {
+    height: 90vh !important;
+    object-fit: cover;
+}
+
+.sub-card {
+    height: 45vh;
+    width: 100%;
+    padding-top: 4vh;
+    position: relative;
+    &:hover {
+        .sub-card-overlay {
+            opacity: 1;
+            height: 41vh;
+        }
+    }
+}
+
+.sub-card-img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+.main-card {
+    width: 100%;
+    height: 90vh;
+    padding-top: 4vh;
+    position: relative;
+    &:hover {
+        .sub-card-overlay {
+            opacity: 1;
+            height: 86vh;
+        }
+    }
+}
+
+.main-card-action {
+    padding-top: 4vh;
+}
+
+.pre-card-action {
+    padding-top: 3vh;
+}
+
+.pre-banner-card {
+    height: 43vh;
+    background: $secondary-color;
+}
+
+.main-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 78vh;
+    color: $black;
+}
+
+.sub-card-organizer {
+    position: absolute;
+    width: 100%;
+    top: 34vh;
+}
+
+.pre-card {
+    width: 100%;
+    height: 43vh;
+    position: relative;
+    &:hover {
+        .pre-card-overlay {
+            opacity: 1;
+            height: 43vh;
+        }
+    }
+}
+
+.pre-card-img {
+    width: 100%;
+    height: 43vh;
+    object-fit: cover;
+}
+
+.main-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 0vh;
+    cursor: pointer;
+    transition: .5s ease;
+    background: $white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
+}
+
+.eveCard {
+    height: 90px;
+}
+
+.sub-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 0vh;
+    cursor: pointer;
+    transition: .5s ease;
+    background: $white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
+}
+
+.pre-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 0vh;
+    cursor: pointer;
+    transition: .5s ease;
+    background: $white;
+    box-shadow: 0 0 0 0 #afafaf40, 1px 1px 25px 1px #afafaf33 !important;
+}
+
+.main-card-title {
+    font-size: 3.3rem;
+    padding-top: 8vh;
+    color: $black;
+    font-family: Regular Font SemiBold;
+}
+
+.sub-card-title {
+    font-size: 2.4rem;
+    padding-top: 2vh;
+    color: $black;
+    font-family: Regular Font SemiBold;
+}
+
+.pre-card-title {
+    font-size: 2rem;
+    padding-top: 2vh;
+    color: $black;
+    font-family: Regular Font SemiBold;
+}
+
+.main-card-content,
+.sub-card-content,
+.pre-card-content {
+    z-index: 10;
+    position: absolute;
+    padding: 20px;
+}
+
+.main-card-date,
+.sub-card-date,
+.pre-card-date {
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    background: $black;
+    color: $white;
+}
+
+div.card.featCard.cateActive {
+    border: 1px solid $secondary-color;
+    &:hover {
+        border: 2px solid $secondary-color;
+    }
+}
+
+
+/* End of Card Styles */
