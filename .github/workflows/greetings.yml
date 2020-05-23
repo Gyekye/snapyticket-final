@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{8cc733735996ec8c263bab347cdbc4e1e9ea8e02}}
+        issue-message: 'When you encounter a problem, dont give up do your best to solve it.Thank You'' first issue'
+        pr-message: 'Welcome to Snapyticket Main Repo,We are glad to have you on baord'' first pr'
