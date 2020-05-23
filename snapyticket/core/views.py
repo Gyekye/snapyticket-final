@@ -5,7 +5,7 @@ from PIL import Image
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView,RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from ticket.models import TicketBag,TicketItem
+from ticket.models import TicketBag,TicketItem,Ticket
 from django.conf import settings
 import base64
 
@@ -27,19 +27,29 @@ class IndexView(TemplateView):
         return self.render_to_response(context)
  
  
+ 
+ 
+ # index page view 
 class PaymentView(LoginRequiredMixin,TemplateView):
     template_name = 'core/payment.html'
     """
     Render a template. Pass keyword arguments from the URLconf to the context.
     """
     def get(self, request, *args, **kwargs):
+        
         context = self.get_context_data(**kwargs)
         context['pubkey'] = settings.RAVE_PUBLIC_KEY
         context['currency'] =  settings.RAVE_CURRENCY
         context['user_order'] = TicketBag.objects.get(user=request.user,ordered=False)
+        
         return self.render_to_response(context)
     
-
+    
+    
+    
+    
+    
+# payment success View 
 class SuccessView(LoginRequiredMixin,TemplateView):
     template_name = 'redirects/payment/success.html'
     
@@ -48,17 +58,22 @@ class SuccessView(LoginRequiredMixin,TemplateView):
         # gets the ticket bag of the user that has paid 
         user_ticket_bag = TicketBag.objects.get(user=request.user,ordered=False)
         user_ticket_item_unpaid = TicketItem.objects.filter(user=request.user, ordered=False)
+        
         # saves the ticket bag order  to true 
         user_ticket_bag.ordered = True
+        
         # checks if ticket bag is ordered
         if user_ticket_bag.ordered == True:
             user_ticket_bag.order_ref_code = create_ref_code()
+            
             # gets all the tickets in the ticket bag
             counter = 0
             for ticketitems in user_ticket_bag.tickets.all():
+                
                 # sets the ticket item ordered to true
                 ticketitems.ordered = True
                 ticketitems.ticket_code = create_ref_code()
+                
                 # saves the ticket item order 
                 ticketitems.save()
                 
@@ -72,6 +87,7 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                             box_size=10,
                             border=4,
                     )
+                    
                     ticket_item_qr.add_data(
                         # the qrcode for each tickets consists of unique data
                         # its consists of the ticket_type
@@ -86,34 +102,52 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                         TICKET_CODE: *************{ticketitems.ticket_code}\n*******\n
                         ''',
                     )
+                    
                     # makes the size of the image fit
                     ticket_item_qr.make(fit=True)
+                    
                     # generates white and black qr code
                     img = ticket_item_qr.make_image(fill_color="black", back_color="white")
+                    
                     # saves the qrcode image to the media folder in the project directory in a folder called qr_codes
                     img.save(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png')
+                    
                     # image generation termination logic begins 
                     # creates an object for the ticket qr model class ( foreign key to ticket item)
                     ticket_image = ticketitems.ticketitemqrimage_set.create(ticket_item=ticketitems)
+                    
                     # opens the image and encodes it to the bytes
                     with open(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png', "rb") as imageFile:
                        str = base64.b64encode(imageFile.read())
+                       
                        # saves the image to the ticket_item_item_qr attribute
                        ticket_image.ticket_item_qr_image.save(f'{request.user}{ticketitems.ticket_code}{counter}.png',imageFile,save=True)
+                       
                        # saves the image to the model
                     ticketitems.save()
                     if counter == ticketitems.quantity:
                         break
+                    
         # saves ticket bag after setting ordered equals True
         user_ticket_bag.save()
+        
         # pass the context to the template
         context['ordered_ticket'] = user_ticket_bag
+        
         return self.render_to_response(context)
-
-
+    
+# payment failure view 
 class FailedView(LoginRequiredMixin,TemplateView):  
     template_name = 'redirects/payment/failed.html'
  
-    
+ 
+ 
+# Home View
 class HomeView(LoginRequiredMixin, TemplateView):
+    
     template_name = 'core/home.html'
+    # renders dynamic data to the home page
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context['all_tickets'] = Ticket.objects.all()
+        return self.render_to_response(context)

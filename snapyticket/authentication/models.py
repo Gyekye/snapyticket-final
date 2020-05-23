@@ -3,8 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 from phone_field import PhoneField
 
-# Creating a custom user model
-
+# custom user model
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     phone = PhoneField(help_text="Enter your phone number")

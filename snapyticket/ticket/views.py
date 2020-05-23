@@ -32,7 +32,7 @@ class TicketDetail(DetailView):
     context_object_name = 'ticket'
     template_name = 'ticket/details.html'
 
-
+# todo replace httpResponse redirects with messages
 class UpdateTicketItem(UpdateView):
     model = TicketItem
     fields = ['quantity']
@@ -41,9 +41,9 @@ class UpdateTicketItem(UpdateView):
 
     def form_valid(self, form):
         """ Checks for the validity of the data being passed into the form"""
-        _ticket_item_quantity = form.cleaned_data.get('quantity')
+        ticket_item_quantity = form.cleaned_data.get('quantity')
         # Return an httpResponse when the quantity falls below onw
-        if _ticket_item_quantity < 1:
+        if ticket_item_quantity < 1:
             return HttpResponse("Quantity must not go below one")
         else:
             # if quantity is greater than or equals one then call save method
@@ -52,84 +52,84 @@ class UpdateTicketItem(UpdateView):
 
 
 @login_required
-def _add_to_cart(request, slug):
+def add_to_cart(request, slug):
     # gets the ticket with a specific slug
-    _ticket = Ticket.objects.get(slug=slug)
+    ticket = Ticket.objects.get(slug=slug)
     # print(_ticket.ticketitem_set.all())
     if request.method == 'POST':
         # gets the ticket_type from the form
-        _type = request.POST.get('ticket_type')
+        type = request.POST.get('ticket_type')
         form = AddToCartForm(request.POST)
         if form.is_valid():
             # gets the ticket variation of a specific ticket
-            _ticket_type = _ticket.ticketvariation_set.get(variation=_type, ticket=_ticket)
+            ticket_type = ticket.ticketvariation_set.get(variation=type, ticket=ticket)
             #  gets the cleaned data from the form
-            _quantity = form.cleaned_data.get('quantity')
+            quantity = form.cleaned_data.get('quantity')
             form.save(commit=False)
             try:
                 # try to check if the ticket item exits already an if it does will update the quantity
-                _existing_ticket_item = TicketItem.objects.get(user=request.user, ticket=_ticket,
-                                                               ticket_type=_ticket_type,ordered=False)
+                existing_ticket_item = TicketItem.objects.get(user=request.user, ticket=ticket,
+                                                               ticket_type=ticket_type,ordered=False)
                 # increases the quantity of the order item by the quantity typed
-                _existing_ticket_item.quantity += _quantity
-                _existing_ticket_item.save()
+                existing_ticket_item.quantity += quantity
+                existing_ticket_item.save()
                 return HttpResponse('updated quantity')
             # else creates a new ticket item and saves it 
             except:
                 # creates a new ticket item
-                _ticket_item, created = TicketItem.objects.get_or_create(
+                ticket_item, created = TicketItem.objects.get_or_create(
                     user=request.user,
-                    ticket=_ticket,
-                    quantity=_quantity,
+                    ticket=ticket,
+                    quantity=quantity,
                     ordered=False,
-                    ticket_type=_ticket_type
+                    ticket_type=ticket_type
                 )  # saves new ticket_item
                 # checks to see the quantity entered does not fall below one
-                if _ticket_item.quantity < 1:
+                if ticket_item.quantity < 1:
                     # if it falls below one, then update to 1 then save
-                    _ticket_item.quantity = 1
-                    _ticket_item.save()
+                    ticket_item.quantity = 1
+                    ticket_item.save()
                 else:
-                    _ticket_item.save()
+                    ticket_item.save()
                 # creates or gets a ticket bag
-                _new_ticket_bag, created = TicketBag.objects.get_or_create(
+                new_ticket_bag, created = TicketBag.objects.get_or_create(
                     user=request.user,
                     ordered=False,
                     tickets__ordered=False,
                 )
                 # saves ticket bag
-                _new_ticket_bag.save()
+                new_ticket_bag.save()
                 # added newly created ticket to the ticket bag
-                _new_ticket_bag.tickets.add(_ticket_item)
+                new_ticket_bag.tickets.add(ticket_item)
                 # print(new_ticket_bag.tickets.quantity)
                 return HttpResponse("added to cart")
     else:
         form = AddToCartForm()
-    context = {'ticket': _ticket, 'form': form}
+    context = {'ticket': ticket, 'form': form}
     return render(request, 'ticket/bag.html', context)
 
 
 @login_required
-def _remove_from_cart(request, slug, pk):
+def remove_from_cart(request, slug, pk):
     # todo build a functionality to decrease the number of ticket items by 1 the remove when its zero
     # gets the specific ticket to remove from ticket bag
-    _ticket_to_remove = get_object_or_404(TicketItem, user=request.user, slug=slug, id=pk, ordered=False)
+    ticket_to_remove = get_object_or_404(TicketItem, user=request.user, slug=slug, id=pk, ordered=False)
     # gets users ticket bag
-    _ticket_bag = TicketBag.objects.get(user=request.user, ordered=False, tickets__ordered=False)
+    ticket_bag = TicketBag.objects.get(user=request.user, ordered=False, tickets__ordered=False)
     # removes ticket item from users ticket bag
-    _ticket_bag.tickets.remove(_ticket_to_remove)
+    ticket_bag.tickets.remove(ticket_to_remove)
     # then deletes other if all ticket items are gone
-    TicketItem.delete(_ticket_to_remove)
+    TicketItem.delete(ticket_to_remove)
     #  deletes the users ticket bag when there are no tickets in them
-    if _ticket_bag.tickets.count() == 0:
-        TicketBag.delete(_ticket_bag)
+    if ticket_bag.tickets.count() == 0:
+        TicketBag.delete(ticket_bag)
     # todo create a redirect to ticket bag
     return HttpResponse('Item removed from ticket items')
 
 @login_required
-def _ticket_bag_summary(request):
-    _user_ticket_bag = get_object_or_404(TicketBag,user=request.user,ordered=False,tickets__ordered=False)
-    context = {'ticket_bag': _user_ticket_bag}
+def ticket_bag_summary(request):
+    user_ticket_bag = get_object_or_404(TicketBag,user=request.user,ordered=False,tickets__ordered=False)
+    context = {'ticket_bag': user_ticket_bag}
     return render(request, 'ticket/ticket_bag_summary.html', context)
 
 

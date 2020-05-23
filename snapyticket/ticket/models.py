@@ -8,14 +8,40 @@ from django.urls import reverse
 
 # Create your models here.
 CATEGORY_CHOICES = (
-    ('CS', "Concert Show"),
-    ('SS', "Summit Show"),
-    ('MS', "Movie Show"),
-    ('FS', "Sports Event"),
-    ('PS', "Party Event"),
-    ('ES', "Other Event"),
+    ('CT', "Concert Ticket"),
+    ('ST', "Summit Ticket"),
+    ('MT', "Movie Ticket"),
+    ('ET', "Esports Ticket"),
+    ('PT', "Party Ticket"),
+    ('OT', "Other Ticket"),
 )
+# Managers for the various types of tickets 
 
+# concert tickets
+class ConcertTicketManager(models.Manager):
+    def get_queryset(self):
+        return super(ConcertTicketManager,self).get_queryset().filter(category='CT')
+# summit tickets   
+class SummitTicketManager(models.Manager):
+    def get_queryset(self):
+        return super(SummitTicketManager,self).get_queryset().filter(category='ST')
+# movie tickets 
+class MovieTicketManager(models.Manager):
+    def get_queryset(self):
+        return super(MovieTicketManager,self).get_queryset().filter(category='MT')
+# esports tickets  
+class EsportTicketManager(models.Manager):
+    def get_queryset(self):
+        return super(EsportTicketManager,self).get_queryset().filter(category='ET')
+# party tickets 
+class PartyTicketManager(models.Manager):
+    def get_queryset(self):
+        return super(PartyTicketManager,self).get_queryset().filter(category='PT')
+# other tickets  
+class OtherTicketManager(models.Manager):
+    def get_queryset(self):
+        return super(OtherTicketManager,self).get_queryset().filter(category='OT')
+    
 class Ticket(models.Model):
     # todo Write queryset to send emails to organizers who have their tickets pending
     # todo write queryset to generate all buyers of specific organizers ticket
@@ -57,14 +83,22 @@ class Ticket(models.Model):
     is_suggested = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     is_most_featured = models.BooleanField(default=False)
-
+    
+    # hooking models to managers
+    objects = models.Manager()
+    parties  = PartyTicketManager()
+    summits  = SummitTicketManager()
+    concerts = ConcertTicketManager() 
+    movies   = MovieTicketManager()
+    esports  = EsportTicketManager()
+    others   = OtherTicketManager()
     # Model Methods 
     def __str__(self):
         return f'{self.title} created by {self.organizer.name}'
-
+    # absolute url
     def get_absolute_url(self):
         return reverse("ticket:detail", kwargs={"slug": self.slug})
-
+    # add to cart url 
     def add_to_cart(self):
         return reverse("ticket:add_to_cart", kwargs={"slug": self.slug})
 
@@ -101,6 +135,7 @@ class TicketVariation(models.Model):
         return f'{self.ticket.title} - {self.variation}'
 
 
+
 class TicketItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
@@ -110,7 +145,6 @@ class TicketItem(models.Model):
     slug = models.SlugField(default="Slug-Field")
     ticket_code = models.CharField(max_length=15,blank=True)
     
-
     # named object representation
     def __str__(self):
         return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
@@ -135,30 +169,42 @@ class TicketItem(models.Model):
     def ticket_item_total_price(self):
         return self.ticket_item_price()
 
-
 #   A signal to generate a unique slug for each Ticket item
 def ticket_item_slug_gen(sender, instance, *args, **kwargs):
     instance.slug = slugify(instance.user) + '-' + slugify(instance.ticket.title)
 pre_save.connect(ticket_item_slug_gen, sender=TicketItem)
 
-
 # model to hold qr _code of ticket item model
 class TicketItemQrImage(models.Model):
     ticket_item = models.ForeignKey(TicketItem,on_delete=models.CASCADE)
     ticket_item_qr_image = models.ImageField(upload_to='ticket_qr_code')
-       
+  
+  
+  
+  
+# Manager to get all ordered ticket bag     
+class OrderedTicketBag(models.Manager):
+    def get_queryset(self):
+        return super(OrderedTicketBag,self).get_queryset().filter(ordered=True)   
     
+# actual ticket bag model   
 class TicketBag(models.Model):
     # todo write custom queryset to get all ordered and unordered querysets
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tickets = models.ManyToManyField(TicketItem)
     created_on = models.DateTimeField(auto_now=True)
     ordered = models.BooleanField(default=False)
-    order_ref_code = models.CharField(max_length=100)
+    order_ref_code = models.CharField(max_length=100,blank=True)
     
+    # hooking manager to model 
+    objects = models.Manager()
+    ordered_ticket_bags = OrderedTicketBag()
+    
+    # model methods 
     def __str__(self):
         return f'{self.user.username} - ticket-bag'
     
+    # absolute url
     def get_absolute_url(self):
         return reverse('profile:user_tickets', kwargs={'id': self.pk})
     

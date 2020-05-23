@@ -7,6 +7,8 @@
 <bolder>Email: {{request.user.email}}<bolder>
 <hr>
 <bolder>Phone: {{request.user.phone}}<bolder>
+<br><br>
+<bolder>Is organizer: {{request.user.is_organizer}}<bolder>
 <hr>
 {% if request.user.profile_image %}
 Profile Photo: <img src="{{request.user.profile_image.url}}" width="100px;" height="100px;"</font>

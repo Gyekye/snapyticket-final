@@ -6,7 +6,8 @@
 {% if request.user.is_organizer %}
 <h3>Welcome to your dashboard {{request.user.organizer.name}}</h3>
 <hr>
-<bolder>Name:{{request.user.organizer.name}}</bolder>
+<bolder>Name:{{request.user.organizer.name}}</bolder><br><br>
+<bolder>Verfied:{{request.user.organizer.is_verified_status}}</bolder>
 <hr>
 {% for links in request.user.organizer.social_set.all %}
 <ul> 
