@@ -1,0 +1,258 @@
+*,
+input {
+  font-family: Regular Font;
+}
+
+.invalidForm {
+  border: 1px solid #EB5757;
+}
+
+.mt-x {
+  padding-top: 3px;
+}
+
+.messageBox {
+  padding: 15px;
+  height: 55px;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  text-align: center;
+  width: 30%;
+  left: 0;
+  -webkit-box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33 !important;
+          box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33 !important;
+  right: 0;
+  font-family: Default Font Bold;
+  color: #3F3D56;
+  margin: auto;
+  -webkit-animation-name: messages;
+          animation-name: messages;
+  -webkit-animation-duration: .6s;
+          animation-duration: .6s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+}
+
+@-webkit-keyframes messages {
+  from {
+    -webkit-transform: translateY(-55px);
+            transform: translateY(-55px);
+  }
+}
+
+@keyframes messages {
+  from {
+    -webkit-transform: translateY(-55px);
+            transform: translateY(-55px);
+  }
+}
+
+input {
+  border-bottom: none;
+  border: none;
+  height: 50px !important;
+  padding-top: 20px;
+  -webkit-box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33 !important;
+          box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33 !important;
+  border-radius: 5px;
+  font-family: Regular Font Medium;
+  text-indent: 20px;
+  -webkit-transition: 3.9s;
+  transition: 3.9s;
+  font-size: .89rem !important;
+  color: #4F4F4F;
+}
+
+input #id_phone_1,
+input #id_password1,
+input #id_password2 {
+  display: none;
+}
+
+.activate {
+  font-size: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 500px;
+  background-color: transparent;
+  border: 3px solid #2F80ED;
+  border-left-color: transparent;
+  -webkit-animation: rotate 1s ease infinite;
+          animation: rotate 1s ease infinite;
+}
+
+.cotext-x {
+  padding-top: 20px;
+}
+
+.cotext-xs {
+  padding-top: 40px;
+}
+
+.cotext-xs .form-field {
+  margin-top: 20px;
+}
+
+.cotext-xs .lx-l {
+  position: aboslute;
+  -webkit-transform: translateY(-35px);
+          transform: translateY(-35px);
+}
+
+.btn {
+  font-family: Regular Font SemiBold;
+  text-transform: capitalize;
+}
+
+button .form-btn-submit {
+  height: 40px;
+}
+
+button .form-btn-submit:hover, button .form-btn-submit:focus {
+  background-color: transparent;
+  border: 2.5px solid #2F80ED;
+  color: #3F3D56;
+  border-left-color: transparent;
+}
+
+button #submitForm {
+  display: none;
+}
+
+a .backBtn {
+  position: absolute;
+}
+
+a .form-btn {
+  width: 100%;
+  height: 50px;
+  padding-top: 6px;
+  -webkit-box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33;
+          box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+a .form-btn:hover {
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.055);
+          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.055);
+  background: #FAFAFA;
+}
+
+a .form-btn-submit {
+  height: 40px;
+  padding-top: 1px;
+}
+
+a .form-btn-submit:hover, a .form-btn-submit:focus {
+  background-color: transparent;
+  border: 2.5px solid #2F80ED;
+  color: #3F3D56;
+  border-left-color: transparent;
+}
+
+a #backForm {
+  display: none;
+}
+
+/* Login Form */
+.login-form-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.login-form-container .login-form-banner {
+  width: 50%;
+  height: 100%;
+  background-color: #3F3D56;
+  float: left;
+}
+
+.login-form-container .login-form-banner login-form-banner-content {
+  padding: 4vh;
+}
+
+.login-form-container .login-form-banner login-form-banner-content .section-x {
+  height: 84vh;
+  padding-top: 20%;
+}
+
+.login-form-container .login-form-banner login-form-banner-content .section-x .heading-banner {
+  font-size: 3rem;
+  font-family: Default Font Bold;
+}
+
+.login-form-container .login-form-banner login-form-banner-content .section-x .heading-banner-helper-text {
+  margin-top: 0;
+}
+
+.login-form-container .login-form-box {
+  width: 50%;
+  height: 100vh;
+  overflow: auto;
+  float: right;
+  padding-left: 9%;
+  padding-right: 9%;
+}
+
+.login-form-container .login-form-box .form-box {
+  -webkit-box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33 !important;
+          box-shadow: 0 0 0 0 #afafaf40, 1px 1px 20px 1px #afafaf33 !important;
+  width: 100%;
+  position: relative;
+}
+
+.login-form-container .login-form-box .form-box .form-box-content {
+  padding: 4vh;
+}
+
+.login-form-container .login-form-box .form-box .form-box-content .heading-form {
+  font-size: 1.7rem;
+  font-family: Default Font Bold;
+}
+
+.login-form-container .login-form-box .form-box .form-box-content .heading-form-helper-text {
+  margin-top: 0;
+  font-size: .8rem;
+}
+
+img .login-svg {
+  position: fixed;
+  bottom: 0;
+  width: 50%;
+}
+
+img .form-img {
+  width: 80px;
+}
+
+i.passwordToggle {
+  position: absolute;
+  right: 6vh;
+  cursor: pointer;
+  -webkit-transform: translateY(14px);
+          transform: translateY(14px);
+  font-size: 1.3rem;
+}
+
+form ul .errorList li {
+  font-size: 14px;
+  color: #EB5757;
+  font-family: Regular Font Medium;
+  display: block;
+}
+
+span .helpertext,
+span .phone-field-ext {
+  display: none;
+}
+
+label[for="id_password1"],
+label[for="id_password2"],
+form ul li {
+  display: none;
+}
+
+/*End of Login form */
+/*# sourceMappingURL=auth.css.map */
