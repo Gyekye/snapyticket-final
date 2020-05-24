@@ -135,7 +135,7 @@ class TicketVariation(models.Model):
         return f'{self.ticket.title} - {self.variation}'
 
 
-
+# Main ticket Item Model
 class TicketItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
@@ -144,6 +144,7 @@ class TicketItem(models.Model):
     ordered = models.BooleanField(default=False)
     slug = models.SlugField(default="Slug-Field")
     ticket_code = models.CharField(max_length=15,blank=True)
+    
     
     # named object representation
     def __str__(self):

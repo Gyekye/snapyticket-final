@@ -11,17 +11,17 @@ POST_TAG=(
 # Manager for all Trend and Insights Post
 class TrendPostManager(models.Manager):
     def get_queryset(self):
-        return super(TrendPostManager,self).get_queryset(tag='Tr')
+        return super(TrendPostManager,self).get_queryset().filter(tag='Tr')
   
 # manager for all Press related Post  
 class PressReleasePostManager(models.Manager):
     def get_queryset(self):
-        return super(PressReleasePostManager,self).get_queryset(tag='Pr')
+        return super(PressReleasePostManager,self).get_queryset().filter(tag='Pr')
 
 # manager for all security related Post
 class SecurityPostManager(models.Manager):
     def get_queryset(self):
-        return super(SecurityPostManager,self).get_queryset(tag='Sr')
+        return super(SecurityPostManager,self).get_queryset().filter(tag='Sr')
     
 class Post(models.Model):
     title = models.CharField(max_length=100)
