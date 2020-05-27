@@ -1,5 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}{% load ticket_counter %}
 
+<div class="item-count">Number of tickets in bag : {{ request.user | cart_item_count }}</div><hr>
 <ul>
     {% for ticket in ticket_bag.tickets.all %}
     <li>
