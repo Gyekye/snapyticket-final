@@ -7,7 +7,7 @@ app_name = 'profile'
 urlpatterns = [
     path('', ProfileView.as_view(), name='user_profile'),
     path('ticket/bags/',UserTicketsList.as_view(),name='user_tickets'),
-    path('ticket/bag/details/<ticket_code>/',UserTicketsDetail.as_view(),name='bag-detail'),
+    path('ticket/bag/details/<order_ref_code>/',UserTicketsDetail.as_view(),name='bag-detail'),
     path('change/profile/details/', ProfileChangeView.as_view(), name='update'),
     
     # Password Change Views

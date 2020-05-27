@@ -40,7 +40,7 @@ class PaymentView(LoginRequiredMixin,TemplateView):
         context = self.get_context_data(**kwargs)
         context['pubkey'] = settings.RAVE_PUBLIC_KEY
         context['currency'] =  settings.RAVE_CURRENCY
-        context['user_order'] = TicketBag.objects.get(user=request.user,ordered=False)
+        context['user_order'] = TicketBag.objects.filter(user=request.user,ordered=False)[0]
         
         return self.render_to_response(context)
     
@@ -56,7 +56,7 @@ class SuccessView(LoginRequiredMixin,TemplateView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         # gets the ticket bag of the user that has paid 
-        user_ticket_bag = TicketBag.objects.get(user=request.user,ordered=False)
+        user_ticket_bag = TicketBag.objects.filter(user=request.user,ordered=False)[0]
         user_ticket_item_unpaid = TicketItem.objects.filter(user=request.user, ordered=False)
         
         # saves the ticket bag order  to true 
@@ -84,7 +84,7 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                     ticket_item_qr = qrcode.QRCode(
                             version=1,
                             error_correction=qrcode.constants.ERROR_CORRECT_L,
-                            box_size=10,
+                            box_size=5,
                             border=4,
                     )
                     
@@ -125,10 +125,28 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                        
                        # saves the image to the model
                     ticketitems.save()
-                    if counter == ticketitems.quantity:
+                    if counter == ticketitems.quantity and ticketitems.ticketitemqrimage_set.count() == ticketitems.quantity:
                         break
                     
-        # saves ticket bag after setting ordered equals True
+                    
+                # making the qrcode for other ticket Items 
+                ticket_item_img = qrcode.make('Some data here')
+                while ticketitems.ticketitemqrimage_set.count() < ticketitems.quantity:
+                    ticket_item_img.save(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{ticketitems.ticket_code}.png')
+                    
+                    with open(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{ticketitems.ticket_code}.png','rb') as ticket_qr:
+                        
+                        str = base64.b64encode(ticket_qr.read())
+                        ticket_img_qr_main = ticketitems.ticketitemqrimage_set.create(ticket_item=ticketitems)
+                        
+                        ticket_img_qr_main.ticket_item_qr_image.save(f'{request.user}{ticketitems.ticket_code}.png',ticket_qr,save=True)
+                        
+                        ticketitems.save()
+                    
+                    
+                
+                    
+        # saves ticket bag after setting ordered equals True 
         user_ticket_bag.save()
         
         # pass the context to the template

@@ -151,8 +151,7 @@ class TicketItem(models.Model):
         return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
     
     # aboslute url
-    def get_absolute_url(self):
-        return reverse("profile:bag-detail", kwargs={"ticket_code": self.ticket_code})
+
     
     # cart to remove from cart
     def remove_from_cart(self):
@@ -207,7 +206,7 @@ class TicketBag(models.Model):
     
     # absolute url
     def get_absolute_url(self):
-        return reverse('profile:user_tickets', kwargs={'id': self.pk})
+        return reverse('profile:bag-detail', kwargs={'order_ref_code': self.order_ref_code})
     
     # getting the total price of Ticket bag 
     def total_ticket_bag_price(self):

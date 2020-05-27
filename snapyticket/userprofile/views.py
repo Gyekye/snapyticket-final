@@ -43,13 +43,17 @@ class ProfileChangeView(LoginRequiredMixin, View):
     
 class UserTicketsList(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        user_ticket_bag = TicketBag.objects.filter(user=request.user,ordered=True)
+        user_ticket_bag = TicketBag.ordered_ticket_bags.filter(user=request.user,ordered=True)
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/tickets.html',context)
         
 class UserTicketsDetail(LoginRequiredMixin,View):
-    def get(self, request, *args, **kwargs):
-        user_ticket_bag = TicketBag.objects.filter(user=request.user,ordered=True)
+    def get(self, request,order_ref_code,*args, **kwargs):
+        user_ticket_bag = TicketBag.ordered_ticket_bags.get(order_ref_code=order_ref_code,user=request.user)
+        print(user_ticket_bag)
+        for items in user_ticket_bag.tickets.all():
+            print(items.ticketitemqrimage_set.count())
+                
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/ticket-details.html',context)
         

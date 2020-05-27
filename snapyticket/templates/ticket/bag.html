@@ -7,7 +7,7 @@
 
 <label>What Fruit Do You Like Most?</label><br>
 <form method="POST">{% csrf_token%}
-    <select id="selFruit" name="ticket_type">
+    <select id="selFruit" name="ticket_type" class='browser-default'>
 {% for t in ticket.ticketvariation_set.all %}
 <option value="{{t.variation}}">{{t.variation}}</option>
 {%endfor%}

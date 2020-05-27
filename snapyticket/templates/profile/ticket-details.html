@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% block content  %}
 
-hello
-{% for ticket_items  in  ordered_ticket_bag %}
-{{ticket_items.ticket_code}}
 
+{% for ticket in ordered_ticket_bag.tickets.all  %}
+<br><br>
+{{ticket.ticket.title}}-{{ticket.ticket_type.variation}} X {{ticket.quantity}}<br>
+Number of images -- {{ticket.ticketitemqrimage_set.all|length}}
+<br>
+{% for qr_image in ticket.ticketitemqrimage_set.all %}
+<img src='{{qr_image.ticket_item_qr_image.url}}'>
+{% endfor %}
+<br>
 {% endfor %}
 {% endblock content  %}
