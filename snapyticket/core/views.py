@@ -130,17 +130,21 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                     
                     
                 # making the qrcode for other ticket Items 
+                #todo add data to the qr data method 
                 ticket_item_img = qrcode.make('Some data here')
+                # condition to stop making qr code
                 while ticketitems.ticketitemqrimage_set.count() < ticketitems.quantity:
+                    # saves the image to the root media folder
                     ticket_item_img.save(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{ticketitems.ticket_code}.png')
-                    
+                    # open saved image
                     with open(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{ticketitems.ticket_code}.png','rb') as ticket_qr:
-                        
+                        # endcodes it
                         str = base64.b64encode(ticket_qr.read())
+                        # creates a ticket item qr image instance 
                         ticket_img_qr_main = ticketitems.ticketitemqrimage_set.create(ticket_item=ticketitems)
-                        
+                        # saves the qr image to the ticket item
                         ticket_img_qr_main.ticket_item_qr_image.save(f'{request.user}{ticketitems.ticket_code}.png',ticket_qr,save=True)
-                        
+                        # saves the ticket image 
                         ticketitems.save()
                     
                     
