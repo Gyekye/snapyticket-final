@@ -15,6 +15,9 @@ def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
 
+
+
+
 class IndexView(TemplateView):
     template_name = 'core/index.html'
     """
@@ -27,9 +30,9 @@ class IndexView(TemplateView):
         return self.render_to_response(context)
  
  
+
  
  
- # index page view 
 class PaymentView(LoginRequiredMixin,TemplateView):
     template_name = 'core/payment.html'
     """
@@ -65,18 +68,14 @@ class SuccessView(LoginRequiredMixin,TemplateView):
         # checks if ticket bag is ordered
         if user_ticket_bag.ordered == True:
             user_ticket_bag.order_ref_code = create_ref_code()
-            
             # gets all the tickets in the ticket bag
             counter = 0
             for ticketitems in user_ticket_bag.tickets.all():
-                
                 # sets the ticket item ordered to true
                 ticketitems.ordered = True
                 ticketitems.ticket_code = create_ref_code()
-                
                 # saves the ticket item order 
                 ticketitems.save()
-                
                 # Qr code generation logic below
                 while counter < ticketitems.quantity:
                     counter = counter + 1
@@ -87,7 +86,6 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                             box_size=5,
                             border=4,
                     )
-                    
                     ticket_item_qr.add_data(
                         # the qrcode for each tickets consists of unique data
                         # its consists of the ticket_type
@@ -102,33 +100,24 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                         TICKET_CODE: *************{ticketitems.ticket_code}\n*******\n
                         ''',
                     )
-                    
                     # makes the size of the image fit
                     ticket_item_qr.make(fit=True)
-                    
                     # generates white and black qr code
                     img = ticket_item_qr.make_image(fill_color="black", back_color="white")
-                    
                     # saves the qrcode image to the media folder in the project directory in a folder called qr_codes
                     img.save(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png')
-                    
                     # image generation termination logic begins 
                     # creates an object for the ticket qr model class ( foreign key to ticket item)
                     ticket_image = ticketitems.ticketitemqrimage_set.create(ticket_item=ticketitems)
-                    
                     # opens the image and encodes it to the bytes
                     with open(settings.MEDIA_ROOT+f'/qr_codes/{request.user}{counter}{ticketitems.ticket_code}.png', "rb") as imageFile:
                        str = base64.b64encode(imageFile.read())
-                       
                        # saves the image to the ticket_item_item_qr attribute
                        ticket_image.ticket_item_qr_image.save(f'{request.user}{ticketitems.ticket_code}{counter}.png',imageFile,save=True)
-                       
                        # saves the image to the model
                     ticketitems.save()
                     if counter == ticketitems.quantity and ticketitems.ticketitemqrimage_set.count() == ticketitems.quantity:
                         break
-                    
-                    
                 # making the qrcode for other ticket Items 
                 #todo add data to the qr data method 
                 ticket_item_img = qrcode.make('Some data here')
@@ -144,18 +133,15 @@ class SuccessView(LoginRequiredMixin,TemplateView):
                         ticket_img_qr_main = ticketitems.ticketitemqrimage_set.create(ticket_item=ticketitems)
                         # saves the qr image to the ticket item
                         ticket_img_qr_main.ticket_item_qr_image.save(f'{request.user}{ticketitems.ticket_code}.png',ticket_qr,save=True)
-                        # saves the ticket image 
+                        # saves the ticket
                         ticketitems.save()
-                    
-                    
-                
+                        #if ticketitems.ticketitemqrimage_set.count() == ticketitems.quantity:
+                            #break
                     
         # saves ticket bag after setting ordered equals True 
         user_ticket_bag.save()
-        
         # pass the context to the template
         context['ordered_ticket'] = user_ticket_bag
-        
         return self.render_to_response(context)
     
 # payment failure view 
@@ -168,6 +154,7 @@ class FailedView(LoginRequiredMixin,TemplateView):
 class HomeView(LoginRequiredMixin, TemplateView):
     
     template_name = 'core/home.html'
+    
     # renders dynamic data to the home page
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)

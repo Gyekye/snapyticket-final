@@ -108,8 +108,6 @@ def add_to_cart(request, slug):
                     ticket_bag_query.tickets.add(ticket_item)
                     # print(new_ticket_bag.tickets.quantity)
                     ticket_bag_query.save()
-                    ticket_bag_to_remove = TicketBag.objects.filter(user=request.user,ordered=False)
-                    print(ticket_bag_to_remove)
                     return HttpResponse("added to cart")
                 else:
                     return HttpResponse('No ticket bag ')
