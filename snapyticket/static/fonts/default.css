@@ -27,3 +27,8 @@
     font-family: 'Regular Font ExtraBold';
     src: url(/static/fonts/poppinsextrabold.woff2);
 }
+
+@font-face {
+    font-family: 'Main Font';
+    src: url(/static/fonts/mainfont.woff2);
+}

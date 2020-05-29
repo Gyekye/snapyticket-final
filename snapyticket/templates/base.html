@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvesBay</title>
     <!-- Favicon -->
-    <link rel="icon" href="{% static 'imgs/core/favicon.png' %}">
+    <link rel="icon" href="{% static 'imgs/icons/evesbay.ico' %}">
     <!-- End of Favicon -->
 
     <!-- CSS -->
@@ -21,10 +21,6 @@
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
     <!-- End of Owl carousel css cdn link -->
-
-    <!-- Fullpage css cdn link -->
-    <link rel="stylesheet" href="{% static 'css/fullpage.min.css' %}">
-    <!-- End of Fullpage css cdn link -->
 
     <!-- Custom css link -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -52,7 +48,9 @@
 
 <body>
 
-    {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% block content %} {% endblock content %}
+    <section class="hide-on-large-only">
+        {% block mobilecontent %} {% endblock mobilecontent %}
+    </section>
 
 
 
@@ -61,28 +59,19 @@
     <!-- JS -->
 
     <!-- Jquery js cdn link -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/context.js' %}"></script>
     <!-- End of jquery js cdn link -->
-
-    <!-- Animation js cdnlink -->
-    <script src="{% static 'js/TweenMax.min.js' %}"></script>
-    <script src="{% static 'js/TimelineMax.min.js' %}"></script>
-    <!-- End of animation js cdnlink -->
 
     <!-- Owl carousel js cdn link -->
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <!-- End of Owl carousel js cdn link -->
-
-    <!-- Fullpage js cdn link -->
-    <script src="{% static 'js/fullpage.min.js' %}"></script>
-    <!-- End of Fullpage js cdn link -->
 
     <!-- Materialize js cdn link -->
     <script src="{% static 'js/materialize.min.js' %}"></script>
     <!-- End of materialize js cdn link -->
 
     <!-- Custom js link -->
-    {% block extrafooter %} {% endblock extrafooter %}
+    <script src="{% static 'js/main.js' %}"></script>
     <!-- End of custom js link -->
 
     <!--END OF JS  -->

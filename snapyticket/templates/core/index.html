@@ -1,459 +1,91 @@
-{% extends 'base.html' %} {% load static %}{% block content %}
-<!-- Main Section -->
-
-{% include 'page_snippets/preloader.html' %}
-<div id="fullpage">
-    <section class="section s1">
-        <!-- Header Section -->
-        <section class="section-heading">
-            <header>
-                <div class="content-x">
-                    <!-- Navbar -->
-                    <nav class="z-depth-0">
-                        <a href="" class="brand-logo x-black">
-                            <img src="{% static 'imgs/core/logo.png' %}" class="brand-logo-img" alt="">
-                        </a>
-                        <ul class="right hide-on-med-and-down">
-                            <li class="waves-effect"><a href="" class="x-grey">Browse Events</a></li>
-                            <li class="waves-effect"><a href="" class="x-grey">Contact</a></li>
-                            <li class="waves-effect"><a href="{% url 'auth:user_register' %}" class="x-grey br-right">Get Started</a></li>
-                            <li class="waves-effect"><a href="{% url 'auth:user_login' %}" class="x-grey">Login</a></li>
-                        </ul>
-                    </nav>
-                    <!-- End of Navbar -->
+{% extends 'base.html' %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
+    <header class="mobile-header">
+        <nav class="mobile-nav transparent z-depth-0">
+            <a href="#menu" class="sidenav-trigger">
+                <div class="menu-btn">
+                    <div class="menu-btn-burger"></div>
                 </div>
-            </header>
-        </section>
-        <!-- End of Header Section -->
-
-        <!-- Quote Section -->
-        <section class="section-quote">
-            <div class="content-z">
-                <!-- Quote -->
-                <div class="row">
-                    <div class="col s5">
-                        <div class="heading-main animateLeft">
-                            No Stress. Get tickets without moving an inch !!
-                        </div>
-                        <p class="heading-helper-text animateRight">Introducing a new way of getting events tickets easily</p>
-                    </div>
-                    <div class="col s7">
-                        <div class="right right-align">
-                            <img src="{% static 'imgs/core/logo.png' %}" class="logo-main" alt="">
-                            <p class="logo-helper-text animateBottom">fast is everything</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Quote -->
-            </div>
-        </section>
-        <!-- End of Quote Section -->
-
-        <!-- Search Box Container -->
-        <section class="section-search-box">
-            <div class="search-box-container animateHeight">
-                <div class="row">
-                    <div class="search-box animateSearch" id="search">
-                        <form action="">
-                            <input type="text" class="col s12 search" placeholder="Looking for an event">
-                            <i class="material-icons search-prefix">search</i>
-                            <div class="col s6 loca-x">
-                            </div>
-                            <button type="submit" class="btn bg-x search-sub-btn z-depth-0 waves-effect">Search</button>
-                        </form>
-                    </div>
-                </div>
-        </section>
-        <!-- End of Search Box Container -->
-    </section>
-
-    <section class="section s2">
-        <div class="cate-right"></div>
-        <!-- Category Search Section -->
-        <section class="section-category-search valign-wrapper">
-            <div class="content-x">
-                <div>
-                    <p class="heading-helper-text mb-0 animateRight">
-                        Introducing a new way of getting events tickets
-                    </p>
-                    <div class="heading-main animateBottom">
-                        Search Events by Category
-                    </div>
-                </div>
-                <!-- Category Search -->
-                <div class="cat-card-container">
-                    <div class="wrapper-x">
-                        <div class="row">
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard">
-                                    <div class="cate-img-x-i waves-effect center-align valign-wrapper">
-                                        <a href="" class="btn default-btn bg-y z-depth-0">View all</a>
-                                    </div>
-                                    <a href="" class="w-100">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-top">
-                                                <div class="right ticket-counter">
-                                                    600 +
-                                                </div>
-                                                <button class="btn prefix-box">
-                                                <i class="material-icons x-grey">bookmark_outline</i>
-                                            </button>
-                                            </div>
-                                            <span class="card-title mb-0">Concert</span>
-                                            <p class="card-text mt-0 grey-text">Entertainment and Fun</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard">
-                                    <div class="cate-img-x-ii waves-effect center-align valign-wrapper">
-                                        <a href="" class="btn default-btn bg-y z-depth-0">View all</a>
-                                    </div>
-                                    <a href="" class="w-100">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-top">
-                                                <div class="right ticket-counter">
-                                                    600 +
-                                                </div>
-                                                <button class="btn prefix-box">
-                                                <i class="material-icons x-grey">bookmark_outline</i>
-                                            </button>
-                                            </div>
-                                            <span class="card-title mb-0">Concert</span>
-                                            <p class="card-text mt-0 grey-text">Entertainment and Fun</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard">
-                                    <div class="cate-img-x-iii waves-effect center-align valign-wrapper">
-                                        <a href="" class="btn default-btn bg-y z-depth-0">View all</a>
-                                    </div>
-                                    <a href="" class="w-100">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-top">
-                                                <div class="right ticket-counter">
-                                                    600 +
-                                                </div>
-                                                <button class="btn prefix-box">
-                                                <i class="material-icons x-grey">bookmark_outline</i>
-                                            </button>
-                                            </div>
-                                            <span class="card-title mb-0">Concert</span>
-                                            <p class="card-text mt-0 grey-text">Entertainment and Fun</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard">
-                                    <div class="cate-img-x-iv waves-effect center-align valign-wrapper">
-                                        <a href="" class="btn default-btn bg-y z-depth-0">View all</a>
-                                    </div>
-                                    <a href="" class="w-100">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-top">
-                                                <div class="right ticket-counter">
-                                                    600 +
-                                                </div>
-                                                <button class="btn prefix-box">
-                                                <i class="material-icons x-grey">bookmark_outline</i>
-                                            </button>
-                                            </div>
-                                            <span class="card-title mb-0">Concert</span>
-                                            <p class="card-text mt-0 grey-text">Entertainment and Fun</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard bg-y z2">
-                                    <a href="" class="waves-effect w-100 waves-light">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-all">
-                                                <div class="heading-main white-text f-x">Browse all Events Tickets</div>
-                                                <p class="heading-helper-text white-text">Lorem ipsum dolor sit.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard">
-                                    <div class="cate-img-x-v waves-effect center-align valign-wrapper">
-                                        <a href="" class="btn default-btn bg-y z-depth-0">View all</a>
-                                    </div>
-                                    <a href="" class="w-100">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-top">
-                                                <div class="right ticket-counter">
-                                                    600 +
-                                                </div>
-                                                <button class="btn prefix-box">
-                                                <i class="material-icons x-grey">bookmark_outline</i>
-                                            </button>
-                                            </div>
-                                            <span class="card-title mb-0">Concert</span>
-                                            <p class="card-text mt-0 grey-text">Entertainment and Fun</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard">
-                                    <div class="cate-img-x-vi waves-effect center-align valign-wrapper">
-                                        <a href="" class="btn default-btn bg-y z-depth-0">View all</a>
-                                    </div>
-                                    <a href="" class="w-100">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-top">
-                                                <div class="right ticket-counter">
-                                                    600 +
-                                                </div>
-                                                <button class="btn prefix-box">
-                                                <i class="material-icons x-grey">bookmark_outline</i>
-                                            </button>
-                                            </div>
-                                            <span class="card-title mb-0">Concert</span>
-                                            <p class="card-text mt-0 grey-text">Entertainment and Fun</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col s3 pl-0">
-                                <div class="card cateCard">
-                                    <div class="cate-img-x-vii waves-effect center-align valign-wrapper">
-                                        <a href="" class="btn default-btn bg-y z-depth-0">View all</a>
-                                    </div>
-                                    <a href="" class="w-100">
-                                        <div class="card-content w-100">
-                                            <div class="card-x-top">
-                                                <div class="right ticket-counter">
-                                                    600 +
-                                                </div>
-                                                <button class="btn prefix-box">
-                                                <i class="material-icons x-grey">bookmark_outline</i>
-                                            </button>
-                                            </div>
-                                            <span class="card-title mb-0">Concert</span>
-                                            <p class="card-text mt-0 grey-text">Entertainment and Fun</p>
-                                        </div>
-                                    </a>
-                                </div>
+            </a>
+            <ul class="right">
+                <li>
+                    <a href="">
+                        <img src="{% static 'imgs/icons/person_outline.png' %}" class="person-outline" alt="">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="nextSectionX">
+        <div class="main-mobile-content">
+            <div class="heading-main white-text">Get Started As A ..</div>
+            <br>
+            <div class="row">
+                <div class="col s6 pl-0">
+                    <div class="card z-depth-0 bg-main">
+                        <div class="card-content">
+                            <div class="center-align">
+                                <img src="{% static 'imgs/core/buyer.png' %}" alt="">
+                                <p class="text-0 white-text">Buyer</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End of Category Search -->
-            </div>
-        </section>
-        <!-- End of category search section -->
-    </section>
-
-    <section class="section s3 bg-c-1">
-        <!-- Featured events section  -->
-        <section class="featured-section valign-wrapper">
-            <div class="content-x">
-                <div class="wrapper-x">
-                    <div class="row">
-                        <div class="col s5 xCard">
-                            <div class="main-card">
-                                <div class="main-card-overlay waves-effect waves-light">
-                                    <div class="main-card-content">
-                                        <div class="main-card-date">
-                                            05 February 2020
-                                        </div>
-                                        <div class="main-card-title">
-                                            Shatta Wale Ft. Stoneboy LiveExploit 2020 SXT.
-                                        </div>
-                                        <div class="main-card-action">
-                                            <a href="" class="btn default-btn bg-y z-depth-0">Get tickets</a>
-                                        </div>
-                                        <div class="main-card-organizer black-text">
-                                            Organized by DarkShadowsEves Community
-                                            <a href="" class="btn right z-depth-0 bg-x btn-large btn-floating shareBtn"><i class="material-icons">share</i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <img src="{% static 'imgs/ticket-images/02.jpg' %}" class="main-card-img" alt="">
-                            </div>
-                        </div>
-                        <div class="col s7 xCard">
-                            <div class="sub-card">
-                                <div class="sub-card-overlay waves-effect waves-light">
-                                    <div class="main-card-content">
-                                        <div class="sub-card-date">
-                                            05 February 2020
-                                        </div>
-                                        <div class="sub-card-title">
-                                            Shatta Wale Ft. Stoneboy LiveExploit 2020 SXT.
-                                        </div>
-                                        <div class="sub-card-action">
-                                            <a href="" class="btn default-btn bg-y z-depth-0">Get tickets</a>
-                                        </div>
-                                        <div class="sub-card-organizer black-text">
-                                            <a href="" class="btn right z-depth-0 bg-x btn-large btn-floating shareBtn"><i class="material-icons">share</i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <img src="/static/imgs/ticket-images/03.jpg" class="sub-card-img" alt="">
-                            </div>
-                            <div class="wrapper-x mt-x">
-                                <div class="row">
-                                    <div class="col s6 xCard">
-                                        <div class="pre-card">
-                                            <div class="pre-card-overlay waves-effect waves-light">
-                                                <div class="main-card-content">
-                                                    <div class="pre-card-date">
-                                                        05 February 2020
-                                                    </div>
-                                                    <div class="pre-card-title">
-                                                        Raperhorlic GH 2020
-                                                    </div>
-                                                    <div class="pre-card-action">
-                                                        <a href="" class="btn default-btn bg-y z-depth-0">Get tickets</a>
-                                                    </div>
-                                                    <div class="pre-card-organizer black-text">
-                                                        <a href="" class="btn right z-depth-0 bg-x ml-x btn-large btn-floating shareBtn"><i class="material-icons">share</i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <img src="/static/imgs/ticket-images/01.jpg" class="pre-card-img" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col s6 xCard">
-                                        <div class="pre-banner-card bg-y valign-wrapper">
-                                            <div class="pre-banner-card-content">
-                                                Some Featured Events For you
-                                                <br>
-                                                <span class="pre-banner-helper-text">Get on this list today.  <a href="" class="white-text bold">Let's Go !!</a></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col s6">
+                    <div class="card z-depth-0">
+                        <div class="card-content">
+                            <div class="center-align">
+                                <img src="{% static 'imgs/core/organizer.png' %}" alt="">
+                                <p class="text-0  color-main">Organizer</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- End of featured events section  -->
-    </section>
-
-    <section class="section s4">
-        <!-- Banner section-->
-        <section class="banner-section valign-wrapper">
-            <div class="right-sect animateWidthXS"></div>
-            <div class="content-z">
-                <div class="wrapper-x">
-                    <div class="row">
-                        <div class="col s6">
-                            <div class="heading-main animateBottom">
-                                Planning of organizing a social Event ? Go live with the push of a button.
-                            </div>
-                            <p class="heading-helper-text-ln animateBottom">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore alias iure quam quas quibusdam a eius fuga odio cumque repudiandae. Quae, tempore omnis! Eos cupiditate, delectus assumenda odit est blanditiis.
-                            </p>
-                            <form action="" class="relative">
-                                <input type="email" class="pl-1" placeholder="Lets Get you going.">
-                                <i class="material-icons email-prefix">mail_outline</i>
-                                <button type="submit" class="btn bg-y emailBtn z-depth-0 waves-effect">Get started</button>
-                            </form>
-                            <br>
-                            <p class="veri-text animateBottom">
-                                <i class="material-icons orange-text left veri">check_circle</i> Verified and approved by Ghana Entercom Community.
-                            </p>
-                        </div>
-                        <div class="col s6">
-                            <img src="{% static 'imgs/core/live.jpg' %}" class="responsive-img animateBottom" alt="">
-                        </div>
-                    </div>
-                </div>
+            <p class="heading-main-helper-text grey-text text-lighten-2">
+                To Give your a customized experience, we need to know your status
+            </p>
+            <div class="cv">
+                <p>
+                    <a href="#" class="white-text" id="closerNextB"><i class="material-icons left">arrow_back</i> Back</a>
+                    <a href="#" class="right btn default-btn z-depth-0 waves-effect">Login Instead</a>
+                </p>
             </div>
-        </section>
-        <!-- End of Banner section-->
-    </section>
-
-    <section class="section s5">
-        <!-- Organizer section -->
-        <section class="organizer-section valign-wrapper">
-            <div class="org-left"></div>
-            <div class="content-x">
-                <div class="wrapper-x">
-                    <div class="row">
-                        <div class="col sx"></div>
-                        <div class="col s6">
-                            <div class="padd-t-3 center">
-                                <br><br>
-                                <center>
-                                    {% include 'page_snippets/dashboard.html' %}
-                                </center>
-                                <p class="f-xs center-align">
-                                    A live interactive dashboard for event organizers to track their sales.
-                                </p>
-                                <div class="h-1"></div>
-                            </div>
-                        </div>
-                        <div class="col s5">
-                            <div class="testimonies-container">
-                                <div class="heading-main">Testimonies</div>
-                                <p class="heading-helper-text">Our happy customer says.</p>
-                                <div class="carousel">
-                                    <div class="carousel-item" href="#one!">
-                                        <div class="card">
-                                            <div class="card-content">
-                                                <div class="imgCircle-container">
-                                                    <img src="{% static 'imgs/testimonies/testimonyOne.jpg' %}" class="imgCircle responsive-img" alt="">
-                                                </div>
-                                                <div class="testimonies-right">
-                                                    <p class="testimonies-user">Emmanuel Kelvin Oppong</p>
-                                                    <span>ekayemmanuel19@gmail.com</span>
-                                                </div>
-                                                <div class="wrapper-con"></div>
-                                                <p class="testimonies-desc">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus tempora vitae suscipit inventore quisquam explicabo quis consectetur dolores perspiciatis magni animi impedit mollitia amet voluptate eius, officia ex aliquam nostrum.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a class="carousel-item" href="#one!">
-                                        <div class="card">
-                                            <div class="card-content">
-                                                <div class="imgCircle-container">
-                                                    <img src="{% static 'imgs/testimonies/testimonyTwo.jpg' %}" class="imgCircle responsive-img" alt="">
-                                                </div>
-                                                <div class="testimonies-right">
-                                                    <p class="testimonies-user">Okine Shaun Nii Okoi</p>
-                                                    <span>ekayemmanuel19@gmail.com</span>
-                                                </div>
-                                                <div class="wrapper-con"></div>
-                                                <p class="testimonies-desc">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus tempora vitae suscipit inventore quisquam explicabo quis consectetur dolores perspiciatis magni animi impedit mollitia amet voluptate eius, officia ex aliquam nostrum.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End of Organizer section -->
-    </section>
-
-    <section class="section s6">
-        <!-- Footer Section -->
-        {% include 'page_snippets/footer-home.html' %}
-        <!-- End of Footer Section -->
-    </section>
-
+        </div>
     </div>
-
-    <!-- End of Main Section -->
-    {% endblock content %} {% block extrafooter %}
-    <script src="{% static 'js/app.js' %}"></script>
-    {% endblock extrafooter %}
+    <div class="nextSection">
+        <div class="IndexImgX">
+            {% include 'core-snippets/indexImgX.html' %}
+        </div>
+        <div class="main-mobile-content cx">
+            <div class="heading-main">Get your tickets with ease</div>
+            <p class="heading-main-helper-text">
+                Every compon Lorem, ipsum dolor. scaled to any size. Everything can be customised, from colour, to layouts, to
+            </p>
+            <p>
+                <a href="#" class="closerNextA"><i class="material-icons left">arrow_back</i> Back</a>
+                <a href="#" class="right btn default-btn z-depth-0 waves-effect" id="nextSecX">Next</a>
+            </p>
+        </div>
+    </div>
+    <div class="IndexImg">
+        {% include 'core-snippets/indexImg.html' %}
+    </div>
+    <div class="main-mobile-content cx">
+        <div class="heading-main">Designed and Built for All</div>
+        <p class="heading-main-helper-text">
+            Every compon Lorem, ipsum dolor. scaled to any size. Everything can be customised, from colour, to layouts, to
+        </p>
+        <p>
+            <a href="" class="x-link">Skip to Login >></a>
+            <a href="#" class="right btn default-btn z-depth-0 waves-effect" id="nextSec">Next</a>
+        </p>
+    </div>
+    <br>
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->
