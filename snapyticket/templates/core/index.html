@@ -1,25 +1,18 @@
 {% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Welcome to your #1 Ticketting PlatForm{% endblock titlecontent %}
 <!-- Mobile Content  -->
 {% block mobilecontent %}
 <!-- Load Static Files -->
 {% load static%}
 <setion class="mobile-content">
-    <header class="mobile-header">
-        <nav class="mobile-nav transparent z-depth-0">
-            <a href="#menu" class="sidenav-trigger">
-                <div class="menu-btn">
-                    <div class="menu-btn-burger"></div>
-                </div>
-            </a>
-            <ul class="right">
-                <li>
-                    <a href="">
-                        <img src="{% static 'imgs/icons/person_outline.png' %}" class="person-outline" alt="">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated.html' %}
+    <!-- End of Header -->
     <div class="nextSectionX">
         <div class="main-mobile-content">
             <div class="heading-main white-text">Get Started As A ..</div>
@@ -52,7 +45,7 @@
             <div class="cv">
                 <p>
                     <a href="#" class="white-text" id="closerNextB"><i class="material-icons left">arrow_back</i> Back</a>
-                    <a href="#" class="right btn default-btn z-depth-0 waves-effect">Login Instead</a>
+                    <a href="{% url 'auth:user_login' %}" class="right btn default-btn z-depth-0 waves-effect">Login Instead</a>
                 </p>
             </div>
         </div>
@@ -81,7 +74,7 @@
             Every compon Lorem, ipsum dolor. scaled to any size. Everything can be customised, from colour, to layouts, to
         </p>
         <p>
-            <a href="" class="x-link">Skip to Login >></a>
+            <a href="{% url 'auth:user_login' %}" class="x-link">Skip to Login >></a>
             <a href="#" class="right btn default-btn z-depth-0 waves-effect" id="nextSec">Next</a>
         </p>
     </div>

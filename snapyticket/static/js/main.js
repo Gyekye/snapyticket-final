@@ -1,12 +1,23 @@
 const menuBtn = document.querySelector('.menu-btn');
+const sidebar = document.querySelector('.sidebar')
+
+setTimeout(() => {
+    $('.mobile-preloader').fadeToggle()
+}, 200);
+setTimeout(() => {
+    $('.messageBox').slideToggle()
+}, 4000);
+
 let menuOpen = false;
 menuBtn.addEventListener("click", () => {
     if (!menuOpen) {
         menuBtn.classList.add('openMenu');
         menuOpen = true;
+        sidebar.classList.add('openSidebar')
     } else {
         menuBtn.classList.remove('openMenu');
         menuOpen = false;
+        sidebar.classList.remove('openSidebar')
     }
 })
 

@@ -1,12 +1,16 @@
 {% load static %}
-<!-- EvesBay Landing Page -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <!-- Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvesBay</title>
+
+    <!-- Remove auto zoom effect -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+
+    <title>{% block titlecontent %}{% endblock titlecontent %}</title>
     <!-- Favicon -->
     <link rel="icon" href="{% static 'imgs/icons/evesbay.ico' %}">
     <!-- End of Favicon -->
@@ -49,7 +53,19 @@
 <body>
 
     <section class="hide-on-large-only">
-        {% block mobilecontent %} {% endblock mobilecontent %}
+        <div class="mobile-preloader">
+            <center>
+                <p class="white-text text-1">Loading</p>
+                <div class="preder-content">
+                    <div class="preder"></div>
+                </div>
+            </center>
+        </div>
+        {% if messages %}
+        <!-- Message Counter  -->
+        {% for message in messages%}
+        <div class="messageBox">{{ message }}</div>
+        {% endfor %} {% else %}{% endif %} {% block mobilecontent %} {% endblock mobilecontent %}
     </section>
 
 

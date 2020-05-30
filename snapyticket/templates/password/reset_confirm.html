@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Set a New Password For Your Account{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated.html' %}
+    <!-- End of Header -->
+
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="heading-main">New Password</div>
+        <span class="heading-helper">Reset your password</span>
+        <br><br>
+        <form method="POST">
+            <!-- Form Token -->
+            {% csrf_token %}
+            <!-- End of Form Token -->
+            {{ form.as_p }}
+            <i class="material-icons passwordToggle xsv" id="passA">visibility</i>
+            <i class="material-icons passwordToggle xsv hide" id="passAx">visibility_off</i>
+            <i class="material-icons passwordToggle" id="passB">visibility</i>
+            <i class="material-icons passwordToggle hide" id="passBx">visibility_off</i>
+            <a href="{% url 'auth:user_login' %}" class="x-link">Return To Login</a>
+            <button type="submit" class="right btn waves-effect default-btn z-depth-0">Set</button>
+            <br><br><br>
+            <p class="form-x-text">I don't have an account. <a href="{% url 'auth:user_register' %}">Get One</a> Free Today.</p>
+        </form>
+    </div>
+</setion>
+<script type="text/javascript">
+    const passA = document.getElementById("passA");
+    const passAx = document.getElementById("passAx");
+    const passB = document.getElementById("passB");
+    const passBx = document.getElementById("passBx");
+    const password1 = document.getElementById('id_new_password1')
+    const password2 = document.getElementById('id_new_password2')
+    passA.addEventListener("click", () => {
+        password1.type = "text"
+        passA.classList.add('hide')
+        passAx.classList.remove('hide')
+    })
+    passAx.addEventListener("click", () => {
+        password1.type = "password"
+        passA.classList.remove('hide')
+        passAx.classList.add('hide')
+    })
+    passB.addEventListener("click", () => {
+        password2.type = "text"
+        passB.classList.add('hide')
+        passBx.classList.remove('hide')
+    })
+    passBx.addEventListener("click", () => {
+        password2.type = "password"
+        passB.classList.remove('hide')
+        passBx.classList.add('hide')
+    })
+</script>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

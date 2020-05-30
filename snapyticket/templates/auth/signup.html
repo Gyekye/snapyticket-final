@@ -1,46 +1,72 @@
-{% extends 'base-auth.html' %} {% block content %} {% load static %}
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay -Create Your Account{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
 
-<section class="login-form-container">
-    <img src="{% static 'imgs/svgs/getstarted.svg' %}" class="login-svg" alt="">
-    <div class="login-form-banner">
-        <div class="login-form-banner-content">
-            <a href="{% url 'core:index' %}" class="btn waves-effect waves-light left btn-floating grey darken-3 btnX z-depth-0 backBtn"><i class="material-icons">home</i></a>
-            <div class="center-align section-x">
-                <div class="heading-banner white-text">
-                    Get a free Account Today
-                </div>
-                <p class="heading-banner-helper-text grey-text text-lighten-4">
-                    Get your tickets at the ease of your home
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="login-form-box valign-wrapper">
-        <div class="form-box">
-            <div class="form-box-content">
-                <a href="" class="right">
-                    <img src="{% static 'imgs/core/logo.png' %}" class="form-img" alt="">
-                </a>
-                <div class="heading-form">Get Started</div>
-                <p class="heading-form-helper-text">Get a free account today</p>
-                <div class="cotext-x">
-                    <a href="" class="btn white form-btn grey-text text-darken-3 bold-text"><img src="{% static 'imgs/icons/google.png' %}" class="left google-icon" alt=""> Continue with Google</a>
-                </div>
-                <div class="cotext-xs">
-                    <form method="POST">
-                        {% csrf_token %} {{ form.as_p }}
-                        <br>
-                        <a href="{% url 'auth:user_login' %}" class="waves-effect waves-blue bold-text mt-x" id="loginForm">Login to my account</a>
-                        <button type="submit" class="right btn btnX form-btn-submit z-depth-0" id="submitForm">Create Account</button>
-                        <a href="" class="waves-effect waves-blue bold-text mt-x" id="backForm">Back</a>
-                        <a type="submit" class="right btn form-btn-submit z-depth-0" id="nextForm">Next</a>
-                        <br>
-                    </form>
-                    <br>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
 
-{% endblock content %}
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="heading-main">Get Started</div>
+        <span class="heading-helper">get your free account today. Now</span>
+        <br><br>
+        <a href="" class="full-width-btn waves-effect btn white color-main"><img src="{% static 'imgs/icons/google.png' %}" class="google-img left" alt=""> Continue With Google</a>
+        <br><br>
+        <div class="heading-main-x">
+            Sign up with Email instead
+        </div>
+        <form method="POST">
+            <!-- Form Token -->
+            {% csrf_token %}
+            <!-- End of Form Token -->
+            {{ form.as_p }}
+            <i class="material-icons passwordToggle xsv" id="passA">visibility</i>
+            <i class="material-icons passwordToggle xsv hide" id="passAx">visibility_off</i>
+            <i class="material-icons passwordToggle" id="passB">visibility</i>
+            <i class="material-icons passwordToggle hide" id="passBx">visibility_off</i>
+            <a href="{% url 'auth:user_login' %}" class="x-link">Login Instead</a>
+            <button type="submit" class="right btn waves-effect default-btn z-depth-0">Get Started</button>
+            <br><br><br>
+            <p class="form-x-text">I don't have an account. <a href="">Get One</a> Free Today.</p>
+        </form>
+    </div>
+</setion>
+<script type="text/javascript">
+    const passA = document.getElementById("passA");
+    const passAx = document.getElementById("passAx");
+    const passB = document.getElementById("passB");
+    const passBx = document.getElementById("passBx");
+    const password1 = document.getElementById('id_password1')
+    const password2 = document.getElementById('id_password2')
+    passA.addEventListener("click", () => {
+        password1.type = "text"
+        passA.classList.add('hide')
+        passAx.classList.remove('hide')
+    })
+    passAx.addEventListener("click", () => {
+        password1.type = "password"
+        passA.classList.remove('hide')
+        passAx.classList.add('hide')
+    })
+    passB.addEventListener("click", () => {
+        password2.type = "text"
+        passB.classList.add('hide')
+        passBx.classList.remove('hide')
+    })
+    passBx.addEventListener("click", () => {
+        password2.type = "password"
+        passB.classList.remove('hide')
+        passBx.classList.add('hide')
+    })
+</script>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

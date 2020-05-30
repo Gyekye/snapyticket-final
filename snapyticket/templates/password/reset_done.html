@@ -1,1 +1,34 @@
-dfasfds
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Notified your Email{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated.html' %}
+    <!-- End of Header -->
+
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="heading-main">Email Notified</div>
+        <span class="heading-helper">Check your  mail box</span>
+        <br><br>
+        <p class="heading-helper-text-x">Your email has being notified with a link. Follow the link and instructions to sucessfully reset your password.</p>
+        <a href="{% url 'auth:user_login' %}" class="x-link">Return To Login</a>
+        <a href="{% url 'auth:password_reset' %}" class="right btn waves-effect default-btn z-depth-0">Resend</a>
+        <br><br><br><br>
+        <center>
+            <div class="mailc">
+                {% include 'core-snippets/mail.html' %}
+            </div>
+        </center>
+    </div>
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

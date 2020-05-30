@@ -1,47 +1,37 @@
-{% extends 'base-auth.html' %} {% block content %} {% load static %}
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Reset Your Password{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
 
-<section class="login-form-container">
-    <img src="{% static 'imgs/svgs/forgotpassword.svg' %}" class="login-svg" alt="">
-    <div class="login-form-banner">
-        <div class="login-form-banner-content">
-            <a href="{% url 'core:index' %}" class="btn waves-effect waves-light left btn-floating grey darken-3 btnX z-depth-0 backBtn"><i class="material-icons">home</i></a>
-            <div class="center-align section-x">
-                <div class="heading-banner white-text">
-                    Struggling with password
-                </div>
-                <p class="heading-banner-helper-text grey-text text-lighten-4">
-                    You can always request for a new one anytime
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="login-form-box valign-wrapper">
-        <div class="form-box">
-            <div class="form-box-content">
-                <a href="" class="right">
-                    <img src="{% static 'imgs/core/logo.png' %}" class="form-img" alt="">
-                </a>
-                <div class="heading-form">Reset Password</div>
-                <p class="heading-form-helper-text">Login to resume your session</p>
-                <div class="cotext-x">
-                    <p class="grey-text text-darken-2">
-                        Provide you email address linked with your account. You would be notified with a link to reset you password immediately.
-                    </p>
-                </div>
-                <div>
-                    <form method="POST">
-                        {% csrf_token %} {{ form.as_p }}
-                        <br>
-                        <div class="cotext-xxs">
-                            <a href="{% url 'auth:user_login' %}" class="bold-text grey-text text-darken-1">Return to login</a>
-                            <button type="submit" class="right btn btnX form-btn-submit z-depth-0">Reset</button>
-                        </div>
-                    </form>
-                    <br>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated.html' %}
+    <!-- End of Header -->
 
-{% endblock content %}
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="heading-main">Reset Password</div>
+        <span class="heading-helper">Struggling with your password</span>
+        <br><br>
+        <p class="heading-helper-text-x">Provide the email associated with your account. You would be notified with a link. Follow link to reset your password
+        </p>
+        <form method="POST">
+            <!-- Form Token -->
+            {% csrf_token %}
+            <!-- End of Form Token -->
+            {{ form.as_p }}
+            <a href="{% url 'auth:user_login' %}" class="x-link">Return To Login</a>
+            <button type="submit" class="right btn waves-effect default-btn z-depth-0">Reset</button>
+            <br><br><br>
+            <p class="form-x-text">I don't have an account. <a href="{% url 'auth:user_register' %}">Get One</a> Free Today.</p>
+        </form>
+    </div>
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

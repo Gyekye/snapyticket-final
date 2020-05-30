@@ -1,6 +1,185 @@
+/*** iPhone and iOS Form Input Zoom Fixes ***/
+
+
+/* Fix Input Zoom on devices older than iPhone 5: */
+
+@media screen and (device-aspect-ratio: 2/3) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"] {
+        font-size: 14px;
+    }
+}
+
+
+/* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+
+@media screen and (device-aspect-ratio: 40/71) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"] {
+        font-size: 14px;
+    }
+}
+
+
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+
+@media screen and (device-aspect-ratio: 375/667) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"] {
+        font-size: 14px;
+    }
+}
+
+
+/* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+
+@media screen and (device-aspect-ratio: 9/16) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"] {
+        font-size: 14px;
+    }
+}
+
 :root {
     --main-black: #3F3D56;
     --core-color: #4F4BFF;
+    --main-grey: rgb(99, 98, 117);
+    --core-grey: rgb(243, 243, 243);
+    --core-red: rgb(253, 97, 97);
+}
+
+input {
+    height: 50px !important;
+    padding-top: 20px;
+    border: 1px solid var(--core-grey) !important;
+    border-radius: 5px;
+    font-family: Regular Font Medium;
+    text-indent: 12px;
+    transition: 3.9s;
+    font-size: .89rem !important;
+    color: #4F4F4F;
+    -webkit-appearance: none;
+}
+
+.passwordToggle {
+    position: absolute;
+    right: 40px;
+    color: var(--main-black);
+    transform: translateY(-60px);
+    transition: .3s;
+}
+
+.xsv {
+    transform: translateY(-155px);
+}
+
+input[type="password"] {
+    letter-spacing: 4px;
+    font-weight: bolder;
+}
+
+input:focus {
+    border: 1px solid var(--core-grey) !important;
+    box-shadow: 0 0 0 .03rem var(--main-black) !important;
+}
+
+ul.errorlist.nonfield li {
+    font-size: 12px;
+    line-height: 24px;
+    color: var(--core-red);
+}
+
+p.form-x-text {
+    font-family: Default Font;
+}
+
+p.form-x-text a {
+    font-family: Regular Font SemiBold;
+    color: var(--core-color);
+}
+
+form p span.helptext,
+form ul li,
+input#id_phone_1,
+span.phone-field-ext {
+    display: none;
+}
+
+form ul.errorlist li {
+    display: block;
+    font-size: 13px;
+    color: var(--core-red);
+}
+
+.mobile-preloader {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: var(--main-black);
+    z-index: 400;
+    padding-top: 60%;
+}
+
+.preder {
+    width: 80px;
+    height: 4px;
+    border-radius: 300px;
+    top: 50%;
+    background: white;
+    animation-name: loader;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+}
+
+.preder-content {
+    width: 80px;
+    height: 4px;
+    background: grey;
+    border-radius: 200px;
 }
 
 .bg-main {
@@ -14,6 +193,10 @@
 .text-0 {
     font-family: Regular Font SemiBold;
     padding-top: 4px;
+}
+
+p.text-0 {
+    font-family: Main Font !important;
 }
 
 .pl-0 {
@@ -45,7 +228,7 @@ header nav.mobile-nav {
     padding-top: 7px;
     height: 65px;
     position: fixed;
-    z-index: 100;
+    z-index: 201;
 }
 
 .menu-btn {
@@ -137,7 +320,7 @@ header nav.mobile-nav {
     transform: translateX(100%);
     height: 100%;
     position: fixed;
-    z-index: 102;
+    z-index: 502;
     background: var(--main-black);
     top: 0;
     transition: .7s;
@@ -148,9 +331,22 @@ div.padding-x {
     height: 375px;
 }
 
+div.padding-xs {
+    padding-top: 80px;
+}
+
 div.main-mobile-content {
-    padding: 20px;
+    padding: 27px;
     padding-top: 0;
+}
+
+.heading-helper {
+    color: var(--main-grey);
+}
+
+.heading-helper-text-x {
+    font-size: 12px;
+    line-height: 25px;
 }
 
 div.heading-main {
@@ -169,21 +365,24 @@ p.heading-main-helper-text {
     font-family: Regular Font SemiBold;
     padding-left: 20px;
     padding-right: 20px;
+    -webkit-appearance: none;
     background: var(--core-color);
 }
 
 .default-btn:focus {
-    font-size: 0;
-    width: 42px;
-    color: transparent;
-    height: 42px;
-    background: transparent;
-    border: 3px solid var(--core-color);
-    border-left: none;
-    border-right: none;
-    animation-name: rotator;
-    animation-duration: .3s;
-    animation-iteration-count: infinite;
+    font-size: 0 !important;
+    width: 42px !important;
+    color: transparent !important;
+    height: 42px !important;
+    background: transparent !important;
+    border: 3px solid var(--core-color) !important;
+    -webkit-background: transparent;
+    -moz-background: transparent;
+    border-left: none !important;
+    border-right: none !important;
+    animation-name: rotator !important;
+    animation-duration: .3s !important;
+    animation-iteration-count: infinite !important;
 }
 
 .x-link {
@@ -192,6 +391,92 @@ p.heading-main-helper-text {
     padding-top: 7px;
     color: var(--main-black);
     font-family: Default Font Bold;
+}
+
+.sidebar {
+    width: 200px;
+    z-index: 1000;
+    height: 100%;
+    position: fixed;
+    transition: .5s;
+    transform: translateX(-200px);
+    background: var(--main-black);
+    z-index: 200;
+}
+
+.sidebar-content {
+    padding-top: 90px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.sidebar-link {
+    display: block;
+    color: white;
+    padding-bottom: 25px;
+    font-family: Default Font Bold;
+}
+
+.full-width-btn {
+    width: 100%;
+    height: 45px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 10px 1px rgba(0, 0, 0, .1);
+    padding-top: 3px;
+    font-family: Default Font Bold;
+    color: var(--main-black);
+}
+
+.full-width-btn:focus {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 20px 1px rgba(0, 0, 0, .1) !important;
+}
+
+img.google-img {
+    width: 20px;
+    padding-top: 7px;
+}
+
+.heading-main-x {
+    font-family: Main Font;
+    color: var(--main-black);
+}
+
+.messageBox {
+    width: 90%;
+    padding: 15px;
+    z-index: 600;
+    background: white;
+    margin-left: 5%;
+    font-family: Regular Font Medium;
+    font-size: 13px;
+    text-align: center;
+    bottom: 0;
+    position: fixed;
+    color: var(--main-black);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 20px 1px rgba(0, 0, 0, .2) !important;
+    animation-name: messageBox;
+    animation-duration: 1s;
+    border-radius: 4px;
+    animation-iteration-count: 1;
+}
+
+#paper {
+    animation-name: email;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+#animateO {
+    animation-name: animateO;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#animateThreeX {
+    animation-name: animateThree;
+    animation-duration: 3s;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation-iteration-count: infinite;
 }
 
 
@@ -203,17 +488,34 @@ p.heading-main-helper-text {
     }
 }
 
+@keyframes loader {
+    0% {
+        width: 0px;
+    }
+    30% {
+        width: 30px;
+    }
+    50% {
+        width: 40px;
+    }
+    100% {
+        width: 80px;
+    }
+}
+
 .menu-btn.openMenu .menu-btn-burger {
-    transform: rotateZ(90deg) translateX(-50px);
-    background: transparent;
+    transform: translateX(-50px);
+    background: white;
 }
 
 .menu-btn.openMenu .menu-btn-burger::before {
     transform: rotate(45deg) translate(35px, -35px);
+    background: white;
 }
 
 .menu-btn.openMenu .menu-btn-burger::after {
     transform: rotate(-45deg) translate(35px, 35px);
+    background: white;
 }
 
 #handX {
@@ -240,6 +542,11 @@ p.heading-main-helper-text {
     animation-iteration-count: infinite;
     transform-origin: center;
     transform-box: fill-box;
+}
+
+.sidebar.openSidebar {
+    transform: translateX(0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, .1), 1px 1px 20px 1px rgba(0, 0, 0, .4);
 }
 
 @keyframes handOne {
@@ -275,5 +582,51 @@ p.heading-main-helper-text {
     }
     100% {
         transform: rotateZ(0deg);
+    }
+}
+
+@keyframes messageBox {
+    from {
+        transform: translateY(100px);
+    }
+}
+
+@keyframes email {
+    0% {
+        transform: translateY(00px);
+    }
+    20% {
+        transform: translateY(30px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes animateThree {
+    0% {
+        transform: rotateZ(-360deg) scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: .9;
+    }
+}
+
+@keyframes animateO {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(6px);
+    }
+    70% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
