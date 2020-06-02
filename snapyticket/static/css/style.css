@@ -99,6 +99,7 @@ html {
     --core-grey: #f3f3f3;
     --core-black: rgb(190, 190, 190);
     --core-red: #fd6161;
+    --core-green: #4ecf84;
     --main-orange: #F47402;
     --core-gradient: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8), rgba(0, 0, 0, 1));
 }
@@ -178,6 +179,30 @@ input {
     color: var(--main-black);
     transform: translateY(-60px);
     transition: .3s;
+}
+
+.network-box,
+.network-box-x {
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    padding: 15px;
+    top: 0;
+    background: var(--core-red);
+    color: white;
+    animation-name: messageBox;
+    animation-duration: 1s;
+    left: 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 40px 1px rgba(0, 0, 0, .3);
+    right: 0;
+    text-align: center;
+    display: none;
+    margin: 0 auto;
+    animation-iteration-count: 1;
+}
+
+.network-box-x {
+    background: var(--core-green);
 }
 
 .qr-container {
