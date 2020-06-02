@@ -47,7 +47,7 @@
         </li>
         {% if user.is_organizer %}
         <li class="profile-nav-x">
-            <a href="" class="profile-nav-link"><i class="material-icons left">track_changes</i> Track My Sales</a>
+            <a href="{% url 'organizer:dashboard' %}" class="profile-nav-link"><i class="material-icons left">track_changes</i> Go To My Dashboard</a>
         </li>
         <li class="profile-nav-x">
             <a href="" class="profile-nav-link"><i class="material-icons left">swap_vertical_circle</i> Host a new Event</a>

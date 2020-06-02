@@ -170,30 +170,35 @@ def ticket_bag_summary(request):
     context = {'ticket_bag': user_ticket_bag}
     return render(request, 'ticket/ticket_bag_summary.html', context)
 
+def add_to_saved(request, slug):
+    ticket = Ticket.objects.get(slug=slug)
 
-def add_to_saved(request,slug):
-    # gets a ticket with the slug
-    ticket_to_save = Ticket.objects.get(slug=slug)
+    status = "save"
+    
     try:
-        # check for already saved ticket 
-        previous_saved_ticket = SavedTicket.objects.get(user=request.user,is_saved=True)
-        # if ticket in saved tickets 
-        if ticket_to_save in previous_saved_ticket.ticket.all():
-            # remove ticket from saved 
-            previous_saved_ticket.ticket.remove(ticket_to_save)
-            return HttpResponse('Removed from saved')
-        else:
-            # add to saved tickets
-            previous_saved_ticket.ticket.add(ticket_to_save)
-            previous_saved_ticket.save()
-    # create a new saved ticket queryset if some doesnt exist
-    except ObjectDoesNotExist:
-        saved_ticket_bag = SavedTicket.objects.create(user=request.user,is_saved=True)
-        saved_ticket_bag.save()
-        saved_ticket_bag.ticket.add(ticket_to_save)
-        saved_ticket_bag.save()
-    return HttpResponse('added to saved tickets ')
+        selected_ticket = SavedTicket.objects.get(user=request.user)
 
+        print(selected_ticket)
+
+        if selected_ticket.is_saved == True:
+            selected_ticket.ticket.remove(ticket)
+            selected_ticket.is_saved = False
+            selected_ticket.save()
+            messages.success(request, "Removed From Saved Tickets")
+            return redirect('ticket:tickets')
+
+        else:
+            selected_ticket.ticket.add(ticket)
+            selected_ticket.is_saved = True
+            selected_ticket.save()
+            messages.success(request, "Added To Saved Tickets")
+            return redirect('ticket:tickets')
+
+    except:
+        saved_ticket = SavedTicket.objects.create(user=request.user, is_saved=True)
+        saved_ticket.ticket.add(ticket)
+        saved_ticket.save()
+        return redirect('ticket:tickets')
 
 #todo fix the webhooks and do a proper server side validation
 #@require_POST

@@ -1,24 +1,69 @@
 {% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
 
+    {% if user.is_authenticated %}
 
-{% block content %}
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
 
-{% if request.user.is_organizer %}
-<h3>Welcome to your dashboard {{request.user.organizer.name}}</h3>
-<hr>
-<bolder>Name:{{request.user.organizer.name}}</bolder><br><br>
-<bolder>Verfied:{{request.user.organizer.is_verified_status}}</bolder>
-<hr>
-{% for links in request.user.organizer.social_set.all %}
-<ul> 
- <a href="{{links.link}}"><li>{{links.platform}}</li></a>
-</ul>
-{% endfor %}
-<hr>
-<bolder>Email:{{request.user.organizer.email}}</bolder><br><br>
-<img src="{{request.user.organizer.logo.url}}" width="100px;" height="100px;"</font><br>
-<a href="{{request.user.organizer.get_absolute_url}}">Update organizer info</a><br>
-{% endif %}<br>
+    <!-- Unauthenitcated Header -->
+    {% else %}
 
-<a href="{% url 'profile:user_profile'%}">Profile</a>  
-{% endblock content %}
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <img src="{% static 'imgs/core/organizer-cover.jpg' %}" class="profile-img-cover" style="height: 300px;" alt="">
+    <!-- User Profile -->
+    {% if request.user.profile_image %}
+    <img src="{{request.user.organizer.logo.url}}" class="halfway-fab profile-img">
+    <!-- User Profile -->
+    {% else %}
+    <img src="{% static 'imgs/icons/user.png' %}" class="halfway-fab profile-img"> {% endif %}
+    <div class="profile-det">
+        <div class="user-name white-text">{{ request.user.organizer.name }}</div>
+        <span class="user-email grey-text text-lighten-1">{{ request.user.organizer.email }}</span>
+    </div>
+    <ul class="profile-nav">
+        <li class="profile-nav-x">
+            <a href="{{request.user.organizer.get_absolute_url}}" class="profile-nav-link"><i class="material-icons left">settings</i> Update my profile</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'profile:password_change' %}" class="profile-nav-link"><i class="material-icons left">event</i> See My Ongoing Events</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'profile:user_bags' %}" class="profile-nav-link"><i class="material-icons left">event_available</i> My Sucessfull Events</a>
+        </li>
+        {% if user.is_organizer %}
+        <li class="profile-nav-x">
+            <a href="{% url 'organizer:dashboard' %}" class="profile-nav-link"><i class="material-icons left">event_busy</i> My Failed Events</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">swap_vertical_circle</i> Host a new Event</a>
+        </li>
+        {% else %}
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">question_answer</i> Become an Organizer</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">access_time</i> Ckeck out Organizers</a>
+        </li>
+        {% endif %}
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">help_outline</i> Help Center</a>
+        </li>
+    </ul>
+</section>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

@@ -48,12 +48,14 @@
             <div class="card horizontal z-depth-0">
                 <div class="card-image">
                     <a href="{{ obj.get_absolute_url }}" class="btn default-btn-sugg z-depth-0">Get Now</a>
-                    <br><br>
-                    <a href="{{ obj.add_to_saved }}" class="btn default-btn-sugg z-depth-0">save</a>
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
+                    <img src="{{ obj.featured_image.url }}" class="sugg-img-ex">
                 </div>
                 <div class="card-stacked">
                     <div class="card-content-x">
+                        <a href="#menu" data-target='{{ obj.id }}' class="dropdown-trigger right"><i class="material-icons orange-text">more_vert</i></a>
+                        <ul id='{{ obj.id }}' style="border: 1px solid var(--core-grey);" class='dropdown-content z-depth-0'>
+                            <li><a href="{{ obj.add_to_saved }}" class="color-main">save</a></li>
+                        </ul>
                         <span class="sugg-date-ex">23th February 2020</span>
                         <p class="sugg-title-ex">{{ obj.title }}</p>
                         <span class="sugg-organizer-ex">By Dark Shadows Community</span>
