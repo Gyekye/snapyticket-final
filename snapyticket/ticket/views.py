@@ -180,19 +180,22 @@ def add_to_saved(request,slug):
         if ticket_to_save in previous_saved_ticket.ticket.all():
             # remove ticket from saved 
             previous_saved_ticket.ticket.remove(ticket_to_save)
-            previous_saved_ticket.is_saved = False
             messages.success(request, "Removed From Saved Tickets")
+            return redirect('ticket:tickets')
         else:
             # add to saved tickets
             previous_saved_ticket.ticket.add(ticket_to_save)
             previous_saved_ticket.save()
+            messages.success(request, "Added To Saved Tickets")
+            return redirect('ticket:tickets')
     # create a new saved ticket queryset if some doesnt exist
     except ObjectDoesNotExist:
         saved_ticket_bag = SavedTicket.objects.create(user=request.user,is_saved=True)
         saved_ticket_bag.save()
         saved_ticket_bag.ticket.add(ticket_to_save)
         saved_ticket_bag.save()
-    messages.success(request, "Added From Saved Tickets")
+        messages.success(request, "Added To Saved Tickets")
+        return redirect('ticket:tickets')
 
 
 #todo fix the webhooks and do a proper server side validation
