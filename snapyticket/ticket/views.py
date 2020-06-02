@@ -172,8 +172,6 @@ def ticket_bag_summary(request):
 
 def add_to_saved(request, slug):
     ticket = Ticket.objects.get(slug=slug)
-
-    status = "save"
     
     try:
         selected_ticket = SavedTicket.objects.get(user=request.user)
@@ -184,7 +182,7 @@ def add_to_saved(request, slug):
             selected_ticket.ticket.remove(ticket)
             selected_ticket.is_saved = False
             selected_ticket.save()
-            messages.success(request, "Removed From Saved Tickets")
+            messages.success(request, "Removed from Saved Tickets")
             return redirect('ticket:tickets')
 
         else:
@@ -198,6 +196,7 @@ def add_to_saved(request, slug):
         saved_ticket = SavedTicket.objects.create(user=request.user, is_saved=True)
         saved_ticket.ticket.add(ticket)
         saved_ticket.save()
+        messages.success(request, "Added To Saved Tickets")
         return redirect('ticket:tickets')
 
 #todo fix the webhooks and do a proper server side validation
