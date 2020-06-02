@@ -76,20 +76,24 @@ def add_to_cart(request, slug):
             quantity = form.cleaned_data.get('quantity')
             form.save(commit=False)
             try:
+                existing_ticket_bag = TicketBag.objects.filter(
+                    user=request.user,
+                    ordered=False
+                )[0]
                 existing_ticket_item = TicketItem.objects.get(
                     user=request.user, 
                     ticket=ticket,
                     ticket_type=ticket_type,
                     ordered=False
                     )
-                if existing_ticket_item.exists():
+                if existing_ticket_item in existing_ticket_bag.tickets.all():
                     # increases the quantity of the order item by the quantity typed
                     existing_ticket_item.quantity += quantity
                     existing_ticket_item.save()
-                    messages.success(request, "Updated Quantity")
-                    return redirect('ticket_bag_summary')
+                    messages.success(request,"Updated Quantity")
+                    return redirect('ticket:ticket_bag_summary')
             # else creates a new ticket item and saves it 
-            except:
+            except ObjectDoesNotExist:
                 # creates or gets a ticket bag
                 new_ticket_bag, created = TicketBag.objects.get_or_create(
                     user=request.user,
