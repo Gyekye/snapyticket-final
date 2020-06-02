@@ -79,18 +79,11 @@
                 getpaidSetup({
                     PBFPubKey: API_publicKey,
                     customer_email: "{{request.user.email}}",
-                    amount: {
-                        {
-                            user_order.total_ticket_bag_price
-                        }
-                    },
-                    { %
-                        if request.user.phone %
-                    }
+                    amount: {{ user_order.total_ticket_bag_price}},
+                    {% if request.user.phone %}
                     customer_phone: "{{request.user.phone}}",
                     customer_firstname: '{{request.user.username}}',
-                    { % endif %
-                    }
+                    {% endif %}
                     currency: "{{currency}}",
                     txref: "rave-{{user_order.order_ref_code}}",
                     meta: [{
