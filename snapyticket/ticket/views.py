@@ -11,12 +11,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView, DetailView, UpdateView, View
-
 from .forms import AddToCartForm
-from .models import Ticket, TicketItem, TicketBag
+from .models import Ticket, TicketItem, TicketBag,SavedTicket
+from django.db.models import ObjectDoesNotExist
 
 
-# Create your views here.
 # Search
 @login_required
 def tickets(request):
@@ -37,6 +36,7 @@ class TicketDetail( LoginRequiredMixin, DetailView):
     model = Ticket
     context_object_name = 'ticket'
     template_name = 'ticket/details.html'
+
 
 # todo replace httpResponse redirects with messages
 class UpdateTicketItem(UpdateView):
@@ -153,6 +153,7 @@ def remove_from_cart(request, slug, pk):
     messages.success(request, "Removed ticket from your bag sucessfully")
     return redirect("ticket:ticket_bag_summary")
 
+
 @login_required
 def ticket_bag_summary(request):
     try:
@@ -161,13 +162,35 @@ def ticket_bag_summary(request):
             ordered=False,
             tickets__ordered=False
             )[0]
-
     except:
         messages.warning(request, "You do not have any Active Order")
         return redirect(f'/ticket/')
     context = {'ticket_bag': user_ticket_bag}
     return render(request, 'ticket/ticket_bag_summary.html', context)
 
+
+def add_to_saved(request,slug):
+    # gets a ticket with the slug
+    ticket_to_save = Ticket.objects.get(slug=slug)
+    try:
+        # check for already saved ticket 
+        previous_saved_ticket = SavedTicket.objects.get(user=request.user,is_saved=True)
+        # if ticket in saved tickets 
+        if ticket_to_save in previous_saved_ticket.ticket.all():
+            # remove ticket from saved 
+            previous_saved_ticket.ticket.remove(ticket_to_save)
+            return HttpResponse('Removed from saved')
+        else:
+            # add to saved tickets
+            previous_saved_ticket.ticket.add(ticket_to_save)
+            previous_saved_ticket.save()
+    # create a new saved ticket queryset if some doesnt exist
+    except ObjectDoesNotExist:
+        saved_ticket_bag = SavedTicket.objects.create(user=request.user,is_saved=True)
+        saved_ticket_bag.save()
+        saved_ticket_bag.ticket.add(ticket_to_save)
+        saved_ticket_bag.save()
+    return HttpResponse('added to saved tickets ')
 
 
 #todo fix the webhooks and do a proper server side validation
