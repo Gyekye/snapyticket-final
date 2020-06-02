@@ -50,7 +50,7 @@
                     <a href="{{ obj.get_absolute_url }}" class="btn default-btn-sugg z-depth-0">Get Now</a>
                     <br><br>
                     <a href="{{ obj.add_to_saved }}" class="btn default-btn-sugg z-depth-0">save</a>
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
+                    <img src="{{ obj.featured_image.url }}" class="sugg-img-ex">
                 </div>
                 <div class="card-stacked">
                     <div class="card-content-x">
