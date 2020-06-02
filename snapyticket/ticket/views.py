@@ -91,7 +91,7 @@ def add_to_cart(request, slug):
                     messages.success(request,"Updated Quantity")
                     return redirect('ticket:ticket_bag_summary')
             # else creates a new ticket item and saves it 
-            except ObjectDoesNotExist:
+            except(IndexError,ObjectDoesNotExist):
                 # creates or gets a ticket bag
                 new_ticket_bag, created = TicketBag.objects.get_or_create(
                     user=request.user,
