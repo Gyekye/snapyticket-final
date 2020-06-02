@@ -43,7 +43,7 @@
             <a href="{% url 'profile:password_change' %}" class="profile-nav-link"><i class="material-icons left">lock_outline</i> Change my password</a>
         </li>
         <li class="profile-nav-x">
-            <a href="" class="profile-nav-link"><i class="material-icons left">card_travel</i> Check My Orders</a>
+            <a href="{% url 'profile:user_bags' %}" class="profile-nav-link"><i class="material-icons left">card_travel</i> Check My Orders</a>
         </li>
         {% if user.is_organizer %}
         <li class="profile-nav-x">

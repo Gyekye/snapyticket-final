@@ -1,15 +1,73 @@
 {% extends 'base.html' %}
-{% block content  %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Welcome to your #1 Ticketting PlatForm{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
 
+    {% if user.is_authenticated %}
 
-{% for ticket in ordered_ticket_bag.tickets.all  %}
-<br><br>
-{{ticket.ticket.title}}-{{ticket.ticket_type.variation}} X {{ticket.quantity}}<br>
-Number of images -- {{ticket.ticketitemqrimage_set.all|length}}
-<br>
-{% for qr_image in ticket.ticketitemqrimage_set.all %}
-<img src='{{qr_image.ticket_item_qr_image.url}}'>
-{% endfor %}
-<br>
-{% endfor %}
-{% endblock content  %}
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+
+    <div class="padding-xs">
+        <div class="main-mobile-content">
+            <div class="heading-main">Order details</div>
+            <div class="card z-depth-0">
+                <div class="card-image">
+                    <img src="{% static 'imgs/core/bag.png' %}" class="suggested-img">
+                </div>
+            </div>
+            <!-- Search Results -->
+            {% for ticket in ordered_ticket_bag.tickets.all %}
+            <br>
+            <div class="sugg-title-ex">{{ticket.ticket.title}}</div><br>
+            <span class="chip-x">{{ticket.ticket_type.variation}}</span> <span class="chip-x">Qty: X {{ticket.quantity}}</span>
+            <br><br> Number of images -- {{ticket.ticketitemqrimage_set.all|length}}
+            <br><br>
+            <!--  -->
+            {% for qr_image in ticket.ticketitemqrimage_set.all %}
+            <div class="qr-container">
+                <div style="width: 100%; height: 250px; background:var(--main-black); position: absolute; opacity: .5"></div>
+                <img src="{{qr_image.ticket_item_qr_image.url}}" style="width: 112% !important; height: 250px; object-fit: cover; margin-left: -20px;" alt="">
+                <a href="{{qr_image.ticket_item_qr_image.url}}" class="btn default-btn-xs z-depth-0" style="position: absolute; top: 100px; left: 90px;">Expand Ticket</a>
+            </div>
+            {% endfor %}
+            <br>
+            <br>
+            <!--  -->
+            {% empty %}
+            <center>
+                <img src="{% static 'imgs/core/notfound.svg' %}" class="responsive-img" alt="">
+            </center>
+            <br>
+            <div class="center-align">
+                Sorry, Nothing Found for <strong class="bold-text">{{ search }}</strong>.
+            </div>
+            {% endfor %}
+            <!-- End of Search Results -->
+        </div>
+        <br><br>
+        <br><br>
+    </div>
+    <footer class="mobile-footer white-text">
+        Copyright &copy 2020. All Rights Reserved. <a href="" class="grey-text">Evesbay.Inc</a>
+    </footer>
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

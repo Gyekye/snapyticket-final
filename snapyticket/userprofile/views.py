@@ -46,7 +46,7 @@ class ProfileChangeView(LoginRequiredMixin, View):
     
 class UserTicketsList(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        user_ticket_bag = TicketBag.ordered_ticket_bags.filter(user=request.user,ordered=True)
+        user_ticket_bag = TicketBag.ordered_ticket_bags.filter(user=request.user,ordered=True).order_by('-created_on')
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/tickets.html',context)
         

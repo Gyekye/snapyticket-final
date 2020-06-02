@@ -27,7 +27,7 @@
 
     <div class="padding-xs">
         <div class="main-mobile-content">
-            <div class="heading-main">Search Events</div>
+            <div class="heading-main">My Orders</div>
             <div class="pad-x"></div>
             <!-- Search Results -->
             {% for bag in ordered_ticket_bag %}
@@ -36,20 +36,19 @@
                     <img src="{% static 'imgs/core/bag.png' %}" class="suggested-img">
                 </div>
                 <div class="card-content-x">
-                    <p class="suggested-date">10th February 2020</p>
-                    <span class="suggested-title">Corna Virus Summit 2020</span>
-                    <p class="suggested-location">Greater Accra Region. Accra Stadium Park</p>
-                    <a href="" class="btn default-btn z-depth-0">See Tickets</a>
+                    <p class="suggested-date">{{ bag.created_on }}<span class="right" style="font-size: 12px; font-family: Regular Font Medium; color: var(--main-black); transform: translateY(4px); border-left: 2px solid var(--main-black); padding-left: 10px;">{{ bag.order_ref_code }}</span></p>
+                    <a href="{{ bag.get_absolute_url }}" class="btn default-btn-xs z-depth-0">See Tickets</a>
                 </div>
             </div>
-            {% empty %}
+            <br> {% empty %}
             <br>
             <center>
                 <img src="{% static 'imgs/core/notfound.svg' %}" class="responsive-img" alt="">
             </center>
             <br>
             <div class="center-align">
-                Sorry, Nothing Found for <strong class="bold-text">{{ search }}</strong>.
+                Sorry, You Do not have any Order <br><br>
+                <a href="{% url 'core:home' %}" class="btn default-btn-xs z-depth-0 waves-effect">Browse</a>
             </div>
             {% endfor %}
             <!-- End of Search Results -->

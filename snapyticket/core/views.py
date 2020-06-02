@@ -90,8 +90,7 @@ def  payment_sucessful(request, order_id):
                 ticket_item_qr = qrcode.QRCode(
                         version=1,
                         error_correction=qrcode.constants.ERROR_CORRECT_L,
-                        box_size=5,
-                        border=4,
+                        box_size=4.3,
                 )
                 ticket_item_qr.add_data(
                     # the qrcode for each tickets consists of unique data
@@ -150,7 +149,7 @@ def  payment_sucessful(request, order_id):
     user_ticket_bag.save()
     # pass the context to the template
 
-    return redirect("core:home")
+    return redirect("profile:user_bags")
 
 # payment failure view 
 class FailedView(LoginRequiredMixin,TemplateView):  
