@@ -61,7 +61,7 @@ class Ticket(models.Model):
     #  main details
     title = models.CharField(max_length=100)
     description = models.TextField()
-    slug = models.SlugField(help_text='This will be auto-generated [Unique Ticket ID]', default='Slug-Field')
+    slug = models.SlugField(help_text='This will be auto-generated [Unique Ticket ID]', default='Slug-Field', max_length=1000)
     featured_image = models.ImageField(upload_to='ticket_images')
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=10)
 
@@ -78,6 +78,7 @@ class Ticket(models.Model):
     venue = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
+    map_location = models.CharField(max_length=1200, blank=True, null=True)
 
     # Features
     is_suggested = models.BooleanField(default=False)
@@ -216,3 +217,11 @@ class TicketBag(models.Model):
             # appends the ticket item price to the total_price variable
             total_price += ticket_items.ticket_item_total_price()
         return total_price
+
+class SavedTickets(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    ticket = models.ForeignKey(Ticket, on_delete=models.SET_NULL, blank=True, null=True)
+    is_saved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.ticket.title} - {self.user}'

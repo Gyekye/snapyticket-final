@@ -1,9 +1,87 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Welcome to your #1 Ticketting PlatForm{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
 
-<ul>
-    <li>
-        {{ticket.title}}
-    </li>
-</ul>
-<a href="{{ticket.add_to_cart}} ">add to cart</a><br><br>
-{% endblock content %}
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+
+    <div class="padding-xs"></div>
+    <div class="deadline">{{ ticket.date_deadline }}</div>
+    <div class="tit-actions">
+        <div class="tit-actions-content">
+            <a href="{{ticket.add_to_cart}}" class="btn full-width-btn bg-ora white-text waves-effect z-depth-0">Get Tickets</a>
+        </div>
+    </div>
+    <img src="{{ ticket.featured_image.url }}" class="ticket-det-img materialboxed" alt="">
+    <div class="main-mobile-content">
+        <div class="ticket-title">
+            {{ ticket.title }}
+        </div>
+        <a href="#organizer" class="ticket-organizer">
+            By {{ ticket.organizer.name }}
+        </a>
+        <span class="ticket-x-t">
+            Date and Time
+        </span>
+        <p class="ticket-x">{{ ticket.start_date_time }} - {{ ticket.end_date_and_time }}</p>
+        <span class="ticket-x-t">
+            Venue and Location
+        </span>
+        <p class="ticket-x">{{ ticket.venue }} - {{ ticket.region }} in {{ ticket.city }}</p>
+        <span class="ticket-x-t">
+            Description
+        </span>
+        <p class="ticket-x">{{ ticket.description }}</p>
+        <span class="ticket-x-t">
+            Map View
+        </span>
+        <br><br>
+        <p class="ticket-x"><iframe src="{{ ticket.map_location}}" width="100%" height="350" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></p>
+        <div class="divider"></div>
+        <br>
+        <span class="ticket-x-t" id="organizer">
+            About The Event Organizer
+        </span>
+        <div class="pad-x"></div>
+        <div class="card z-depth-0">
+            <div class="card-content-x">
+                <div class="card-image">
+                    <img src="{{ ticket.organizer.logo.url }}" alt="">
+                    <a href="{{ ticket.organizer.facebook }}" class="btn halfway-fab btn-floating white z-depth-0"><i class="fa fa-facebook color-main"></i></a>
+                    <a href="{{ ticket.organizer.instagram }}" class="btn halfway-fab btn-floating white z-depth-0 xl-3"><i class="fa fa-instagram color-main"></i></a>
+                    <a href="{{ ticket.organizer.twitter }}" class="btn halfway-fab btn-floating white z-depth-0 xl-2"><i class="fa fa-twitter color-main"></i></a>
+                    <a href="{{ ticket.organizer.telegram }}" class="btn halfway-fab btn-floating white z-depth-0 xl-1"><i class="fa fa-telegram color-main"></i></a>
+                </div>
+                <br><br>
+                <span class="sugg-date-ex"><i class="material-icons left small-t">check_circle</i> Verified By Admin</span><br>
+                <p class="sugg-title-ex">{{ ticket.organizer.name }}</p>
+                <span class="sugg-organizer-ex">{{ ticket.organizer.email }}</span>
+                <br><br>
+                <br><br>
+                <br><br>
+            </div>
+        </div>
+    </div>
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

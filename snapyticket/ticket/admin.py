@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ticket,TicketImage,TicketVariation,TicketItem,TicketBag,TicketItemQrImage
+from .models import Ticket,TicketImage,TicketVariation,TicketItem,TicketBag,TicketItemQrImage, SavedTickets
 # Register your models here.
 class TicketImageInline(admin.TabularInline):
     min_num = 1
@@ -43,4 +43,5 @@ class TicketItemAdmin(admin.ModelAdmin):
 admin.site.register(Ticket,TicketAdmin)
 admin.site.register(TicketBag,TicketBagAdmin)
 admin.site.register(TicketItem,TicketItemAdmin)
+admin.site.register(SavedTickets)
 

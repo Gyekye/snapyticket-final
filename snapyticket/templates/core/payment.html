@@ -1,8 +1,69 @@
 {% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Complete Your Order - {{ user.username }}{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
 
-{% block content  %}
-<input type="submit" style="cursor:pointer;" value="Pay Now" id="submit" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="tit-actions">
+        <div class="tit-actions-content">
+            <input type="submit" style="cursor:pointer; border: none !important;" class="btn full-width-btn white-text bg-ora z-depth-0" value="Pay ₵{{user_order.total_ticket_bag_price}}.00 Now" id="submit" />
+        </div>
+    </div>
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="suggested-title">Complete Your Order</div>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th data-field="id">Ticket</th>
+                    <th data-field="name">Qty & Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in user_order.tickets.all %}
+                <tr>
+                    <td>{{ ticket.ticket_type.variation }} - {{ ticket.ticket.title|truncatechars:20 }}</td>
+                    <td>x{{ ticket.quantity }} - ₵{{ ticket.ticket_item_price }}.00</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div class="suggested-title">Total Cost</div>
+        <div class="total-cost">
+            <div class="price-box">
+                GH₵ {{user_order.total_ticket_bag_price}}.00
+            </div>
+            {% include 'core-snippets/totalprice.html' %}
+        </div>{{ user_order.ref_code }}
+        <p>
+            <span class="bold-text color-main">NB:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, recusandae?
+        </p>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
 <script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(event) {
@@ -27,9 +88,9 @@
         callback:function(response) {
           txref = response.data.txRef, chargeResponse = response.data.chargeResponseCode;
           if (chargeResponse == "00" || chargeResponse == "0") {
-            window.location = "http://127.0.0.1:8000/payment/success/"+txref; //Add your success page here //Add your success page here
+            window.location = "http://127.0.0.1:8000/payment/failed/"
           } else {
-            window.location = "http://127.0.0.1:8000/payment/failed/"+txref;  //Add your failure page here
+            window.location = "{% url 'core:payment_sucessful' user_order.order_ref_code %}"
           }
         }
       }
@@ -37,4 +98,6 @@
     });
   });
 </script>
-{% endblock content  %}
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

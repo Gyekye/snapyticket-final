@@ -3,9 +3,11 @@ import json
 import requests
 #unirest is a http library. You can use any http library you prefer
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView, DetailView, UpdateView, View
@@ -15,19 +17,23 @@ from .models import Ticket, TicketItem, TicketBag
 
 
 # Create your views here.
-class TicketView(TemplateView):
-    template_name = 'ticket/tickets.html'
-    """
-    Render a template. Pass keyword arguments from the URLconf to the context.
-    """
+# Search
+@login_required
+def tickets(request):
+    query = request.GET.get('query')
+    tickets = Ticket.objects.all()
+    if query == None:
+        tickets = Ticket.objects.all()
+        print(True)
 
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        context['ticket'] = Ticket.objects.all()
-        return self.render_to_response(context)
+    else:
+        tickets = Ticket.objects.filter(title__icontains=query)
+    
+    context = {'tickets': tickets, 'search': query}
+    return render(request, 'ticket/tickets.html', context)
 
 
-class TicketDetail(DetailView):
+class TicketDetail( LoginRequiredMixin, DetailView):
     model = Ticket
     context_object_name = 'ticket'
     template_name = 'ticket/details.html'
@@ -80,7 +86,8 @@ def add_to_cart(request, slug):
                     # increases the quantity of the order item by the quantity typed
                     existing_ticket_item.quantity += quantity
                     existing_ticket_item.save()
-                    return HttpResponse('updated quantity')
+                    messages.success(request, "Updated Quantity")
+                    return redirect('ticket_bag_summary')
             # else creates a new ticket item and saves it 
             except:
                 # creates or gets a ticket bag
@@ -108,9 +115,11 @@ def add_to_cart(request, slug):
                     ticket_bag_query.tickets.add(ticket_item)
                     # print(new_ticket_bag.tickets.quantity)
                     ticket_bag_query.save()
-                    return HttpResponse("added to cart")
+                    messages.success(request, "Added ticket to your bag sucessfully")
+                    return redirect('ticket:ticket_bag_summary')
                 else:
-                    return HttpResponse('No ticket bag ')
+                    messages.error(request, 'No ticket bag was found')
+                    return redirect(request, f"/ticket/{slug}/add_to_cart")
     else:
         form = AddToCartForm()
     context = {'ticket': ticket, 'form': form}
@@ -141,17 +150,24 @@ def remove_from_cart(request, slug, pk):
     if ticket_bag.tickets.count() == 0:
         TicketBag.delete(ticket_bag)
     # todo create a redirect to ticket bag
-    return HttpResponse('Item removed from ticket items')
+    messages.success(request, "Removed ticket from your bag sucessfully")
+    return redirect("ticket:ticket_bag_summary")
 
 @login_required
 def ticket_bag_summary(request):
-    user_ticket_bag = TicketBag.objects.filter(
-        user=request.user,
-        ordered=False,
-        tickets__ordered=False
-        )[0]
+    try:
+        user_ticket_bag = TicketBag.objects.filter(
+            user=request.user,
+            ordered=False,
+            tickets__ordered=False
+            )[0]
+
+    except:
+        messages.warning(request, "You do not have any Active Order")
+        return redirect(f'/ticket/')
     context = {'ticket_bag': user_ticket_bag}
     return render(request, 'ticket/ticket_bag_summary.html', context)
+
 
 
 #todo fix the webhooks and do a proper server side validation

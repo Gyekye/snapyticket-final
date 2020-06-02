@@ -5,8 +5,42 @@ setTimeout(() => {
     $('.mobile-preloader').fadeToggle()
 }, 200);
 setTimeout(() => {
-    $('.messageBox').slideToggle()
+    $('.messageBox').fadeToggle()
 }, 4000);
+setTimeout(() => {
+    $('.messageBox-overlay').fadeToggle()
+}, 4000);
+
+$(document).ready(() => {
+    $('.sidenav').sidenav();
+    $('.materialboxed').materialbox();
+    $(".owl-carousel.most-featured").owlCarousel({
+        loop: true,
+        margin: 20,
+        items: 1,
+        stagePadding: 40,
+        center: false,
+        rtl: false,
+        merge: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true
+    });
+    $(".owl-carousel.featured").owlCarousel({
+        loop: true,
+        margin: 15,
+        items: 2,
+        stagePadding: 30,
+        center: false,
+        rtl: false,
+        merge: true,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        autoplayTimeout: 4000,
+        autoplayHoverPause: true
+    });
+})
 
 let menuOpen = false;
 menuBtn.addEventListener("click", () => {

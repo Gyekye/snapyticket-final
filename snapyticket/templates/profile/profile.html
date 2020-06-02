@@ -1,25 +1,69 @@
 {% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
 
-{% block content %}
-<h3> Welcome to your profile</h3>
-<bolder>Name: {{ request.user.username}}<bolder>
-<hr>
-<bolder>Email: {{request.user.email}}<bolder>
-<hr>
-<bolder>Phone: {{request.user.phone}}<bolder>
-<br><br>
-<bolder>Is organizer: {{request.user.is_organizer}}<bolder>
-<hr>
-{% if request.user.profile_image %}
-Profile Photo: <img src="{{request.user.profile_image.url}}" width="100px;" height="100px;"</font>
-{% else %}
-<br><br><hr>
-<a href="{% url 'profile:update'%}">Choose a Profile picture</a>
-{% endif %}
-<br>
-<br>
-<a href="{% url 'auth:user_logout'%}">Logout</a>  
-<a href="{% url 'profile:password_change'%}">Change Password</a> 
-<a href="{% url 'profile:update'%}">Update Profile</a>
-{% endblock content %}
+    {% if user.is_authenticated %}
 
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <img src="{% static 'imgs/core/cover.jpg' %}" class="profile-img-cover" alt="">
+    <!-- User Profile -->
+    {% if request.user.profile_image %}
+    <img src="{{request.user.profile_image.url}}" class="halfway-fab profile-img">
+    <!-- User Profile -->
+    {% else %}
+    <img src="{% static 'imgs/icons/user.png' %}" class="halfway-fab profile-img"> {% endif %}
+    <div class="profile-det">
+        <div class="user-name white-text">{{ user.username }}</div>
+        <span class="user-email grey-text text-lighten-1">{{ user.email }}</span>
+    </div>
+    <ul class="profile-nav">
+        <li class="profile-nav-x">
+            <a href="{% url 'profile:update' %}" class="profile-nav-link"><i class="material-icons left">settings</i> Update my profile</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'profile:password_change' %}" class="profile-nav-link"><i class="material-icons left">lock_outline</i> Change my password</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">card_travel</i> Check My Orders</a>
+        </li>
+        {% if user.is_organizer %}
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">track_changes</i> Track My Sales</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">swap_vertical_circle</i> Host a new Event</a>
+        </li>
+        {% else %}
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">settings</i> Update my profile</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">settings</i> Update my profile</a>
+        </li>
+        {% endif %}
+        <li class="profile-nav-x">
+            <a href="" class="profile-nav-link"><i class="material-icons left">help_outline</i> Help Center</a>
+        </li>
+    </ul>
+</section>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

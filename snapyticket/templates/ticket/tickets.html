@@ -1,13 +1,73 @@
 {% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Welcome to your #1 Ticketting PlatForm{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
 
-{% block content %}
+    {% if user.is_authenticated %}
 
-<ul>
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
 
-{% for obj in ticket %}
-<li><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></li>
-{% endfor %}
-</ul>
+    <!-- Unauthenitcated Header -->
+    {% else %}
 
-{% endblock content %}
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
 
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+
+    <div class="padding-xs">
+        <div class="main-mobile-content">
+            <div class="heading-main">Search Events</div>
+            <form action="" method="GET">
+                <div class="pad-x"></div>
+                <p><input type="search" placeholder="Search Events Here ..." name="query" autofocus autocapitalize="none" autocomplete="username"></p>
+                <i class="material-icons searcher">search</i>
+            </form>
+            <div class="pad-x"></div>
+            <!-- Search Results -->
+            {% for obj in tickets %}
+            <div class="card horizontal z-depth-0">
+                <div class="card-image">
+                    <a href="{{ obj.get_absolute_url }}" class="btn default-btn-sugg z-depth-0">Get Now</a>
+                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content-x">
+                        <span class="sugg-date-ex">23th February 2020</span>
+                        <p class="sugg-title-ex">{{ obj.title }}</p>
+                        <span class="sugg-organizer-ex">By Dark Shadows Community</span>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <br>
+            <center>
+                <img src="{% static 'imgs/core/notfound.svg' %}" class="responsive-img" alt="">
+            </center>
+            <br>
+            <div class="center-align">
+                Sorry, Nothing Found for <strong class="bold-text">{{ search }}</strong>.
+            </div>
+            {% endfor %}
+            <!-- End of Search Results -->
+        </div>
+        <br><br>
+        <br><br>
+    </div>
+</setion>
+<footer class="mobile-footer white-text">
+    Copyright &copy 2020. All Rights Reserved. <a href="" class="grey-text">Evesbay.Inc</a>
+</footer>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

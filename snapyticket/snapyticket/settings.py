@@ -132,7 +132,7 @@ EMAIL_HOST_PASSWORD = 'justscan235'
 EMAIL_PORT = 587
 
 # AUTHENTICATION REDIRECT URLS
-LOGIN_REDIRECT_URL = 'profile:user_profile'
+LOGIN_REDIRECT_URL = 'core:home'
 LOGOUT_REDIRECT_URL = 'auth:user_login'
 LOGIN_URL = 'auth:user_login'
 

@@ -7017,10 +7017,13 @@ select.browser-default {
 }
 
 select {
-    background-color: green;
+    background-color: white;
     width: 100%;
+    font-family: Regular Font;
     padding: 5px;
     border: 1px solid #f2f2f2;
+    margin-top: 10px;
+    -webkit-appearance: none;
     border-radius: 2px;
     height: 3rem
 }

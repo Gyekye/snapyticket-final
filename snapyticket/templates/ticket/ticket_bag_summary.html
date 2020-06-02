@@ -1,12 +1,69 @@
-{% extends 'base.html' %} {% block content %}{% load ticket_counter %}
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Tickets Bag - {{ user.username }}{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
 
-<div class="item-count">Number of tickets in bag : {{ request.user | cart_item_count }}</div><hr>
-<ul>
-    {% for ticket in ticket_bag.tickets.all %}
-    <li>
-        {{ticket.ticket_type}} * {{ticket.quantity}}
-    </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'core:payment'%}">checkout</a><br><br>
-{% endblock content %}
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="tit-actions">
+        <div class="tit-actions-content">
+            <a href="{% url 'core:payment' %}" class="btn full-width-btn white-text bg-ora waves-effect z-depth-0">Proceed To Payment</a>
+        </div>
+    </div>
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="suggested-title">Tickets Bag</div>
+        {% for ticket in ticket_bag.tickets.all %}
+        <div class="card horizontal z-depth-0">
+            <div class="card-image">
+                <a href="{{ticket.remove_from_cart }}" class="btn default-btn-sugg z-depth-0" style="transform: translateX(20px);"><i class="material-icons">delete</i></a>
+                <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
+            </div>
+            <div class="card-stacked">
+                <div class="card-content-x">
+                    <div style="height: 4px;"></div>
+                    <span class="sugg-date-ex">{{ ticket.ticket_type.variation }} - Quantity: x{{ ticket.quantity }} - ₵{{ ticket.ticket_item_price }}.00</span>
+                    <p class="sugg-title-ex">{{ ticket.ticket.title }}</p>
+                    <span class="sugg-organizer-ex" style="font-size: 12px;">By: {{ ticket.ticket.organizer.name|truncatechars:25 }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+        <div class="suggested-title">Total Cost</div>
+        <div class="total-cost">
+            <div class="price-box">
+                GH₵ {{ticket_bag.total_ticket_bag_price}}.00
+            </div>
+            {% include 'core-snippets/totalprice.html' %}
+        </div>
+        <p>
+            <span class="bold-text color-main">NB:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, recusandae?
+        </p>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

@@ -1,0 +1,65 @@
+{% load static %}{% load ticket_counter %}
+<header class="mobile-header">
+    <nav class="mobile-nav white z-depth-0">
+        <style>
+            .mobile-nav {
+                position: fixed;
+            }
+        </style>
+        <a href="#menu" class="sidenav-trigger" data-target="mobile-links">
+            <div class="menu-btn-x">
+                <div class="menu-btn-burger-x"></div>
+            </div>
+        </a>
+        <ul class="right">
+            <li>
+                <a href="{% url 'ticket:tickets' %}">
+                    <i class="material-icons color-main">search</i>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'ticket:ticket_bag_summary' %}">
+                    <img src="{% static 'imgs/icons/shoppingBag.png' %}" class="shoppingBag" alt="">
+                </a>
+            </li>
+            <span class="btn  z-depth-0 ticket-counter">{{ request.user | cart_item_count }}</span>
+            <li>
+                <a href="{% url 'profile:all_user_tickets' %}">
+                    <img src="{% static 'imgs/icons/tickets.png' %}" class="tickets" alt="">
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="sidenav" id="mobile-links">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="{% static 'imgs/core/cover.jpg' %}">
+                </div>
+                {% if request.user.profile_image %}
+                <a href="{{request.user.profile_image.url}}"><img class="user-profile-image" src="{{request.user.profile_image.url}}"></a>
+                {% else %}
+                <a href="{% url 'profile:update' %}"><img class="user-profile-image" src="{% static 'imgs/icons/user.png' %}"></a>
+                {% endif %}
+                <a href="{% url 'profile:update' %}"><span class="white-text name">{{ user.username }}</span></a>
+                <a href="{% url 'profile:update' %}"><span class="white-text email">{{ user.email }}</span></a>
+            </div>
+        </li>
+        <li><a href="{% url 'profile:user_profile' %}"><i class="material-icons">person_outline</i>My Accounts</a></li>
+        <li><a href="{% url 'profile:user_bags' %}"><i class="material-icons">card_travel</i>My Orders</a></li>
+        <li>
+            <a href="{% url 'profile:all_user_tickets' %}"><img src="{% static 'imgs/icons/tickets.png' %}" class="tickets-x" alt=""> My Tickets</a>
+        </li>
+        <li><a href="{% url 'core:home' %}"><i class="material-icons">explore</i>Explore Events</a></li>
+        <li><a href="#!"><i class="material-icons">favorite_border</i>Saved Events</a></li>
+        <li><a href="#!"><i class="material-icons">question_answer</i>Become an Organizer</a></li>
+        <li><a href="#!"><i class="material-icons">help_outline</i>Help Center</a></li>
+        {% if request.user.is_organizer %}
+        <li><a href="#!"><i class="material-icons">track_changes</i>Track My Sales</a></li>
+        {% else %} {% endif %}
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="waves-effect" href="{% url 'auth:user_logout' %}"><i class="material-icons left">logout</i> Logout</a></li>
+    </ul>
+</header>

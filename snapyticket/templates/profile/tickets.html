@@ -1,11 +1,62 @@
-{% extends 'base.html' %} {% block content %}
-<h3> Welcome to your purcahased tickets</h3>
-{% for bag  in ordered_ticket_bag %}
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Welcome to your #1 Ticketting PlatForm{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
 
-{{bag.order_ref_code}}<br>
-<a href='{{bag.get_absolute_url}}'>Order details</a><br><br>
-{% endfor %}
-<br>
-<a href="{% url 'auth:user_logout'%}">Logout</a>
-<a href="{% url 'profile:password_change'%}">Change Password</a>
-<a href="{% url 'profile:update'%}">Update Profile</a> {% endblock content %}
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+
+    <div class="padding-xs">
+        <div class="main-mobile-content">
+            <div class="heading-main">Search Events</div>
+            <div class="pad-x"></div>
+            <!-- Search Results -->
+            {% for bag in ordered_ticket_bag %}
+            <div class="card z-depth-0">
+                <div class="card-image">
+                    <img src="{% static 'imgs/core/bag.png' %}" class="suggested-img">
+                </div>
+                <div class="card-content-x">
+                    <p class="suggested-date">10th February 2020</p>
+                    <span class="suggested-title">Corna Virus Summit 2020</span>
+                    <p class="suggested-location">Greater Accra Region. Accra Stadium Park</p>
+                    <a href="" class="btn default-btn z-depth-0">See Tickets</a>
+                </div>
+            </div>
+            {% empty %}
+            <br>
+            <center>
+                <img src="{% static 'imgs/core/notfound.svg' %}" class="responsive-img" alt="">
+            </center>
+            <br>
+            <div class="center-align">
+                Sorry, Nothing Found for <strong class="bold-text">{{ search }}</strong>.
+            </div>
+            {% endfor %}
+            <!-- End of Search Results -->
+        </div>
+        <br><br>
+        <br><br>
+    </div>
+</setion>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

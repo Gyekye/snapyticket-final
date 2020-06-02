@@ -64,9 +64,19 @@
         {% if messages %}
         <!-- Message Counter  -->
         {% for message in messages%}
-        <div class="messageBox">{{ message }}</div>
+        <div class="messageBox-overlay" id="messBoxOv">
+            <a onclick="messCloser()" class="messageCloser btn btn-floating z-depth-0" id="messCloser"><i class="material-icons">close</i></a>
+        </div>
+        <div class="messageBox" id="messBox">{{ message }}</div>
         {% endfor %} {% else %}{% endif %} {% block mobilecontent %} {% endblock mobilecontent %}
     </section>
+
+    <script type="text/javascript">
+        function messCloser() {
+            document.getElementById('messBox').style.transform = 'translateY(1000px)';
+            document.getElementById('messBoxOv').style.transform = 'translateY(1000px)';
+        }
+    </script>
 
 
 

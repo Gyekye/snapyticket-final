@@ -1,29 +1,78 @@
-{% extends 'base.html' %} {% block content %}Ticket Bag page
-<ul>
-    <li>
-        {{ticket.title}}
-    </li>
-</ul>
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Add to Bag - {{ ticket.title }}{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
 
-<label>What Fruit Do You Like Most?</label><br>
-<form method="POST">{% csrf_token%}
-    <select id="selFruit" name="ticket_type" class='browser-default'>
-{% for t in ticket.ticketvariation_set.all %}
-<option value="{{t.variation}}">{{t.variation}}</option>
-{%endfor%}
-</select> {{form}}
-    <button type="submit">Add
-        </button>
-</form>
+    {% if user.is_authenticated %}
 
-<a href="{{ticket.get_absolute_url}} ">view ticket</a><br><br>
-<br><br>
-{% for obj in ticket.ticketitem_set.all %}
-{% if obj.ordered %}
-{% else %}
-<a href="{{obj.remove_from_cart}} ">Remove -{{obj.ticket.title}}-{{obj.ticket_type}} * {{obj.quantity}}</a><br>
-<a href="{{obj.update_ticket_item}} ">Edit - {{obj.ticket.title}}-{{obj.ticket_type}} * {{obj.quantity}}</a><br><br>
-{% endif %}
-{% endfor %}
-<a href="{% url 'ticket:ticket_bag_summary'%}">View your ticket bag</a><br><br>
-{% endblock content %}
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+
+    <form method="POST">
+        <div class="padding-xs"></div>
+        <div class="main-mobile-content">
+            <div class="suggested-title">Purchase</div>
+            <br>
+            <img src="{{ ticket.featured_image.url }}" class="ticket-cart-img materialboxed" alt="">
+            <div class="ticket-title">
+                {{ ticket.title }}
+            </div>
+            <a href="#organizer" class="ticket-organizer">
+            By {{ ticket.organizer.name }}
+        </a>
+            <br><br>
+            <!-- Token -->
+            {% csrf_token %}
+            <span class="ticket-x-t">
+            Select an amount of ticket of your choice
+            </span>{{ form.as_p }}
+
+            <a onclick="upOrDown(true)" class="btn default-btn right z-depth-0 quan black"><i class="material-icons">add_circle_outline</i></a>
+            <a onclick="upOrDown(false)" class="btn default-btn right z-depth-0 xl-4 quan black"><i class="material-icons">remove_circle_outline</i></a>
+            <br><br><br><br>
+            <span class="ticket-x-t">
+                Choose Your Ticket Type
+            </span>
+            <br><select id="selFruit" name="ticket_type" class="browser-default">
+                {% for t in ticket.ticketvariation_set.all %}
+                <option value="{{t.variation}}">{{t.variation}} - ₵{{ t.price }}</option>
+                {%endfor%}
+            </select>
+            <br><br><br>
+            <br><br><br>
+        </div>
+        <div class="tit-actions">
+            <div class="tit-actions-content">
+                <button type="submit" class="btn full-width-btn bg-ora waves-effect white-text z-depth-0">Get Tickets</button>
+            </div>
+        </div>
+    </form>
+</setion>
+<script type="text/javascript">
+    var g = 0;
+
+    function upOrDown(isUp) {
+        g = isUp ? (++g) : (--g < 1 ? 1 : g)
+        document.getElementById('id_quantity').value = g;
+        return;
+    }
+</script>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->
