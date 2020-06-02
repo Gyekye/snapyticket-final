@@ -86,6 +86,9 @@
         })
         window.addEventListener("offline", () => {
             document.querySelector('.network-box').style.display = 'block';
+            setTimeout(() => {
+                $('.network-box').fadeToggle();
+            }, 4000)
         })
 
         function messCloser() {
