@@ -56,7 +56,7 @@ class UserAllTicketsList(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         all_tickets = TicketItem.objects.filter(user=request.user,ordered=True)
         context = {'all_tickets':all_tickets}
-        return render(request,'profile/tickets.html',context)
+        return render(request,'profile/all-tickets.html',context)
         
         
         

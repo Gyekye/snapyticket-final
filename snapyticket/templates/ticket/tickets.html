@@ -27,15 +27,24 @@
 
     <div class="padding-xs">
         <div class="main-mobile-content">
+            <a class='dropdown-trigger right btn z-depth-0 white color-main' style="border: 1px solid var(--core-grey);" href='#' data-target='dropdown1'>Filter by</a>
+
+            <ul id='dropdown1' class='dropdown-content z-depth-0' style="border: 1px solid var(--core-grey);">
+                <li><a class="color-main" href="?query=">All</a></li>
+                <li><a class="color-main" href="?query=concert">Concert</a></li>
+                <li><a class="color-main" href="?query=party">Party</a></li>
+                <li><a class="color-main" href="?query=gaming">Gaming</a></li>
+            </ul>
             <div class="heading-main">Search Events</div>
             <form action="" method="GET">
                 <div class="pad-x"></div>
-                <p><input type="search" placeholder="Search Events Here ..." name="query" autofocus autocapitalize="none" autocomplete="username"></p>
+                <p><input type="search" placeholder="Search Events Here ..." value="{{ search }}" name="query" autofocus autocapitalize="none" autocomplete="username"></p>
                 <i class="material-icons searcher">search</i>
             </form>
             <div class="pad-x"></div>
             <!-- Search Results -->
-            {% for obj in tickets %}
+            {% for obj in tickets %} {% if search %}Search Results For <strong class="bold-text">{{ search }}</strong>{% else %}{% endif %}
+            <div class="pad-x"></div>
             <div class="card horizontal z-depth-0">
                 <div class="card-image">
                     <a href="{{ obj.get_absolute_url }}" class="btn default-btn-sugg z-depth-0">Get Now</a>

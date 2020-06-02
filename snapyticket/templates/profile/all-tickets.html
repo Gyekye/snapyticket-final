@@ -27,19 +27,22 @@
 
     <div class="padding-xs">
         <div class="main-mobile-content">
-            <div class="heading-main">My Orders</div>
+            <div class="heading-main">All Ordered Tickets</div>
             <div class="pad-x"></div>
             <!-- Search Results -->
-            {% for bag in ordered_ticket_bag %}
-            <div class="card z-depth-0">
-                <div class="card-image">
-                    <img src="{% static 'imgs/core/bag.png' %}" class="suggested-img">
-                </div>
-                <div class="card-content-x">
-                    <p class="suggested-date">{{ bag.created_on }}<span onclick="M.toast({html: 'Copied To ClipBoard'})" class="right" style="font-size: 12px; font-family: Regular Font Medium; color: var(--main-black); transform: translateY(4px); border-left: 2px solid var(--main-black); padding-left: 10px;">{{ bag.order_ref_code }}</span></p>
-                    <a href="{{ bag.get_absolute_url }}" class="btn default-btn-xs z-depth-0">See Tickets</a>
-                </div>
+            <br> {% for ticket in all_tickets %}
+            <div class="sugg-title-ex">{{ticket.ticket.title}}</div>
+            <div class="pad-x"></div>
+            <span class="chip-x">{{ticket.ticket_type.variation}}</span> <span class="chip-x">Qty: X {{ticket.quantity}}</span>
+            <!-- Break -->
+            <br><br> {% for qr_image in ticket.ticketitemqrimage_set.all %}
+            <div class="qr-container">
+                <div style="width: 100%; height: 250px; background:var(--main-black); position: absolute; opacity: .5"></div>
+                <img src="{{qr_image.ticket_item_qr_image.url}}" style="width: 112% !important; height: 250px; object-fit: cover; margin-left: -20px;" alt="">
+                <a href="{{qr_image.ticket_item_qr_image.url}}" class="btn default-btn-xs z-depth-0" style="position: absolute; top: 100px; left: 90px;">Expand Ticket</a>
             </div>
+            {% endfor%}
+            <div class="divider"></div>
             <br> {% empty %}
             <br>
             <center>
@@ -54,8 +57,10 @@
             <!-- End of Search Results -->
         </div>
         <br><br>
-        <br><br>
     </div>
+    <footer class="mobile-footer white-text">
+        Copyright &copy 2020. All Rights Reserved. <a href="" class="grey-text">Evesbay.Inc</a>
+    </footer>
 </setion>
 {% endblock mobilecontent%}
 <!-- Endblock mobile content  -->

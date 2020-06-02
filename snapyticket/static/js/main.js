@@ -5,15 +5,16 @@ setTimeout(() => {
     $('.mobile-preloader').fadeToggle()
 }, 200);
 setTimeout(() => {
-    $('.messageBox').fadeToggle()
+    $('.messageBox').slideToggle()
 }, 4000);
 setTimeout(() => {
-    $('.messageBox-overlay').fadeToggle()
+    $('.messageBox-overlay').slideToggle()
 }, 4000);
 
 $(document).ready(() => {
     $('.sidenav').sidenav();
     $('.materialboxed').materialbox();
+    $('.dropdown-trigger').dropdown();
     $(".owl-carousel.most-featured").owlCarousel({
         loop: true,
         margin: 20,
@@ -32,6 +33,19 @@ $(document).ready(() => {
         margin: 15,
         items: 2,
         stagePadding: 30,
+        center: false,
+        rtl: false,
+        merge: true,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        autoplayTimeout: 4000,
+        autoplayHoverPause: true
+    });
+    $(".owl-carousel.category").owlCarousel({
+        loop: true,
+        margin: 15,
+        items: 3,
+        stagePadding: 40,
         center: false,
         rtl: false,
         merge: true,
