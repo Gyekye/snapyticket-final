@@ -52,11 +52,11 @@
         </li>
         <li><a href="{% url 'core:home' %}"><i class="material-icons">explore</i>Explore Events</a></li>
         <li><a href="#!"><i class="material-icons">favorite_border</i>Saved Events</a></li>
-        <li><a href="#!"><i class="material-icons">question_answer</i>Become an Organizer</a></li>
         <li><a href="#!"><i class="material-icons">help_outline</i>Help Center</a></li>
         {% if request.user.is_organizer %}
-        <li><a href="#!"><i class="material-icons">track_changes</i>Track My Sales</a></li>
-        {% else %} {% endif %}
+        <li><a href="{% url 'organizer:dashboard' %}"><i class="material-icons">track_changes</i>Go To My Dashboard</a></li>
+        {% else %}
+        <li><a href="#!"><i class="material-icons">question_answer</i>Become an Organizer</a></li>{% endif %}
         <li>
             <div class="divider"></div>
         </li>
