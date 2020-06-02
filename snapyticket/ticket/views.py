@@ -23,8 +23,6 @@ def tickets(request):
     tickets = Ticket.objects.all()
     if query == None:
         tickets = Ticket.objects.all()
-        print(True)
-
     else:
         tickets = Ticket.objects.filter(title__icontains=query)
     
