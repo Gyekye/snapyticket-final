@@ -102,6 +102,9 @@ class Ticket(models.Model):
     # add to cart url 
     def add_to_cart(self):
         return reverse("ticket:add_to_cart", kwargs={"slug": self.slug})
+    # add to saved tickets
+    def add_to_saved(self):
+        return reverse('ticket:add_to_saved',kwargs={'slug':self.slug})
 
 
 # model signals 
@@ -218,10 +221,10 @@ class TicketBag(models.Model):
             total_price += ticket_items.ticket_item_total_price()
         return total_price
 
-class SavedTickets(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
-    ticket = models.ForeignKey(Ticket, on_delete=models.SET_NULL, blank=True, null=True)
+class SavedTicket(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    ticket = models.ManyToManyField(Ticket, blank=True)
     is_saved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.ticket.title} - {self.user}'
+        return f'{self.user}'
