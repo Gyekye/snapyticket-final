@@ -593,7 +593,6 @@ footer.mobile-footer {
 }
 
 .default-btn:focus {
-    font-size: 0 !important;
     width: 42px !important;
     color: transparent !important;
     height: 42px !important;

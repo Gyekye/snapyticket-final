@@ -5,16 +5,17 @@ setTimeout(() => {
     $('.mobile-preloader').fadeToggle()
 }, 200);
 setTimeout(() => {
-    $('.messageBox').slideToggle()
+    $('.messageBox').fadeToggle()
 }, 4000);
 setTimeout(() => {
-    $('.messageBox-overlay').slideToggle()
+    $('.messageBox-overlay').fadeToggle()
 }, 4000);
 
 $(document).ready(() => {
     $('.sidenav').sidenav();
     $('.materialboxed').materialbox();
     $('.dropdown-trigger').dropdown();
+    $('.collapsible').collapsible();
     $(".owl-carousel.most-featured").owlCarousel({
         loop: true,
         margin: 20,

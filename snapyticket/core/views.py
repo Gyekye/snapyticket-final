@@ -105,6 +105,7 @@ def  payment_sucessful(request, order_id):
                     VARAIATION: {ticketitems.ticket_type.variation}\n**\n
                     ORDER ID: {user_ticket_bag.order_ref_code}\n**\n
                     TICKET_CODE: {ticketitems.ticket_code}\n**\n
+                    NUMBER OF TICKETS: {counter}\n**\n
                     ''',
                 )
                 # makes the size of the image fit
@@ -127,7 +128,21 @@ def  payment_sucessful(request, order_id):
                     break
             # making the qrcode for other ticket Items 
             #todo add data to the qr data method 
-            ticket_item_img = qrcode.make('Some data here')
+            ticket_item_img = qrcode.make(
+                    # the qrcode for each tickets consists of unique data
+                    # its consists of the ticket_type
+                    # its consist of the username of the user
+                    # the order ref code 
+                    # and the name of the ticket
+                    # todo pass more data to the data in the qrcode 
+                    f'''
+                    PURCHASED BY: {request.user} - {request.user.email }\n**\n
+                    PHONE number: { request.user.phone }\n**\n
+                    VARAIATION: {ticketitems.ticket_type.variation}\n**\n
+                    ORDER ID: {user_ticket_bag.order_ref_code}\n**\n
+                    TICKET_CODE: {ticketitems.ticket_code}\n**\n
+                    ''',
+                )
             # condition to stop making qr code
             while ticketitems.ticketitemqrimage_set.count() < ticketitems.quantity:
                 # saves the image to the root media folder

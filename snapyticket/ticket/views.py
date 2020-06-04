@@ -152,6 +152,8 @@ def remove_from_cart(request, slug, pk):
     if ticket_bag.tickets.count() == 0:
         TicketBag.delete(ticket_bag)
     # todo create a redirect to ticket bag
+        messages.success(request, "You do not have any active Order")
+        return redirect("ticket:tickets")
     messages.success(request, "Removed ticket from your bag sucessfully")
     return redirect("ticket:ticket_bag_summary")
 
