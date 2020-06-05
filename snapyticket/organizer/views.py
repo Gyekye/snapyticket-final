@@ -35,6 +35,7 @@ class OrganizerUpdate(LoginRequiredMixin,EventOrganizerRequired,UpdateView):
 
 
 class RegisterOrganizer(LoginRequiredMixin,CreateView):
+    model = Organizer
     form_class = OrganizerRegisterForm
     template_name = 'organizer/register.html'
     success_url  = reverse_lazy('organizer:dashboard')
