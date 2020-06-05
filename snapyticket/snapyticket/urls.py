@@ -19,18 +19,18 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    # urls to admin panel 
+    #* urls to admin panel 
     # todo change the url routing name of the url path to admin panel
     path('admin/', admin.site.urls),
-    # url patterns to the core app
+    #* url patterns to the core app
     path('',include('core.urls',namespace='core')),
-    # url patterns to the ticket app
+    #* url patterns to the ticket app
     path('ticket/',include('ticket.urls',namespace='ticket')),
-    # url patterns to the authentication app
+    #* url patterns to the authentication app
     path('auth/',include('authentication.urls',namespace='auth')),
-    # url patterns to the userprofile app
+    #* url patterns to the userprofile app
     path('user/profile/',include('userprofile.urls',namespace='profile')),
-    # url patterns to the organizer app
+    #* url patterns to the organizer app
     path('user/organizer/dashboard/',include('organizer.urls',namespace='organizer')),
 ]
 if settings.DEBUG:
