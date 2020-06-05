@@ -1,0 +1,13 @@
+Organizer
+    - signal to generate the secret key of organizers **
+    - functionality to email the organizers secret key to them when they register **
+    - Organizer register functionality
+    - Verfied organizer only Mixin **
+    - Create Ticket functionality
+    - Publish Verfied ticket only functionality
+    - Custom actions in the admin
+    - customize the admin
+    - send emails to organizers when they are verfied 
+    - send emails to organizers when they register
+    - send emails to organizers when they create a ticket
+    - send emails to organizers when thier tickets are approved
