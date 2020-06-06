@@ -5,10 +5,10 @@ setTimeout(() => {
     $('.mobile-preloader').fadeToggle()
 }, 200);
 setTimeout(() => {
-    $('.messageBox').fadeToggle()
+    $('.messageBox').slideToggle()
 }, 4000);
 setTimeout(() => {
-    $('.messageBox-overlay').fadeToggle()
+    $('.messageBox-overlay').slideToggle()
 }, 4000);
 
 $(document).ready(() => {
@@ -16,6 +16,8 @@ $(document).ready(() => {
     $('.materialboxed').materialbox();
     $('.dropdown-trigger').dropdown();
     $('.collapsible').collapsible();
+    $('.tabs').tabs();
+    $('.modal').modal();
     $(".owl-carousel.most-featured").owlCarousel({
         loop: true,
         margin: 20,
@@ -44,9 +46,9 @@ $(document).ready(() => {
     });
     $(".owl-carousel.category").owlCarousel({
         loop: true,
-        margin: 15,
+        margin: 10,
         items: 3,
-        stagePadding: 40,
+        stagePadding: 0,
         center: false,
         rtl: false,
         merge: true,

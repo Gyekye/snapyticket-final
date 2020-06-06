@@ -43,7 +43,7 @@
             <br> {% empty %}
             <br>
             <center>
-                <img src="{% static 'imgs/core/notfound.svg' %}" class="responsive-img" alt="">
+                <img src="{% static 'imgs/core/emptyorder.svg' %}" class="responsive-img" style="height: 300px;" alt="">
             </center>
             <br>
             <div class="center-align">
@@ -57,5 +57,5 @@
         <br><br>
     </div>
 </setion>
-{% endblock mobilecontent%}
+{% include 'core-snippets/mobile-footer.html' %} {% endblock mobilecontent%}
 <!-- Endblock mobile content  -->

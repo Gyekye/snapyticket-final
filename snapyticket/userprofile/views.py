@@ -7,6 +7,8 @@ from django.views.generic import View,TemplateView
 from ticket.models import TicketBag,TicketItem
 from authentication.forms import UserChangeForm
 from django.conf import settings
+from .forms import OrganizerRegisterForm
+
 User = get_user_model()
 
 
@@ -67,3 +69,9 @@ class UserTicketsDetail(LoginRequiredMixin,View):
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/ticket-details.html',context)
         
+
+class OrganizerRegisterView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        form = OrganizerRegisterForm()
+        context = {'form': form}
+        return render(self.request, 'profile/organizer-register.html', context)

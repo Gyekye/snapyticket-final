@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div style="height: 40px;"></div>
+    {% for organizer in organizers %}
+    <img src="{{organizer.logo.url}}" class="profile-img-cover" alt="" style="height: 270px; object-fit: cover !important;">
+    <!-- User Profile -->
+    {% if organizer.user.profile_image %}
+    <img src="{{ organizer.user.profile_image.url }}" class="halfway-fab profile-img-x"> {% else %}
+    <img src="{% static 'imgs/icons/user.png' %}" class="profile-img-x"> {% endif %}
+    <!-- User Profile -->
+    <div class="profile-det">
+        <div class="user-name white-text">{{ organizer.name }}</div>
+        <span class="user-email grey-text text-lighten-1">{{ organizer.email }}</span>
+    </div>
+    <div class="main-mobile-content" style="padding-top: 10px;">
+        <span class="sugg-date-ex"><i class="material-icons right small-t">check_circle</i> Verified By Admin</span><br>
+        <div style="height: 7px;"></div>
+        <div class="heading-main-x">Organized 4 Events</div>
+        <div style="height: 7px;"></div>
+        <a href="#{{ organizer.id }}" class="x-link modal-trigger" data-target="{{ organizer.id }}"><i class="material-icons left">trending_up</i>Contact</a>
+        <a href="" class="btn default-btn right z-depth-0">Events</a>
+        <br><br>
+    </div>
+    <div class="modal z-depth-0" style="width: 100%;" id="{{ organizer.id}}">
+        <div class="modal-content center-align" style="padding: 10px;">
+            <p>
+                <i class="material-icons orange-text">mail_outline</i> <br><span class="bold-text color-main">{{ organizer.email }}</span>
+            </p>
+            <p>
+                <i class="fa fa-facebook orange-text"></i> <br><a href="{{ organizer.facebook }}" class="bold-text color-main">{{ organizer.facebook }}</a>
+            </p>
+            <p>
+                <i class="material-icons orange-text">mail_outline</i> <br><span class="bold-text color-main">{{ organizer.email }}</span>
+            </p>
+            <p>
+                <i class="material-icons orange-text">mail_outline</i> <br><span class="bold-text color-main">{{ organizer.email }}</span>
+            </p>
+            <p>
+                <i class="material-icons orange-text">mail_outline</i> <br><span class="bold-text color-main">{{ organizer.email }}</span>
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock mobilecontent %}
+<!-- Endblock mobile content  -->

@@ -5,15 +5,17 @@ from PIL import Image
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView,RedirectView
+from organizer.models import Organizer
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ticket.models import TicketBag,TicketItem,Ticket
+from django.views.generic import View
 from django.conf import settings
 import base64
 
 # Create your views here.
 def create_ref_code():
     # Generates a reference codes for order
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+    return ''.join(random.choices(string.digits, k=15))
 
 
 
@@ -182,3 +184,11 @@ class HomeView(TemplateView):
         context = self.get_context_data(**kwargs)
         context['all_tickets'] = Ticket.objects.all()
         return self.render_to_response(context)
+
+
+
+class AllOrganizersView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        organizers = Organizer.objects.filter(is_verified=True)
+        context = {'organizers': organizers}
+        return render(self.request, 'organizer/organizers.html', context)

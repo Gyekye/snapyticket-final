@@ -30,4 +30,3 @@ class OrganizerUpdate(LoginRequiredMixin,EventOrganizerRequired,UpdateView):
         messages.info(self.request,"You have successfully updated your details")
         return super().form_valid(form)
 
-

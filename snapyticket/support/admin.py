@@ -23,5 +23,6 @@ admin.site.register(TermsAndCondition)
 
 admin.site.register(PrivacyPolicy)
 
+admin.site.register(Contact)
 
 admin.site.register(OurTeam,OurTeamAdmin)

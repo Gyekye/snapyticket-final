@@ -93,6 +93,12 @@ class Ticket(models.Model):
     movies   = MovieTicketManager()
     esports  = EsportTicketManager()
     others   = OtherTicketManager()
+    
+    # * Ticket.parties.filter(most_feartured=True)
+    # ? 
+    # !
+    # *
+
     # Model Methods 
     def __str__(self):
         return f'{self.title} created by {self.organizer.name}'

@@ -54,12 +54,12 @@
         </li>
         {% else %}
         <li class="profile-nav-x">
-            <a href="" class="profile-nav-link"><i class="material-icons left">question_answer</i> Become an Organizer</a>
-        </li>
-        <li class="profile-nav-x">
-            <a href="" class="profile-nav-link"><i class="material-icons left">access_time</i> Ckeck out Organizers</a>
+            <a href="{% url 'profile:organizer-register' %}" class="profile-nav-link"><i class="material-icons left">question_answer</i> Become an Organizer</a>
         </li>
         {% endif %}
+        <li class="profile-nav-x">
+            <a href="{% url 'core:organizers' %}" class="profile-nav-link"><i class="material-icons left">access_time</i> Ckeck out Verified Organizers</a>
+        </li>
         <li class="profile-nav-x">
             <a href="{% url 'support:help_center' %}" class="profile-nav-link"><i class="material-icons left">help_outline</i> Help Center</a>
         </li>

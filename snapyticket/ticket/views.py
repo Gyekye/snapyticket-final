@@ -35,6 +35,11 @@ class TicketDetail( LoginRequiredMixin, DetailView):
     context_object_name = 'ticket'
     template_name = 'ticket/details.html'
 
+class SavedTickets(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        saved_tickets = SavedTicket.objects.filter(user=self.request.user, is_saved=True)
+        context = {'saved_tickets':saved_tickets}
+        return render(self.request, 'ticket/saved.html', context)
 
 # todo replace httpResponse redirects with messages
 class UpdateTicketItem(UpdateView):
@@ -183,13 +188,13 @@ def add_to_saved(request,slug):
             # remove ticket from saved 
             previous_saved_ticket.ticket.remove(ticket_to_save)
             messages.success(request, "Removed From Saved Tickets")
-            return redirect('ticket:tickets')
+            return redirect('ticket:saved')
         else:
             # add to saved tickets
             previous_saved_ticket.ticket.add(ticket_to_save)
             previous_saved_ticket.save()
             messages.success(request, "Added To Saved Tickets")
-            return redirect('ticket:tickets')
+            return redirect('ticket:saved')
     # create a new saved ticket queryset if some doesnt exist
     except ObjectDoesNotExist:
         saved_ticket_bag = SavedTicket.objects.create(user=request.user,is_saved=True)
@@ -197,7 +202,7 @@ def add_to_saved(request,slug):
         saved_ticket_bag.ticket.add(ticket_to_save)
         saved_ticket_bag.save()
         messages.success(request, "Added To Saved Tickets")
-        return redirect('ticket:tickets')
+        return redirect('ticket:saved')
 
 
 #todo fix the webhooks and do a proper server side validation

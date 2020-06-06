@@ -187,11 +187,11 @@
                 </div>
             </div>
             <br>
-            <div class="banner-section">
+            <div class="banner-section white-text">
                 Are you an Event Planner? <br>No Stress, Get your Event live Today.
                 <br><br>
                 <center>
-                    {% include 'core-snippets/stress.html' %}
+                    <img src="{% static 'imgs/core/stress.svg' %}" class="responsive-img" alt="">
                 </center>
                 <br>
                 <a href="" class="btn default-btn z-depth-0 white color-main">Let's Get Started</a>
@@ -310,28 +310,26 @@
                 </div>
             </div>
             <div class="heading-main">Browse By Category</div>
-        </div><br>
+        </div>
         <div class="most-featured-content white">
+            <div class="pad-x"></div>
             <div class="owl-carousel category white">
-                <div class="chip">
-                    <a href="" class="color-main bold-text">Concert</a>
+                <div class="chip-xs center-align">
+                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
                 </div>
-                <div class="chip">
-                    <a href="" class="color-main bold-text">Party</a>
+                <div class="chip-xs center-align">
+                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
                 </div>
-                <div class="chip">
-                    <a href="" class="color-main bold-text">Summit</a>
+                <div class="chip-xs center-align">
+                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
                 </div>
-                <div class="chip">
-                    <a href="" class="color-main bold-text">Gaming</a>
+                <div class="chip-xs center-align">
+                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
                 </div>
             </div>
         </div>
     </div>
     <br><br>
 </setion>
-<footer class="mobile-footer white-text">
-    Copyright &copy 2020. All Rights Reserved. <a href="" class="grey-text">Evesbay.Inc</a>
-</footer>
-{% endblock mobilecontent%}
+{% include 'core-snippets/mobile-footer.html' %} {% endblock mobilecontent%}
 <!-- Endblock mobile content  -->
