@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView,UpdateView,CreateView
+from django.views.generic import TemplateView,UpdateView,View
 from django.http import HttpResponse, HttpResponseRedirect
 from .decorators import EventOrganizerRequired,VerifiedOrganizerRequired
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,6 +7,8 @@ from .models import Organizer
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import OrganizerRegisterForm
+from django.db.models import ObjectDoesNotExist
+from django.db import IntegrityError
 
 # view for displaying the dashboard to the organizer
 class DashBoardView(EventOrganizerRequired,LoginRequiredMixin,TemplateView):
@@ -34,9 +36,61 @@ class OrganizerUpdate(LoginRequiredMixin,EventOrganizerRequired,UpdateView):
         return super().form_valid(form)
 
 
-class RegisterOrganizer(LoginRequiredMixin,CreateView):
-    model = Organizer
-    form_class = OrganizerRegisterForm
-    template_name = 'organizer/register.html'
-    success_url  = reverse_lazy('organizer:dashboard')
+class RegisterOrganizerView(View):
     
+    def get(self, request, *args, **kwargs):
+        
+        form = OrganizerRegisterForm()
+        context = {'form':form}
+        
+        return render(request,'organizer/register.html',context)
+
+    def post(self, request, *args, **kwargs):
+        
+        form = OrganizerRegisterForm(request.POST,request.FILES)
+        
+        if form.is_valid():
+            
+            #? org is the short form of organizer
+            #? gets the clean data from model form for custom validation
+            
+            #* Core credentials 
+            org_name = form.cleaned_data.get('name')
+            org_email = form.cleaned_data.get('email')
+            org_logo  = form.cleaned_data.get('logo')
+            
+            #* Social Media Accounts
+            org_instagram = form.cleaned_data.get('instagram')
+            org_facebook  = form.cleaned_data.get('facebook')
+            org_telegram  = form.cleaned_data.get('telegram')
+            
+            #! Custom Validations for cleaned data from forms
+            if len(org_name) > 100:
+                messages.info(request,'name should be at least 100')
+                return redirect('organizer:register')
+            if Organizer.objects.filter(name=org_name).exists():
+                return HttpResponse('name is taken')
+            if Organizer.objects.filter(email=org_email).exists():
+                return HttpResponse('Email is taken')
+            try:
+                        
+                new_organizer = Organizer.objects.create(
+                    user=request.user,
+                    name=org_name,
+                    email=org_email,
+                    logo=org_logo,
+                    instagram=org_instagram,
+                    facebook=org_facebook,
+                    telegram=org_telegram
+                )
+                    #* create a new organizer instance 
+                new_organizer.save()
+                messages.info(request,'registered wait for approval')
+                return redirect('profile:user_profile')
+                
+            except IntegrityError:
+                return HttpResponse('Already registered ')
+        else:
+            form = OrganizerRegisterForm()
+        context = {'form':form}
+        return render(request,'organizer/register.html',context)

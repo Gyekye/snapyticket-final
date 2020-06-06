@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import DashBoardView,OrganizerUpdate,RegisterOrganizer
+from .views import DashBoardView,OrganizerUpdate,RegisterOrganizerView
 
 app_name = 'organizer'
 
 urlpatterns = [
     #* Url pattern to register user as organizer
-    path('register/',RegisterOrganizer.as_view(),name='register'),
+    path('register/',RegisterOrganizerView.as_view(),name='register'),
     
     #* url pattern tosee the dashboard of the organizer
     path('',DashBoardView.as_view(),name='dashboard'),
