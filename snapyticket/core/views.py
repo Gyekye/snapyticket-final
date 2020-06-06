@@ -12,13 +12,11 @@ from django.views.generic import View
 from django.conf import settings
 import base64
 
+
 # Create your views here.
 def create_ref_code():
     # Generates a reference codes for order
     return ''.join(random.choices(string.digits, k=15))
-
-
-
 
 
 class IndexView(TemplateView):
@@ -31,9 +29,6 @@ class IndexView(TemplateView):
             return redirect('core:home')
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
- 
- 
-
  
  
 class PaymentView(LoginRequiredMixin,TemplateView):
@@ -55,12 +50,8 @@ class PaymentView(LoginRequiredMixin,TemplateView):
         context['user_order'] = user_order
         
         return self.render_to_response(context)
-    
-    
-    
-    
-    
-    
+
+
 # payment success View 
 def  payment_sucessful(request, order_id):
 
@@ -171,7 +162,6 @@ def  payment_sucessful(request, order_id):
 # payment failure view 
 class FailedView(LoginRequiredMixin,TemplateView):  
     template_name = 'redirects/payment/failed.html'
- 
  
  
 # Home View
