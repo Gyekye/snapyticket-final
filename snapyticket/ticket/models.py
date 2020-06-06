@@ -95,20 +95,12 @@ class Ticket(models.Model):
     esports  = EsportTicketManager()
     others   = OtherTicketManager()
     
-<<<<<<< HEAD
-    # * Ticket.parties.filter(most_feartured=True)
-    # ? 
-    # !
-    # *
-
-=======
     #* model properties
     # checks whether a ticket is approved or not
     @property
     def is_approved_status(self):
         return self.is_approved
     
->>>>>>> e512c0d60ac150abb816473147bb5394d1c41280
     # Model Methods 
     def __str__(self):
         return f'{self.title} created by {self.organizer.name}'

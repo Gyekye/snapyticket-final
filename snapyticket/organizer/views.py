@@ -36,7 +36,7 @@ class OrganizerUpdate(LoginRequiredMixin,EventOrganizerRequired,UpdateView):
         return super().form_valid(form)
 
 
-class RegisterOrganizerView(View):
+class RegisterOrganizerView(LoginRequiredMixin, View):
     
     def get(self, request, *args, **kwargs):
         

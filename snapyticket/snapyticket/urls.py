@@ -24,13 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #* url patterns to the core app
     path('',include('core.urls',namespace='core')),
-<<<<<<< HEAD
-    # url patterns to the support app
-    path('support/', include('support.urls',namespace='support')),
-    # url patterns to the ticket app
-=======
+    # url patterns to support app
+    path('support/', include('support.urls', namespace='support')),
     #* url patterns to the ticket app
->>>>>>> e512c0d60ac150abb816473147bb5394d1c41280
     path('ticket/',include('ticket.urls',namespace='ticket')),
     #* url patterns to the authentication app
     path('auth/',include('authentication.urls',namespace='auth')),

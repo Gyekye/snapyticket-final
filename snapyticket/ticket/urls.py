@@ -7,16 +7,15 @@ urlpatterns = [
     
     #* url pattern to see all approved tickets
     path('', tickets, name='tickets'),
-<<<<<<< HEAD
-    path('saved/', SavedTickets.as_view(), name='saved'),
-=======
     
     #* url pattern to see a ticket detail
->>>>>>> e512c0d60ac150abb816473147bb5394d1c41280
     path('detail/<slug:slug>/', TicketDetail.as_view(), name='detail'),
     
     #* url pattern to add a ticket to a ticket bag
     path('<slug:slug>/add_to_cart/', add_to_cart, name='add_to_cart'),
+
+    # url pattern to saved tickets
+    path('saved/', SavedTickets.as_view(), name='saved'),
     
     #* url pattern to add a ticket to saved ticket
     path('<slug:slug>/add_to_saved/',add_to_saved,name='add_to_saved'),
