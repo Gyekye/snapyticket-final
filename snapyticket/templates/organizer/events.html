@@ -24,19 +24,21 @@
     {% include 'core-snippets/header-not-authenticated-x.html' %}
     <!-- End of Header -->
     {% endif %}
-    <div style="height: 40px;"></div>
-    {% for organizer in organizers %}
-    <img src="{{organizer.logo.url}}" class="profile-img-cover" alt="" style="height: 230px; object-fit: cover !important;">
-
-    <div class="main-mobile-content" style="padding-top: 10px;">
+    <div class="main-mobile-content">
+        <div style="height: 70px;"></div>
+        <div class="heading-main">Ongoing Events</div>
+    </div>
+    {% for event in events %}
+    <div class="main-mobile-content" style="padding-top: 0px;">
+        <img src="{{event.featured_image.url}}" class="profile-img-cover" alt="" style="height: 230px; object-fit: cover !important; border-radius: 5px;">
         <div>
             <div class="user-name black-text">{{ organizer.name }}</div>
             <span class="user-email grey-text text-darken-1">{{ organizer.email }}</span>
         </div>
-        <span class="sugg-date-ex">Verified By Admin <i class="material-icons small-t" style="transform: translateY(2px);">check_circle</i> </span><br>
+        <span class="sugg-date-ex">Approved <i class="material-icons small-t" style="transform: translateY(2px);">check_circle</i> </span><br>
         <div style="height: 7px;"></div>
-        <a href="#{{ organizer.id }}" class="x-link modal-trigger" data-target="{{ organizer.id }}"><i class="material-icons left">airplay</i>Contact</a>
-        <a href="" class="btn default-btn right z-depth-0">Events</a>
+        <a href="" class="x-link modal-trigger" data-target="{{ organizer.id }}"><i class="material-icons left">event</i>{{ event.date_deadline }}</a>
+        <a href="{% url 'organizer:track' event.slug %}" class="btn default-btn right z-depth-0">Track</a>
         <br><br>
     </div>
     <div class="modal z-depth-0" style="width: 90%;" id="{{ organizer.id}}">
@@ -64,7 +66,7 @@
     </center>
     <br>
     <div class="center-align">
-        Sorry, There are no organizers in this list.
+        Sorry, You don't have any ongoing event
         <br><br>
         <a href="{% url 'core:home' %}" class="btn default-btn waves-effect z-depth-0">Browse</a>
     </div>

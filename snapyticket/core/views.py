@@ -172,7 +172,9 @@ class HomeView(TemplateView):
     # renders dynamic data to the home page
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        context['all_tickets'] = Ticket.objects.all()
+        context['most_featured_events'] = Ticket.objects.filter(is_most_featured=True)
+        context['featured_events'] = Ticket.objects.filter(is_featured=True)
+        context['most_suggested_summit'] = Ticket.objects.get(is_most_suggested=True, category='ST')
         return self.render_to_response(context)
 
 

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="main-mobile-content">
+        <div style="height: 70px;"></div>
+        <span class="badge right" style="background: #FFDFBA; transform: translateY(10px)">GH</span>
+        <div class="heading-main">Sales Revenue</div>
+        <p style="margin-top: 0; color: #68739D">Amount made from ticket Sales</p>
+        <canvas id="myChart" style="width: 100% !important;" height="400px"></canvas>
+    </div>
+</section>
+{% block extrafooter%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: 'Ticket Sales',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+        },
+        borderColor: "#D9DFE8",
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+{% endblock extrafooter%} {% endblock mobilecontent %}
+<!-- Endblock mobile content  -->

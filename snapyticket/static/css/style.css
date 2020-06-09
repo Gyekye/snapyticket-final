@@ -101,7 +101,7 @@ html {
     --core-red: #fd6161;
     --core-green: #4ecf84;
     --main-orange: #F47402;
-    --core-gradient: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8), rgba(0, 0, 0, 1));
+    --core-gradient: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .83), rgba(0, 0, 0, .8), rgba(0, 0, 0, .8), rgba(0, 0, 0, 1));
 }
 
 input,
@@ -111,6 +111,7 @@ textarea {
     box-shadow: 0 0 .2rem rgb(124, 121, 121) !important;
     border-radius: 3px !important;
     font-family: Regular Font Medium;
+    border: 1px solid var(--main-black);
     text-indent: 12px;
     transition: 3.9s;
     font-size: .89rem !important;
@@ -260,6 +261,13 @@ p.form-x-text {
     font-family: Default Font;
 }
 
+.x-coverlay {
+    width: 100%;
+    height: 300px;
+    background: var(--core-gradient);
+    position: absolute;
+}
+
 p.form-x-text a {
     font-family: Regular Font SemiBold;
     color: var(--core-color);
@@ -269,6 +277,7 @@ form p span.helptext,
 form ul li,
 input#id_phone_1,
 label[for="id_logo"],
+p.Logo,
 span.phone-field-ext {
     display: none;
 }
@@ -974,7 +983,7 @@ img.featured-img {
 
 .featured-content {
     position: absolute;
-    background: var(--core-gradient);
+    background: var(--x-gradient);
     width: 100%;
     height: 150px;
     padding: 10px;

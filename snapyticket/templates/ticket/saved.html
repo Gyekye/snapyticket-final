@@ -41,8 +41,8 @@
                             <li><a href="{{ ticket.add_to_saved }}" class="color-main">remove</a></li>
                         </ul>
                         <span class="sugg-date-ex">{{ ticket.date_deadline }}</span>
-                        <p class="sugg-title-ex">{{ ticket.title }}</p>
-                        <span class="sugg-organizer-ex">By {{ ticket.organizer.name }}</span>
+                        <p class="sugg-title-ex">{{ ticket.title|truncatechars:50 }}</p>
+                        <span class="sugg-organizer-ex">By {{ ticket.organizer.name|truncatechars:25 }}</span>
                         <br><br>
                     </div>
                 </div>

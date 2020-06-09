@@ -42,7 +42,7 @@
                 <div class="card-content-x">
                     <div style="height: 4px;"></div>
                     <span class="sugg-date-ex">{{ ticket.ticket_type.variation }} - Qty: x{{ ticket.quantity }} - ₵{{ ticket.ticket_item_price }}.00</span>
-                    <p class="sugg-title-ex">{{ ticket.ticket.title }}</p>
+                    <p class="sugg-title-ex">{{ ticket.ticket.title|truncatechars:25 }}</p>
                     <span class="sugg-organizer-ex" style="font-size: 12px;">By: {{ ticket.ticket.organizer.name|truncatechars:20 }}</span>
                 </div>
             </div>

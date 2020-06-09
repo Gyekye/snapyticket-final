@@ -14,6 +14,7 @@ CATEGORY_CHOICES = (
     ('ET', "Esports Ticket"),
     ('PT', "Party Ticket"),
     ('OT', "Other Ticket"),
+    ('OE', "Online Event"),
 )
 #! I have violated the principle of DRY in writing the model mnanagers to get each category of tickets 
 
@@ -82,6 +83,7 @@ class Ticket(models.Model):
     is_suggested = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     is_most_featured = models.BooleanField(default=False)
+    is_most_suggested = models.BooleanField(default=False)
     
     # approval trigger
     is_approved = models.BooleanField(default=False)

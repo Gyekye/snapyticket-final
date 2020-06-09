@@ -31,48 +31,29 @@
         </div>
         <div class="most-featured-content white">
             <div class="owl-carousel most-featured">
+                {% for most_featured_event in most_featured_events %}
                 <div class="most-featured card z-depth-0">
                     <div class="x-core-overlay"></div>
                     <div class="x-core-content">
                         <p>
-                            <span class="x-core-date">25th May 2020</span>
-                            <span class="cate-chip right">concert</span>
+                            <span class="x-core-date">{{ most_featured_event.start_date_time.date }}</span>
+                            <span class="cate-chip right">{{ most_featured_event.get_category_display }}</span>
                         </p>
                         <br><br>
                         <div class="x-core-title">
-                            Then Night Street Show
+                            {{ most_featured_event.title|truncatechars:30 }}
                         </div>
                         <p class="x-core-organizer">
-                            By DarkShadows Eves Comm.
+                            By {{most_featured_event.organizer.name|truncatechars:30}}
                         </p>
                         <div class="x-core-actions">
-                            <a href="" class="btn default-btn z-depth-0">Get Now</a>
-                            <a href="" class="xs-link right"><i class="material-icons">favorite_border</i></a>
+                            <a href="{{ most_featured_event.get_absolute_url }}" class="btn default-btn z-depth-0">Get Now</a>
+                            <a href="{{ most_featured_event.add_to_saved }}" class="xs-link right"><i class="material-icons">favorite_border</i></a>
                         </div>
                     </div>
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="x-core" alt="">
+                    <img src="{{ most_featured_event.featured_image.url }}" class="x-core" alt="">
                 </div>
-                <div class="most-featured card green z-depth-0">
-                    <div class="x-core-overlay"></div>
-                    <div class="x-core-content">
-                        <p>
-                            <span class="x-core-date">25th May 2020</span>
-                            <span class="cate-chip right">concert</span>
-                        </p>
-                        <br><br>
-                        <div class="x-core-title">
-                            Then Night Street Show
-                        </div>
-                        <p class="x-core-organizer">
-                            By DarkShadows Eves Comm.
-                        </p>
-                        <div class="x-core-actions">
-                            <a href="" class="btn default-btn z-depth-0">Get Now</a>
-                            <a href="" class="xs-link right"><i class="material-icons">favorite_border</i></a>
-                        </div>
-                    </div>
-                    <img src="{% static 'imgs/x-core/two.png' %}" class="x-core" alt="">
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="main-mobile-content">
@@ -80,38 +61,24 @@
         </div>
         <div class="most-featured-content white">
             <div class="owl-carousel featured">
+                {% for featured_event in featured_events %}
                 <div class="featured card z-depth-0 green">
                     <div class="featured-overlay"></div>
                     <div class="featured-content">
                         <div class="featured-title">
-                            RaperHorlic GH 2020
+                            {{ featured_event.title|truncatechars:20 }}
                         </div>
                         <p class="featured-organizer">
-                            By GH.Entercom 202
+                            By {{ featured_event.organizer.name|truncatechars:30 }}
                         </p>
                         <div class="featured-actions">
-                            <a href="" class="btn default-btn-small z-depth-0">Get</a>
-                            <a href="" class="xs-link right"><i class="material-icons">favorite_border</i></a>
+                            <a href="{{ featured_event.get_absolute_url }}" class="btn default-btn-small z-depth-0">Get</a>
+                            <a href="{{ featured_event.add_to_saved }}" class="xs-link right"><i class="material-icons">favorite_border</i></a>
                         </div>
                     </div>
-                    <img src="{% static 'imgs/x-core/three.png' %}" class="featured-img" alt="">
+                    <img src="{{ featured_event.featured_image.url }}" class="featured-img" alt="">
                 </div>
-                <div class="featured card z-depth-0 green">
-                    <div class="featured-overlay"></div>
-                    <div class="featured-content">
-                        <div class="featured-title">
-                            Drake's Concert
-                        </div>
-                        <p class="featured-organizer">
-                            By GH.Entercom 202
-                        </p>
-                        <div class="featured-actions">
-                            <a href="" class="btn default-btn-small z-depth-0">Get</a>
-                            <a href="" class="xs-link right"><i class="material-icons">favorite_border</i></a>
-                        </div>
-                    </div>
-                    <img src="{% static 'imgs/x-core/four.png' %}" class="featured-img" alt="">
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="main-mobile-content">
@@ -119,14 +86,14 @@
             <br>
             <div class="card z-depth-0">
                 <div class="card-image">
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="suggested-img">
-                    <a href="" class="btn btn-floating halfway-fab white z-depth-0 sugg-fav"><i class="material-icons color-main">favorite_border</i></a>
+                    <img src="{{ most_suggested_summit.featured_image.url }}" class="suggested-img">
+                    <a href="{{ most_suggested_summit.add_to_saved }}" class="btn btn-floating halfway-fab white z-depth-0 sugg-fav"><i class="material-icons color-main">favorite_border</i></a>
                 </div>
                 <div class="card-content-x">
-                    <p class="suggested-date">10th February 2020</p>
-                    <span class="suggested-title">Corna Virus Summit 2020</span>
-                    <p class="suggested-location">Greater Accra Region. Accra Stadium Park</p>
-                    <a href="" class="btn default-btn z-depth-0">Get Now</a>
+                    <p class="suggested-date">{{ most_suggested_summit.start_date_time.date }}</p>
+                    <span class="suggested-title">{{ most_suggested_summit.title }}</span>
+                    <p class="suggested-location">{{ most_suggested_summit.venue }}, <br> <span class="bold-text"> By {{ most_suggested_summit.organizer.name }}</span> </p>
+                    <a href="{{most_suggested_summit.get_absolute_url}}" class="btn default-btn z-depth-0">Get Now</a>
                 </div>
             </div>
             <br>
@@ -194,65 +161,11 @@
                     <img src="{% static 'imgs/core/stress.svg' %}" class="responsive-img" alt="">
                 </center>
                 <br>
-                <a href="" class="btn default-btn z-depth-0 white color-main">Let's Get Started</a>
+                <a href="{% url 'organizer:register' %}" class="btn default-btn z-depth-0 white color-main">Let's Get Started</a>
             </div>
             <br>
             <br>
-            <div class="card z-depth-0">
-                <div class="card-image">
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="suggested-img">
-                    <a href="" class="btn btn-floating halfway-fab white z-depth-0 sugg-fav"><i class="material-icons color-main">favorite_border</i></a>
-                </div>
-                <div class="card-content-x">
-                    <p class="suggested-date">10th February 2020</p>
-                    <span class="suggested-title">Corna Virus Summit 2020</span>
-                    <p class="suggested-location">Greater Accra Region. Accra Stadium Park</p>
-                    <a href="" class="btn default-btn z-depth-0">Get Now</a>
-                </div>
-            </div>
-            <br>
-            <div class="card horizontal z-depth-0">
-                <div class="card-image">
-                    <a href="" class="btn default-btn-sugg z-depth-0">Get Now</a>
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content-x">
-                        <span class="sugg-date-ex">23th February 2020</span>
-                        <p class="sugg-title-ex">RaperHorlic GH Exclusive</p>
-                        <span class="sugg-organizer-ex">By Dark Shadows Community</span>
-                        <br><br>
-                    </div>
-                </div>
-            </div>
-            <div class="card horizontal z-depth-0">
-                <div class="card-image">
-                    <a href="" class="btn default-btn-sugg z-depth-0">Get Now</a>
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content-x">
-                        <span class="sugg-date-ex">23th February 2020</span>
-                        <p class="sugg-title-ex">RaperHorlic GH Exclusive</p>
-                        <span class="sugg-organizer-ex">By Dark Shadows Community</span>
-                        <br><br>
-                    </div>
-                </div>
-            </div>
-            <div class="card horizontal z-depth-0">
-                <div class="card-image">
-                    <a href="" class="btn default-btn-sugg z-depth-0">Get Now</a>
-                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content-x">
-                        <span class="sugg-date-ex">23th February 2020</span>
-                        <p class="sugg-title-ex">RaperHorlic GH Exclusive</p>
-                        <span class="sugg-organizer-ex">By Dark Shadows Community</span>
-                        <br><br>
-                    </div>
-                </div>
-            </div>
+            <div class="heading-main">Check This Out</div>
             <br>
             <div class="card z-depth-0">
                 <div class="card-image">
@@ -309,22 +222,60 @@
                     </div>
                 </div>
             </div>
-            <div class="heading-main">Browse By Category</div>
-        </div>
-        <div class="most-featured-content white">
-            <div class="pad-x"></div>
-            <div class="owl-carousel category white">
-                <div class="chip-xs center-align">
-                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
+            <br>
+            <div class="card z-depth-0">
+                <div class="card-image">
+                    <img src="{% static 'imgs/x-core/one.png' %}" class="suggested-img">
+                    <a href="" class="btn btn-floating halfway-fab white z-depth-0 sugg-fav"><i class="material-icons color-main">favorite_border</i></a>
                 </div>
-                <div class="chip-xs center-align">
-                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
+                <div class="card-content-x">
+                    <p class="suggested-date">10th February 2020</p>
+                    <span class="suggested-title">Corna Virus Summit 2020</span>
+                    <p class="suggested-location">Greater Accra Region. Accra Stadium Park</p>
+                    <a href="" class="btn default-btn z-depth-0">Get Now</a>
                 </div>
-                <div class="chip-xs center-align">
-                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
+            </div>
+            <br>
+            <div class="card horizontal z-depth-0">
+                <div class="card-image">
+                    <a href="" class="btn default-btn-sugg z-depth-0">Get Now</a>
+                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
                 </div>
-                <div class="chip-xs center-align">
-                    <a href="" class="color-main bold-text"><i class="material-icons left" style="transform: translateY(3px); font-size: 13px;">gamepad</i> Gaming</a>
+                <div class="card-stacked">
+                    <div class="card-content-x">
+                        <span class="sugg-date-ex">23th February 2020</span>
+                        <p class="sugg-title-ex">RaperHorlic GH Exclusive</p>
+                        <span class="sugg-organizer-ex">By Dark Shadows Community</span>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+            <div class="card horizontal z-depth-0">
+                <div class="card-image">
+                    <a href="" class="btn default-btn-sugg z-depth-0">Get Now</a>
+                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content-x">
+                        <span class="sugg-date-ex">23th February 2020</span>
+                        <p class="sugg-title-ex">RaperHorlic GH Exclusive</p>
+                        <span class="sugg-organizer-ex">By Dark Shadows Community</span>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+            <div class="card horizontal z-depth-0">
+                <div class="card-image">
+                    <a href="" class="btn default-btn-sugg z-depth-0">Get Now</a>
+                    <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content-x">
+                        <span class="sugg-date-ex">23th February 2020</span>
+                        <p class="sugg-title-ex">RaperHorlic GH Exclusive</p>
+                        <span class="sugg-organizer-ex">By Dark Shadows Community</span>
+                        <br><br>
+                    </div>
                 </div>
             </div>
         </div>

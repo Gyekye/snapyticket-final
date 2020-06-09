@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import DashBoardView,OrganizerUpdate,RegisterOrganizerView
+from .views import DashBoardView,OrganizerUpdate,RegisterOrganizerView, OrganizerEventsView, track_event
 
 app_name = 'organizer'
 
@@ -12,5 +12,11 @@ urlpatterns = [
     
     #* url pattern to allow users to update their organizer details
     path('update/<int:pk>/',OrganizerUpdate.as_view(),name='update'),
+
+    #* url for organizer to select an event to track
+    path('events/', OrganizerEventsView.as_view(), name='events'),
+
+    #* url to track selected event
+    path('event/track/<str:slug>/', track_event, name='track'),
 
 ]

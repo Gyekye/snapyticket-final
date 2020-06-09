@@ -57,9 +57,8 @@
                             <li><a href="{{ obj.add_to_saved }}" class="color-main">save</a></li>
                         </ul>
                         <span class="sugg-date-ex">23th February 2020</span>
-                        <p class="sugg-title-ex">{{ obj.title }}</p>
-                        <span class="sugg-organizer-ex">By {{ obj.organizer.name }}</span>
-                        <br><br>
+                        <p class="sugg-title-ex">{{ obj.title|truncatechars:45 }}</p>
+                        <span class="sugg-organizer-ex">By {{ obj.organizer.name|truncatechars:25 }}</span>
                     </div>
                 </div>
             </div>

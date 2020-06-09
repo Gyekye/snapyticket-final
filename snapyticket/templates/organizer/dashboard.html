@@ -24,7 +24,8 @@
     {% include 'core-snippets/header-not-authenticated-x.html' %}
     <!-- End of Header -->
     {% endif %}
-    <img src="{% static 'imgs/core/organizer-cover.jpg' %}" class="profile-img-cover" style="height: 300px;" alt="">
+    <div class="x-coverlay"></div>
+    <img src="{{ request.user.organizer.logo.url }}" class="profile-img-cover" style="height: 300px; object-fit:cover;" alt="">
     <!-- User Profile -->
     {% if request.user.profile_image %}
     <img src="{{request.user.organizer.logo.url}}" class="halfway-fab profile-img">
@@ -40,26 +41,14 @@
             <a href="{{request.user.organizer.get_absolute_url}}" class="profile-nav-link"><i class="material-icons left">settings</i> Update my profile</a>
         </li>
         <li class="profile-nav-x">
-            <a href="{% url 'profile:password_change' %}" class="profile-nav-link"><i class="material-icons left">event</i> See My Ongoing Events</a>
-        </li>
-        <li class="profile-nav-x">
-            <a href="{% url 'profile:user_bags' %}" class="profile-nav-link"><i class="material-icons left">event_available</i> My Sucessfull Events</a>
-        </li>
-        {% if user.is_organizer %}
-        <li class="profile-nav-x">
-            <a href="{% url 'organizer:dashboard' %}" class="profile-nav-link"><i class="material-icons left">event_busy</i> My Failed Events</a>
+            <a href="{% url 'organizer:events' %}" class="profile-nav-link"><i class="material-icons left">event</i> See My Ongoing Events</a>
         </li>
         <li class="profile-nav-x">
             <a href="" class="profile-nav-link"><i class="material-icons left">swap_vertical_circle</i> Host a new Event</a>
         </li>
-        {% else %}
         <li class="profile-nav-x">
-            <a href="" class="profile-nav-link"><i class="material-icons left">question_answer</i> Become an Organizer</a>
+            <a href="{% url 'core:organizers' %}" class="profile-nav-link"><i class="material-icons left">access_time</i> Ckeck out Organizers</a>
         </li>
-        <li class="profile-nav-x">
-            <a href="" class="profile-nav-link"><i class="material-icons left">access_time</i> Ckeck out Organizers</a>
-        </li>
-        {% endif %}
         <li class="profile-nav-x">
             <a href="{% url 'support:help_center' %}" class="profile-nav-link"><i class="material-icons left">help_outline</i> Help Center</a>
         </li>
