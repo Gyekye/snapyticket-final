@@ -41,30 +41,42 @@
         <div class="heading-main">Sales History</div>
         <p style="margin-top: 0; color: #68739D">History of ticket sales</p>
         {% for sale in sales %}
-        <div class="sales-history-container">
-            <div class="sales-history-box">
-                <div class="sales-img-container">
-                    <div class="sales-img-overlay">
-                        {% if sale.user.profile_image %}
-                        <img src="{{ sale.user.profile_image.url }}" class="sales-img" alt=""> {% else %}
-                        <img src="{% static 'imgs/icons/user.png' %}" class="sales-img" alt=""> {% endif %}
+        <a href="" class="color-main">
+            <div class="sales-history-container">
+                <div class="sales-history-box">
+                    <div class="sales-img-container">
+                        <div class="sales-img-overlay">
+                            {% if sale.user.profile_image %}
+                            <img src="{{ sale.user.profile_image.url }}" class="sales-img" alt=""> {% else %}
+                            <img src="{% static 'imgs/icons/user.png' %}" class="sales-img" alt=""> {% endif %}
+                        </div>
+                    </div>
+                    <div class="sales-det-container">
+                        <div class="sales-name">{{ sale.user.username }}</div>
+                        {% if sale.user.is_organizer %}
+                        <p class="sales-status">Organzier</p>
+                        {% else %}
+                        <p class="sales-status">Regular User</p>
+                        {% endif %}
+                    </div>
+                    <div class="sales-amount-container">
+                        <div class="sales-amount">₵{{ sale.ticket_item_price }}.00</div>
+                        <p class="sales-status">Succesful</p>
                     </div>
                 </div>
-                <div class="sales-det-container">
-                    <div class="sales-name">{{ sale.user.username }}</div>
-                    {% if sale.user.is_organizer %}
-                    <p class="sales-status">Organzier</p>
-                    {% else %}
-                    <p class="sales-status">Regular User</p>
-                    {% endif %}
-                </div>
-                <div class="sales-amount-container">
-                    <div class="sales-amount">₵{{ sale.ticket_item_price }}.00</div>
-                    <p class="sales-status">Succesful</p>
-                </div>
             </div>
+        </a>
+        {% empty %}
+        <br>
+        <center>
+            <img src="{% static 'imgs/core/emptybag.svg' %}" class="responsive-img" style="height: 300px;" alt="">
+        </center>
+        <br>
+        <div class="center-align">
+            Sorry, No one has bought your ticket yet <br><br>
         </div>
         {% endfor %}
+        <br><br>
         <a href="" class="x-link">See all order history <i class="material-icons right">arrow_forward</i></a>
         <a href="{{ event.get_absolute_url }}" class="right btn default-btn z-depth-0">Peek</a>
         <br><br><br>
