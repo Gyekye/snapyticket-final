@@ -4,7 +4,7 @@
     "start_url": "/templates/core/home.html",
     "display": "standalone",
     "background_color": "#4F4BFF",
-    "theme_color": "#3F3D56",
+    "theme_color": "#000000",
     "orientation": "portrait",
     "icons": [{
             "src": "/static/imgs/pwa-icons/72x72.png",

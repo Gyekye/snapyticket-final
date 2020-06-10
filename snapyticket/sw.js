@@ -1,5 +1,10 @@
+// Note that anytime you make a change in any of the pages or static files you must update the version of either the staticCacheName or dynamicCacheName before you will see your changes (i.e 'site-static' must become 'site-static-v1' and vice versa)
+
+// Site-static caches the assets array
 const staticCacheName = 'site-static';
+// Site-dynamic caches the other individual pages
 const dynamicCacheName = 'site-dynamic';
+// This array stores common pages and static files(other static files can be added)
 const assets = [
     '/',
     '/index.html',
@@ -34,7 +39,7 @@ const limitCacheSize = (name, size) => {
 
 // Install Service Worker
 self.addEventListener('install', evt => {
-    //console.log('service worker has been installed');
+    //caches elements in the assets array
     evt.waitUntil(
         caches.open(staticCacheName).then(cache => {
             console.log('caching shell assets');
@@ -45,10 +50,9 @@ self.addEventListener('install', evt => {
 
 // Activate Event
 self.addEventListener('activate', evt => {
-    //console.log('service worker has been activated');
+    //Deletes the old cache version
     evt.waitUntil(
         caches.keys().then(keys => {
-            //console.log(keys);
             return Promise.all(keys
                 .filter(key => key !== staticCacheName && key !== dynamicCacheName)
                 .map(key => caches.delete(key))
@@ -59,17 +63,18 @@ self.addEventListener('activate', evt => {
 
 // fetch event
 self.addEventListener('fetch', evt => {
-    //console.log('fetch event', evt);
+    //Limits the cache size of the other cached pages
     evt.respondWith(
         caches.match(evt.request).then(cachesRes => {
             return cachesRes || fetch(evt.request).then(fetchRes => {
                 return caches.open(dynamicCacheName).then(cache => {
                     cache.put(evt.request.url, fetchRes.clone());
-                    limitCacheSize(dynamicCacheName, 15);
+                    limitCacheSize(dynamicCacheName, 20);
                     return fetchRes;
                 })
             });
         }).catch(() => {
+            // Redirects to fallback page if requested page is not cached
             if (evt.request.url.indexOf('.html') > -1) {
                 return caches.match('/templates/fallback.html')
             }
