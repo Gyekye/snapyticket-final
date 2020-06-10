@@ -38,7 +38,6 @@ class OrganizerUpdate(LoginRequiredMixin,EventOrganizerRequired,UpdateView):
 
 
 class RegisterOrganizerView(LoginRequiredMixin, View):
-    
     def get(self, request, *args, **kwargs):
         
         form = OrganizerRegisterForm()
@@ -51,11 +50,9 @@ class RegisterOrganizerView(LoginRequiredMixin, View):
         form = OrganizerRegisterForm(request.POST,request.FILES)
         
         if form.is_valid():
-            
             #? org is the short form of organizer
             #? gets the clean data from model form for custom validation
-            
-            #* Core credentials 
+            # #* Core credentials 
             org_name = form.cleaned_data.get('name')
             org_email = form.cleaned_data.get('email')
             org_logo  = form.cleaned_data.get('logo')
@@ -96,7 +93,6 @@ class RegisterOrganizerView(LoginRequiredMixin, View):
         context = {'form':form}
         return render(request,'organizer/register.html',context)
 
-
 class OrganizerEventsView(EventOrganizerRequired, View):
     def get(self, *args, **kwargs):
         events = Ticket.objects.filter(organizer=self.request.user.organizer)
@@ -109,3 +105,10 @@ def track_event(request, slug):
     sales = TicketItem.objects.filter(ticket=event, ordered=True)
     context = {'event': event, 'sales': sales}
     return render(request, "organizer/track.html", context)
+
+
+def event_sales(request, slug):
+    e = Ticket.objects.get(slug=slug)
+    event = TicketItem.objects.filter(ticket=e)
+    context = {'event': event}
+    return render(request, 'organizer/sales.html', context)
