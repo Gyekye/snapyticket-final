@@ -40,23 +40,31 @@
         <br>
         <div class="heading-main">Sales History</div>
         <p style="margin-top: 0; color: #68739D">History of ticket sales</p>
+        {% for sale in sales %}
         <div class="sales-history-container">
             <div class="sales-history-box">
                 <div class="sales-img-container">
                     <div class="sales-img-overlay">
-                        <img src="{% static 'imgs/core/cover.jpg' %}" class="sales-img" alt="">
+                        {% if sale.user.profile_image %}
+                        <img src="{{ sale.user.profile_image.url }}" class="sales-img" alt=""> {% else %}
+                        <img src="{% static 'imgs/icons/user.png' %}" class="sales-img" alt=""> {% endif %}
                     </div>
                 </div>
                 <div class="sales-det-container">
-                    <div class="sales-name">Stephen Kofi</div>
+                    <div class="sales-name">{{ sale.user.username }}</div>
+                    {% if sale.user.is_organizer %}
+                    <p class="sales-status">Organzier</p>
+                    {% else %}
                     <p class="sales-status">Regular User</p>
+                    {% endif %}
                 </div>
                 <div class="sales-amount-container">
-                    <div class="sales-amount">₵250.00</div>
+                    <div class="sales-amount">₵{{ sale.ticket_item_price }}.00</div>
                     <p class="sales-status">Succesful</p>
                 </div>
             </div>
         </div>
+        {% endfor %}
         <a href="" class="x-link">See all order history <i class="material-icons right">arrow_forward</i></a>
         <a href="{{ event.get_absolute_url }}" class="right btn default-btn z-depth-0">Peek</a>
         <br><br><br>

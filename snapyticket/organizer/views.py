@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .decorators import EventOrganizerRequired,VerifiedOrganizerRequired
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Organizer
-from ticket.models import Ticket
+from ticket.models import Ticket, TicketItem
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import OrganizerRegisterForm
@@ -106,5 +106,6 @@ class OrganizerEventsView(EventOrganizerRequired, View):
 
 def track_event(request, slug):
     event = Ticket.objects.get(slug=slug)
-    context = {'event': event}
+    sales = TicketItem.objects.filter(ticket=event, ordered=True)
+    context = {'event': event, 'sales': sales}
     return render(request, "organizer/track.html", context)

@@ -38,6 +38,7 @@
                 <div class="card-content-x">
                     <p class="suggested-date">{{ bag.created_on }}<span onclick="M.toast({html: 'Copied To ClipBoard'})" class="right" style="font-size: 12px; font-family: Regular Font Medium; color: var(--main-black); transform: translateY(4px); border-left: 2px solid var(--main-black); padding-left: 10px;">{{ bag.order_ref_code }}</span></p>
                     <a href="{{ bag.get_absolute_url }}" class="btn default-btn-xs z-depth-0">See Tickets</a>
+                    <span class="chip right bold-text">GH₵{{bag.total_ticket_bag_price}}.00</span>
                 </div>
             </div>
             <br> {% empty %}
