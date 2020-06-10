@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="suggested-title">Evesbay Tutorial</div>
+        <br>
+        <iframe width="100%" frameborder="0" class="shadow-x" height="215" src="https://www.youtube.com/embed/wfucGSKngq4"></iframe>
+        <br><br>
+        <div class="suggested-title">Steps</div>
+        <p>
+            <span class="bold-text">1. </span> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia voluptate perferendis asperiores
+        </p>
+        <p>
+            <span class="bold-text">2. </span> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia voluptate perferendis asperiores
+        </p>
+        <p>
+            <span class="bold-text">3. </span> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia voluptate perferendis asperiores
+        </p>
+        <p>
+            <span class="bold-text">4. </span> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia voluptate perferendis asperiores
+        </p>
+        <p>
+            <span class="bold-text">5. </span> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia voluptate perferendis asperiores
+        </p>
+    </div>
+</section>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

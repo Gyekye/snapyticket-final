@@ -36,8 +36,8 @@
             <!-- Search Results -->
             {% for ticket in ordered_ticket_bag.tickets.all %}
             <br>
-            <div class="sugg-title-ex">{{ticket.ticket.title}}</div><br>
-            <span class="chip-x">{{ticket.ticket_type.variation}}</span> <span class="chip-x">Qty: X {{ticket.quantity}}</span>
+            <div class="heading-main-x">{{ticket.ticket.title}}</div><br>
+            <span class="chip bold-text">{{ticket.ticket_type.variation}}</span> <span class="chip bold-text">Qty: X {{ticket.quantity}}</span> <span class="chip right bold-text bg-main white-text">₵{{ ticket.ticket_item_price }}.00</span>
             <br><br> Number of images -- {{ticket.ticketitemqrimage_set.all|length}}
             <br><br>
             <!--  -->
@@ -64,9 +64,6 @@
         </div>
         <br><br>
     </div>
-    <footer class="mobile-footer white-text">
-        Copyright &copy 2020. All Rights Reserved. <a href="" class="grey-text">Evesbay.Inc</a>
-    </footer>
 </setion>
-{% endblock mobilecontent%}
+{% include 'core-snippets/mobile-footer.html' %} {% endblock mobilecontent%}
 <!-- Endblock mobile content  -->

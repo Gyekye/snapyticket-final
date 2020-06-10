@@ -101,15 +101,17 @@ html {
     --core-red: #fd6161;
     --core-green: #4ecf84;
     --main-orange: #F47402;
-    --core-gradient: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8), rgba(0, 0, 0, 1));
+    --core-gradient: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .83), rgba(0, 0, 0, .8), rgba(0, 0, 0, .8), rgba(0, 0, 0, 1));
 }
 
-input {
+input,
+textarea {
     height: 50px !important;
     padding-top: 20px;
-    border: 1px solid var(--core-black) !important;
-    border-radius: 5px;
+    box-shadow: 0 0 .2rem rgb(124, 121, 121) !important;
+    border-radius: 3px !important;
     font-family: Regular Font Medium;
+    border: 1px solid var(--main-black);
     text-indent: 12px;
     transition: 3.9s;
     font-size: .89rem !important;
@@ -237,9 +239,16 @@ input[type="password"] {
     color: var(--main-black);
 }
 
-input:focus {
+input:focus,
+textarea:focus {
     border: 1px solid var(--core-grey) !important;
     box-shadow: 0 0 0 .03rem var(--main-black) !important;
+}
+
+textarea {
+    height: 100px !important;
+    outline: none !important;
+    border-radius: 0 !important;
 }
 
 ul.errorlist.nonfield li {
@@ -252,6 +261,13 @@ p.form-x-text {
     font-family: Default Font;
 }
 
+.x-coverlay {
+    width: 100%;
+    height: 300px;
+    background: var(--core-gradient);
+    position: absolute;
+}
+
 p.form-x-text a {
     font-family: Regular Font SemiBold;
     color: var(--core-color);
@@ -260,6 +276,8 @@ p.form-x-text a {
 form p span.helptext,
 form ul li,
 input#id_phone_1,
+label[for="id_logo"],
+p.Logo,
 span.phone-field-ext {
     display: none;
 }
@@ -570,7 +588,7 @@ footer.mobile-footer {
 .banner-section {
     width: 100%;
     padding: 20px 10px;
-    background: var(--main-orange);
+    background: rgb(34, 35, 47);
     text-align: center;
     font-family: Default Font Bold;
     font-size: 16px;
@@ -593,17 +611,7 @@ footer.mobile-footer {
 }
 
 .default-btn:focus {
-    font-size: 0 !important;
-    width: 42px !important;
-    color: transparent !important;
-    height: 42px !important;
-    background: transparent !important;
-    border: 3px solid var(--main-orange) !important;
-    border-left: none !important;
-    border-right: none !important;
-    animation-name: rotator !important;
-    animation-duration: .3s !important;
-    animation-iteration-count: infinite !important;
+    background: #000 !important
 }
 
 .default-btn-small:focus {
@@ -626,6 +634,23 @@ footer.mobile-footer {
     padding-top: 7px;
     color: var(--main-black);
     font-family: Default Font Bold;
+}
+
+.person-outline-container {
+    width: 35px;
+    height: 35px;
+    border-radius: 500px;
+    border: 1px solid var(--main-black) !important;
+    position: relative;
+    transform: translateY(10px);
+}
+
+.person-outline-x {
+    width: 30px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
 .sidebar {
@@ -751,6 +776,16 @@ p.Password label {
     object-fit: cover;
 }
 
+.profile-img-x {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    left: 25px;
+    transform: translateY(50px);
+    border-radius: 100%;
+    object-fit: cover;
+}
+
 .messageBox {
     width: 90%;
     padding: 15px;
@@ -760,6 +795,7 @@ p.Password label {
     font-family: Regular Font Medium;
     font-size: 13px;
     text-align: center;
+    z-index: 1400;
     transition: .7s;
     top: 48%;
     position: fixed;
@@ -774,8 +810,7 @@ p.Password label {
     width: 100%;
     height: 100%;
     position: fixed;
-    background: white;
-    opacity: .8;
+    background: var(--main-black);
     transition: .7s;
     z-index: 600;
 }
@@ -915,6 +950,12 @@ p.Password label {
     border-radius: 30px;
 }
 
+.chip-xs {
+    display: block !important;
+    border-right: 1px solid var(--main-black);
+    padding-right: 2px;
+}
+
 .x-core-actions {
     position: absolute;
     bottom: 20px;
@@ -942,7 +983,7 @@ img.featured-img {
 
 .featured-content {
     position: absolute;
-    background: var(--core-gradient);
+    background: var(--x-gradient);
     width: 100%;
     height: 150px;
     padding: 10px;
@@ -1098,6 +1139,59 @@ img.suggested-img {
     background: white;
 }
 
+.sales-img-container {
+    width: 25%;
+    height: 100px;
+    float: left;
+}
+
+.sales-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    object-fit: cover;
+}
+
+.sales-history-container {
+    width: 100%;
+    height: 120px;
+}
+
+.bg-core,
+.bg-core:focus {
+    background: var(--core-color);
+}
+
+.sales-img-overlay {
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    background: #FFDFBA;
+    padding: 10px;
+}
+
+.sales-det-container {
+    width: 50%;
+    height: 80px;
+    float: left;
+}
+
+.sales-name,
+.sales-amount {
+    font-family: Default Font Bold;
+    font-size: 16px;
+    padding-top: 3px;
+}
+
+.sales-amount {
+    color: var(--core-color);
+}
+
+.sales-status {
+    margin-top: 5px;
+    color: var(--main-grey);
+}
+
 
 /* ANIMATIONS */
 
@@ -1165,7 +1259,6 @@ img.suggested-img {
 
 .sidebar.openSidebar {
     transform: translateX(0);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, .1), 1px 1px 20px 1px rgba(0, 0, 0, .4);
 }
 
 @keyframes handOne {

@@ -26,13 +26,13 @@
     {% endif %}
 
     <div class="padding-xs"></div>
-    <div class="deadline">{{ ticket.date_deadline }}</div>
+    <div class="deadline"><span class="grey-text text-lighten-1">Closes on: </span>{{ ticket.date_deadline }}</div>
     <div class="tit-actions">
         <div class="tit-actions-content">
             <a href="{{ticket.add_to_cart}}" class="btn full-width-btn bg-ora white-text waves-effect z-depth-0">Get Tickets</a>
         </div>
     </div>
-    <img src="{{ ticket.featured_image.url }}" class="ticket-det-img materialboxed" alt="" style="margin-top: -10px;">
+    <img src="{{ ticket.featured_image.url }}" class="ticket-det-img" alt="" style="margin-top: -10px; width: 100% !important;">
     <div class="main-mobile-content">
         <div class="ticket-title">
             {{ ticket.title }}
@@ -40,6 +40,7 @@
         <a href="#organizer" class="ticket-organizer">
             By {{ ticket.organizer.name }}
         </a>
+        <br>
         <span class="ticket-x-t">
             Date and Time
         </span>

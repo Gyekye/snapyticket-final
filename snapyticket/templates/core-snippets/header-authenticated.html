@@ -37,7 +37,7 @@
                     <img src="{% static 'imgs/core/cover.jpg' %}">
                 </div>
                 {% if request.user.profile_image %}
-                <a href="{{request.user.profile_image.url}}"><img class="user-profile-image" src="{{request.user.profile_image.url}}"></a>
+                <a href="{{request.user.profile_image.url}}"><img class="user-profile-image" src="{{request.user.profile_image.url}}" style="object-fit: cover !important;"></a>
                 {% else %}
                 <a href="{% url 'profile:update' %}"><img class="user-profile-image" src="{% static 'imgs/icons/user.png' %}"></a>
                 {% endif %}
@@ -51,12 +51,15 @@
             <a href="{% url 'profile:all_user_tickets' %}"><img src="{% static 'imgs/icons/tickets.png' %}" class="tickets-x" alt=""> My Tickets</a>
         </li>
         <li><a href="{% url 'core:home' %}"><i class="material-icons">explore</i>Explore Events</a></li>
-        <li><a href="#!"><i class="material-icons">favorite_border</i>Saved Events</a></li>
-        <li><a href="#!"><i class="material-icons">help_outline</i>Help Center</a></li>
+        <li><a href="{% url 'ticket:saved' %}"><i class="material-icons">favorite_border</i>Saved Events</a></li>
+        <li><a href="{% url 'support:help_center' %}"><i class="material-icons">help_outline</i>Help Center</a></li>
         {% if request.user.is_organizer %}
         <li><a href="{% url 'organizer:dashboard' %}"><i class="material-icons">track_changes</i>Go To My Dashboard</a></li>
         {% else %}
-        <li><a href="#!"><i class="material-icons">question_answer</i>Become an Organizer</a></li>{% endif %}
+        <li><a href="{% url 'organizer:register' %}"><i class="material-icons">question_answer</i>Become an Organizer</a></li>{% endif %}
+        <li>
+            <a href="{% url 'core:organizers' %}"><i class="material-icons">access_time</i>See Organizers</a>
+        </li>
         <li>
             <div class="divider"></div>
         </li>

@@ -8,6 +8,11 @@ ROLES = (
     ('FS','FullStack Developer'),
 )
 
+MESSAGE_SUBJECT = (
+    ('TP', "Technical Problems"),
+    ('RP', "Refund Problems"),
+    ('OP', "Other Problems"),
+)
 
 
 class TermsAndCondition(models.Model):
@@ -51,3 +56,11 @@ class SocialProfile(models.Model):
     profile_url     = models.URLField()
     
     
+class Contact(models.Model):
+    fullname = models.CharField(max_length=200)
+    email = models.EmailField()
+    subject = models.CharField(choices=MESSAGE_SUBJECT, max_length=2)
+    message = models.TextField()
+
+    def __str__(self):
+        return f'{self.fullname} -- {self.subject}'

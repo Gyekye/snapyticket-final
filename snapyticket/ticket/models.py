@@ -14,37 +14,36 @@ CATEGORY_CHOICES = (
     ('ET', "Esports Ticket"),
     ('PT', "Party Ticket"),
     ('OT', "Other Ticket"),
+    ('OE', "Online Event"),
 )
-# Managers for the various types of tickets 
+#! I have violated the principle of DRY in writing the model mnanagers to get each category of tickets 
 
-# concert tickets
+#* concert tickets
 class ConcertTicketManager(models.Manager):
     def get_queryset(self):
-        return super(ConcertTicketManager,self).get_queryset().filter(category='CT')
-# summit tickets   
+        return super(ConcertTicketManager,self).get_queryset().filter(is_approved = True, category='CT')
+#* summit tickets   
 class SummitTicketManager(models.Manager):
     def get_queryset(self):
-        return super(SummitTicketManager,self).get_queryset().filter(category='ST')
-# movie tickets 
+        return super(SummitTicketManager,self).get_queryset().filter(is_approved = True,category='ST')
+#* movie tickets 
 class MovieTicketManager(models.Manager):
     def get_queryset(self):
-        return super(MovieTicketManager,self).get_queryset().filter(category='MT')
-# esports tickets  
+        return super(MovieTicketManager,self).get_queryset().filter(is_approved = True,category='MT')
+#* esports tickets  
 class EsportTicketManager(models.Manager):
     def get_queryset(self):
-        return super(EsportTicketManager,self).get_queryset().filter(category='ET')
-# party tickets 
+        return super(EsportTicketManager,self).get_queryset().filter(is_approved = True,category='ET')
+#* party tickets 
 class PartyTicketManager(models.Manager):
     def get_queryset(self):
-        return super(PartyTicketManager,self).get_queryset().filter(category='PT')
-# other tickets  
+        return super(PartyTicketManager,self).get_queryset().filter(is_approved = True,category='PT')
+#* other tickets  
 class OtherTicketManager(models.Manager):
     def get_queryset(self):
-        return super(OtherTicketManager,self).get_queryset().filter(category='OT')
+        return super(OtherTicketManager,self).get_queryset().filter(is_approved = True,category='OT')
     
 class Ticket(models.Model):
-    # todo Write queryset to send emails to organizers who have their tickets pending
-    # todo write queryset to generate all buyers of specific organizers ticket
     """ 
     An event organizer can have multiple tickets
     A Ticket should be based in a particular category of events
@@ -84,6 +83,10 @@ class Ticket(models.Model):
     is_suggested = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     is_most_featured = models.BooleanField(default=False)
+    is_most_suggested = models.BooleanField(default=False)
+    
+    # approval trigger
+    is_approved = models.BooleanField(default=False)
     
     # hooking models to managers
     objects = models.Manager()
@@ -93,6 +96,13 @@ class Ticket(models.Model):
     movies   = MovieTicketManager()
     esports  = EsportTicketManager()
     others   = OtherTicketManager()
+    
+    #* model properties
+    # checks whether a ticket is approved or not
+    @property
+    def is_approved_status(self):
+        return self.is_approved
+    
     # Model Methods 
     def __str__(self):
         return f'{self.title} created by {self.organizer.name}'
@@ -107,21 +117,19 @@ class Ticket(models.Model):
         return reverse('ticket:add_to_saved',kwargs={'slug':self.slug})
 
 
-# model signals 
-# todo write a custom signal to send ticket ID to organizers
-# todo uncomment the sending email functionality
+#* Generates a Ticket ID and sends it to the organizer 
 def ticket_slug_slugify(sender, instance, *args, **kwargs):
-    """ Auto Generates Ticket Slug and then sends the unique ID to the event organizer"""
-    instance.slug = slugify(instance.title) + '-' + slugify(instance.organizer.name)
-    """
-    send_mail(
-    'Your Ticket ID',
-    f'This is your unique Ticket ID:{instance.slug}',
-    settings.EMAIL_HOST_USER,
-    [instance.organizer.email],
-    fail_silently=False,
-    )
-    """
+    
+    #? generate ticket ID when the ticket is approved in the admin
+    if instance.is_approved_status == True:
+        instance.slug = slugify(instance.title) + '-' + slugify(instance.organizer.name)
+        
+    #? if the ticket has a ticket ID, send it to the organizer email
+    if instance.slug:
+        send_mail('Your Ticket ID',f'This is your unique Ticket ID:{instance.slug}',
+                  settings.EMAIL_HOST_USER,[instance.organizer.email],fail_silently=False,
+                  )
+#* connect the function above to the pre-save method
 pre_save.connect(ticket_slug_slugify, sender=Ticket)
 
 

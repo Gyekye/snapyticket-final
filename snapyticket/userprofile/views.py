@@ -7,6 +7,8 @@ from django.views.generic import View,TemplateView
 from ticket.models import TicketBag,TicketItem
 from authentication.forms import UserChangeForm
 from django.conf import settings
+from .forms import OrganizerRegisterForm
+
 User = get_user_model()
 
 
@@ -17,7 +19,6 @@ class ProfileView(LoginRequiredMixin, View):
         return render(self.request, 'profile/profile.html')
 
 
-
 class ProfileChangeView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = UserChangeForm(instance=request.user)
@@ -25,45 +26,55 @@ class ProfileChangeView(LoginRequiredMixin, View):
         return render(self.request, 'profile/update.html', context)
 
     def post(self, request, *args, **kwargs):
-        # creates an instance of the UserChangeForm that can also accepts files
+        #* creates an instance of the UserChangeForm that can also accepts files
         form = UserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            # if form is valid check to see if the phone number consist of 10 digits
+            #* if form is valid check to see if the phone number consist of 10 digits
             user_phone = form.cleaned_data.get('phone')
             if len(user_phone) > 10:
                 messages.info(request, 'Phone number must be 10 digits')
                 return redirect('profile:update')
             form.save()
             messages.success(request, 'You have update your profile')
-            # it updates the sessions of the current user 
+            #* it updates the sessions of the current user 
             update_session_auth_hash(request, request.user)
             return redirect('profile:user_profile')
         context = {'form': form}
         return render(self.request, 'profile/update.html', context)
     
     
-    
-    
 class UserTicketsList(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        user_ticket_bag = TicketBag.ordered_ticket_bags.filter(user=request.user,ordered=True).order_by('-created_on')
+        user_ticket_bag = TicketBag.ordered_ticket_bags.filter(
+            user=request.user,
+            ordered=True
+            ).order_by('-created_on')
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/tickets.html',context)
-        
-        
-        
+
+
 class UserAllTicketsList(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        all_tickets = TicketItem.objects.filter(user=request.user,ordered=True)
+        all_tickets = TicketItem.objects.filter(
+            user=request.user,
+            ordered=True
+            )
         context = {'all_tickets':all_tickets}
         return render(request,'profile/all-tickets.html',context)
-        
-        
-        
+    
         
 class UserTicketsDetail(LoginRequiredMixin,View):
     def get(self, request,order_ref_code,*args, **kwargs):
-        user_ticket_bag = TicketBag.ordered_ticket_bags.get(order_ref_code=order_ref_code,user=request.user)
+        user_ticket_bag = TicketBag.ordered_ticket_bags.get(
+            order_ref_code=order_ref_code,
+            user=request.user
+            )
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/ticket-details.html',context)
         
+
+class OrganizerRegisterView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        form = OrganizerRegisterForm()
+        context = {'form': form}
+        return render(self.request, 'profile/organizer-register.html', context)

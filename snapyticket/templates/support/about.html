@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="suggested-title">About Evesbay</div>
+        <br>
+        <img src="{% static 'imgs/core/about-us.svg' %}" style="width: 100% !important;" class="materialboxed" alt="">
+        <br>
+        <span class="ticket-x-t">
+            Our Story
+        </span>
+        <p class="ticket-x">
+            Orem ipsum dolor sit amet consectetur adipisicing elit. At ullam possimus, aperiam ducimus odit Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, necessitatibus commodi! Recusandae harum amet consectetur nihil cum hic, eveniet labore est
+            eaque eius doloribus ipsum. Dolorem illum debitis atque ipsum! ea, sed atque ab eveniet sequi consequuntur pariatur id quia eos numquam corporis nemo esse voluptates?
+        </p>
+        <span class="ticket-x-t">
+            Aims and Ambition
+        </span>
+        <p class="ticket-x">
+            Orem ipsum dolor sit amet consectetur adipisicing elit. At ullam possimus, aperiam ducimus odit Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, necessitatibus commodi! Recusandae harum amet consectetur nihil cum hic, eveniet labore est
+            eaque eius doloribus ipsum. Dolorem illum debitis atque ipsum! ea, sed atque ab eveniet sequi consequuntur pariatur id quia eos numquam corporis nemo esse voluptates?
+        </p>
+        <span class="ticket-x-t">
+            Goals and Targets
+        </span>
+        <p class="ticket-x">
+            Orem ipsum dolor sit amet consectetur adipisicing elit. At ullam possimus, aperiam ducimus odit Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, necessitatibus commodi! Recusandae harum amet consectetur nihil cum hic, eveniet labore est
+            eaque eius doloribus ipsum. Dolorem illum debitis atque ipsum! ea, sed atque ab eveniet sequi consequuntur pariatur id quia eos numquam corporis nemo esse voluptates?
+        </p>
+        <span class="ticket-x-t">
+            Meet The Team
+        </span>
+        <div class="pad-x"></div>
+        <div class="card z-depth-0">
+            <div class="card-content-x">
+                <div class="card-image">
+                    <img src="/media/profile/profile-images/A88A849D-2F7F-4228-83CD-20FDBFB7D4C3.jpeg" alt="">
+                </div>
+                <br>
+                <a href="{{ ticket.organizer.facebook }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-facebook color-main"></i></a>
+                <a href="{{ ticket.organizer.instagram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-instagram color-main"></i></a>
+                <a href="{{ ticket.organizer.twitter }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-twitter color-main"></i></a>
+                <a href="{{ ticket.organizer.telegram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-telegram color-main"></i></a>
+                <span class="sugg-date-ex">Co - Founder</span><br>
+                <p class="sugg-title-ex">Mark Junior Ameyaw</p>
+                <span class="sugg-organizer-ex">{{ ticket.organizer.email }}</span>
+            </div>
+        </div>
+        <br>
+        <div class="card z-depth-0">
+            <div class="card-content-x">
+                <div class="card-image">
+                    <img src="/media/profile/profile-images/A88A849D-2F7F-4228-83CD-20FDBFB7D4C3.jpeg" alt="">
+                </div>
+                <br>
+                <a href="{{ ticket.organizer.facebook }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-facebook color-main"></i></a>
+                <a href="{{ ticket.organizer.instagram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-instagram color-main"></i></a>
+                <a href="{{ ticket.organizer.twitter }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-twitter color-main"></i></a>
+                <a href="{{ ticket.organizer.telegram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-telegram color-main"></i></a>
+                <span class="sugg-date-ex">Co - Founder</span><br>
+                <p class="sugg-title-ex">Stephen Kofi Amponsah</p>
+                <span class="sugg-organizer-ex">{{ ticket.organizer.email }}</span>
+            </div>
+        </div>
+        <br>
+        <div class="card z-depth-0">
+            <div class="card-content-x">
+                <div class="card-image">
+                    <img src="/media/profile/profile-images/A88A849D-2F7F-4228-83CD-20FDBFB7D4C3.jpeg" alt="">
+                </div>
+                <br>
+                <a href="{{ ticket.organizer.facebook }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-facebook color-main"></i></a>
+                <a href="{{ ticket.organizer.instagram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-instagram color-main"></i></a>
+                <a href="{{ ticket.organizer.twitter }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-twitter color-main"></i></a>
+                <a href="{{ ticket.organizer.telegram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-telegram color-main"></i></a>
+                <span class="sugg-date-ex">Co - Founder</span><br>
+                <p class="sugg-title-ex">Richmond Gyekye Pinamang</p>
+                <span class="sugg-organizer-ex">{{ ticket.organizer.email }}</span>
+            </div>
+        </div>
+        <br>
+        <div class="card z-depth-0">
+            <div class="card-content-x">
+                <div class="card-image">
+                    <img src="/media/profile/profile-images/A88A849D-2F7F-4228-83CD-20FDBFB7D4C3.jpeg" alt="">
+                </div>
+                <br>
+                <a href="{{ ticket.organizer.facebook }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-facebook color-main"></i></a>
+                <a href="{{ ticket.organizer.instagram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-instagram color-main"></i></a>
+                <a href="{{ ticket.organizer.twitter }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-twitter color-main"></i></a>
+                <a href="{{ ticket.organizer.telegram }}" style="padding-left: 15px; padding-top: 10px;" class="right white z-depth-0"><i class="fa fa-telegram color-main"></i></a>
+                <span class="sugg-date-ex">Co - Founder</span><br>
+                <p class="sugg-title-ex">Selase Bredzei</p>
+                <span class="sugg-organizer-ex">{{ ticket.organizer.email }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

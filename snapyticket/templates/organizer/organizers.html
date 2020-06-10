@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div style="height: 40px;"></div>
+    {% for organizer in organizers %}
+    <img src="{{organizer.logo.url}}" class="profile-img-cover" alt="" style="height: 230px; object-fit: cover !important;">
+
+    <div class="main-mobile-content" style="padding-top: 10px;">
+        <div>
+            <div class="user-name black-text">{{ organizer.name }}</div>
+            <span class="user-email grey-text text-darken-1">{{ organizer.email }}</span>
+        </div>
+        <span class="sugg-date-ex">Verified By Admin <i class="material-icons small-t" style="transform: translateY(2px);">check_circle</i> </span><br>
+        <div style="height: 7px;"></div>
+        <a href="#{{ organizer.id }}" class="x-link modal-trigger" data-target="{{ organizer.id }}"><i class="material-icons left">airplay</i>Contact</a>
+        <a href="" class="btn default-btn right z-depth-0">Events</a>
+        <br><br>
+    </div>
+    <div class="modal z-depth-0" style="width: 90%;" id="{{ organizer.id}}">
+        <div class="modal-content" style="padding: 20px;">
+            <div class="suggested-title">
+                Contact at
+            </div>
+            <p>
+                <i class="material-icons orange-text left">mail_outline</i>{{ organizer.email }}
+            </p>
+            <br>
+            <div class="suggested-title">
+                Follow on
+            </div>
+            <br>
+            <a href="{{ organizer.facebook }}" class="btn btn-floating bg-main z-depth-0" style="margin-right: 15px;"><i class="fa fa-facebook"></i></a>
+            <a href="{{ organizer.instagram }}" class="btn btn-floating bg-main z-depth-0" style="margin-right: 15px;"><i class="fa fa-instagram"></i></a>
+            <a href="{{ organizer.twitter }}" class="btn btn-floating bg-main z-depth-0" style="margin-right: 15px;"><i class="fa fa-twitter"></i></a>
+            <a href="{{ organizer.telegram }}" class="btn btn-floating bg-main z-depth-0" style="margin-right: 15px;"><i class="fa fa-telegram"></i></a>
+            <br><br>
+        </div>
+    </div>{% empty %} <br> <br>
+    <center>
+        <img src="{% static 'imgs/core/emptybag.svg' %}" class="responsive-img" alt="">
+    </center>
+    <br>
+    <div class="center-align">
+        Sorry, There are no organizers in this list.
+        <br><br>
+        <a href="{% url 'core:home' %}" class="btn default-btn waves-effect z-depth-0">Browse</a>
+    </div>
+    {% endfor %}
+</section>
+{% endblock mobilecontent %}
+<!-- Endblock mobile content  -->

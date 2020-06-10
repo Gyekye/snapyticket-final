@@ -36,14 +36,14 @@
         <div class="card horizontal z-depth-0">
             <div class="card-image">
                 <a href="{{ticket.remove_from_cart }}" class="btn default-btn-sugg z-depth-0" style="transform: translateX(20px);"><i class="material-icons">delete</i></a>
-                <img src="{% static 'imgs/x-core/one.png' %}" class="sugg-img-ex">
+                <img src="{{ticket.ticket.featured_image.url }}" class="sugg-img-ex">
             </div>
             <div class="card-stacked">
                 <div class="card-content-x">
                     <div style="height: 4px;"></div>
-                    <span class="sugg-date-ex">{{ ticket.ticket_type.variation }} - Quantity: x{{ ticket.quantity }} - ₵{{ ticket.ticket_item_price }}.00</span>
-                    <p class="sugg-title-ex">{{ ticket.ticket.title }}</p>
-                    <span class="sugg-organizer-ex" style="font-size: 12px;">By: {{ ticket.ticket.organizer.name|truncatechars:25 }}</span>
+                    <span class="sugg-date-ex">{{ ticket.ticket_type.variation }} - Qty: x{{ ticket.quantity }} - ₵{{ ticket.ticket_item_price }}.00</span>
+                    <p class="sugg-title-ex">{{ ticket.ticket.title|truncatechars:25 }}</p>
+                    <span class="sugg-organizer-ex" style="font-size: 12px;">By: {{ ticket.ticket.organizer.name|truncatechars:20 }}</span>
                 </div>
             </div>
         </div>

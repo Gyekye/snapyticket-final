@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <br><br>
+    <div class="tit-actions">
+        <div class="tit-actions-content">
+            <a href="" class="btn full-width-btn bg-core white-text waves-effect z-depth-0">Request Payment</a>
+        </div>
+    </div>
+    <img src="{{event.featured_image.url}}" class="" alt="" style="object-fit: cover !important; margin-bottom: 0; width: 100%; height: 200px;">
+    <div class="main-mobile-content">
+        <br>
+        <span class="badge right" style="background: #FFDFBA; transform: translateY(10px)">GH</span>
+        <div class="heading-main">Sales Revenue</div>
+        <p style="margin-top: 0; color: #68739D">Amount made from ticket Sales</p>
+        <canvas id="myChart" style="width: 100% !important; background: #D9DFE8; padding: 5px;" height="300px"></canvas>
+        <br>
+        <div class="heading-main">Sales History</div>
+        <p style="margin-top: 0; color: #68739D">History of ticket sales</p>
+        {% for sale in sales %}
+        <div class="sales-history-container">
+            <div class="sales-history-box">
+                <div class="sales-img-container">
+                    <div class="sales-img-overlay">
+                        {% if sale.user.profile_image %}
+                        <img src="{{ sale.user.profile_image.url }}" class="sales-img" alt=""> {% else %}
+                        <img src="{% static 'imgs/icons/user.png' %}" class="sales-img" alt=""> {% endif %}
+                    </div>
+                </div>
+                <div class="sales-det-container">
+                    <div class="sales-name">{{ sale.user.username }}</div>
+                    {% if sale.user.is_organizer %}
+                    <p class="sales-status">Organzier</p>
+                    {% else %}
+                    <p class="sales-status">Regular User</p>
+                    {% endif %}
+                </div>
+                <div class="sales-amount-container">
+                    <div class="sales-amount">₵{{ sale.ticket_item_price }}.00</div>
+                    <p class="sales-status">Succesful</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <a href="" class="x-link">See all order history <i class="material-icons right">arrow_forward</i></a>
+        <a href="{{ event.get_absolute_url }}" class="right btn default-btn z-depth-0">Peek</a>
+        <br><br><br>
+        <br><br><br>
+    </div>
+    <div class="main-mobile-content">
+    </div>
+</section>
+{% block extrafooter%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    Chart.defaults.global.defaultFontFamily = 'Regular Font Medium';
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            datasets: [{
+                label: 'Sales Revenue',
+                backgroundColor: 'transparent',
+                borderColor: '#4F4BFF',
+                pointBorderWidth: 5,
+                data: [10, 20, 17, 5, 20, 25, 15]
+            }]
+        },
+        options: {
+            defaultFontFamily: 'Regular Font',
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display: false
+                    }
+                }]
+            }
+        }
+    });
+</script>
+{% endblock extrafooter%} {% endblock mobilecontent %}
+<!-- Endblock mobile content  -->

@@ -61,51 +61,58 @@
 </head>
 
 <body>
+    <div class="network-box">
+        You are offline
+    </div>
+    <div class="network-box-x">
+        Back Online
+    </div>
+    <div class="sectorx">
+        <section class="hide-on-large-only">
+            <div class="mobile-preloader">
+                <center>
+                    <p class="white-text text-1">Loading</p>
+                    <div class="preder-content">
+                        <div class="preder"></div>
+                    </div>
+                </center>
+            </div>
+            {% if messages %}
+            <!-- Message Counter  -->
+            {% for message in messages%}
+            <div class="messageBox-overlay" id="messBoxOv">
+                <a onclick="messCloser()" class="messageCloser btn btn-floating z-depth-0" id="messCloser"><i class="material-icons">close</i></a>
+            </div>
+            <div class="messageBox" id="messBox">{{ message }}</div>
+            {% empty %} {% endfor %} {% else %}{% endif %} {% block mobilecontent %}
+            <!-- Main Content -->
+            {% endblock mobilecontent %}
+        </section>
 
-    <section class="hide-on-large-only">
-        <div class="mobile-preloader">
-            <center>
-                <p class="white-text text-1">Loading</p>
-                <div class="preder-content">
-                    <div class="preder"></div>
-                </div>
-            </center>
-        </div>
-        <div class="network-box">
-            You are offline
-        </div>
-        <div class="network-box-x">
-            Back Online
-        </div>
-        {% if messages %}
-        <!-- Message Counter  -->
-        {% for message in messages%}
-        <div class="messageBox-overlay" id="messBoxOv">
-            <a onclick="messCloser()" class="messageCloser btn btn-floating z-depth-0" id="messCloser"><i class="material-icons">close</i></a>
-        </div>
-        <div class="messageBox" id="messBox">{{ message }}</div>
-        {% endfor %} {% else %}{% endif %} {% block mobilecontent %} {% endblock mobilecontent %}
-    </section>
+        <script type="text/javascript">
+            window.addEventListener("online", () => {
+                document.querySelector('.network-box-x').style.display = 'block';
+                document.querySelector('.sectorx').style.opacity = 1;
+                document.querySelector('.sectorx').style.position = "relative";
+                setTimeout(() => {
+                    $('.network-box-x').fadeToggle();
+                }, 4000)
+                setTimeout(() => {
+                    $('.network-box').fadeToggle();
+                }, 1000)
+            })
+            window.addEventListener("offline", () => {
+                document.querySelector('.network-box').style.display = 'block';
+                document.querySelector('.sectorx').style.opacity = .1;
+                document.querySelector('.sectorx').style.position = "fixed";
+            })
 
-    <script type="text/javascript">
-        window.addEventListener("online", () => {
-            document.querySelector('.network-box-x').style.display = 'block';
-            setTimeout(() => {
-                $('.network-box-x').fadeToggle();
-            }, 4000)
-        })
-        window.addEventListener("offline", () => {
-            document.querySelector('.network-box').style.display = 'block';
-            setTimeout(() => {
-                $('.network-box').fadeToggle();
-            }, 4000)
-        })
-
-        function messCloser() {
-            document.getElementById('messBox').style.transform = 'translateY(1000px)';
-            document.getElementById('messBoxOv').style.transform = 'translateY(1000px)';
-        }
-    </script>
+            function messCloser() {
+                document.getElementById('messBox').style.transform = 'translateY(-1000px)';
+                document.getElementById('messBoxOv').style.transform = 'translateY(100%)';
+            }
+        </script>
+    </div>
 
 
 
@@ -124,6 +131,8 @@
     <!-- Materialize js cdn link -->
     <script src="{% static 'js/materialize.min.js' %}"></script>
     <!-- End of materialize js cdn link -->
+
+    {% block extrafooter %} {% endblock extrafooter %}
 
     <!-- Custom js link -->
     <script src="{% static 'js/main.js' %}"></script>

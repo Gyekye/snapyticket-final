@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Welcome to your #1 Ticketting PlatForm{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<setion class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+
+    <div class="padding-xs">
+        <div class="main-mobile-content">
+            <div class="heading-main">Saved Tickets</div>
+            <br> {% for saved_ticket in saved_tickets %} {% for ticket in saved_ticket.ticket.all %}
+            <div class="card horizontal z-depth-0">
+                <div class="card-image">
+                    <a href="{{ ticket.get_absolute_url }}" class="btn default-btn-sugg z-depth-0">Get Now</a>
+                    <img src="{{ ticket.featured_image.url }}" class="sugg-img-ex" style="height: 90px !important;">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content-x">
+                        <a href="#menu" style="position: absolute; right: 0;" data-target='{{ ticket.id }}' class="dropdown-trigger right"><i class="material-icons orange-text">more_vert</i></a>
+                        <ul id='{{ ticket.id }}' style="border: 1px solid var(--core-grey);" class='dropdown-content z-depth-0'>
+                            <li><a href="{{ ticket.add_to_saved }}" class="color-main">remove</a></li>
+                        </ul>
+                        <span class="sugg-date-ex">{{ ticket.date_deadline }}</span>
+                        <p class="sugg-title-ex">{{ ticket.title|truncatechars:50 }}</p>
+                        <span class="sugg-organizer-ex">By {{ ticket.organizer.name|truncatechars:25 }}</span>
+                        <br><br>
+                    </div>
+                </div>
+            </div>{% empty %} <br>
+            <center>
+                <img src="{% static 'imgs/core/emptybag.svg' %}" class="responsive-img" alt="">
+            </center>
+            <br>
+            <div class="center-align">
+                Sorry, You do not have any saved tickets<strong class="bold-text">{{ search }}</strong>.
+                <br><br>
+                <a href="{% url 'core:home' %}" class="btn default-btn waves-effect z-depth-0">Browse</a>
+            </div>
+            {% endfor %}{% empty %} <br>
+            <center>
+                <img src="{% static 'imgs/core/emptybag.svg' %}" class="responsive-img" alt="">
+            </center>
+            <br>
+            <div class="center-align">
+                Sorry, You do not have any saved tickets<strong class="bold-text">{{ search }}</strong>.
+                <br><br>
+                <a href="{% url 'core:home' %}" class="btn default-btn waves-effect z-depth-0">Browse</a>
+            </div> {% endfor %}
+        </div>
+    </div>
+    <br><br>
+</setion>
+{% include 'core-snippets/mobile-footer.html' %} {% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

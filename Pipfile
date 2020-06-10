@@ -6,12 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
 pillow = "*"
 django-phone-field = "*"
 requests = "*"
 qrcode = "*"
 six = "*"
+django = "*"
 
 [requires]
 python_version = "3.8"

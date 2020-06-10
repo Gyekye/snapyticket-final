@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="suggested-title">Help Center</div>
+        <br>
+        <img src="{% static 'imgs/core/help.svg' %}" style="width: 100% !important;" class="materialboxed" alt="">
+    </div>
+    <ul class="profile-nav">
+        {% if request.user.is_organizer %}
+        <li class="profile-nav-x">
+            <a href="{% url 'support:about' %}" class="profile-nav-link"><i class="material-icons left">school</i> About Evesbay</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'profile:password_change' %}" class="profile-nav-link"><i class="material-icons left">settings_input_component</i> Payment and Charges</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:tutorial' %}" class="profile-nav-link"><i class="material-icons left">tv</i> How to use QR Based Tickets</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:contact' %}" class="profile-nav-link"><i class="material-icons left">trending_up</i> Send us a message</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:faq' %}" class="profile-nav-link"><i class="material-icons left">question_answer</i> Frequently Asked Questions</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:terms-and-conditions' %}" class="profile-nav-link"><i class="material-icons left">content_paste</i> Terms and Conditions</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:privacy-policy' %}" class="profile-nav-link"><i class="material-icons left">error_outline</i> Privacry Policy</a>
+        </li>
+        <!--  -->
+        {% else %}
+        <li class="profile-nav-x">
+            <a href="{% url 'support:about' %}" class="profile-nav-link"><i class="material-icons left">school</i> About Evesbay</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:tutorial' %}" class="profile-nav-link"><i class="material-icons left">tv</i> How to use QR Based Tickets</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:contact' %}" class="profile-nav-link"><i class="material-icons left">trending_up</i> Send us a message</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:faq' %}" class="profile-nav-link"><i class="material-icons left">question_answer</i> Frequently Asked Questions</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:terms-and-conditions' %}" class="profile-nav-link"><i class="material-icons left">content_paste</i> Terms and Conditions</a>
+        </li>
+        <li class="profile-nav-x">
+            <a href="{% url 'support:privacy-policy' %}" class="profile-nav-link"><i class="material-icons left">error_outline</i> Privacry Policy</a>
+        </li>
+        <!--  -->
+        {% endif %}
+    </ul>
+</section>
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

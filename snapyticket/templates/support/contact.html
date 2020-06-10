@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="suggested-title">Contact Us</div>
+        <br>
+        <img src="{% static 'imgs/core/contact.svg' %}" style="width: 100% !important;" class="materialboxed" alt="">
+        <br>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <form action="" method="POST">
+            <!-- Token -->
+            {% csrf_token %}
+            <!-- Form -->
+            {{ form.as_p }}
+            <button type="submit" class="btn z-depth-0 default-btn">Send</button>
+        </form>
+    </div>
+</section>
+
+<script type="text/javascript">
+    var selectx = document.querySelector('#id_subject')
+    selectx.classList.add('browser-default')
+    selectx.style.border = '1px solid rgb(190, 190, 190)'
+    selectx.style.height = '50px'
+</script>
+
+{% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

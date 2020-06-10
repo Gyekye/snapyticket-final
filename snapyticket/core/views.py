@@ -5,18 +5,18 @@ from PIL import Image
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView,RedirectView
+from organizer.models import Organizer
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ticket.models import TicketBag,TicketItem,Ticket
+from django.views.generic import View
 from django.conf import settings
 import base64
+
 
 # Create your views here.
 def create_ref_code():
     # Generates a reference codes for order
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
-
-
-
+    return ''.join(random.choices(string.digits, k=15))
 
 
 class IndexView(TemplateView):
@@ -29,9 +29,6 @@ class IndexView(TemplateView):
             return redirect('core:home')
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
- 
- 
-
  
  
 class PaymentView(LoginRequiredMixin,TemplateView):
@@ -53,12 +50,8 @@ class PaymentView(LoginRequiredMixin,TemplateView):
         context['user_order'] = user_order
         
         return self.render_to_response(context)
-    
-    
-    
-    
-    
-    
+
+
 # payment success View 
 def  payment_sucessful(request, order_id):
 
@@ -105,6 +98,7 @@ def  payment_sucessful(request, order_id):
                     VARAIATION: {ticketitems.ticket_type.variation}\n**\n
                     ORDER ID: {user_ticket_bag.order_ref_code}\n**\n
                     TICKET_CODE: {ticketitems.ticket_code}\n**\n
+                    NUMBER OF TICKETS: {counter}\n**\n
                     ''',
                 )
                 # makes the size of the image fit
@@ -127,7 +121,21 @@ def  payment_sucessful(request, order_id):
                     break
             # making the qrcode for other ticket Items 
             #todo add data to the qr data method 
-            ticket_item_img = qrcode.make('Some data here')
+            ticket_item_img = qrcode.make(
+                    # the qrcode for each tickets consists of unique data
+                    # its consists of the ticket_type
+                    # its consist of the username of the user
+                    # the order ref code 
+                    # and the name of the ticket
+                    # todo pass more data to the data in the qrcode 
+                    f'''
+                    PURCHASED BY: {request.user} - {request.user.email }\n**\n
+                    PHONE number: { request.user.phone }\n**\n
+                    VARAIATION: {ticketitems.ticket_type.variation}\n**\n
+                    ORDER ID: {user_ticket_bag.order_ref_code}\n**\n
+                    TICKET_CODE: {ticketitems.ticket_code}\n**\n
+                    ''',
+                )
             # condition to stop making qr code
             while ticketitems.ticketitemqrimage_set.count() < ticketitems.quantity:
                 # saves the image to the root media folder
@@ -156,7 +164,6 @@ class FailedView(LoginRequiredMixin,TemplateView):
     template_name = 'redirects/payment/failed.html'
  
  
- 
 # Home View
 class HomeView(TemplateView):
     
@@ -165,5 +172,15 @@ class HomeView(TemplateView):
     # renders dynamic data to the home page
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        context['all_tickets'] = Ticket.objects.all()
+        context['most_featured_events'] = Ticket.objects.filter(is_most_featured=True)
+        context['featured_events'] = Ticket.objects.filter(is_featured=True)
+        context['most_suggested_summit'] = Ticket.objects.get(is_most_suggested=True, category='ST')
         return self.render_to_response(context)
+
+
+
+class AllOrganizersView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        organizers = Organizer.objects.filter(is_verified=True)
+        context = {'organizers': organizers}
+        return render(self.request, 'organizer/organizers.html', context)

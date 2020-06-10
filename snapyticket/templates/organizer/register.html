@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%} {% if user.is_organizer %}
+<br><br>
+<center>
+    <img src="{% static 'imgs/core/emptybag.svg' %}" class="responsive-img" alt="">
+</center>
+<br>
+<div class="center-align">
+    Oops, You are already an organizer<strong class="bold-text">{{ search }}</strong>.
+    <br><br>
+    <a href="{% url 'organizer:dashboard' %}" class="btn default-btn waves-effect z-depth-0">My dashboard</a>
+</div>
+{% else %}
+<section class="mobile-content">
+
+    {% if user.is_authenticated %}
+
+    <!-- Aunthenticated Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Aunthenticated Header -->
+
+    <!-- Unauthenitcated Header -->
+    {% else %}
+
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-not-authenticated-x.html' %}
+    <!-- End of Header -->
+    {% endif %}
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="suggested-title">Register - Organizer</div>
+        <br>
+        <p style="font-size: 14px; font-family: Regular Font Medium;">You first have to upload a logo for your Organizing Group</p>
+        <br><br>
+        <form action="" method="POST">
+            <!-- Token -->
+            {% csrf_token %}
+            <div class="upload-image-overlay" style="margin-bottom: 110px;">
+                <div class="upload-image-content center-align">
+                    {{ form.logo }}
+                    <img id='output' src="{% static 'imgs/icons/user.png' %}" style="width: 100px; border-radius: 500px; margin-bottom: 5px; height: 100px; object-fit: cover;"><br>
+
+                    <a href="#x" id="imageUpload" class="btn waves-effect default-btn-xs z-depth-0">Upload</a>
+                </div>
+            </div>
+            <!-- Form -->
+            <p class="heading-main-x">Core Informations</p>
+            <label for="">Organizer Name</label> {{ form.name }}
+            <label for="">Organizer Email</label> {{ form.email }}
+            <br><br>
+            <p class="heading-main-x">Social Media Links</p>
+            <label for="">Facebook Link</label> {{ form.facebook }}
+            <label for="">Instagram Link</label> {{ form.instagram }}
+            <label for="">Twitter Link</label> {{ form.twitter }}
+            <label for="">Telegram Link</label> {{ form.telegram }}
+            <br><br>
+            <button type="submit" class="btn z-depth-0 default-btn">Apply</button>
+        </form>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    const imageUpload = document.querySelector('#imageUpload')
+    const imageField = document.querySelector('#id_logo')
+    var openFile = function(file) {
+        var input = file.target;
+
+        var reader = new FileReader();
+        reader.onload = function() {
+            var dataURL = reader.result;
+            var output = document.getElementById('output');
+            output.src = dataURL;
+        };
+        reader.readAsDataURL(input.files[0]);
+    };
+    imageUpload.addEventListener("click", () => {
+        imageField.click()
+        imageField.addEventListener("change", () => {
+            openFile(event)
+        })
+    })
+</script>{% endif %} {% endblock mobilecontent%}
+<!-- Endblock mobile content  -->

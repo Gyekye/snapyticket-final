@@ -1,22 +1,67 @@
-{% extends 'base.html' %} {% block mobilecontent %}
-<h2>Update organizer here</h2>
-<style>
-    #id_password {
-        display: none;
-    }
-    
-    #for {
-        display: none;
-    }
-</style>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %} {% for field in form %}
-    <p>
-        {{ field.label_tag }}<br> {{ field }} {% if field.help_text %}
-        <small style="display: none">{{ field.help_text }}</small> {% endif %} {% for error in field.errors %}
-        <p style="color: red">{{ error }}</p>
-        {% endfor %}
-    </p>
-    {% endfor %}<button type="submit">Update Info</button>
-</form>
-{% endblock mobilecontent %}
+{% extends 'base.html' %}
+<!-- TItle Content -->
+{% block titlecontent %}Evesbay - Update Your Profile{% endblock titlecontent %}
+<!-- Mobile Content  -->
+{% block mobilecontent %}
+<!-- Load Static Files -->
+{% load static%}
+<section class="mobile-content">
+    <!-- Sidebar -->
+    {% include 'core-snippets/sidebar.html' %}
+    <!-- End of Sidebar -->
+
+    <!-- Header -->
+    {% include 'core-snippets/header-authenticated.html' %}
+    <!-- End of Header -->
+
+    <div class="padding-xs"></div>
+    <div class="main-mobile-content">
+        <div class="heading-main">Update Your Info</div>
+        <span class="heading-helper">Change your previous info</span>
+        <br><br>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="upload-image-overlay" style="margin-top: 0px;">
+                <div class="upload-image-content center-align">
+                    <img id='output' src="{{organizer.logo.url}}" style="width: 100px; border-radius: 500px; margin-bottom: 5px; height: 100px; object-fit: cover;"><br>
+                    <!--  -->
+                    <a href="#" id="imageUpload" class="btn waves-effect default-btn-xs z-depth-0">Upload</a><br><br>
+                </div>
+            </div>{% for field in form %}
+            <p class="{{ field.label }}" style="margin-bottom: 0;">
+                {{ field.label_tag }}<br> {{ field }} {% if field.help_text %}
+                <small style="display: none">{{ field.help_text }}</small> {% endif %} {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </p>
+            {% endfor %}
+            <br>
+            <a href="{% url 'organizer:dashboard' %}" class="x-link"><i class="material-icons left">arrow_back</i> Go Back</a>
+            <button type="submit" class="right btn waves-effect default-btn-xs z-depth-0">Update</button>
+            <br>
+            <br><br><br>
+        </form>
+    </div>
+</section>
+<script type="text/javascript">
+    const imageUpload = document.querySelector('#imageUpload')
+    const imageField = document.querySelector('#id_logo')
+    var openFile = function(file) {
+        var input = file.target;
+
+        var reader = new FileReader();
+        reader.onload = function() {
+            var dataURL = reader.result;
+            var output = document.getElementById('output');
+            output.src = dataURL;
+        };
+        reader.readAsDataURL(input.files[0]);
+    };
+    imageUpload.addEventListener("click", () => {
+        imageField.click()
+        imageField.addEventListener("change", () => {
+            openFile(event)
+        })
+    })
+</script>
+{% endblock mobilecontent%}

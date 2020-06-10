@@ -33,7 +33,7 @@
             <br> {% for ticket in all_tickets %}
             <div class="sugg-title-ex">{{ticket.ticket.title}}</div>
             <div class="pad-x"></div>
-            <span class="chip-x">{{ticket.ticket_type.variation}}</span> <span class="chip-x">Qty: X {{ticket.quantity}}</span>
+            <span class="chip bold-text">{{ticket.ticket_type.variation}}</span> <span class="chip bold-text">Qty: X {{ticket.quantity}}</span> <span class="chip right bold-text bg-main white-text">₵{{ ticket.ticket_item_price }}.00</span>
             <!-- Break -->
             <br><br> {% for qr_image in ticket.ticketitemqrimage_set.all %}
             <div class="qr-container">
@@ -58,9 +58,6 @@
         </div>
         <br><br>
     </div>
-    <footer class="mobile-footer white-text">
-        Copyright &copy 2020. All Rights Reserved. <a href="" class="grey-text">Evesbay.Inc</a>
-    </footer>
 </setion>
-{% endblock mobilecontent%}
+{% include 'core-snippets/mobile-footer.html' %} {% endblock mobilecontent%}
 <!-- Endblock mobile content  -->
