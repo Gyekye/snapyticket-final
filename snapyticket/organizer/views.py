@@ -109,6 +109,6 @@ def track_event(request, slug):
 
 def event_sales(request, slug):
     e = Ticket.objects.get(slug=slug)
-    event = TicketItem.objects.filter(ticket=e)
-    context = {'event': event}
+    sales = TicketItem.objects.filter(ticket=e)
+    context = {'sales': sales}
     return render(request, 'organizer/sales.html', context)
