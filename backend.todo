@@ -1,7 +1,7 @@
 Organizer
     - signal to generate the secret key of organizers **
     - functionality to email the organizers secret key to them when they register **
-    - Organizer register functionality
+    - Organizer register functionality **
     - Verfied organizer only Mixin **
     - Create Ticket functionality
     - Publish Verfied ticket only functionality
