@@ -1139,6 +1139,59 @@ img.suggested-img {
     background: white;
 }
 
+.sales-img-container {
+    width: 25%;
+    height: 100px;
+    float: left;
+}
+
+.sales-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    object-fit: cover;
+}
+
+.sales-history-container {
+    width: 100%;
+    height: 120px;
+}
+
+.bg-core,
+.bg-core:focus {
+    background: var(--core-color);
+}
+
+.sales-img-overlay {
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    background: #FFDFBA;
+    padding: 10px;
+}
+
+.sales-det-container {
+    width: 50%;
+    height: 80px;
+    float: left;
+}
+
+.sales-name,
+.sales-amount {
+    font-family: Default Font Bold;
+    font-size: 16px;
+    padding-top: 3px;
+}
+
+.sales-amount {
+    color: var(--core-color);
+}
+
+.sales-status {
+    margin-top: 5px;
+    color: var(--main-grey);
+}
+
 
 /* ANIMATIONS */
 

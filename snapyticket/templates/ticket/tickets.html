@@ -51,14 +51,13 @@
                     <img src="{{ obj.featured_image.url }}" class="sugg-img-ex" style="height: 90px !important;">
                 </div>
                 <div class="card-stacked">
-                    <div class="card-content-x">
+                    <div class="card-content-x" style="padding-top: 8px;">
                         <a href="#menu" style="position: absolute; right: 0;" data-target='{{ obj.id }}' class="dropdown-trigger right"><i class="material-icons orange-text">more_vert</i></a>
                         <ul id='{{ obj.id }}' style="border: 1px solid var(--core-grey);" class='dropdown-content z-depth-0'>
                             <li><a href="{{ obj.add_to_saved }}" class="color-main">save</a></li>
                         </ul>
                         <span class="sugg-date-ex">23th February 2020</span>
                         <p class="sugg-title-ex">{{ obj.title|truncatechars:45 }}</p>
-                        <span class="sugg-organizer-ex">By {{ obj.organizer.name|truncatechars:25 }}</span>
                     </div>
                 </div>
             </div>
