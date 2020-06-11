@@ -3,7 +3,7 @@ Organizer
     - functionality to email the organizers secret key to them when they register **
     - Organizer register functionality **
     - Verfied organizer only Mixin **
-    - Create Ticket functionality
+    - Create Ticket functionality 
     - Publish Verfied ticket only functionality
     - Custom actions in the admin
     - customize the admin

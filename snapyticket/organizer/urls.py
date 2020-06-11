@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import DashBoardView,OrganizerUpdate,RegisterOrganizerView, OrganizerEventsView, track_event, event_sales
+from .views import DashBoardView,OrganizerUpdate,RegisterOrganizerView, OrganizerEventsView, EventSales, TrackEventSales
 
 app_name = 'organizer'
 
@@ -17,9 +17,9 @@ urlpatterns = [
     path('events/', OrganizerEventsView.as_view(), name='events'),
 
     #* url to track selected event
-    path('event/track/<str:slug>/', track_event, name='track'),
+    path('event/track/<slug:slug>/', EventSales.as_view(), name='track'),
 
     #* url to view sales of selected event
-    path('event/sales/<str:slug>/', event_sales, name='sales'),
+    path('event/sales/<slug:slug>/', TrackEventSales.as_view(), name='sales'),
 
 ]

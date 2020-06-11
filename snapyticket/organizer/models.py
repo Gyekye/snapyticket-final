@@ -5,13 +5,12 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from django.core.mail import send_mail
-
 User = settings.AUTH_USER_MODEL
 
 class VerifiedOrganizersManager(models.Manager):
     #* returns all organizers with their verfied status as True
     def get_queryset(self):
-        return super().get_queryset().filter(is_approved=True, is_verfied = True)
+        return super().get_queryset().filter(is_approved=True, is_verified = True)
     
 class ApprovedOrganizersManager(models.Manager):
     #* returns all organizers with their approved status as True
@@ -69,6 +68,8 @@ class Organizer(models.Model):
     @property
     def is_approved_status(self):
         return self.is_approved
+    
+        
     
 # ? function to generate the secret key of organizers when  the save method is called
 def organizer_secret_key(sender, instance, *args, **kwargs):
