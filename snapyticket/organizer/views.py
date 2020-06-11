@@ -10,7 +10,8 @@ from django.urls import reverse_lazy
 from .forms import OrganizerRegisterForm
 from django.db.models import ObjectDoesNotExist
 from django.db import IntegrityError
-
+from django.core.mail import send_mail
+from django.conf import settings
 # view for displaying the dashboard to the organizer
 class DashBoardView(EventOrganizerRequired,LoginRequiredMixin,TemplateView):
     template_name = 'organizer/dashboard.html'
@@ -83,7 +84,14 @@ class RegisterOrganizerView(LoginRequiredMixin, View):
                 )
                 #* create a new organizer instance 
                 new_organizer.save()
-                messages.info(request,'registered wait for approval')
+                send_mail(
+                        'Organizer Registration Email',
+                        f'''Thank You for requesting to become an organizer to share content on this beautiful platform.We will send you another email to confirm your registration.Thank You {request.user.username}''',
+                        settings.EMAIL_HOST_USER,
+                        [new_organizer.email],
+                        fail_silently=False,
+                        )
+                messages.info(request,'registered wait for approval email')
                 return redirect('profile:user_profile')
                 
             except IntegrityError:

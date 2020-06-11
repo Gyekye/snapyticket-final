@@ -78,6 +78,7 @@ def organizer_secret_key(sender, instance, *args, **kwargs):
     if instance.is_approved_status == True:
         instance.secret_id = slugify(instance.user) + '-' + slugify(instance.name)
         
+        
     # ? if user has a secret Id , email it to them
     if instance.secret_id:
         # todo 
@@ -85,6 +86,15 @@ def organizer_secret_key(sender, instance, *args, **kwargs):
         send_mail(
         'Your Secret ID',
         f'This is your unique Secret ID:{instance.secret_id}',
+        settings.EMAIL_HOST_USER,
+        [instance.email],
+        fail_silently=False,
+        )
+        
+    if instance.is_verified_status == True:
+        send_mail(
+        'You Have Been verified',
+        f'You have been verified organizer {instance.name}',
         settings.EMAIL_HOST_USER,
         [instance.email],
         fail_silently=False,
