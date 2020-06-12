@@ -102,6 +102,8 @@ class OrganizerEventsView(EventOrganizerRequired, View):
 
 def track_event(request, slug):
     event = Ticket.objects.get(slug=slug)
+    
+    #* Gets the ordered ticket
     sales = TicketItem.objects.filter(ticket=event, ordered=True)
     context = {'event': event, 'sales': sales}
     return render(request, "organizer/track.html", context)
