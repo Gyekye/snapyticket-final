@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #* url patterns to the core app
     path('',include('core.urls',namespace='core')),
-    # url patterns to support app
+    #* url patterns to support app
     path('support/', include('support.urls', namespace='support')),
     #* url patterns to the ticket app
     path('ticket/',include('ticket.urls',namespace='ticket')),

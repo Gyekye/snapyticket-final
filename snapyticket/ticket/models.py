@@ -228,6 +228,7 @@ class TicketBag(models.Model):
             # appends the ticket item price to the total_price variable
             total_price += ticket_items.ticket_item_total_price()
         return total_price
+    
 
 class SavedTicket(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
