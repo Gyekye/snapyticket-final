@@ -96,7 +96,7 @@
 
         // The data for our dataset
         data: {
-            labels: [{% for sale in sales %}'{{ sale.user }}',{% endfor %}],
+            labels: [{% for sale in sales %}'{{ sale.user.id }}',{% endfor %}],
             datasets: [{
                 label: 'Sales',
                 backgroundColor: 'transparent',

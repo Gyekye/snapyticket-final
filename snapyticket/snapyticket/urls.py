@@ -34,6 +34,9 @@ urlpatterns = [
     path('user/profile/',include('userprofile.urls',namespace='profile')),
     #* url patterns to the organizer app
     path('user/organizer/dashboard/',include('organizer.urls',namespace='organizer')),
+    
+    #? Google login url
+    path('api/v1', include('social_django.urls', namespace='social')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
