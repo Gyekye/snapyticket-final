@@ -1,29 +1,28 @@
 // Note that anytime you make a change in any of the pages or static files you must update the version of either the staticCacheName or dynamicCacheName before you will see your changes (i.e 'site-static' must become 'site-static-v1' and vice versa)
 
 // Site-static caches the assets array
-const staticCacheName = 'site-static';
+const staticCacheName = 'site-static-v1';
 // Site-dynamic caches the other individual pages
 const dynamicCacheName = 'site-dynamic';
 // This array stores common pages and static files(other static files can be added)
 const assets = [
     '/',
-    '/index.html',
-    'auth/login.html',
-    'auth/signup.html',
-    'static/js/app.js',
-    'static/js/main.js',
-    'static/js/materialize.min.js',
-    'static/js/jquery-3.4.1.min.js',
-    'static/css/style.css',
-    'static/css/materialize.min.css',
-    'static/imgs/icons/evesbay.ico',
-    'static/imgs/icons/tickets.png',
-    'static/imgs/icons/shoppingBag.png',
-    'static/imgs/icons/trash.png',
-    'static/imgs/icons/user.png',
-    'static/imgs/icons/settings.svg',
-    'static/fonts/icon.css',
-    'static/fonts/default.css',
+    '/auth/login',
+    '/auth/register',
+    '/static/js/app.js',
+    '/static/js/main.js',
+    '/static/js/materialize.min.js',
+    '/static/js/jquery-3.4.1.min.js',
+    '/static/css/style.css',
+    '/static/css/materialize.min.css',
+    '/static/imgs/icons/evesbay.ico',
+    '/static/imgs/icons/tickets.png',
+    '/static/imgs/icons/shoppingBag.png',
+    '/static/imgs/icons/trash.png',
+    '/static/imgs/icons/user.png',
+    '/static/imgs/icons/settings.svg',
+    '/static/fonts/icon.css',
+    '/static/fonts/default.css',
 ];
 
 // Cache size limit function

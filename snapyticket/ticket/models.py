@@ -1,5 +1,6 @@
 from django.db import models
 from organizer.models import Organizer
+from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.core.mail import send_mail
@@ -157,7 +158,9 @@ class TicketItem(models.Model):
     slug = models.SlugField(default="Slug-Field")
     ticket_code = models.CharField(max_length=15,blank=True)
     
-    
+    # date ordered
+    ordered_on = models.DateTimeField(default=timezone.now)
+
     # named object representation
     def __str__(self):
         return f'{self.ticket.title}-{self.ticket_type}-{self.quantity}-{self.user.username}'
@@ -228,6 +231,7 @@ class TicketBag(models.Model):
             # appends the ticket item price to the total_price variable
             total_price += ticket_items.ticket_item_total_price()
         return total_price
+    
 
 class SavedTicket(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)

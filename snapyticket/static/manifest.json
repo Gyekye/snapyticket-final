@@ -1,7 +1,7 @@
 {
     "name": "Evesbay",
     "short_name": "Evesbay",
-    "start_url": "/templates/core/home.html",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#4F4BFF",
     "theme_color": "#000000",
@@ -27,7 +27,7 @@
             "sizes": "144x144"
         },
         {
-            "src": "/static/imgs/pwa-icons/152x152.png",
+            "src": "/snapyticket/static/imgs/pwa-icons/152x152.png",
             "type": "image/png",
             "sizes": "152x152"
         },

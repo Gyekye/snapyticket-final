@@ -48,9 +48,15 @@ INSTALLED_APPS = [
     'feedback.apps.FeedbackConfig',
     # PACKAGES
     'phone_field',
+    'social_django',
 ]
 # Linking to  Custom User model
 AUTH_USER_MODEL = 'authentication.User'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -137,8 +145,8 @@ LOGOUT_REDIRECT_URL = 'auth:user_login'
 LOGIN_URL = 'auth:user_login'
 
 # FLUTTERWAVE PAYMENTS
-RAVE_PUBLIC_KEY = 'FLWPUBK_TEST-914edb532df870a7867d127a2a9fd28d-X'
-RAVE_SECRET_KEY = 'FLWSECK_TEST-0d2cc4f5a0787d8fd5f59efff8d379a6-X'
+RAVE_PUBLIC_KEY = 'FLWPUBK_TEST-41b459e92077082772d4c7d741e4d95f-X'
+RAVE_SECRET_KEY = 'FLWSECK_TEST-7b8d42b4a55b4ccbe77b574f50c05f59-X'
 RAVE_CURRENCY = 'GHS'
 
 # Static files (CSS, JavaScript, Images)

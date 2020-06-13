@@ -2,6 +2,7 @@ import qrcode
 import random
 import string
 from PIL import Image
+from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView,RedirectView
@@ -21,32 +22,25 @@ def create_ref_code():
 
 class IndexView(TemplateView):
     template_name = 'core/index.html'
-    """
-    Render a template. Pass keyword arguments from the URLconf to the context.
-    """
     def get(self, request, *args, **kwargs):
+        
         if self.request.user.is_authenticated:
             return redirect('core:home')
         context = self.get_context_data(**kwargs)
+        
         return self.render_to_response(context)
  
  
 class PaymentView(LoginRequiredMixin,TemplateView):
     template_name = 'core/payment.html'
-    """
-    Render a template. Pass keyword arguments from the URLconf to the context.
-    """
     def get(self, request, *args, **kwargs):
         
         context = self.get_context_data(**kwargs)
         context['pubkey'] = settings.RAVE_PUBLIC_KEY
         context['currency'] =  settings.RAVE_CURRENCY
-
         user_order = TicketBag.objects.filter(user=request.user,ordered=False)[0]
-
         user_order.order_ref_code = create_ref_code()
         user_order.save()
-
         context['user_order'] = user_order
         
         return self.render_to_response(context)
@@ -74,6 +68,7 @@ def  payment_sucessful(request, order_id):
             # sets the ticket item ordered to true
             ticketitems.ordered = True
             ticketitems.ticket_code = create_ref_code()
+            ticketitems.ordered_on = timezone.now()
             # saves the ticket item order 
             ticketitems.save()
             # Qr code generation logic below
@@ -166,21 +161,25 @@ class FailedView(LoginRequiredMixin,TemplateView):
  
 # Home View
 class HomeView(TemplateView):
-    
     template_name = 'core/home.html'
     
     # renders dynamic data to the home page
     def get(self, request, *args, **kwargs):
+        
         context = self.get_context_data(**kwargs)
         context['most_featured_events'] = Ticket.objects.filter(is_most_featured=True)
         context['featured_events'] = Ticket.objects.filter(is_featured=True)
-        context['most_suggested_summit'] = Ticket.objects.get(is_most_suggested=True, category='ST')
+        context['most_suggested_summit'] = Ticket.summits.get(is_most_suggested=True)
+        
         return self.render_to_response(context)
 
 
 
 class AllOrganizersView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
-        organizers = Organizer.objects.filter(is_verified=True)
+        
+        #* List of verified organizers
+        organizers = Organizer.verified.all()
         context = {'organizers': organizers}
+        
         return render(self.request, 'organizer/organizers.html', context)
