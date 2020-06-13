@@ -1192,6 +1192,26 @@ img.suggested-img {
     color: var(--main-grey);
 }
 
+.price-content-wrapper {
+    width: 85%;
+    height: 180px;
+    position: absolute;
+    z-index: 1;
+}
+
+.price-content {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-family: Default Font Bold;
+    color: #fff;
+    font-size: 30px;
+    top: 70px;
+    margin: auto;
+}
+
 
 /* ANIMATIONS */
 

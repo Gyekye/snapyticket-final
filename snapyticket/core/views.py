@@ -2,6 +2,7 @@ import qrcode
 import random
 import string
 from PIL import Image
+from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView,RedirectView
@@ -67,6 +68,7 @@ def  payment_sucessful(request, order_id):
             # sets the ticket item ordered to true
             ticketitems.ordered = True
             ticketitems.ticket_code = create_ref_code()
+            ticketitems.ordered_on = timezone.now()
             # saves the ticket item order 
             ticketitems.save()
             # Qr code generation logic below

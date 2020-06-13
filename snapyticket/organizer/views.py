@@ -117,9 +117,20 @@ class EventSales(TemplateView):
     def get(self,request,slug,*args,**kwargs):
         event_ticket = Ticket.objects.get(slug=slug,organizer=self.request.user.organizer)
         context = self.get_context_data(**kwargs)
+
+        #* generate the total ticket sales revenue
+        total_revenue = 0
+        for ordered_ticket_revenue in TicketItem.objects.filter(
+            ticket__organizer=self.request.user.organizer,ticket=event_ticket):
+            total_revenue += ordered_ticket_revenue.ticket_item_price()
+        #* end
+        #? call total_revenue in the html to get the total revenue of an organizer
+        
+        context['total_revenue'] = total_revenue
         context['sales'] = TicketItem.objects.filter(ticket=event_ticket,ordered=True)
+        context['event'] = event_ticket
         return self.render_to_response(context)
-    
+        
 
 class TrackEventSales(TemplateView):
     template_name = 'organizer/track.html'
@@ -130,13 +141,32 @@ class TrackEventSales(TemplateView):
         context = self.get_context_data(**kwargs)
         #* generate the total ticket sales revenue
         total_revenue = 0
-        for ordered_ticket_revenue in TicketBag.ordered_ticket_bags.filter(
-            tickets__ticket__organizer=self.request.user.organizer):
-            total_revenue += ordered_ticket_revenue.total_ticket_bag_price()
+        for ordered_ticket_revenue in TicketItem.objects.filter(
+            ticket__organizer=self.request.user.organizer,ticket=event_ticket):
+            total_revenue += ordered_ticket_revenue.ticket_item_price()
         #* end
         #? call total_revenue in the html to get the total revenue of an organizer
         
-        context['sales'] = TicketItem.objects.filter(ticket=event_ticket,ordered=True)
+        context['sales'] = TicketItem.objects.filter(ticket=event_ticket,ordered=True).order_by('-ordered_on')
+        context['graph_sales'] = TicketItem.objects.filter(ticket=event_ticket,ordered=True)
+        context['total_revenue'] = total_revenue
+        context['event'] = event_ticket
+        return self.render_to_response(context)
+
+class RequestPaymentView(TemplateView):
+    template_name = 'organizer/request-payment.html'
+
+    # renders dynamic data to the home page
+    def get(self,request,slug,*args,**kwargs):
+        event_ticket = Ticket.objects.get(slug=slug,organizer=self.request.user.organizer)
+        context = self.get_context_data(**kwargs)
+        #* generate the total ticket sales revenue
+        total_revenue = 0
+        for ordered_ticket_revenue in TicketItem.objects.filter(
+            ticket__organizer=self.request.user.organizer,ticket=event_ticket):
+            total_revenue += ordered_ticket_revenue.ticket_item_price()
+        #* end
+        
         context['total_revenue'] = total_revenue
         context['event'] = event_ticket
         return self.render_to_response(context)

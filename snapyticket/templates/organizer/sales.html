@@ -27,12 +27,17 @@
     <br><br>
     <div class="tit-actions">
         <div class="tit-actions-content">
-            <a href="" class="btn full-width-btn bg-core white-text waves-effect z-depth-0">Request Payment</a>
+            <a href="{% url 'organizer:request-payment' event.slug %}" class="btn full-width-btn bg-core white-text waves-effect z-depth-0">Request Payment</a>
         </div>
     </div>
     <div class="main-mobile-content">
         <br>
-        <img src="{% static 'imgs/core/price.png' %}" style="width: 100%;" alt="">
+        <div class="price-content-wrapper">
+            <div class="price-content">
+                GH₵{{ total_revenue }}.00
+            </div>
+        </div>
+        <img src="{% static 'imgs/core/price.png' %}" style="width: 100%; height: 180px" alt="">
         <div class="pad-x"></div>
         <div class="heading-main">Sales History</div>
         <p style="margin-top: 0; color: #68739D">History of ticket sales</p>
