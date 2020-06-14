@@ -1414,7 +1414,7 @@ div.header-banner {
 
 div.heading-banner {
     font-family: Main Font;
-    font-size: 55px;
+    font-size: 48px;
     letter-spacing: 2px;
 }
 
@@ -1432,4 +1432,11 @@ a.default-btn-desk:focus {
     padding-left: 30px;
     padding-right: 30px;
     background: var(--core-color);
+}
+
+div.main-banner {
+    padding-top: 170px;
+    padding-bottom: 120px;
+    padding-left: 3%;
+    padding-right: 3%;
 }
