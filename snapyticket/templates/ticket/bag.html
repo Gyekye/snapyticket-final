@@ -50,7 +50,7 @@
             <span class="ticket-x-t">
                 Choose Your Ticket Type
             </span>
-            <br><select id="selFruit" name="ticket_type" class="browser-default">
+            <br><select id="selFruit" name="ticket_type" class="browser-default" style="padding-top: 0;">
                 {% for t in ticket.ticketvariation_set.all %}
                 <option value="{{t.variation}}">{{t.variation}} - ₵{{ t.price }}</option>
                 {%endfor%}
