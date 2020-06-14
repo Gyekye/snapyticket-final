@@ -1440,3 +1440,56 @@ div.main-banner {
     padding-left: 3%;
     padding-right: 3%;
 }
+
+svg#progressSVG {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    z-index: 1000;
+}
+
+svg#progressSVG circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #191919;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transform: translate(5px 5px);
+}
+
+svg#progressSVG circle:nth-child(2) {
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+}
+
+.progressCard:nth-child(1) svg#progressSVG circle:nth-child(2) {
+    stroke: var(--core-color);
+}
+
+.progressCard:nth-child(2) svg#progressSVG circle:nth-child(2) {
+    stroke: var(--main-orange);
+}
+
+.progressCard:nth-child(3) svg#progressSVG circle:nth-child(2) {
+    stroke: var(--core-red);
+}
+
+.progress-container {
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.progress-container .progressCard {
+    position: relative;
+    width: 250px;
+    background: rgb(224, 228, 230);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    overflow: hidden;
+    transform: .5s;
+}
