@@ -15,9 +15,9 @@
                 <li><a href="{% url 'ticket:tickets' %}"><i class="material-icons left" style="transform: translateY(5px); font-size: 19px;">search</i> Search</a></li>
                 <li><a href="{% url 'core:index' %}">Home</a></li>
                 <li><a href="{% url 'core:home' %}">Browse Events</a></li>
-                <li><a href="">Login</a></li>
+                <li><a href="{% url 'auth:user_login' %}">Login</a></li>
                 <li>
-                    <a href="" class="btn z-depth-0 bg-core waves-effect">Get Started</a>
+                    <a href="{% url 'auth:user_register' %}" class="btn z-depth-0 bg-core waves-effect">Get Started</a>
                 </li>
             </ul>
         </nav>
@@ -35,7 +35,7 @@
                         sint!
                     </p>
                     <p>
-                        <a href="" class="btn default-btn-desk waves-effect z-depth-0">Browse Events</a>
+                        <a href="{% url 'core:home' %}" class="btn default-btn-desk waves-effect z-depth-0">Browse Events</a>
                     </p>
                 </div>
                 <div class="col s1"></div>
