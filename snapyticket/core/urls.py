@@ -9,7 +9,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     
     #* url to display the home page 
-    path('home/', HomeView.as_view(), name='home'),
+    path('browse/', HomeView.as_view(), name='home'),
     
     # url to view all organizers
     path('organizer/all/', AllOrganizersView.as_view(), name='organizers'),

@@ -28,7 +28,7 @@
                 {% endfor %}
             </p>
             {% endfor %}
-            <div class="upload-image-overlay">
+            <div class="upload-image-overlay" style="margin-bottom: 120px;">
                 <div class="upload-image-content center-align">
                     {% if request.user.profile_image %}
                     <img id='output' src="{{request.user.profile_image.url}}" style="width: 100px; border-radius: 500px; margin-bottom: 5px; height: 100px; object-fit: cover;"><br>

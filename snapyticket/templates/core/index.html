@@ -1,6 +1,236 @@
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 <!-- TItle Content -->
 {% block titlecontent %}Evesbay - Welcome to your #1 Ticketting PlatForm{% endblock titlecontent %}
+
+<!-- Desktop Content -->
+{% block desktopcontent %} {% load static %}
+
+<section class="desktop-content">
+    <header class="desktop-header">
+        <nav class="desktop-nav z-depth-0 transparent">
+            <a href="" class="brand-logo desktop color-main">
+                <img src="{% static 'imgs/core/logo-white.png' %}" alt="" class="left">
+            </a>
+            <ul class="right">
+                <li><a href="{% url 'ticket:tickets' %}"><i class="material-icons left" style="transform: translateY(5px); font-size: 19px;">search</i> Search</a></li>
+                <li><a href="{% url 'core:index' %}">Home</a></li>
+                <li><a href="{% url 'core:home' %}">Browse Events</a></li>
+                <li><a href="{% url 'auth:user_login' %}">Login</a></li>
+                <li>
+                    <a href="{% url 'auth:user_register' %}" class="btn z-depth-0 bg-core waves-effect">Get Started</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="heading-banner-content">
+        <div class="header-banner">
+            <div class="row">
+                <div class="col s5">
+                    <br><br><br>
+                    <div class="heading-banner white-text">
+                        Design, Built and Customized For All
+                    </div>
+                    <p class="heading-banner-helper-text">
+                        Lorem ipscitationem maxime omnis vitae, ut ea ipsa evesapiente reiciend adipisicing elit. Porro soluta neque aliquam veniam dolorem impedit minima beatae? Molestiae, repudiandae similique animi incidunt delectus provident omnis iste beatae vitae culpa
+                        sint!
+                    </p>
+                    <p>
+                        <a href="{% url 'core:home' %}" class="btn default-btn-desk waves-effect z-depth-0">Browse Events</a>
+                    </p>
+                </div>
+                <div class="col s1"></div>
+                <div class="col s6">
+                    <img src="{% static 'imgs/core/built.svg' %}" class="responsive-img" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-banner">
+        <div class="row">
+            <div class="col s6">
+                <img src="{% static 'imgs/core/stressx.svg' %}" class="responsive-img" alt="">
+            </div>
+            <div class="col s1"></div>
+            <div class="col s5">
+                <br><br><br>
+                <div class="heading-banner color-main">
+                    No More Stress For Your Event Tickets
+                </div>
+                <p class="heading-banner-helper-text grey-text text-darken-2">
+                    Lorem ipscitationem maxime omnis vitae, ut ea ipsa evesapiente reiciend adipisicing elit. Porro soluta neque aliquam veniam dolorem impedit minima beatae? Molestiae, repudiandae similique animi incidunt delectus provident omnis iste beatae vitae culpa
+                    sint!
+                </p>
+                <p>
+                    <a href="{% url 'auth:user_register' %}" class="btn default-btn-desk waves-effect z-depth-0">Let's Get started</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="heading-banner-content">
+        <div class="header-banner">
+            <div class="row">
+                <div class="col s5">
+                    <br><br><br><br>
+                    <div class="heading-banner white-text">
+                        A whole New Level For All Organizer
+                    </div>
+                    <p class="heading-banner-helper-text">
+                        Lorem ipscitationem maxime omnis vitae, ut ea ipsa evesapiente reiciend adipisicing elit. Porro soluta neque aliquam veniam dolorem impedit minima beatae? Molestiae, repudiandae similique animi incidunt delectus provident omnis iste beatae vitae culpa
+                        sint!
+                    </p>
+                    <p>
+                        <a href="{% url 'auth:user_register' %}" class="btn default-btn-desk waves-effect z-depth-0">Let's Get started</a>
+                    </p>
+                </div>
+                <div class="col s1"></div>
+                <div class="col s6">
+                    <img src="{% static 'imgs/core/collection.png' %}" class="responsive-img" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-banner bg-main-pic">
+        <div class="row">
+            <div class="col s3"></div>
+            <div class="col s6">
+                <div class="center-align">
+                    <div class="heading-banner">Get Started As ..</div>
+                </div>
+                <br><br>
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col s1"></div>
+                        <div class="col s5">
+                            <a href="{% url 'auth:user_register' %}">
+                                <div class="card shadow-x">
+                                    <div class="card-content center-align">
+                                        <img src="{% static 'imgs/core/organizer.png' %}" alt="">
+                                        <br><br>
+                                        <div class="heading-main">
+                                            Organizer
+                                        </div>
+                                        <p class="heading-banner-helper-text grey-text text-darken-2">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, saepe.
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s5">
+                            <a href="{% url 'auth:user_register' %}">
+                                <div class="card shadow-x">
+                                    <div class="card-content center-align">
+                                        <img src="{% static 'imgs/core/buyer.png' %}" alt="">
+                                        <br><br>
+                                        <div class="heading-main">
+                                            End User
+                                        </div>
+                                        <p class="heading-banner-helper-text grey-text text-darken-2">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, saepe.
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s1"></div>
+                    </div>
+                    <br>
+                    <p class="center-align heading-banner-helper-text color-main">
+                        To give a customized experience we need to know your status
+                    </p>
+                </div>
+            </div>
+            <div class="col s3"></div>
+        </div>
+    </div>
+    <div class="main-banner grey lighten-5">
+        <div class="row">
+            <div class="col s3"></div>
+            <div class="col s6">
+                <div class="heading-main center-align">Interactive Dashboard To Track Sales</div>
+                <br>
+                <img src="{% static 'imgs/core/dashboard.png' %}" class="responsive-img" alt="">
+                <p class="center-align">
+                    <a href="" class="btn default-btn-desk z-depth-0 waves-effect">Trak My Sales</a>
+                </p>
+            </div>
+            <div class="col s3"></div>
+        </div>
+    </div>
+    <footer class="desktop-footer">
+        <div class="desktop-footer-content">
+            <div class="row">
+                <div class="col s3">
+                    <div class="heading-main white-text">Evesbay</div>
+                    <br>
+                    <a href="{% url 'support:about' %}" class="footer-link">About us</a>
+                    <a href="{% url 'support:contact' %}" class="footer-link">Contact us</a>
+                    <a href="" class="footer-link">Newsroom</a>
+                    <a href="" class="footer-link">Browse Events</a>
+                    <a href="" class="footer-link">Universal Terms and Condition</a>
+                    <a href="" class="footer-link">Privacy Policy</a>
+                </div>
+                <div class="col s3">
+                    <div class="heading-main white-text">Support</div>
+                    <br>
+                    <a href="" class="footer-link">Community</a>
+                    <a href="" class="footer-link">Report Abuse</a>
+                    <a href="" class="footer-link">Contact Us</a>
+                    <a href="" class="footer-link">How to Use QR Codes Based Tickets</a>
+                    <a href="" class="footer-link">Become an Organizer</a>
+                </div>
+                <div class="col s3">
+                    <div class="heading-main white-text">Accounts</div>
+                    <br>
+                    <a href="" class="footer-link">My Evesbay Account</a>
+                    <a href="" class="footer-link">Check My Orders</a>
+                    <a href="" class="footer-link">View my ticket</a>
+                </div>
+                <div class="col s3">
+                    <div class="heading-main white-text">Shopping</div>
+                    <br>
+                    <a href="" class="footer-link">My Ticket Bag</a>
+                    <a href="" class="footer-link">Look for an Organzier</a>
+                    <a href="" class="footer-link">My Saved Tickets</a>
+                    <a href="" class="footer-link">Browse Events</a>
+                </div>
+            </div>
+            <br>
+            <div class="divider-desk"></div>
+            <br><br>
+            <div class="row">
+                <div class="col s6">
+                    <img src="{% static 'imgs/core/logo-white.png' %}" style="width: 120px;" alt="">
+                    <br><br>
+                    <span class="white-text" style="font-family: Regular Font Medium">
+                        Copyright © 2020 - 2020 EvesBay Community, GHN. All Rights Reserved.
+                    </span>
+                    <br><br>
+                    <span class="grey-text">Use of this Site is subject to express terms of use. By using this site, you signify that you agree to be bound by these Universal Terms of Service.</span>
+                </div>
+                <div class="col s6">
+                    <a href="" class="right white-text" style="margin-left: 30px;"><i class="fa fa-facebook"></i></a>
+                    <a href="" class="right white-text" style="margin-left: 30px;"><i class="fa fa-instagram"></i></a>
+                    <a href="" class="right white-text" style="margin-left: 30px;"><i class="fa fa-twitter"></i></a>
+                    <a href="" class="right white-text" style="margin-left: 30px;"><i class="fa fa-telegram"></i></a>
+                    <span class="white-text" style="font-family: Regular Font Medium">
+                        Let's Get Social
+                    </span>
+                    <br><br>
+                    <div class="pad-x"></div>
+                    <a href="" class="footer-link">info@snapyticket.com</a>
+                    <a href="" class="footer-link">+(233) 54 253-2383</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</section>
+
+
+
+{% endblock desktopcontent %}
+<!-- End of Desktop Content -->
+
 <!-- Mobile Content  -->
 {% block mobilecontent %}
 <!-- Load Static Files -->
@@ -51,11 +281,11 @@
         </div>
     </div>
     <div class="nextSection">
-        <div class="IndexImgX">
-            <img src="{% static 'imgs/core/relax.svg' %}" class="responsive-img" style="position: absolute; top: 100px;" alt="">
-        </div>
+        <center>
+            <img src="{% static 'imgs/core/relax.svg' %}" class="responsive-img" style=" margin-top: 100px; width: 90%;" alt="">
+        </center>
         <div class="main-mobile-content cx">
-            <div class="heading-main">Get your tickets with ease</div>
+            <div class="heading-main">No more stress for tickets</div>
             <p class="heading-main-helper-text">
                 Stress no more because now with Evesbay, you can get any ticket to all your favourite events with ease
             </p>
@@ -69,6 +299,7 @@
         {% include 'core-snippets/indexImg.html' %}
     </div>
     <div class="main-mobile-content cx">
+        <br><br>
         <div class="heading-main">Designed and Built for All</div>
         <p class="heading-main-helper-text">
             Evesbay has a unique and very simple design which can be used by everyone on every device easily

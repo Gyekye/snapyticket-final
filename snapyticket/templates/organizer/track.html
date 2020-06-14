@@ -60,7 +60,7 @@
                         {% endif %}
                     </div>
                     <div class="sales-amount-container">
-                        <div class="sales-amount">GH₵{{ sale.ticket_item_price }}.00</div>
+                        <div class="sales-amount">₵{{ sale.ticket_item_price }}.00</div>
                         <p class="sales-status">Succesful</p>
                     </div>
                 </div>
@@ -96,13 +96,13 @@
 
         // The data for our dataset
         data: {
-            labels: [{% for sale in sales %}'{{ sale.user.id }}', {% endfor %}],
+            labels: [{% for sale in sales %}'{{ sale.user.id }}',{% endfor %}],
             datasets: [{
                 label: 'Sales',
                 backgroundColor: 'transparent',
                 borderColor: '#4F4BFF',
                 pointBorderWidth: 3,
-                data: [{% for graph_sale in graph_sales %} {{graph_sale.ticket_item_price}}, {% endfor %}]
+                data: [{% for graph_sale in graph_sales %}{{ graph_sale.ticket_item_price }},{% endfor %}]
             }]
         },
         options: {
@@ -114,9 +114,9 @@
                     }
                 }],
                 yAxes: [{
-                    ticks: {
+		    ticks: {
                         beginAtZero: true
-                    },
+            	    },
                     gridLines: {
                         display: false
                     }

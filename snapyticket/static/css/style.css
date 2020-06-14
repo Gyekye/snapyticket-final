@@ -7,6 +7,10 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    background: fdfdfd;
+}
+
 @media screen and (device-aspect-ratio: 2/3) {
     select,
     textarea,
@@ -105,13 +109,13 @@ html {
 }
 
 input,
-textarea {
+textarea,
+select {
     height: 50px !important;
     padding-top: 20px;
-    box-shadow: 0 0 .2rem rgb(124, 121, 121) !important;
-    border-radius: 3px !important;
+    box-shadow: -3px -3px 4px #ffffff73, 1px 1px 7px 2px rgba(156, 166, 184, 0.288) !important;
+    border-radius: 0px !important;
     font-family: Regular Font Medium;
-    border: 1px solid var(--main-black);
     text-indent: 12px;
     transition: 3.9s;
     font-size: .89rem !important;
@@ -239,16 +243,16 @@ input[type="password"] {
     color: var(--main-black);
 }
 
-input:focus,
-textarea:focus {
-    border: 1px solid var(--core-grey) !important;
-    box-shadow: 0 0 0 .03rem var(--main-black) !important;
-}
-
 textarea {
     height: 100px !important;
     outline: none !important;
     border-radius: 0 !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    box-shadow: 0 0 10px 0 inset rgba(156, 166, 184, 0.288) !important;
 }
 
 ul.errorlist.nonfield li {
@@ -492,7 +496,7 @@ div.padding-xs {
 div.main-mobile-content {
     padding: 27px;
     padding-top: 0;
-    background: white;
+    background: #fdfdfd;
 }
 
 .heading-helper {
@@ -611,7 +615,8 @@ footer.mobile-footer {
 }
 
 .default-btn:focus {
-    background: #000 !important
+    background: #000 !important;
+    color: white !important;
 }
 
 .default-btn-small:focus {
@@ -680,14 +685,14 @@ footer.mobile-footer {
 .full-width-btn {
     width: 100%;
     height: 45px;
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 10px 1px rgba(0, 0, 0, .1);
+    box-shadow: -3px -3px 4px #ffffff73, 1px 1px 7px 2px rgba(156, 166, 184, 0.288) !important;
     padding-top: 3px;
     font-family: Default Font Bold;
     color: var(--main-black);
 }
 
 .full-width-btn:focus {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 1px 1px 20px 1px rgba(0, 0, 0, .1) !important;
+    box-shadow: 0 0 10px 0 inset rgba(156, 166, 184, 0.288) !important;
     background: black;
 }
 
@@ -740,7 +745,7 @@ p.Password label {
     height: 100px;
     margin-top: -40px;
     position: relative;
-    margin-bottom: 135px;
+    margin-bottom: 235px;
 }
 
 .upload-image-content {
@@ -748,7 +753,7 @@ p.Password label {
     right: 0;
     left: 0;
     top: 20px;
-    width: 100px;
+    width: 100% !important;
     margin: 0 auto;
 }
 
@@ -1158,6 +1163,7 @@ img.suggested-img {
 }
 
 .bg-core,
+.bg-core:hover,
 .bg-core:focus {
     background: var(--core-color);
 }
@@ -1376,4 +1382,90 @@ img.suggested-img {
     100% {
         transform: rotateZ(0);
     }
+}
+
+
+/* Desktop */
+
+a.brand-logo.desktop img {
+    width: 120px;
+    margin-top: 20px;
+    margin-left: 6%;
+}
+
+header.desktop-header {
+    padding-left: 3%;
+    width: 100%;
+    position: absolute;
+    padding-right: 3%;
+    padding-top: 10px;
+}
+
+div.heading-banner-content {
+    background: var(--main-black);
+}
+
+div.header-banner {
+    padding-top: 170px;
+    padding-bottom: 120px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+div.heading-banner {
+    font-family: Main Font;
+    font-size: 48px;
+    letter-spacing: 2px;
+}
+
+p.heading-banner-helper-text {
+    font-size: 17px;
+    color: #c4c2c2;
+    line-height: 35px;
+}
+
+a.default-btn-desk,
+a.default-btn-desk:hover,
+a.default-btn-desk:focus {
+    height: 60px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: var(--core-color);
+}
+
+div.main-banner {
+    padding-top: 170px;
+    padding-bottom: 120px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.bg-main-pic {
+    background: url(/static/imgs/core/bg-main.png);
+    background-size: cover;
+}
+
+footer.desktop-footer {
+    background: #333333;
+    padding-top: 130px;
+    padding-bottom: 130px;
+}
+
+.desktop-footer-content {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.footer-link {
+    display: block;
+    color: rgb(150, 149, 158);
+    font-family: Regular Font Medium;
+    padding-bottom: 15px;
+}
+
+.divider-desk {
+    height: 1px;
+    width: 100%;
+    background: rgb(80, 73, 73);
 }

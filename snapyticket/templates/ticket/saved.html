@@ -29,22 +29,16 @@
         <div class="main-mobile-content">
             <div class="heading-main">Saved Tickets</div>
             <br> {% for saved_ticket in saved_tickets %} {% for ticket in saved_ticket.ticket.all %}
-            <div class="card horizontal z-depth-0">
+            <div class="pad-x"></div>
+            <div class="card z-depth-0">
                 <div class="card-image">
-                    <a href="{{ ticket.get_absolute_url }}" class="btn default-btn-sugg z-depth-0">Get Now</a>
-                    <img src="{{ ticket.featured_image.url }}" class="sugg-img-ex" style="height: 90px !important;">
+                    <img src="{{ ticket.featured_image.url }}" class="suggested-img">
                 </div>
-                <div class="card-stacked">
-                    <div class="card-content-x">
-                        <a href="#menu" style="position: absolute; right: 0;" data-target='{{ ticket.id }}' class="dropdown-trigger right"><i class="material-icons orange-text">more_vert</i></a>
-                        <ul id='{{ ticket.id }}' style="border: 1px solid var(--core-grey);" class='dropdown-content z-depth-0'>
-                            <li><a href="{{ ticket.add_to_saved }}" class="color-main">remove</a></li>
-                        </ul>
-                        <span class="sugg-date-ex">{{ ticket.date_deadline }}</span>
-                        <p class="sugg-title-ex">{{ ticket.title|truncatechars:50 }}</p>
-                        <span class="sugg-organizer-ex">By {{ ticket.organizer.name|truncatechars:25 }}</span>
-                        <br><br>
-                    </div>
+                <div class="card-content-x">
+                    <p class="suggested-date">{{ ticket.start_date_time.date }}</p>
+                    <span class="suggested-title">{{ ticket.title }}</span>
+                    <br><a href="{{ ticket.add_to_saved }}" class="btn btn-floating right white z-depth-0 sugg-fav" style="border: 1.4px solid var(--main-black)"><i class="material-icons color-main">close</i> Remove</a>
+                    <a href="{{ticket.get_absolute_url}}" class="btn default-btn z-depth-0">Get Now</a>
                 </div>
             </div>{% empty %} <br>
             <center>
