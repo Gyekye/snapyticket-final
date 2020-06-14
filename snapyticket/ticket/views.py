@@ -180,6 +180,7 @@ def ticket_bag_summary(request):
     context = {'ticket_bag': user_ticket_bag}
     return render(request, 'ticket/ticket_bag_summary.html', context)
 
+@login_required
 def add_to_saved(request,slug):
     # gets a ticket with the slug
     ticket_to_save = Ticket.objects.get(slug=slug)
@@ -199,11 +200,11 @@ def add_to_saved(request,slug):
             messages.success(request, "Added To Saved Tickets")
             return redirect('ticket:saved')
     # create a new saved ticket queryset if some doesnt exist
-    except ObjectDoesNotExist:
-        saved_ticket_bag = SavedTicket.objects.create(user=request.user,is_saved=True)
-        saved_ticket_bag.save()
-        saved_ticket_bag.ticket.add(ticket_to_save)
-        saved_ticket_bag.save()
+    except (ObjectDoesNotExist,TypeError):
+        new_saved_ticket_bag = SavedTicket.objects.create(user=request.user,is_saved=True)
+        new_saved_ticket_bag.save()
+        new_saved_ticket_bag.ticket.add(ticket_to_save)
+        new_saved_ticket_bag.save()
         messages.success(request, "Added To Saved Tickets")
         return redirect('ticket:saved')
 

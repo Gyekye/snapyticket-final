@@ -85,7 +85,7 @@
     <div class="main-mobile-content">
     </div>
 </section>
-{% block extrafooter%}
+{% block extrafooter %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
     Chart.defaults.global.defaultFontFamily = 'Regular Font Medium';
@@ -96,25 +96,13 @@
 
         // The data for our dataset
         data: {
-            labels: [{ %
-                    for sale in sales %
-                }
-                '{{ sale.user.id }}', { % endfor %
-                }
-            ],
+            labels: [{% for sale in sales %}'{{ sale.user.id }}', {% endfor %}],
             datasets: [{
                 label: 'Sales',
                 backgroundColor: 'transparent',
                 borderColor: '#4F4BFF',
                 pointBorderWidth: 3,
-                data: [{ %
-                    for graph_sale in graph_sales %
-                } {
-                    {
-                        graph_sale.ticket_item_price
-                    }
-                }, { % endfor %
-                }]
+                data: [{% for graph_sale in graph_sales %} {{graph_sale.ticket_item_price}}, {% endfor %}]
             }]
         },
         options: {
@@ -137,5 +125,6 @@
         }
     });
 </script>
-{% endblock extrafooter%} {% endblock mobilecontent %}
+{% endblock extrafooter %}
+{% endblock mobilecontent %}
 <!-- Endblock mobile content  -->

@@ -8,6 +8,7 @@ from ticket.models import TicketBag,TicketItem
 from authentication.forms import UserChangeForm
 from django.conf import settings
 from .forms import OrganizerRegisterForm
+from django.db.models import ObjectDoesNotExist
 
 User = get_user_model()
 
@@ -31,8 +32,8 @@ class ProfileChangeView(LoginRequiredMixin, View):
         if form.is_valid():
             #* if form is valid check to see if the phone number consist of 10 digits
             user_phone = form.cleaned_data.get('phone')
-            if len(user_phone) > 10:
-                messages.info(request, 'Phone number must be 10 digits')
+            if len(user_phone) > 10 or len(user_phone) < 10:
+                messages.info(request, 'Phone number must be atleast 10 digits')
                 return redirect('profile:update')
             form.save()
             messages.success(request, 'You have update your profile')
@@ -45,36 +46,43 @@ class ProfileChangeView(LoginRequiredMixin, View):
     
 class UserTicketsList(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        user_ticket_bag = TicketBag.ordered_ticket_bags.filter(
-            user=request.user,
-            ordered=True
-            ).order_by('-created_on')
+        try:
+            user_ticket_bag = TicketBag.ordered_ticket_bags.filter(
+                user=request.user,
+                ordered=True
+                ).order_by('-created_on')
+        except ObjectDoesNotExist:
+            messages.success(request,'You have not bought any ticket yet')
+            return redirect('core:home')
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/tickets.html',context)
 
 
 class UserAllTicketsList(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
-        all_tickets = TicketItem.objects.filter(
-            user=request.user,
-            ordered=True
-            )
+        try:
+            all_tickets = TicketItem.objects.filter(
+                user=request.user,
+                ordered=True
+                )
+        except ObjectDoesNotExist:
+            messages.success(request,'You have not bought any ticket yet')
+            return redirect('core:home')
         context = {'all_tickets':all_tickets}
         return render(request,'profile/all-tickets.html',context)
     
         
 class UserTicketsDetail(LoginRequiredMixin,View):
     def get(self, request,order_ref_code,*args, **kwargs):
-        user_ticket_bag = TicketBag.ordered_ticket_bags.get(
-            order_ref_code=order_ref_code,
-            user=request.user
-            )
+        try:
+            user_ticket_bag = TicketBag.ordered_ticket_bags.get(
+                order_ref_code=order_ref_code,
+                user=request.user
+                )
+        except ObjectDoesNotExist:
+            messages.success(request,'You have not bought any ticket yet')
+            return redirect('core:home')
         context = {'ordered_ticket_bag':user_ticket_bag}
         return render(request,'profile/ticket-details.html',context)
         
 
-class OrganizerRegisterView(LoginRequiredMixin, View):
-    def get(self, *args, **kwargs):
-        form = OrganizerRegisterForm()
-        context = {'form': form}
-        return render(self.request, 'profile/organizer-register.html', context)
