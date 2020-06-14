@@ -1163,6 +1163,7 @@ img.suggested-img {
 }
 
 .bg-core,
+.bg-core:hover,
 .bg-core:focus {
     background: var(--core-color);
 }
@@ -1381,4 +1382,54 @@ img.suggested-img {
     100% {
         transform: rotateZ(0);
     }
+}
+
+
+/* Desktop */
+
+a.brand-logo.desktop img {
+    width: 120px;
+    margin-top: 20px;
+    margin-left: 6%;
+}
+
+header.desktop-header {
+    padding-left: 3%;
+    width: 100%;
+    position: absolute;
+    padding-right: 3%;
+    padding-top: 10px;
+}
+
+div.heading-banner-content {
+    background: var(--main-black);
+}
+
+div.header-banner {
+    padding-top: 170px;
+    padding-bottom: 180px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+div.heading-banner {
+    font-family: Main Font;
+    font-size: 55px;
+    letter-spacing: 2px;
+}
+
+p.heading-banner-helper-text {
+    font-size: 17px;
+    color: #c4c2c2;
+    line-height: 35px;
+}
+
+a.default-btn-desk,
+a.default-btn-desk:hover,
+a.default-btn-desk:focus {
+    height: 60px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: var(--core-color);
 }

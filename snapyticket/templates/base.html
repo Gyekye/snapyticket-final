@@ -90,6 +90,10 @@
             {% endblock mobilecontent %}
         </section>
 
+        <section class="hide-on-med-and-down">
+            {% block desktopcontent %} {% endblock desktopcontent %}
+        </section>
+
         <script type="text/javascript">
             window.addEventListener("online", () => {
                 document.querySelector('.network-box-x').style.display = 'block';
