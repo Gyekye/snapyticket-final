@@ -17,7 +17,6 @@ from django.db.models import ObjectDoesNotExist
 
 
 # Search
-@login_required
 def tickets(request):
     query = request.GET.get('query')
     tickets = Ticket.objects.all()
@@ -30,7 +29,7 @@ def tickets(request):
     return render(request, 'ticket/tickets.html', context)
 
 
-class TicketDetail( LoginRequiredMixin, DetailView):
+class TicketDetail(DetailView):
     model = Ticket
     context_object_name = 'ticket'
     template_name = 'ticket/details.html'
@@ -42,7 +41,7 @@ class SavedTickets(LoginRequiredMixin, View):
         return render(self.request, 'ticket/saved.html', context)
 
 # todo replace httpResponse redirects with messages
-class UpdateTicketItem(UpdateView):
+class UpdateTicketItem(LoginRequiredMixin,UpdateView):
     model = TicketItem
     fields = ['quantity']
     success_url = reverse_lazy('ticket:ticket_bag_summary')
