@@ -1,0 +1,17 @@
+{% load static %}
+<header class="desktop-header">
+    <nav class="desktop-nav z-depth-0 transparent">
+        <a href="{% url 'core:index' %}" class="brand-logo desktop color-main">
+            <img src="{% static 'imgs/core/logo-main.png' %}" alt="" class="left">
+        </a>
+        <ul class="right">
+            <li><a href="{% url 'ticket:tickets' %}" class="color-main"><i class="material-icons left" style="transform: translateY(5px); font-size: 19px;">search</i> Search</a></li>
+            <li><a href="{% url 'core:index' %}" class="color-main">Home</a></li>
+            <li><a href="{% url 'core:home' %}" class="color-main">Browse Events</a></li>
+            <li><a href="{% url 'auth:user_login' %}" class="color-main">Login</a></li>
+            <li>
+                <a href="{% url 'auth:user_register' %}" class="btn z-depth-0 bg-core waves-effect">Get Started</a>
+            </li>
+        </ul>
+    </nav>
+</header>

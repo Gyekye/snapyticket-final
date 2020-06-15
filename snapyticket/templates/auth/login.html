@@ -1,6 +1,40 @@
 {% extends 'base.html' %}
 <!-- TItle Content -->
-{% block titlecontent %}Evesbay - Login To Your Account{% endblock titlecontent %}
+{% block titlecontent %}Evesbay - Login To Your Account{% endblock titlecontent %} {% block desktopcontent %} {% load static %}
+<!-- Desktop Content -->
+<section class="desktop-content">
+    <!-- Header -->
+    {% include 'core-snippets/headerDesk.html' %}
+    <!-- End of Header -->
+    <img src="{% static 'imgs/core/login.svg' %}" class="form-img" alt="">
+    <div class="desk-login-form-wrapper">
+        <div class="login-form-box">
+            <div class="login-form color-main center">
+                <div class="heading-main">LOGIN</div>
+                <p class="heading-banner-helper-text color-main" style="margin-top: 0;">
+                    Login To Resume your Session
+                </p>
+                <br>
+                <a href="" class="full-width-btn btn white color-main"><img src="{% static 'imgs/icons/google.png' %}" class="google-img left" alt=""> Continue With Google</a>
+                <br><br>
+                <form method="POST" class="left-align">
+                    <!-- Token -->
+                    {% csrf_token %}
+                    <!-- End oF TOken -->
+                    {{ form }}
+                    <br><br>
+                    <a href="" class="left x-link" style="margin-top: 2px;">Forgot Password ?</a>
+                    <button type="submit" class="right btn default-btn z-depth-0">Login</button>
+                </form>
+                <br><br><br>
+                <p class="left-align">I don't have an account. <a href="{% url 'auth:user_register' %}">Get Started</a> Free Today.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of Desktop Content -->
+{% endblock desktopcontent %}
+
 <!-- Mobile Content  -->
 {% block mobilecontent %}
 <!-- Load Static Files -->
