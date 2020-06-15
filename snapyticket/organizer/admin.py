@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Organizer
+from .models import Organizer,RequestPayment
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.translation import ngettext
@@ -25,5 +25,6 @@ class OrganizerAdmin(admin.ModelAdmin):
             updated,
         ) % updated, messages.SUCCESS)
     approve_organizer.short_description = "Approve Organizer as Verified"
+    
 admin.site.register(Organizer,OrganizerAdmin)
-#admin.site.register(Social)
+admin.site.register(RequestPayment)

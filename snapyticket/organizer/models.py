@@ -5,7 +5,20 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from django.core.mail import send_mail
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 User = settings.AUTH_USER_MODEL
+
+PAYMENT_OPTIONS = (
+    ('MM','mobile money'),
+    ('BA','bank account'),
+)
+
+PAYMENT_STATUS  = (
+    ('PEND','PENDING'),
+    ('SUCCESS','SUCCESSFUL'),
+    ('CANCEL','CANCELLED'),
+)
 
 class VerifiedOrganizersManager(models.Manager):
     #* returns all organizers with their verfied status as True
@@ -102,3 +115,45 @@ def organizer_secret_key(sender, instance, *args, **kwargs):
     
 # ? connect method with signal function
 pre_save.connect(organizer_secret_key, sender=Organizer)
+
+
+#* payment model 
+class RequestPayment(models.Model):
+    # Security Details
+    organizer       = models.ForeignKey(Organizer,on_delete=models.CASCADE)
+    secret_id       = models.CharField(max_length=200)
+    ticket_code     = models.CharField(max_length=200)
+    
+    # receipient account details
+    payment_option  = models.CharField(max_length=100,choices=PAYMENT_OPTIONS)
+    name_on_account = models.CharField(max_length=100)
+    account_number  = models.PositiveIntegerField()
+    
+    # amount to be paid
+    amount          = models.PositiveIntegerField()
+    
+    # date requested and paid
+    requested_on    = models.DateTimeField(auto_now_add=True)
+    paid_on         = models.DateTimeField(default=timezone.now)
+    
+    # payment request status
+    status          = models.CharField(max_length=20, choices=PAYMENT_STATUS)
+    
+    #* Model methods
+    def __str__(self):
+        return self.organizer.name
+    
+    #* Model Properties
+    @property
+    def payment_status(self):
+        return self.status
+    
+    #* Model meta 
+    class Meta:
+        verbose_name = _("Organizer's Payment Request")
+        verbose_name_plural = _("Organizers payment requests")
+        ordering = ['-requested_on']
+        
+    
+
+

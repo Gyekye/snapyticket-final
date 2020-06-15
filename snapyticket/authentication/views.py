@@ -24,6 +24,7 @@ from django.urls import reverse_lazy
 from django.db.models import ObjectDoesNotExist
 from django.core.exceptions import ValidationError
 from django.contrib.admin import forms
+from socket import gaierror
 
 User = get_user_model()
 
@@ -49,12 +50,13 @@ class RegisterView(View):
             if User.objects.filter(phone=user_phone).exists():
                 messages.info(request, "Your phone number exists change it ")
                 return redirect('auth:user_register')
-            if len(user_phone) > 10:
-                messages.info(request, 'Phone number must be 10 not more than')
+            if len(user_phone) > 10 or len(user_phone) < 10:
+                messages.info(request, 'Phone number must be 10 digits not less or more than')
                 return redirect('auth:user_register')
             user_email = form.cleaned_data.get('email')
-            user = form.save(commit=False)
-            user.is_active = False
+            #! change the is_active status to true 
+            user = form.save()
+            user.is_active = True
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account'
@@ -72,10 +74,14 @@ class RegisterView(View):
             # TODO #4 Integrate Email Sending with SendGrid to speed things up when going into production
 
             # Sends a Verification link to user so they can activate their account
-            send_mail(mail_subject, mail_body, settings.EMAIL_HOST_USER, [user_email])
-            messages.success(request,
+            try:
+                send_mail(mail_subject, mail_body, settings.EMAIL_HOST_USER, [user_email])
+                messages.success(request,
                              "A confirmation link has been sent to your email use that to activate your account")
-            return redirect('auth:user_login')
+                #! if connection is done do the below
+            except gaierror:
+                messages.success(request,"There was a problem with your internet connection so we could not verify your email. But you can log in.")
+                return redirect('auth:user_login')
         context = {'form': form}
         return render(self.request, 'auth/signup.html', context)
 
