@@ -30,11 +30,6 @@ class ProfileChangeView(LoginRequiredMixin, View):
         #* creates an instance of the UserChangeForm that can also accepts files
         form = UserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            #* if form is valid check to see if the phone number consist of 10 digits
-            user_phone = form.cleaned_data.get('phone')
-            if len(user_phone) > 10 or len(user_phone) < 10:
-                messages.info(request, 'Phone number must be atleast 10 digits')
-                return redirect('profile:update')
             form.save()
             messages.success(request, 'You have update your profile')
             #* it updates the sessions of the current user 

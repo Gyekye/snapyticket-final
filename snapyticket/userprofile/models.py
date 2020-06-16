@@ -14,16 +14,20 @@ class VerifiedOrganizersManager(models.Manager):
         return super().get_queryset().filter(is_verfied = True)
 
 class OrganizerRegister(models.Model):
-    # Todo write a functuality to send the organizer ID to organizers when they regsiter as organizers
-    # todo #3 write necesaary querysets for event organizers
+
+    #*  core info 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='organizers_logos_register', default='default_organizer_logo')
     name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
+
+    #*  social info
     instagram = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     telegram = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
+
+    # * Security info
     is_verified = models.BooleanField(default=False)
     secret_id = models.SlugField(blank=True)
     

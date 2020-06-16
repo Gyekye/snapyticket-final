@@ -13,3 +13,4 @@ class OrganizerRegisterForm(forms.ModelForm):
             'telegram',
             'twitter',
         ]
+        

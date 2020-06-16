@@ -45,14 +45,6 @@ class RegisterView(View):
         form = UserCreationForm(request.POST)
         # Checks if the form is valid
         if form.is_valid():
-            user_phone = form.cleaned_data.get('phone')
-            # print(type(user_phone))
-            if User.objects.filter(phone=user_phone).exists():
-                messages.info(request, "Your phone number exists change it ")
-                return redirect('auth:user_register')
-            if len(user_phone) > 10 or len(user_phone) < 10:
-                messages.info(request, 'Phone number must be 10 digits not less or more than')
-                return redirect('auth:user_register')
             user_email = form.cleaned_data.get('email')
             #! change the is_active status to true 
             user = form.save()

@@ -13,6 +13,7 @@ class OrganizerRegisterForm(forms.ModelForm):
             'instagram',
             'facebook',
             'telegram',
+            'twitter',
         ]
         
 
