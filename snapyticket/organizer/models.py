@@ -57,7 +57,7 @@ class Organizer(models.Model):
     #* methods for the organizer model
     
     def __str__(self):
-        return f'{self.name} - {self.user.username} - {self.secret_id}'
+        return f'{self.name}'
     
     def get_absolute_url(self):
         return reverse('organizer:update', kwargs={'pk': self.id})

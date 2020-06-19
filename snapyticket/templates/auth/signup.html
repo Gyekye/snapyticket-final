@@ -3,11 +3,36 @@
 {% block titlecontent %}Evesbay -Create Your Account{% endblock titlecontent %} {% block desktopcontent %} {% load static %}
 <!-- Desktop Content -->
 <section class="desktop-content">
-
+    {% include 'core-snippets/desktop-multi-header.html' %}
+    <div class="form-content-container">
+        <div class="form-image-content">
+            <img src="{% static 'imgs/core/getstarted.svg' %}" class="form-image" alt="">
+        </div>
+        <div class="form-box-content">
+            <div class="form-box">
+                <div class="heading-main">Login</div>
+                <span class="heading-helper">Welcome Back. Login to resume session</span>
+                <br><br>
+                <a href="" class="full-width-btn waves-effect btn white color-main"><img src="{% static 'imgs/icons/google.png' %}" class="google-img left" alt=""> Continue With Google</a>
+                <br><br>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <i class="material-icons passwordToggle-x" id="passAd">visibility</i>
+                    <i class="material-icons passwordToggle-x hide" id="passAxd">visibility_off</i>
+                    <a href="{% url 'auth:password_reset' %}" class="x-link" style="font-family: Regular Font Medium;">Forgot Password ?</a>
+                    <button type="submit" class="btn default-btn-desk-x z-depth-0 bg-core waves-effect right" style="padding-top: 0;">Login</button>
+                    <br><br><br>
+                    <p>
+                        I don't have an account <a href="{% url 'auth:user_register' %}" class="bold-text">Get One</a> <a href="" class="right color-main bold-text">Terms and Conditions</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- End of Desktop Content -->
 {% endblock desktopcontent %}
-
 
 <!-- Mobile Content  -->
 {% block mobilecontent %}

@@ -185,6 +185,16 @@ select {
     color: var(--main-black);
     transform: translateY(-60px);
     transition: .3s;
+    cursor: pointer;
+}
+
+.passwordToggle-x {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    color: var(--main-black);
+    transform: translateY(-60px);
+    transition: .3s;
 }
 
 .network-box,
@@ -357,6 +367,7 @@ p.text-0 {
 
 .btn {
     text-transform: capitalize;
+    font-family: Regular Font;
 }
 
 * {
@@ -1435,6 +1446,19 @@ a.default-btn-desk:focus {
     background: var(--core-color);
 }
 
+a.default-btn-desk-x,
+a.default-btn-desk-x:hover,
+a.default-btn-desk-x:focus,
+button.default-btn-desk-x,
+button.default-btn-desk-x:hover,
+button.default-btn-desk-x:focus {
+    height: 45px;
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: var(--core-color);
+}
+
 div.main-banner {
     padding-top: 170px;
     padding-bottom: 120px;
@@ -1471,6 +1495,33 @@ footer.desktop-footer {
     background: rgb(80, 73, 73);
 }
 
+/* Desktop Forms */
+.form-image-content {
+    width: 60%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    background-color: var(--main-black);
+    top: 0;
+}
+
+.form-box-content {
+    width: 40%;
+    position: absolute;
+    right: 0;
+    padding: 90px;
+    padding-top: 190px;
+}
+
+.form-box {
+    position: relative;
+}
+
+.form-image {
+    width: 100% !important;
+    position: absolute;
+    bottom: 0;
+}
 
 /* width */
 

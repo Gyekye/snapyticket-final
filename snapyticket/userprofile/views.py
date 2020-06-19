@@ -7,7 +7,6 @@ from django.views.generic import View,TemplateView
 from ticket.models import TicketBag,TicketItem
 from authentication.forms import UserChangeForm
 from django.conf import settings
-from .forms import OrganizerRegisterForm
 from django.db.models import ObjectDoesNotExist
 
 User = get_user_model()

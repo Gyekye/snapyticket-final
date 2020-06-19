@@ -25,54 +25,57 @@
     <!-- End of Header -->
     {% endif %}
     <br><br>
-    <div class="main-mobile-content">
-        <br>
-        <div class="price-content-wrapper">
-            <div class="price-content">
-                GH₵{{ total_revenue }}.00
+    <form>
+        <div class="main-mobile-content">
+            <br>
+            <div class="price-content-wrapper">
+                <div class="price-content">
+                    GH₵{{ total_revenue }}.00
+                </div>
+            </div>
+            <img src="{% static 'imgs/core/price.png' %}" style="width: 100%; height: 180px" alt="">
+            <div class="pad-x"></div>
+            <div class="heading-main">Request Payment</div>
+            <div class="" style="line-height: 30px;">
+                <p class="orange-text text-darken-3"><i class="material-icons left" style="font-size: 17px; transform: translateY(5px)">warning</i> Note that requested payments can only be processed after the event is over.</p>
+                    <p>
+                        <input type="text" name="" value="" placeholder="Your Organizer ID">
+                    </p>
+                    <p>
+                        <input type="text" name="" value="" placeholder="Your Ticket Code">
+                    </p>
+                    <p id="bankTrans">
+                        <input type="checkbox" checked class="filled-in" id="bankInput">
+                        <span>Receive payment with Bank</span>
+                    </p>
+                    <div class="bankForm" style="transition: .5s;">
+                        <p>
+                            <input type="text" name="" value="" placeholder="Account Number">
+                        </p>
+                        <p>
+                            <input type="text" name="" value="" placeholder="Name on Account">
+                        </p>
+                    </div>
+                    <p id="momoTrans">
+                        <input type="checkbox" class="filled-in" id="momoInput" checked>
+                        <span>Receive payment with Mobile Money</span>
+                    </p>
+                    <div style="position: fixed; opacity: 0; transition: .5s; transform: translateY(100px) rotateX(160deg)" class="momoForm">
+                        <p>
+                            <input type="text" name="" value="" placeholder="Mobile Money Number">
+                        </p>
+                        <p>
+                            <input type="text" name="" value="" placeholder="Name on Account">
+                        </p>
+                    </div></div>
+            <br><br><br><br>
+        </div>
+        <div class="tit-actions">
+            <div class="tit-actions-content">
+                <button type="submit" class="btn full-width-btn bg-core waves-effect white-text z-depth-0">Request Payment</button>
             </div>
         </div>
-        <img src="{% static 'imgs/core/price.png' %}" style="width: 100%; height: 180px" alt="">
-        <div class="pad-x"></div>
-        <div class="heading-main">Request Payment</div>
-        <div class="" style="line-height: 30px;">
-            <p>Note that requested payments can only be processed after the event is over.</p>
-            <form>
-                <p>
-                    <input type="text" name="" value="" placeholder="Your Organizer ID">
-                </p>
-                <p>
-                    <input type="text" name="" value="" placeholder="Your Ticket Code">
-                </p>
-                <p id="bankTrans">
-                    <input type="checkbox" checked class="filled-in" id="bankInput">
-                    <span>Receive payment with Bank</span>
-                </p>
-                <div class="bankForm" style="transition: .5s;">
-                    <p>
-                        <input type="text" name="" value="" placeholder="Account Number">
-                    </p>
-                    <p>
-                        <input type="text" name="" value="" placeholder="Name on Account">
-                    </p>
-                </div>
-                <p id="momoTrans">
-                    <input type="checkbox" class="filled-in" id="momoInput" checked>
-                    <span>Receive payment with Mobile Money</span>
-                </p>
-                <div style="position: fixed; opacity: 0; transition: .5s; transform: translateY(100px) rotateX(160deg)" class="momoForm">
-                    <p>
-                        <input type="text" name="" value="" placeholder="Mobile Money Number">
-                    </p>
-                    <p>
-                        <input type="text" name="" value="" placeholder="Name on Account">
-                    </p>
-                </div>
-                <button type="submit" class="btn full-width-btn bg-core white-text waves-effect z-depth-0">Request Payment</button>
-            </form>
-        </div>
-        <br><br><br>
-    </div>
+    </form>
 </setion>
 <script type="text/javascript">
     const bankTrans = document.querySelector('#bankTrans')

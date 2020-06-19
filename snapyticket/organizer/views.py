@@ -47,7 +47,6 @@ class RegisterOrganizerView(LoginRequiredMixin, View):
         return render(request,'organizer/register.html',context)
 
     def post(self, request, *args, **kwargs):
-        
         form = OrganizerRegisterForm(request.POST,request.FILES)
         
         if form.is_valid():
@@ -62,6 +61,7 @@ class RegisterOrganizerView(LoginRequiredMixin, View):
             org_instagram = form.cleaned_data.get('instagram')
             org_facebook  = form.cleaned_data.get('facebook')
             org_telegram  = form.cleaned_data.get('telegram')
+            org_twitter   = form.cleaned_data.get('twitter')
             
             #! Custom Validations for cleaned data from forms
             if len(org_name) > 100:
@@ -72,23 +72,12 @@ class RegisterOrganizerView(LoginRequiredMixin, View):
             if Organizer.objects.filter(email=org_email).exists():
                 return HttpResponse('Email is taken')
             try:
-                        
-                new_organizer = Organizer.objects.create(
-                    user=request.user,
-                    name=org_name,
-                    email=org_email,
-                    logo=org_logo,
-                    instagram=org_instagram,
-                    facebook=org_facebook,
-                    telegram=org_telegram
-                )
-                #* create a new organizer instance 
-                new_organizer.save()
+                form.save()
                 send_mail(
                         'Organizer Registration Email',
                         f'''Thank You for requesting to become an organizer to share content on this beautiful platform.We will send you another email to confirm your registration.Thank You {request.user.username}''',
                         settings.EMAIL_HOST_USER,
-                        [new_organizer.email],
+                        [org_email],
                         fail_silently=False,
                         )
                 messages.info(request,'registered wait for approval email')

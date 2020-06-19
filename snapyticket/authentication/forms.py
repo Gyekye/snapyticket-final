@@ -19,7 +19,7 @@ class UserCreationForm(UserCreationForm):
     def clean_phone(self):
         data = self.cleaned_data['phone']
         try:
-            existing_phone=User.objects.get(phone=data)
+            existing_phone=User.objects.filter(phone=data)[0]
             if existing_phone:
                 raise forms.ValidationError('A user with this phone number already exists')
         except ObjectDoesNotExist:
